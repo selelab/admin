@@ -1,0 +1,132 @@
+FORMAT: 1A
+
+# Group Account Control
+
+## Authorization [/sign_in]
+
+### Sign In [POST]
+
++ user_email (string) - ユーザーの名前
++ password (string) - パスワード
+
++ Request (application/json)
+
+        {
+            "user_email": "test_user_1@example.com",
+            "password": "hogehoge"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "user_id": "users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c",
+            "user_name": "test_user_1",
+            "user_email": "test_user_1@example.com",
+            "last_modified": "2014-11-11T08:40:51.620Z",
+            "icon_media_key": "user_icons/29eb22b8-a953-4ec3-84b1-46b746e13071"
+        }
+
++ Response 400 (plain/text)
+
+        Invalid Argument
+
+
+### Sign Out [DELETE]
+
++ Response 200 (plain/text)
+
+        OK
+
++ Response 401 (plain/text)
+
+        Unauthorized
+
+## User Control [/users/]
+
+### Get List of User [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "user_id": "users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c",
+                "user_name": "test_user_1",
+                "user_email": "test_user_1@example.com",
+                "last_modified": "2014-11-11T08:40:51.620Z",
+                "icon_media_key": "user_icons/29eb22b8-a953-4ec3-84b1-46b746e13071"
+            },
+            {
+                "user_id": "users/473ce91f-3a1b-425d-9676-d70cc990945b",
+                "user_name": "test_user_2",
+                "user_email": "test_user_2@example.com",
+                "last_modified": "2014-11-11T08:40:51.620Z",
+                "icon_media_key": "user_icons/d17c244c-bf44-48a4-9276-4d9c523f1006"
+            }
+        ]
+
+### Create New User [POST]
+
++ Request (application/json)
+
+        {
+            "user_name": "test_user_3",
+            "user_email": "test_user_3@example.com",
+            "password": "fugafuga"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "user_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
+            "user_name": "test_user_3",
+            "user_email": "test_user_3@example.com",
+            "last_modified": "2014-11-11T08:40:51.620Z",
+            "icon_media_key": "user_icons/b70b4a3e-6a7f-4f87-9798-aff296b9f4a8"
+        }
+
+## User Control [/users/{user_id}]
+
+### Get User Information [GET]
+
++ Parameters
+  + user_id (string)
+
++ Response 200 (application/json)
+
+        {
+            "user_id": "users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c",
+            "name": "Test User 1",
+            "user_email": "test_user_1@example.com",
+            "last_modified": "2014-11-11T08:40:51.620Z",
+            "icon_media_key": "user_icons/29eb22b8-a953-4ec3-84b1-46b746e13071"
+        }
+
++ Response 401 (plain/text)
+
+        Unauthorized
+
+### Get User Information [PUT]
+
++ Parameters
+  + user_id (string)
+
++ Request (application/json)
+
+        {
+            "password": "mogemoge",
+            "icon_media_key": "user_icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "user_id": "users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c",
+            "name": "Test User 1",
+            "user_email": "test_user_1@example.com",
+            "last_modified": "2014-11-11T08:40:51.620Z",
+            "icon_media_key": "user_icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f"
+        }
+
++ Response 401 (plain/text)
+
+        Unauthorized
