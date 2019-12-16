@@ -29,11 +29,11 @@ FORMAT: 1A
 + approved : true (boolean) - 承認されたかどうか
 
 
-# Group Account Control
+# Group ユーザ管理
 
-## Authorization [/sign_in]
+## 認証処理 [/sign_in]
 
-### Sign In [POST]
+### サインインする [POST]
 
 + user_email (string) - ユーザーの名前
 + password (string) - パスワード
@@ -55,7 +55,7 @@ FORMAT: 1A
         Invalid Argument
 
 
-### Sign Out [DELETE]
+### サインアウトする [DELETE]
 
 + Response 200 (plain/text)
 
@@ -65,16 +65,16 @@ FORMAT: 1A
 
         Unauthorized
 
-## User Control [/users/]
+## ユーザー全体の管理 [/users/]
 
-### Get List of User [GET]
+### ユーザーの一覧を取得する [GET]
 
 + Response 200 (application/json)
 
     + Attributes
         + users (array[UserInfo], required, fixed-type) - ユーザー一覧
 
-### Create New User [POST]
+### 新しいユーザーを作成する [POST]
 
 + Request (application/json)
 
@@ -89,9 +89,9 @@ FORMAT: 1A
     + Attributes
         + user (UserInfo)
 
-## User Control [/users/{user_id}]
+## ユーザー単体の管理 [/users/{user_id}]
 
-### Get User Information [GET]
+### ユーザーの情報を取得する [GET]
 
 + Parameters
   + user_id (string)
@@ -105,7 +105,7 @@ FORMAT: 1A
 
         Unauthorized
 
-### Get User Information [PUT]
+### ユーザーの情報を更新する [PUT]
 
 + Parameters
   + user_id (string)
@@ -127,18 +127,27 @@ FORMAT: 1A
 
         Unauthorized
 
-# Group Project
+### プロジェクトを削除する [DELETE]
 
-## Project Control [/projects]
++ Parameters
+  + user_id (string)
 
-### Get List of Projects [GET]
++ Response 200 (plain/text)
+
+        OK
+
+# Group プロジェクト
+
+## プロジェクト全体のコントロール [/projects]
+
+### プロジェクトの一覧を取得する [GET]
 
 + Response 200 (application/json)
 
     + Attributes
         + projects (array[ProjectInfo], required, fixed-type) - プロジェクト一覧
 
-### Create New Project [POST]
+### 新しいプロジェクトを作成する [POST]
 
 + Request
 
