@@ -28,6 +28,14 @@ FORMAT: 1A
 + closed : false (boolean) - 完了したかどうか
 + approved : true (boolean) - 承認されたかどうか
 
+## PurchaseInfo
++ id : `purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8` (string) - ID
++ title : サーバー管理費 (string) - タイトル
++ description : 利用しているAWSでドメイン名を管理するために必要な経費です。 (string) - タイトル
++ project_id : `projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae` (string) - プロジェクトのID
++ receipt_media_keys : `media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518` (array[string], required, fixed-type) - レシートの画像一覧
++ returned : false (boolean) - 返金されたかどうか
++ approved : true (boolean) - 承認されたかどうか
 
 # Group ユーザ管理
 
@@ -165,3 +173,145 @@ FORMAT: 1A
 
     + Attributes
         + project (ProjectInfo)
+
+## プロジェクト単体の管理 [/projects/{project_id}]
+
+### プロジェクトの情報を取得する [GET]
+
++ Parameters
+  + project_id (string)
+
++ Response 200 (application/json)
+
+    + Attributes
+        + projects (array[ProjectInfo], required, fixed-type) - プロジェクト一覧
+
+### プロジェクトを更新する [PUT]
+
++ Parameters
+  + project_id (string)
+
++ Request
+
+        [
+            {
+                "project.title": "エレラボAPI構築プロジェクト",
+            }
+        ]
+
++ Response 200 (application/json)
+
+    + Attributes
+        + project (ProjectInfo)
+            + title : エレラボAPI構築プロジェクト
+
+### プロジェクトを削除する [DELETE]
+
++ Parameters
+  + project_id (string)
+
++ Response 200 (plain/text)
+
+        OK
+
+## プロジェクトの購入の管理 [/projects/{project_id}/purchases]
+
+### プロジェクトに関する購入の一覧を取得する [GET]
+
++ Parameters
+  + project_id (string)
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchases (array[PurchaseInfo], required, fixed-type) - 購入一覧
+
+### プロジェクトに新しい購入を作成する [POST]
+
++ Parameters
+  + project_id (string)
+
++ Request
+
+        [
+            {
+                "title": "test_project_1",
+                "description", "エレラボのAPIを作成する。",
+                "amount": 10000,
+            }
+        ]
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchase (PurchaseInfo)
+
+# Group 購入
+
+## 購入全体のコントロール [/purchases]
+
+### 管理購入の一覧を取得する [GET]
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchases (array[PurchaseInfo], required, fixed-type) - 購入一覧
+
+### 新しい購入を作成する [POST]
+
++ Request
+
+        [
+            {
+                "purchase.title": "test_purchase_1",
+                "purchase.manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
+                "description", "エレラボのAPIを作成する。",
+                "budget": 10000,
+                "completion_date": "2014-11-18"
+            }
+        ]
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchase (PurchaseInfo)
+
+## 購入単体の管理 [/purchases/{purchase_id}]
+
+### 購入の情報を取得する [GET]
+
++ Parameters
+  + purchase_id (string)
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchases (array[PurchaseInfo], required, fixed-type) - 購入一覧
+
+### 購入を更新する [PUT]
+
++ Parameters
+  + purchase_id (string)
+
++ Request
+
+        [
+            {
+                "purchase.title": "エレラボAPI構築購入",
+            }
+        ]
+
++ Response 200 (application/json)
+
+    + Attributes
+        + purchase (PurchaseInfo)
+            + title : エレラボAPI構築購入
+
+### 購入を削除する [DELETE]
+
++ Parameters
+  + purchase_id (string)
+
++ Response 200 (plain/text)
+
+        OK
