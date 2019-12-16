@@ -33,7 +33,7 @@ FORMAT: 1A
 + title : サーバー管理費 (string) - タイトル
 + description : 利用しているAWSでドメイン名を管理するために必要な経費です。 (string) - タイトル
 + project_id : `projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae` (string) - プロジェクトのID
-+ receipt_media_keys : `media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518` , `media/receipts/fbc9517e-814e-4568-b9b8-d3b038942931`  (array[string], required, fixed-type) - レシートの画像一覧
++ evidence_media_keys : `media/evidences/8ea313b7-1172-4c35-bd9f-cf5d63429518` , `media/evidences/fbc9517e-814e-4568-b9b8-d3b038942931`  (array[string], required, fixed-type) - レシート/商品等証拠となる画像一覧
 + returned : false (boolean) - 返金されたかどうか
 + approved : true (boolean) - 承認されたかどうか
 
