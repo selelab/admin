@@ -87,9 +87,9 @@ FORMAT: 1A
 + Request (application/json)
 
         {
-            "user_name": "test_user_3",
-            "user_email": "test_user_3@example.com",
-            "password": "fugafuga"
+            "user.name": "test_user_3",
+            "user.email": "test_user_3@example.com",
+            "user.password": "fugafuga"
         }
 
 + Response 200 (application/json)
@@ -161,8 +161,8 @@ FORMAT: 1A
 
         [
             {
-                "project_name": "test_project_1",
-                "project_manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
+                "project.title": "test_project_1",
+                "project.manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
                 "description", "エレラボのAPIを作成する。",
                 "budget": 10000,
                 "completion_date": "2014-11-18"
