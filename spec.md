@@ -286,7 +286,7 @@ FORMAT: 1A
 + Response 200 (application/json)
 
     + Attributes
-        + purchases (array[PurchaseInfo], required, fixed-type) - 購入一覧
+        + purchase (PurchaseInfo) - 購入一覧
 
 ### 購入を更新する [PUT]
 
