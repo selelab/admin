@@ -3,9 +3,16 @@
 ## 環境構築
 
 ```
-# yarnが入っていない場合
-# brew install node
-# npm install -g yarn
+# nodejsをインストールする
+brew install node
 
-yarn install
+# aglioをインストールする
+npm install -g aglio
+
+# http://localhost:3000/ にAPIドキュメントをみるためのサーバーを起動する
+aglio -i spec.md -s
+
+# spec.htmlを出力する
+#  -> https://htmlpreview.github.io/?https://github.com/selelab/admin-api/blob/master/docs/spec.html
+aglio -i spec.md -o docs/spec.html
 ```
