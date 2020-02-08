@@ -39,6 +39,10 @@ FORMAT: 1A
 
 # Group ユーザ管理
 
+### 関連するID一覧
+- users/{uuid4}
+- media/icons/{uuid4}
+
 ## 認証処理 [/sign_in]
 
 ### サインインする [POST]
@@ -122,20 +126,20 @@ FORMAT: 1A
 
         {
             "password": "mogemoge",
-            "icon_media_key": "user_icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f"
+            "icon_media_key": "media/icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f"
         }
 
 + Response 200 (application/json)
 
     + Attributes
         + user_info (UserInfo)
-            + icon_media_key : `user_icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f`
+            + icon_media_key : `media/icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f`
 
 + Response 401 (plain/text)
 
         Unauthorized
 
-### プロジェクトを削除する [DELETE]
+### ユーザーを削除する [DELETE]
 
 + Parameters
   + user_id (string)
@@ -145,6 +149,9 @@ FORMAT: 1A
         OK
 
 # Group プロジェクト
+### 関連するID一覧
+- projects/{uuid4}
+- purchases/{uuid4}
 
 ## プロジェクト全体のコントロール [/projects]
 
@@ -159,15 +166,13 @@ FORMAT: 1A
 
 + Request
 
-        [
-            {
-                "project.title": "test_project_1",
-                "project.manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
-                "description", "エレラボのAPIを作成する。",
-                "budget": 10000,
-                "completion_date": "2014-11-18"
-            }
-        ]
+        {
+            "title": "test_project_1",
+            "manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
+            "description", "エレラボのAPIを作成する。",
+            "budget": 10000,
+            "completion_date": "2014-11-18"
+        }
 
 + Response 200 (application/json)
 
@@ -193,11 +198,9 @@ FORMAT: 1A
 
 + Request
 
-        [
-            {
-                "project.title": "エレラボAPI構築プロジェクト",
-            }
-        ]
+        {
+            "project.title": "エレラボAPI構築プロジェクト",
+        }
 
 + Response 200 (application/json)
 
@@ -233,13 +236,11 @@ FORMAT: 1A
 
 + Request
 
-        [
-            {
-                "title": "test_project_1",
-                "description", "エレラボのAPIを作成する。",
-                "amount": 10000,
-            }
-        ]
+        {
+            "title": "test_project_1",
+            "description", "エレラボのAPIを作成する。",
+            "amount": 10000,
+        }
 
 + Response 200 (application/json)
 
@@ -247,6 +248,9 @@ FORMAT: 1A
         + purchase (PurchaseInfo)
 
 # Group 購入
+### 関連するID一覧
+- purchases/{uuid4}
+- media/evidences/{uuid4}
 
 ## 購入全体のコントロール [/purchases]
 
@@ -261,20 +265,20 @@ FORMAT: 1A
 
 + Request
 
-        [
-            {
-                "purchase.title": "test_purchase_1",
-                "purchase.manager_id": "users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88",
-                "description", "エレラボのAPIを作成する。",
-                "budget": 10000,
-                "completion_date": "2014-11-18"
-            }
-        ]
+        {
+            "title": "test_purchase_1",
+            "description", "エレラボのAPIを作成する。"
+            "project_id", "projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"
+        }
 
 + Response 200 (application/json)
 
     + Attributes
         + purchase (PurchaseInfo)
+            + title : `test_purchase_1`
+            + description : エレラボのAPIを作成する。
+            + id : `purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8` 
+            + project_id : `projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae` 
 
 ## 購入単体の管理 [/purchases/{purchase_id}]
 
@@ -295,11 +299,9 @@ FORMAT: 1A
 
 + Request
 
-        [
-            {
-                "purchase.title": "エレラボAPI構築購入",
-            }
-        ]
+        {
+            "title": "エレラボAPI構築購入",
+        }
 
 + Response 200 (application/json)
 
