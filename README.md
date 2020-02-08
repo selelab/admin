@@ -1,18 +1,18 @@
-# ã‚¨ãƒ¬ãƒ©ãƒœç®¡ç†ç”»é¢API
+# ƒGƒŒƒ‰ƒ{ŠÇ—‰æ–ÊAPI
 
-## ç’°å¢ƒæ§‹ç¯‰
+## ŠÂ‹«\’z
 
 ```
-# nodejsã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹
+# nodejs‚ðƒCƒ“ƒXƒg[ƒ‹‚·‚é
 brew install node
 
-# aglioã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã™ã‚‹
+# aglio‚ðƒCƒ“ƒXƒg[ƒ‹‚·‚é
 npm install -g aglio
 
-# http://localhost:3000/ ã«APIãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’ã¿ã‚‹ãŸã‚ã®ã‚µãƒ¼ãƒãƒ¼ã‚’èµ·å‹•ã™ã‚‹
+# http://localhost:3000/ ‚ÉAPIƒhƒLƒ…ƒƒ“ƒg‚ð‚Ý‚é‚½‚ß‚ÌƒT[ƒo[‚ð‹N“®‚·‚é
 aglio -i spec.md -s
 
-# spec.htmlã‚’å‡ºåŠ›ã™ã‚‹
+# spec.html‚ðo—Í‚·‚é
 #  -> https://htmlpreview.github.io/?https://github.com/selelab/admin-api/blob/master/docs/spec.html
 aglio -i spec.md -o docs/spec.html
 ```

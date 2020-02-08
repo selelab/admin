@@ -1,9 +1,9 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>API Documentation</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†">ãƒ¦ãƒ¼ã‚¶ç®¡ç†</a></div><div class="collapse-content"><ul><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†">èªè¨¼å‡¦ç†</a><ul><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-post"><span class="badge post"><i class="fa fa-plus"></i></span>ã‚µã‚¤ãƒ³ã‚¤ãƒ³ã™ã‚‹</a></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ã‚µã‚¤ãƒ³ã‚¢ã‚¦ãƒˆã™ã‚‹</a></li></ul></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†">ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†</a><ul><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-post"><span class="badge post"><i class="fa fa-plus"></i></span>æ–°ã—ã„ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’ä½œæˆã™ã‚‹</a></li></ul></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†">ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†</a><ul><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-put"><span class="badge put"><i class="fa fa-pencil"></i></span>ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹</a></li><li><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ</a></div><div class="collapse-content"><ul><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</a><ul><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post"><span class="badge post"><i class="fa fa-plus"></i></span>æ–°ã—ã„ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹</a></li></ul></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†</a><ul><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-put"><span class="badge put"><i class="fa fa-pencil"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã™ã‚‹</a></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹</a></li></ul></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†</a><ul><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«é–¢ã™ã‚‹è³¼å…¥ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-post"><span class="badge post"><i class="fa fa-plus"></i></span>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«æ–°ã—ã„è³¼å…¥ã‚’ä½œæˆã™ã‚‹</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#è³¼å…¥">è³¼å…¥</a></div><div class="collapse-content"><ul><li><a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«">è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</a><ul><li><a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ç®¡ç†è³¼å…¥ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post"><span class="badge post"><i class="fa fa-plus"></i></span>æ–°ã—ã„è³¼å…¥ã‚’ä½œæˆã™ã‚‹</a></li></ul></li><li><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†">è³¼å…¥å˜ä½“ã®ç®¡ç†</a><ul><li><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>è³¼å…¥ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</a></li><li><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-put"><span class="badge put"><i class="fa fa-pencil"></i></span>è³¼å…¥ã‚’æ›´æ–°ã™ã‚‹</a></li><li><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-delete"><span class="badge delete"><i class="fa fa-times"></i></span>è³¼å…¥ã‚’å‰Šé™¤ã™ã‚‹</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">API Documentation</h1></header><section id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†" class="resource-group"><h2 class="group-heading">ãƒ¦ãƒ¼ã‚¶ç®¡ç† <a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†" class="permalink">&para;</a></h2><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†" class="resource"><h3 class="resource-heading">èªè¨¼å‡¦ç† <a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-post" class="action post"><h4 class="action-heading"><div class="name">ã‚µã‚¤ãƒ³ã‚¤ãƒ³ã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-post" class="method post">POST</a><code class="uri">/sign_in</code></h4><ul>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>API Documentation</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#ƒ†[ƒUŠÇ—">ƒ†[ƒUŠÇ—</a></div><div class="collapse-content"><ul><li><a href="#ƒ†[ƒUŠÇ—-”FØˆ—">”FØˆ—</a><ul><li><a href="#ƒ†[ƒUŠÇ—-”FØˆ—-post"><span class="badge post"><i class="fa fa-plus"></i></span>ƒTƒCƒ“ƒCƒ“‚·‚é</a></li><li><a href="#ƒ†[ƒUŠÇ—-”FØˆ—-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ƒTƒCƒ“ƒAƒEƒg‚·‚é</a></li></ul></li><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—">ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—</a><ul><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ƒ†[ƒU[‚Ìˆê——‚ğæ“¾‚·‚é</a></li><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-post"><span class="badge post"><i class="fa fa-plus"></i></span>V‚µ‚¢ƒ†[ƒU[‚ğì¬‚·‚é</a></li></ul></li><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—">ƒ†[ƒU[’P‘Ì‚ÌŠÇ—</a><ul><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ƒ†[ƒU[‚Ìî•ñ‚ğæ“¾‚·‚é</a></li><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-put"><span class="badge put"><i class="fa fa-pencil"></i></span>ƒ†[ƒU[‚Ìî•ñ‚ğXV‚·‚é</a></li><li><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ƒvƒƒWƒFƒNƒg‚ğíœ‚·‚é</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#ƒvƒƒWƒFƒNƒg">ƒvƒƒWƒFƒNƒg</a></div><div class="collapse-content"><ul><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹">ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹</a><ul><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ƒvƒƒWƒFƒNƒg‚Ìˆê——‚ğæ“¾‚·‚é</a></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post"><span class="badge post"><i class="fa fa-plus"></i></span>V‚µ‚¢ƒvƒƒWƒFƒNƒg‚ğì¬‚·‚é</a></li></ul></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—">ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—</a><ul><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ƒvƒƒWƒFƒNƒg‚Ìî•ñ‚ğæ“¾‚·‚é</a></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-put"><span class="badge put"><i class="fa fa-pencil"></i></span>ƒvƒƒWƒFƒNƒg‚ğXV‚·‚é</a></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-delete"><span class="badge delete"><i class="fa fa-times"></i></span>ƒvƒƒWƒFƒNƒg‚ğíœ‚·‚é</a></li></ul></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—">ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—</a><ul><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ƒvƒƒWƒFƒNƒg‚ÉŠÖ‚·‚éw“ü‚Ìˆê——‚ğæ“¾‚·‚é</a></li><li><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-post"><span class="badge post"><i class="fa fa-plus"></i></span>ƒvƒƒWƒFƒNƒg‚ÉV‚µ‚¢w“ü‚ğì¬‚·‚é</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#w“ü">w“ü</a></div><div class="collapse-content"><ul><li><a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹">w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹</a><ul><li><a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>ŠÇ—w“ü‚Ìˆê——‚ğæ“¾‚·‚é</a></li><li><a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post"><span class="badge post"><i class="fa fa-plus"></i></span>V‚µ‚¢w“ü‚ğì¬‚·‚é</a></li></ul></li><li><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—">w“ü’P‘Ì‚ÌŠÇ—</a><ul><li><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>w“ü‚Ìî•ñ‚ğæ“¾‚·‚é</a></li><li><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-put"><span class="badge put"><i class="fa fa-pencil"></i></span>w“ü‚ğXV‚·‚é</a></li><li><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-delete"><span class="badge delete"><i class="fa fa-times"></i></span>w“ü‚ğíœ‚·‚é</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">API Documentation</h1></header><section id="ƒ†[ƒUŠÇ—" class="resource-group"><h2 class="group-heading">ƒ†[ƒUŠÇ— <a href="#ƒ†[ƒUŠÇ—" class="permalink">&para;</a></h2><div id="ƒ†[ƒUŠÇ—-”FØˆ—" class="resource"><h3 class="resource-heading">”FØˆ— <a href="#ƒ†[ƒUŠÇ—-”FØˆ—" class="permalink">&nbsp;&para;</a></h3><div id="ƒ†[ƒUŠÇ—-”FØˆ—-post" class="action post"><h4 class="action-heading"><div class="name">ƒTƒCƒ“ƒCƒ“‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-”FØˆ—-post" class="method post">POST</a><code class="uri">/sign_in</code></h4><ul>
 <li>
-<p>user_email (string) - ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®åå‰</p>
+<p>user_email (string) - ƒ†[ƒU[‚Ì–¼‘O</p>
 </li>
 <li>
-<p>password (string) - ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰</p>
+<p>password (string) - ƒpƒXƒ[ƒh</p>
 </li>
 </ul>
 <h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/sign_in</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
@@ -30,24 +30,24 @@
         </span>}</span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
         </span>}</span>,
         "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
         </span>}</span>,
         "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
         </span>}</span>,
         "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Invalid Argument</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-delete" class="action delete"><h4 class="action-heading"><div class="name">ã‚µã‚¤ãƒ³ã‚¢ã‚¦ãƒˆã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-èªè¨¼å‡¦ç†-delete" class="method delete">DELETE</a><code class="uri">/sign_in</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/sign_in</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†" class="resource"><h3 class="resource-heading">ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç† <a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-get" class="action get"><h4 class="action-heading"><div class="name">ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-get" class="method get">GET</a><code class="uri">/users/</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>400</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Invalid Argument</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒ†[ƒUŠÇ—-”FØˆ—-delete" class="action delete"><h4 class="action-heading"><div class="name">ƒTƒCƒ“ƒAƒEƒg‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-”FØˆ—-delete" class="method delete">DELETE</a><code class="uri">/sign_in</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/sign_in</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—" class="resource"><h3 class="resource-heading">ƒ†[ƒU[‘S‘Ì‚ÌŠÇ— <a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—" class="permalink">&nbsp;&para;</a></h3><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-get" class="action get"><h4 class="action-heading"><div class="name">ƒ†[ƒU[‚Ìˆê——‚ğæ“¾‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-get" class="method get">GET</a><code class="uri">/users/</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">users</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
@@ -72,29 +72,29 @@
           </span>}</span>,
           "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
           </span>}</span>,
           "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
           </span>}</span>,
           "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
           </span>}</span>,
           "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
           </span>}
         </span>}
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¦ãƒ¼ã‚¶ãƒ¼ä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ†[ƒU[ˆê——"</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"users"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-post" class="action post"><h4 class="action-heading"><div class="name">æ–°ã—ã„ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚’ä½œæˆã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å…¨ä½“ã®ç®¡ç†-post" class="method post">POST</a><code class="uri">/users/</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-post" class="action post"><h4 class="action-heading"><div class="name">V‚µ‚¢ƒ†[ƒU[‚ğì¬‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[‘S‘Ì‚ÌŠÇ—-post" class="method post">POST</a><code class="uri">/users/</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">user.name</span>": <span class="hljs-value"><span class="hljs-string">"test_user_3"</span></span>,
   "<span class="hljs-attribute">user.email</span>": <span class="hljs-value"><span class="hljs-string">"test_user_3@example.com"</span></span>,
   "<span class="hljs-attribute">user.password</span>": <span class="hljs-value"><span class="hljs-string">"fugafuga"</span>
@@ -119,24 +119,24 @@
         </span>}</span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
         </span>}</span>,
         "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
         </span>}</span>,
         "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
         </span>}</span>,
         "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†" class="resource"><h3 class="resource-heading">ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç† <a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-get" class="action get"><h4 class="action-heading"><div class="name">ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-get" class="method get">GET</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—" class="resource"><h3 class="resource-heading">ƒ†[ƒU[’P‘Ì‚ÌŠÇ— <a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—" class="permalink">&nbsp;&para;</a></h3><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-get" class="action get"><h4 class="action-heading"><div class="name">ƒ†[ƒU[‚Ìî•ñ‚ğæ“¾‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-get" class="method get">GET</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">user_info</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
     "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"test_user_1"</span></span>,
@@ -157,24 +157,24 @@
         </span>}</span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
         </span>}</span>,
         "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
         </span>}</span>,
         "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
         </span>}</span>,
         "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-put" class="action put"><h4 class="action-heading"><div class="name">ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-put" class="method put">PUT</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-put" class="action put"><h4 class="action-heading"><div class="name">ƒ†[ƒU[‚Ìî•ñ‚ğXV‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-put" class="method put">PUT</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"mogemoge"</span></span>,
   "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value"><span class="hljs-string">"user_icons/eb5f6ab6-1e94-4e47-8502-d3cb4f3ea74f"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
@@ -198,29 +198,29 @@
         </span>}</span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
         </span>}</span>,
         "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
         </span>}</span>,
         "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
         </span>}</span>,
         "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-delete" class="action delete"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹</div><a href="#ãƒ¦ãƒ¼ã‚¶ç®¡ç†-ãƒ¦ãƒ¼ã‚¶ãƒ¼å˜ä½“ã®ç®¡ç†-delete" class="method delete">DELETE</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ" class="resource-group"><h2 class="group-heading">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ <a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ" class="permalink">&para;</a></h2><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«" class="resource"><h3 class="resource-heading">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« <a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get" class="action get"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get" class="method get">GET</a><code class="uri">/projects</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>Unauthorized</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-delete" class="action delete"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚ğíœ‚·‚é</div><a href="#ƒ†[ƒUŠÇ—-ƒ†[ƒU[’P‘Ì‚ÌŠÇ—-delete" class="method delete">DELETE</a><code class="uri">/users/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="user_id">user_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="ƒvƒƒWƒFƒNƒg" class="resource-group"><h2 class="group-heading">ƒvƒƒWƒFƒNƒg <a href="#ƒvƒƒWƒFƒNƒg" class="permalink">&para;</a></h2><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹" class="resource"><h3 class="resource-heading">ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹ <a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹" class="permalink">&nbsp;&para;</a></h3><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get" class="action get"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚Ìˆê——‚ğæ“¾‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get" class="method get">GET</a><code class="uri">/projects</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">projects</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰PJ"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœç®¡ç†ç”»é¢ã®APIã‚’ä½œã‚‹ã€‚"</span></span>,
+      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zPJ"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{ŠÇ—‰æ–Ê‚ÌAPI‚ğì‚éB"</span></span>,
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"soft"</span></span>,
       "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
@@ -259,11 +259,11 @@
           </span>}</span>,
           "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"èª¬æ˜"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"à–¾"</span>
           </span>}</span>,
           "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
@@ -271,7 +271,7 @@
               <span class="hljs-string">"soft"</span>,
               <span class="hljs-string">"hard"</span>
             ]</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ä¼šè¨ˆç¨®åˆ¥"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"‰ïŒví•Ê"</span>
           </span>}</span>,
           "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -282,22 +282,22 @@
               </span>}</span>,
               "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
               </span>}</span>,
               "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
               </span>}</span>,
               "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
               </span>}</span>,
               "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
               </span>}
             </span>}</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ç”³è«‹è€…"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"\¿Ò"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approver</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -308,68 +308,68 @@
               </span>}</span>,
               "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
               </span>}</span>,
               "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
               </span>}</span>,
               "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
               </span>}</span>,
               "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
               </span>}
             </span>}</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªè€…"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”FÒ"</span>
           </span>}</span>,
           "<span class="hljs-attribute">passed_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘/é…çµ¦æ¸ˆé¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à/”z‹‹ÏŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">used_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Ÿæ”¯æ‰•ã„é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Àx•¥‚¢Šz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">budget_est_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—æ¦‚è¦é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZŠT—vŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">budget_max_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—ä¸Šé™é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZãŒÀŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">closed</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Œäº†ã—ãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Š®—¹‚µ‚½‚©‚Ç‚¤‚©"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}
         </span>}
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒgˆê——"</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"projects"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post" class="action post"><h4 class="action-heading"><div class="name">æ–°ã—ã„ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post" class="method post">POST</a><code class="uri">/projects</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post" class="action post"><h4 class="action-heading"><div class="name">V‚µ‚¢ƒvƒƒWƒFƒNƒg‚ğì¬‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post" class="method post">POST</a><code class="uri">/projects</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
     {
         <span class="hljs-string">"project.title"</span>: <span class="hljs-string">"test_project_1"</span>,
         <span class="hljs-string">"project.manager_id"</span>: <span class="hljs-string">"users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88"</span>,
-        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœã®APIã‚’ä½œæˆã™ã‚‹ã€‚"</span>,
+        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ƒGƒŒƒ‰ƒ{‚ÌAPI‚ğì¬‚·‚éB"</span>,
         <span class="hljs-string">"budget"</span>: <span class="hljs-number">10000</span>,
         <span class="hljs-string">"completion_date"</span>: <span class="hljs-string">"2014-11-18"</span>
     }
 ]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">project</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰PJ"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœç®¡ç†ç”»é¢ã®APIã‚’ä½œã‚‹ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zPJ"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{ŠÇ—‰æ–Ê‚ÌAPI‚ğì‚éB"</span></span>,
     "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"soft"</span></span>,
     "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
@@ -405,11 +405,11 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"èª¬æ˜"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"à–¾"</span>
         </span>}</span>,
         "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
@@ -417,7 +417,7 @@
             <span class="hljs-string">"soft"</span>,
             <span class="hljs-string">"hard"</span>
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ä¼šè¨ˆç¨®åˆ¥"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"‰ïŒví•Ê"</span>
         </span>}</span>,
         "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -428,22 +428,22 @@
             </span>}</span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
             </span>}</span>,
             "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
             </span>}</span>,
             "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
             </span>}</span>,
             "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
             </span>}
           </span>}</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ç”³è«‹è€…"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"\¿Ò"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approver</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -454,56 +454,56 @@
             </span>}</span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
             </span>}</span>,
             "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
             </span>}</span>,
             "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
             </span>}</span>,
             "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
             </span>}
           </span>}</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªè€…"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”FÒ"</span>
         </span>}</span>,
         "<span class="hljs-attribute">passed_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘/é…çµ¦æ¸ˆé¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à/”z‹‹ÏŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">used_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Ÿæ”¯æ‰•ã„é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Àx•¥‚¢Šz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">budget_est_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—æ¦‚è¦é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZŠT—vŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">budget_max_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—ä¸Šé™é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZãŒÀŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">closed</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Œäº†ã—ãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Š®—¹‚µ‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†" class="resource"><h3 class="resource-heading">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç† <a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-get" class="action get"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-get" class="method get">GET</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—" class="resource"><h3 class="resource-heading">ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ— <a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—" class="permalink">&nbsp;&para;</a></h3><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-get" class="action get"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚Ìî•ñ‚ğæ“¾‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-get" class="method get">GET</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">projects</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰PJ"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœç®¡ç†ç”»é¢ã®APIã‚’ä½œã‚‹ã€‚"</span></span>,
+      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zPJ"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{ŠÇ—‰æ–Ê‚ÌAPI‚ğì‚éB"</span></span>,
       "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"soft"</span></span>,
       "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
@@ -542,11 +542,11 @@
           </span>}</span>,
           "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"èª¬æ˜"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"à–¾"</span>
           </span>}</span>,
           "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
@@ -554,7 +554,7 @@
               <span class="hljs-string">"soft"</span>,
               <span class="hljs-string">"hard"</span>
             ]</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ä¼šè¨ˆç¨®åˆ¥"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"‰ïŒví•Ê"</span>
           </span>}</span>,
           "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -565,22 +565,22 @@
               </span>}</span>,
               "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
               </span>}</span>,
               "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
               </span>}</span>,
               "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
               </span>}</span>,
               "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
               </span>}
             </span>}</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ç”³è«‹è€…"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"\¿Ò"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approver</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -591,64 +591,64 @@
               </span>}</span>,
               "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
               </span>}</span>,
               "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
               </span>}</span>,
               "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
               </span>}</span>,
               "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
               </span>}
             </span>}</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªè€…"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”FÒ"</span>
           </span>}</span>,
           "<span class="hljs-attribute">passed_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘/é…çµ¦æ¸ˆé¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à/”z‹‹ÏŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">used_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Ÿæ”¯æ‰•ã„é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Àx•¥‚¢Šz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">budget_est_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—æ¦‚è¦é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZŠT—vŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">budget_max_yen</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—ä¸Šé™é¡"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZãŒÀŠz"</span>
           </span>}</span>,
           "<span class="hljs-attribute">closed</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Œäº†ã—ãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Š®—¹‚µ‚½‚©‚Ç‚¤‚©"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}
         </span>}
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒgˆê——"</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"projects"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-put" class="action put"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-put" class="method put">PUT</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-put" class="action put"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚ğXV‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-put" class="method put">PUT</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
     {
-        "<span class="hljs-attribute">project.title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ"</span></span>,
+        "<span class="hljs-attribute">project.title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zƒvƒƒWƒFƒNƒg"</span></span>,
     }
 ]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">project</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœç®¡ç†ç”»é¢ã®APIã‚’ä½œã‚‹ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zƒvƒƒWƒFƒNƒg"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{ŠÇ—‰æ–Ê‚ÌAPI‚ğì‚éB"</span></span>,
     "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"soft"</span></span>,
     "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"users/152d7c4e-e4f6-45a7-befa-cbc9e0aacb1c"</span></span>,
@@ -684,11 +684,11 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"èª¬æ˜"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"à–¾"</span>
         </span>}</span>,
         "<span class="hljs-attribute">type</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
@@ -696,7 +696,7 @@
             <span class="hljs-string">"soft"</span>,
             <span class="hljs-string">"hard"</span>
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ä¼šè¨ˆç¨®åˆ¥"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"‰ïŒví•Ê"</span>
         </span>}</span>,
         "<span class="hljs-attribute">leader</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -707,22 +707,22 @@
             </span>}</span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
             </span>}</span>,
             "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
             </span>}</span>,
             "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
             </span>}</span>,
             "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
             </span>}
           </span>}</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ç”³è«‹è€…"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"\¿Ò"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approver</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
@@ -733,56 +733,56 @@
             </span>}</span>,
             "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åå‰"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"–¼‘O"</span>
             </span>}</span>,
             "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ[ƒ‹ƒAƒhƒŒƒX"</span>
             </span>}</span>,
             "<span class="hljs-attribute">last_modified</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æœ€çµ‚æ›´æ–°æ—¥æ™‚"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ÅIXV“ú"</span>
             </span>}</span>,
             "<span class="hljs-attribute">icon_media_key</span>": <span class="hljs-value">{
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã®ã‚­ãƒ¼"</span>
+              "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ÌƒL["</span>
             </span>}
           </span>}</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªè€…"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”FÒ"</span>
         </span>}</span>,
         "<span class="hljs-attribute">passed_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘/é…çµ¦æ¸ˆé¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à/”z‹‹ÏŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">used_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Ÿæ”¯æ‰•ã„é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Àx•¥‚¢Šz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">budget_est_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—æ¦‚è¦é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZŠT—vŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">budget_max_yen</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"äºˆç®—ä¸Šé™é¡"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—\ZãŒÀŠz"</span>
         </span>}</span>,
         "<span class="hljs-attribute">closed</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"å®Œäº†ã—ãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Š®—¹‚µ‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-delete" class="action delete"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå˜ä½“ã®ç®¡ç†-delete" class="method delete">DELETE</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†" class="resource"><h3 class="resource-heading">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç† <a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†" class="permalink">&nbsp;&para;</a></h3><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-get" class="action get"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«é–¢ã™ã‚‹è³¼å…¥ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-get" class="method get">GET</a><code class="uri">/projects/{project_id}/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span>/purchases</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-delete" class="action delete"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚ğíœ‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg’P‘Ì‚ÌŠÇ—-delete" class="method delete">DELETE</a><code class="uri">/projects/{project_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—" class="resource"><h3 class="resource-heading">ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ— <a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—" class="permalink">&nbsp;&para;</a></h3><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-get" class="action get"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚ÉŠÖ‚·‚éw“ü‚Ìˆê——‚ğæ“¾‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-get" class="method get">GET</a><code class="uri">/projects/{project_id}/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span>/purchases</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchases</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è²»"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒT[ƒo[ŠÇ—”ï"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
       "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
       "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
         <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -807,15 +807,15 @@
           </span>}</span>,
           "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
           </span>}</span>,
           "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -827,38 +827,38 @@
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
               </span>}
             ]</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
           </span>}</span>,
           "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}
         </span>}</span>,
         "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
           <span class="hljs-string">"receipt_media_keys"</span>
         ]
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è³¼å…¥ä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"w“üˆê——"</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"purchases"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-post" class="action post"><h4 class="action-heading"><div class="name">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«æ–°ã—ã„è³¼å…¥ã‚’ä½œæˆã™ã‚‹</div><a href="#ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ-ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®è³¼å…¥ã®ç®¡ç†-post" class="method post">POST</a><code class="uri">/projects/{project_id}/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span>/purchases</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-post" class="action post"><h4 class="action-heading"><div class="name">ƒvƒƒWƒFƒNƒg‚ÉV‚µ‚¢w“ü‚ğì¬‚·‚é</div><a href="#ƒvƒƒWƒFƒNƒg-ƒvƒƒWƒFƒNƒg‚Ìw“ü‚ÌŠÇ—-post" class="method post">POST</a><code class="uri">/projects/{project_id}/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/projects/<span class="hljs-attribute" title="project_id">project_id</span>/purchases</span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>project_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
     {
         <span class="hljs-string">"title"</span>: <span class="hljs-string">"test_project_1"</span>,
-        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœã®APIã‚’ä½œæˆã™ã‚‹ã€‚"</span>,
+        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ƒGƒŒƒ‰ƒ{‚ÌAPI‚ğì¬‚·‚éB"</span>,
         <span class="hljs-string">"amount"</span>: <span class="hljs-number">10000</span>,
     }
 ]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchase</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è²»"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒT[ƒo[ŠÇ—”ï"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
     "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
     "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
       <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -880,15 +880,15 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
         </span>}</span>,
         "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -900,15 +900,15 @@
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
             </span>}
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
         </span>}</span>,
         "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
@@ -916,12 +916,12 @@
       ]
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="è³¼å…¥" class="resource-group"><h2 class="group-heading">è³¼å…¥ <a href="#è³¼å…¥" class="permalink">&para;</a></h2><div id="è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«" class="resource"><h3 class="resource-heading">è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« <a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«" class="permalink">&nbsp;&para;</a></h3><div id="è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get" class="action get"><h4 class="action-heading"><div class="name">ç®¡ç†è³¼å…¥ã®ä¸€è¦§ã‚’å–å¾—ã™ã‚‹</div><a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-get" class="method get">GET</a><code class="uri">/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="w“ü" class="resource-group"><h2 class="group-heading">w“ü <a href="#w“ü" class="permalink">&para;</a></h2><div id="w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹" class="resource"><h3 class="resource-heading">w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹ <a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹" class="permalink">&nbsp;&para;</a></h3><div id="w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get" class="action get"><h4 class="action-heading"><div class="name">ŠÇ—w“ü‚Ìˆê——‚ğæ“¾‚·‚é</div><a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-get" class="method get">GET</a><code class="uri">/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases</span></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchases</span>": <span class="hljs-value">[
     {
       "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è²»"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+      "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒT[ƒo[ŠÇ—”ï"</span></span>,
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
       "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
       "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
         <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -946,15 +946,15 @@
           </span>}</span>,
           "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
           </span>}</span>,
           "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
           </span>}</span>,
           "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -966,40 +966,40 @@
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
               </span>}
             ]</span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
           </span>}</span>,
           "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}</span>,
           "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
           </span>}
         </span>}</span>,
         "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
           <span class="hljs-string">"receipt_media_keys"</span>
         ]
       </span>}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è³¼å…¥ä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"w“üˆê——"</span>
     </span>}
   </span>}</span>,
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"purchases"</span>
   ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post" class="action post"><h4 class="action-heading"><div class="name">æ–°ã—ã„è³¼å…¥ã‚’ä½œæˆã™ã‚‹</div><a href="#è³¼å…¥-è³¼å…¥å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«-post" class="method post">POST</a><code class="uri">/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post" class="action post"><h4 class="action-heading"><div class="name">V‚µ‚¢w“ü‚ğì¬‚·‚é</div><a href="#w“ü-w“ü‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹-post" class="method post">POST</a><code class="uri">/purchases</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
     {
         <span class="hljs-string">"purchase.title"</span>: <span class="hljs-string">"test_purchase_1"</span>,
         <span class="hljs-string">"purchase.manager_id"</span>: <span class="hljs-string">"users/b688f1c0-5b6b-49fb-a7d4-52113fb1dd88"</span>,
-        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœã®APIã‚’ä½œæˆã™ã‚‹ã€‚"</span>,
+        <span class="hljs-string">"description"</span>, <span class="hljs-string">"ƒGƒŒƒ‰ƒ{‚ÌAPI‚ğì¬‚·‚éB"</span>,
         <span class="hljs-string">"budget"</span>: <span class="hljs-number">10000</span>,
         <span class="hljs-string">"completion_date"</span>: <span class="hljs-string">"2014-11-18"</span>
     }
 ]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchase</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è²»"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒT[ƒo[ŠÇ—”ï"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
     "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
     "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
       <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -1021,15 +1021,15 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
         </span>}</span>,
         "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -1041,15 +1041,15 @@
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
             </span>}
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
         </span>}</span>,
         "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
@@ -1057,11 +1057,11 @@
       ]
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†" class="resource"><h3 class="resource-heading">è³¼å…¥å˜ä½“ã®ç®¡ç† <a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†" class="permalink">&nbsp;&para;</a></h3><div id="è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-get" class="action get"><h4 class="action-heading"><div class="name">è³¼å…¥ã®æƒ…å ±ã‚’å–å¾—ã™ã‚‹</div><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-get" class="method get">GET</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="w“ü-w“ü’P‘Ì‚ÌŠÇ—" class="resource"><h3 class="resource-heading">w“ü’P‘Ì‚ÌŠÇ— <a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—" class="permalink">&nbsp;&para;</a></h3><div id="w“ü-w“ü’P‘Ì‚ÌŠÇ—-get" class="action get"><h4 class="action-heading"><div class="name">w“ü‚Ìî•ñ‚ğæ“¾‚·‚é</div><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-get" class="method get">GET</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchase</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è²»"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒT[ƒo[ŠÇ—”ï"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
     "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
     "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
       <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -1083,15 +1083,15 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
         </span>}</span>,
         "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -1103,32 +1103,32 @@
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
             </span>}
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
         </span>}</span>,
         "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
         <span class="hljs-string">"receipt_media_keys"</span>
       ]</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è³¼å…¥ä¸€è¦§"</span>
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"w“üˆê——"</span>
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-put" class="action put"><h4 class="action-heading"><div class="name">è³¼å…¥ã‚’æ›´æ–°ã™ã‚‹</div><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-put" class="method put">PUT</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="w“ü-w“ü’P‘Ì‚ÌŠÇ—-put" class="action put"><h4 class="action-heading"><div class="name">w“ü‚ğXV‚·‚é</div><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-put" class="method put">PUT</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Body</h5><pre><code>[
     {
-        "<span class="hljs-attribute">purchase.title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰è³¼å…¥"</span></span>,
+        "<span class="hljs-attribute">purchase.title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zw“ü"</span></span>,
     }
 ]</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">purchase</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8"</span></span>,
-    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¨ãƒ¬ãƒ©ãƒœAPIæ§‹ç¯‰è³¼å…¥"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"åˆ©ç”¨ã—ã¦ã„ã‚‹AWSã§ãƒ‰ãƒ¡ã‚¤ãƒ³åã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã«å¿…è¦ãªçµŒè²»ã§ã™ã€‚"</span></span>,
+    "<span class="hljs-attribute">title</span>": <span class="hljs-value"><span class="hljs-string">"ƒGƒŒƒ‰ƒ{API\’zw“ü"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"—˜—p‚µ‚Ä‚¢‚éAWS‚ÅƒhƒƒCƒ“–¼‚ğŠÇ—‚·‚é‚½‚ß‚É•K—v‚ÈŒo”ï‚Å‚·B"</span></span>,
     "<span class="hljs-attribute">project_id</span>": <span class="hljs-value"><span class="hljs-string">"projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae"</span></span>,
     "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">[
       <span class="hljs-string">"media/receipts/8ea313b7-1172-4c35-bd9f-cf5d63429518"</span>,
@@ -1150,15 +1150,15 @@
         </span>}</span>,
         "<span class="hljs-attribute">title</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">description</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ã‚¿ã‚¤ãƒˆãƒ«"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒ^ƒCƒgƒ‹"</span>
         </span>}</span>,
         "<span class="hljs-attribute">project_id</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ID"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒvƒƒWƒFƒNƒg‚ÌID"</span>
         </span>}</span>,
         "<span class="hljs-attribute">receipt_media_keys</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"array"</span></span>,
@@ -1170,15 +1170,15 @@
               "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
             </span>}
           ]</span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ãƒ¬ã‚·ãƒ¼ãƒˆã®ç”»åƒä¸€è¦§"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"ƒŒƒV[ƒg‚Ì‰æ‘œˆê——"</span>
         </span>}</span>,
         "<span class="hljs-attribute">returned</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"è¿”é‡‘ã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"•Ô‹à‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}</span>,
         "<span class="hljs-attribute">approved</span>": <span class="hljs-value">{
           "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"boolean"</span></span>,
-          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"æ‰¿èªã•ã‚ŒãŸã‹ã©ã†ã‹"</span>
+          "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"³”F‚³‚ê‚½‚©‚Ç‚¤‚©"</span>
         </span>}
       </span>}</span>,
       "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
@@ -1186,7 +1186,7 @@
       ]
     </span>}
   </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-delete" class="action delete"><h4 class="action-heading"><div class="name">è³¼å…¥ã‚’å‰Šé™¤ã™ã‚‹</div><a href="#è³¼å…¥-è³¼å…¥å˜ä½“ã®ç®¡ç†-delete" class="method delete">DELETE</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 16 Dec 2019</p><script>/* eslint-env browser */
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="w“ü-w“ü’P‘Ì‚ÌŠÇ—-delete" class="action delete"><h4 class="action-heading"><div class="name">w“ü‚ğíœ‚·‚é</div><a href="#w“ü-w“ü’P‘Ì‚ÌŠÇ—-delete" class="method delete">DELETE</a><code class="uri">/purchases/{purchase_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/purchases/<span class="hljs-attribute" title="purchase_id">purchase_id</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>purchase_id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;</dd></dl></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">plain/text</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>OK</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 16 Dec 2019</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
 
