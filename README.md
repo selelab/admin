@@ -37,6 +37,7 @@ DB_PORT=''
 ```bash
 cd web
 python manage.py migrate
+python manage.py loaddata seed_auth seed_accounting
 python manage.py createsuperuser
 python manage.py runserver
 ```
