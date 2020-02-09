@@ -1,6 +1,47 @@
 # エレラボ管理画面API
 
 ## 環境構築
+### API系
+
+- MySQLは事前にインストールしておいてください
+
+- pipenvをインストールする
+```bash
+# Macの場合
+brew install pipenv
+# Windowsの場合
+pip install pipenv
+```
+
+- 必要なモジュールをインストールする
+```
+pipenv install
+```
+
+- MySQLで `selelab-admin-api` というデータベースを作っておく
+```SQL
+create database `selelab-admin-api`
+```
+
+- `.env` ファイルを以下のように設定する
+```env
+DB_NAME='selelab-admin-api'
+DB_USER='root'
+DB_PSWD=''
+DB_HOST=''
+DB_PORT=''
+```
+ただし、パスワードはMySQLの設定による
+
+- djangoの初期化
+```bash
+cd web
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+### ドキュメント系
 
 ```
 # nodejsをインストールする

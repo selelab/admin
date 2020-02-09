@@ -1,0 +1,68 @@
+[
+  {
+    "model": "accounting.project",
+    "pk": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
+    "fields": {
+      "title": "\u3059\u3054\u3044\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
+      "accounting_type": "soft",
+      "leader": "380ac58d-1595-4614-a8e2-5e881b51d18a",
+      "closed": false
+    }
+  },
+  {
+    "model": "accounting.project",
+    "pk": "5cfec77f-c466-415b-a7de-8be6b43bbc6d",
+    "fields": {
+      "title": "Django\u3067REST API\u4f5c\u308b\u305e",
+      "accounting_type": "soft",
+      "leader": "f2b34d83-b890-45ff-aedd-1d11a92cb9f5",
+      "closed": false
+    }
+  },
+  {
+    "model": "accounting.project",
+    "pk": "66c1b2b1-7376-48c1-9509-e52d568ed910",
+    "fields": {
+      "title": "\u30db\u30b2\u30db\u30b2\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
+      "accounting_type": "soft",
+      "leader": null,
+      "closed": false
+    }
+  },
+  {
+    "model": "accounting.project",
+    "pk": "da96e698-3dae-47b5-ae64-b6f5a7650387",
+    "fields": {
+      "title": "\u30db\u30b2\u30db\u30b2\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
+      "accounting_type": "soft",
+      "leader": "380ac58d-1595-4614-a8e2-5e881b51d18a",
+      "closed": false
+    }
+  },
+  {
+    "model": "accounting.purchase",
+    "pk": "690c4aeb-fef7-45d2-a98b-1c5f8c7af548",
+    "fields": {
+      "title": "\u4ea4\u901a\u8cbb",
+      "description": "\u6771\u4eac\u99c5\u304b\u3089\u8349\u6d25\u6e29\u6cc9\u307e\u3067\u306e\u4ea4\u901a\u8cbb\u3067\u3059\u3002",
+      "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
+      "evidence_media_key": "d2a85f4f-4ac5-4dcb-986e-6e988d83d3b4",
+      "price": 5670,
+      "returned": false,
+      "approved": false
+    }
+  },
+  {
+    "model": "accounting.purchase",
+    "pk": "768a00ae-b643-4449-8148-418e996636c7",
+    "fields": {
+      "title": "\u4ea4\u969b\u8cbb",
+      "description": "\u8efd\u4e95\u6ca2\u30d3\u30fc\u30eb\u8cfc\u5165\u4ee3\u91d1",
+      "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
+      "evidence_media_key": "d2a85f4f-4ac5-4dcb-986e-6e988d83d3b4",
+      "price": 1862,
+      "returned": false,
+      "approved": false
+    }
+  }
+]

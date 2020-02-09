@@ -1,0 +1,24 @@
+[
+  {
+    "model": "authenticate.user",
+    "pk": "380ac58d-1595-4614-a8e2-5e881b51d18a",
+    "fields": {
+      "name": "user1",
+      "email": "user1@example.com",
+      "last_modified": "2020-02-08T01:41:57.829Z",
+      "date_registered": "2020-02-08T03:02:10.908Z",
+      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089"
+    }
+  },
+  {
+    "model": "authenticate.user",
+    "pk": "f2b34d83-b890-45ff-aedd-1d11a92cb9f5",
+    "fields": {
+      "name": "user2__",
+      "email": "user2@example.com",
+      "last_modified": "2020-02-08T03:00:46.763Z",
+      "date_registered": "2020-02-08T03:02:10.908Z",
+      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089"
+    }
+  }
+]

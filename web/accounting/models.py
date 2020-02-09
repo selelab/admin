@@ -1,9 +1,34 @@
+import uuid
+
 from django.db import models
 
+from authenticate.models import User
 
-class User(models.Model):
-    user_id = models.UUIDField(unique=True)
-    name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True, max_length=254)
-    last_modified = models.DateTimeField(auto_now=True)
-    icon_media_key = models.UUIDField()
+ACCOUNTING_TYPES = (
+    ('soft', 'software_accounting'),
+    ('hard', 'hardware_accounting'),
+)
+
+
+class Project(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=50)
+    accounting_type = models.CharField(max_length=10, choices=ACCOUNTING_TYPES, default='soft')
+    leader = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+    closed = models.BooleanField(default=False)
+
+class ProjectApproval(models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    approver = models.ForeignKey(User, on_delete=models.PROTECT)
+    budget_amount = models.IntegerField(default=0)
+    approved = models.BooleanField(null=True)
+
+class Purchase(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=200)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    evidence_media_key = models.UUIDField()
+    price = models.IntegerField(default=0)
+    returned = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)

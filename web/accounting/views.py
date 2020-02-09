@@ -1,13 +1,20 @@
-from django.shortcuts import render
 import django_filters
-from rest_framework import viewsets, filters
+from django.shortcuts import render
+from rest_framework import filters, viewsets
 
-# Create your views here.
-
-from .models import User
-from .serializer import UserSerializer
+from .models import Project, Purchase
+from .serializer import ProjectSerializer, ProjectDetailSerializer, PurchaseSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ProjectDetailSerializer
+        return self.serializer_class
+
+class PurchaseViewSet(viewsets.ModelViewSet):
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer
