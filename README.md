@@ -5,7 +5,7 @@
 
 - MySQLは事前にインストールしておいてください
 
-- pipenvをインストールする
+- pipenvをインストールする(初回のみ)
 ```bash
 # Macの場合
 brew install pipenv
@@ -13,17 +13,17 @@ brew install pipenv
 pip install pipenv
 ```
 
-- 必要なモジュールをインストールする
+- 必要なモジュールをインストールする(初回のみ)
 ```
 pipenv install
 ```
 
-- MySQLで `selelab-admin-api` というデータベースを作っておく
+- MySQLで `selelab-admin-api` というデータベースを作っておく(初回のみ)
 ```SQL
 create database `selelab-admin-api`
 ```
 
-- `.env` ファイルを以下のように設定する
+- `.env` ファイルを以下のように設定する(初回のみ)
 ```env
 DB_NAME='selelab-admin-api'
 DB_USER='root'
@@ -33,13 +33,18 @@ DB_PORT=''
 ```
 ただし、パスワードはMySQLの設定による
 
-- djangoの初期化
+- djangoの初期化(初回のみ)
 ```bash
-pipenv shell
-cd web
+pipenv shell  # VSCodeの機能でpipenvが自動的に起動される場合は不要
+cd web  # admin-api/webに移動する
 python manage.py migrate
 python manage.py loaddata seed_auth seed_accounting
 python manage.py createsuperuser
+```
+
+- サーバーの起動
+```bash
+cd web  # admin-api/webに移動する
 python manage.py runserver
 ```
 
