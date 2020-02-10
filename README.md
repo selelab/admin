@@ -35,6 +35,7 @@ DB_PORT=''
 
 - djangoの初期化
 ```bash
+pipenv shell
 cd web
 python manage.py migrate
 python manage.py loaddata seed_auth seed_accounting
