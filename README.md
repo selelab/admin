@@ -24,13 +24,15 @@ create database `selelab-admin-api`
 ```
 
 - `.env` ファイルを以下のように設定する(初回のみ)
-```env
-DB_NAME='selelab-admin-api'
-DB_USER='root'
-DB_PSWD=''
-DB_HOST=''
-DB_PORT=''
-```
+
+    ```env
+    DB_NAME='selelab-admin-api'
+    DB_USER='root'
+    DB_PASS=''
+    DB_HOST=''
+    DB_PORT=''
+    ```
+
 ただし、パスワードはMySQLの設定による
 
 - djangoの初期化(初回のみ)
