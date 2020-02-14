@@ -3,25 +3,48 @@
 ## 環境構築
 ### API系
 
-- MySQLは事前にインストールしておいてください
+- Python(>=3.7), MySQLは事前にインストールしておいてください
+    - Windowsの場合
+        - Python: https://www.python.org/downloads/
+        - MySQL: https://dev.mysql.com/downloads/installer/
+    - MacOSの場合
+        - Pythonのインストール
+            ```bash
+            brew install pyenv
+            pyenv install 3.8.0
+            echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+            echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+            echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+
+        - MySQLのインストール
+            ```bash
+            brew install mysql
+            brew services start mysql
+            ```
 
 - pipenvをインストールする(初回のみ)
-```bash
-# Macの場合
-brew install pipenv
-# Windowsの場合
-pip install pipenv
-```
+    ```bash
+    # Macの場合
+    brew install pipenv
+    # Windowsの場合
+    pip install pipenv
+    ```
 
 - 必要なモジュールをインストールする(初回のみ)
-```
-pipenv install
-```
+    ```
+    pipenv install
+    ```
 
 - MySQLで `selelab-admin-api` というデータベースを作っておく(初回のみ)
-```SQL
-create database `selelab-admin-api`
-```
+    ```bash
+    $ mysql -u root
+    Welcome to the MySQL monitor.  Commands end with ; or \g.
+
+    ... (中略) ...
+
+    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+    mysql> create database `selelab-admin-api`
+    ```
 
 - `.env` ファイルを以下のように設定する(初回のみ)
 
@@ -36,19 +59,20 @@ create database `selelab-admin-api`
 ただし、パスワードはMySQLの設定による
 
 - djangoの初期化(初回のみ)
-```bash
-pipenv shell  # VSCodeの機能でpipenvが自動的に起動される場合は不要
-cd web  # admin-api/webに移動する
-python manage.py migrate
-python manage.py loaddata seed_auth seed_accounting
-python manage.py createsuperuser
-```
 
-- サーバーの起動
-```bash
-cd web  # admin-api/webに移動する
-python manage.py runserver
-```
+    ```bash
+    pipenv shell  # VSCodeの機能でpipenvが自動的に起動される場合は不要
+    cd web  # admin-api/webに移動する
+    python manage.py migrate
+    python manage.py loaddata seed_auth seed_accounting
+    python manage.py createsuperuser
+    ```
+
+    - サーバーの起動
+    ```bash
+    cd web  # admin-api/webに移動する
+    python manage.py runserver
+    ```
 
 - エンドポイントにアクセス
     - ユーザーの一覧を取得する
@@ -136,17 +160,24 @@ python manage.py runserver
 
 ### ドキュメント系
 
-```
-# nodejsをインストールする
-brew install node
+- 初期設定
 
-# aglioをインストールする
-npm install -g aglio
+    ```
+    # nodejsをインストールする
+    brew install node
 
-# http://localhost:3000/ にAPIドキュメントをみるためのサーバーを起動する
-aglio -i spec.md -s
+    # aglioをインストールする
+    npm install -g aglio
+    ```
 
-# spec.htmlを出力する
-#  -> https://htmlpreview.github.io/?https://github.com/selelab/admin-api/blob/master/docs/spec.html
-aglio -i spec.md -o docs/spec.html
-```
+- http://localhost:3000/ でAPIドキュメントをみるためのサーバーを起動する
+    ```
+    aglio -i spec.md -s
+    ```
+
+- spec.htmlを出力する
+
+    GitHub上にアップロードした後、https://htmlpreview.github.io/?https://github.com/selelab/admin-api/blob/master/docs/spec.html で見ることができる。
+    ```
+    aglio -i spec.md -o docs/spec.html
+    ```
