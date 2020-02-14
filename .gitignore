@@ -1,4 +1,7 @@
 
+# 複数のPythonのバージョンに対応するため
+Pipfile.lock
+
 # Created by https://www.gitignore.io/api/osx,linux,ruby,python
 # Edit at https://www.gitignore.io/?templates=osx,linux,ruby,python
 

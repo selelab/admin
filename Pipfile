@@ -14,6 +14,3 @@ django-filter = "*"
 mysqlclient = "*"
 django-environ = "*"
 pymysql = "*"
-
-[requires]
-python_version = "3.7"
