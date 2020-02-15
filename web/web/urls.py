@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(authenticate_router.urls)),
     url(r'^v1/api/', include(accounting_router.urls)),
+    url(r'api-auth/', include('rest_framework.urls')),
 ]

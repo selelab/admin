@@ -18,6 +18,7 @@ class Project(models.Model):
     closed = models.BooleanField(default=False)
 
 class ProjectApproval(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     approver = models.ForeignKey(User, on_delete=models.PROTECT)
     budget_amount = models.IntegerField(default=0)

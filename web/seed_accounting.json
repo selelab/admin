@@ -40,6 +40,26 @@
     }
   },
   {
+    "model": "accounting.projectapproval",
+    "pk": "ebbdd26b-33b9-4ef3-ac61-d23ee559c83c",
+    "fields": {
+      "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
+      "approver": "345865f9-c7ee-4107-9149-57dc35db0b79",
+      "budget_amount": 7532,
+      "approved": true
+    }
+  },
+  {
+    "model": "accounting.projectapproval",
+    "pk": "f6ed8162-44c0-4fe8-aa30-99f100c79f5c",
+    "fields": {
+      "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
+      "approver": "345865f9-c7ee-4107-9149-57dc35db0b79",
+      "budget_amount": 1500,
+      "approved": false
+    }
+  },
+  {
     "model": "accounting.purchase",
     "pk": "690c4aeb-fef7-45d2-a98b-1c5f8c7af548",
     "fields": {

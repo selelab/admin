@@ -1,24 +1,50 @@
 [
   {
     "model": "authenticate.user",
+    "pk": "345865f9-c7ee-4107-9149-57dc35db0b79",
+    "fields": {
+      "password": "pbkdf2_sha256$180000$v4bnTjt0AnA7$qxLt/fLqlAROpEE6aBFsqyg+uDy7m85TKzJN+d73BxA=",
+      "last_login": "2020-02-14T21:00:16.451Z",
+      "is_superuser": true,
+      "email": "admin1@example.com",
+      "display_name": "\u7ba1\u7406\u8005",
+      "last_modified": "2020-02-15T06:41:28.157Z",
+      "date_registered": "2020-02-14T19:49:22.519Z",
+      "icon_media_key": null,
+      "is_staff": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "authenticate.user",
     "pk": "380ac58d-1595-4614-a8e2-5e881b51d18a",
     "fields": {
-      "name": "user1",
+      "password": "pbkdf2_sha256$180000$4jzKCjeQOASL$TuqUA0s9E9/4VPoBn7QYLovIL4sVu1T+xrK2EJnDkk0=",
+      "last_login": "2020-02-15T06:30:32.120Z",
+      "is_superuser": false,
       "email": "user1@example.com",
-      "last_modified": "2020-02-08T01:41:57.829Z",
+      "display_name": "\u30e6\u30fc\u30b6\u30fc1",
+      "last_modified": "2020-02-14T20:53:07.212Z",
       "date_registered": "2020-02-08T03:02:10.908Z",
-      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089"
+      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089",
+      "is_staff": false,
+      "is_active": true
     }
   },
   {
     "model": "authenticate.user",
     "pk": "f2b34d83-b890-45ff-aedd-1d11a92cb9f5",
     "fields": {
-      "name": "user2__",
+      "password": "pbkdf2_sha256$180000$LrhcuQQPgY56$UVAOv7xxGnNWpIKnl/BhJbd01HEp8zGB54OqNYZrBBE=",
+      "last_login": "2020-02-14T21:00:10Z",
+      "is_superuser": false,
       "email": "user2@example.com",
-      "last_modified": "2020-02-08T03:00:46.763Z",
+      "display_name": "user2",
+      "last_modified": "2020-02-15T05:57:47.117Z",
       "date_registered": "2020-02-08T03:02:10.908Z",
-      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089"
+      "icon_media_key": "8284e730-8e31-47b6-b4ab-f230e12ee089",
+      "is_staff": false,
+      "is_active": true
     }
   }
 ]

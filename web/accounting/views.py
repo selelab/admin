@@ -1,12 +1,14 @@
 import django_filters
 from django.shortcuts import render
-from rest_framework import filters, viewsets
+from rest_framework import filters, permissions, viewsets
 
-from .models import Project, Purchase
-from .serializer import ProjectSerializer, ProjectDetailSerializer, PurchaseSerializer
+from .models import Project, ProjectApproval, Purchase
+from .serializer import (ProjectDetailSerializer, ProjectSerializer,
+                         PurchaseSerializer, ProjectApprovalSerializer)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
@@ -16,5 +18,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return self.serializer_class
 
 class PurchaseViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
+
+class ProjectApprovalViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = ProjectApproval.objects.all()
+    serializer_class = ProjectApprovalSerializer
