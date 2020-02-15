@@ -28,6 +28,8 @@
     brew install pipenv
     # Windowsの場合
     pip install pipenv
+    # anacondaを使っている場合
+    conda install -c conda-forge pipenv
     ```
 
 - 必要なモジュールをインストールする(初回のみ)
