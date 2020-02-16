@@ -3,8 +3,10 @@ from django.shortcuts import render
 from rest_framework import filters, permissions, viewsets
 
 from .models import Project, ProjectApproval, Purchase
-from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer,
-                         ProjectSerializer, PurchaseSerializer)
+from .serializer import (
+    ProjectApprovalSerializer, ProjectDetailSerializer, ProjectSerializer,
+    PurchaseSerializer
+)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -17,10 +19,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
             return ProjectDetailSerializer
         return self.serializer_class
 
+
 class PurchaseViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
+
 
 class ProjectApprovalViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)

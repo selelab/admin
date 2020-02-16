@@ -47,7 +47,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('メールアドレス'), unique=True)
     display_name = models.CharField(_('表示名'), max_length=150, blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    date_registered = models.DateTimeField(default=utils.timezone.now, editable=False)
+    date_registered = models.DateTimeField(
+        default=utils.timezone.now, editable=False
+    )
     icon_media_key = models.UUIDField(null=True)
     is_staff = models.BooleanField(
         _('staff status'),
@@ -60,8 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
         help_text=_(
             'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
-        ),
+            'Unselect this instead of deleting accounts.'),
     )
 
     objects = UserManager()

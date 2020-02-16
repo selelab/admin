@@ -23,7 +23,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/swagger/')),
-    url(r'^swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(
+        r'^swagger/',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='schema-swagger-ui'
+    ),
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(authenticate_router.urls)),
     url(r'^v1/api/', include(accounting_router.urls)),

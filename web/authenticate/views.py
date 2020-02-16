@@ -11,14 +11,19 @@ from .serializer import UserDetailSerializer, UserSerializer
 
 
 class AdminPermission(permissions.BasePermission):
+
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
 
+
 class ReadOnlyPermission(permissions.BasePermission):
+
     def has_permission(self, request, view):
         return request.user and request.user.is_authenticated and request.method in permissions.SAFE_METHODS
 
+
 class OwnerPermission(permissions.BasePermission):
+
     def has_permission(self, request, view):
         if 'pk' not in view.kwargs:
             return False
@@ -36,10 +41,17 @@ class OwnerPermission(permissions.BasePermission):
 
         return True
 
+
 class UserPermission(permissions.BasePermission):
+
     def has_permission(self, request, view):
-        allowed_perm_classes = [AdminPermission, ReadOnlyPermission, OwnerPermission]
-        return any(perm_class().has_permission(request, view) for perm_class in allowed_perm_classes)
+        allowed_perm_classes = [
+            AdminPermission, ReadOnlyPermission, OwnerPermission
+        ]
+        return any(
+            perm_class().has_permission(request, view)
+            for perm_class in allowed_perm_classes
+        )
 
 
 class UserViewSet(viewsets.ModelViewSet):
