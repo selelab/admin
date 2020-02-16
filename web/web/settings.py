@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounting',
     'authenticate',
     'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'web.urls'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/api-auth/login'
+LOGOUT_URL = '/api-auth/logout'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 TEMPLATES = [
     {
