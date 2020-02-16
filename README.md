@@ -45,7 +45,7 @@
     ... (中略) ...
 
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-    mysql> create database `selelab-admin-api`
+    mysql> create database `selelab-admin-api`;
     ```
 
 - `.env` ファイルを以下のように設定する(初回のみ)
