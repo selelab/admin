@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from typing import List
 
 import environ
 
@@ -30,7 +31,7 @@ SECRET_KEY = 'sx_g#il*p$-ppeb2=1%reb9s2rin!7m0u4#u*l7f)-!ykw0g5^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition

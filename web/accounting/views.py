@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework import filters, permissions, viewsets
 
 from .models import Project, ProjectApproval, Purchase
-from .serializer import (ProjectDetailSerializer, ProjectSerializer,
-                         PurchaseSerializer, ProjectApprovalSerializer)
+from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer,
+                         ProjectSerializer, PurchaseSerializer)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
