@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-from rest_framework import permissions
+from rest_framework import permissions, routers
 
 from accounting.urls import router as accounting_router
 from authenticate.urls import router as authenticate_router
@@ -21,6 +21,26 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
+
+class RouterExtendable(routers.DefaultRouter):
+    """
+    Extends `DefaultRouter` class to add a method for extending url routes from another router.
+    """
+
+    def extend(self, router):
+        """
+        Extend the routes with url routes of the passed in router.
+
+        Args:
+             router: SimpleRouter instance containing route definitions.
+        """
+        self.registry.extend(router.registry)
+
+
+api_router = RouterExtendable()
+api_router.extend(authenticate_router)
+api_router.extend(accounting_router)
+
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/swagger/')),
     url(
@@ -29,7 +49,6 @@ urlpatterns = [
         name='schema-swagger-ui'
     ),
     url(r'^admin/', admin.site.urls),
-    url(r'^v1/api/', include(authenticate_router.urls)),
-    url(r'^v1/api/', include(accounting_router.urls)),
+    url(r'^v1/api/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),
 ]
