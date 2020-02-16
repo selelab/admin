@@ -9,9 +9,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = (
-            'id', 'title', 'accounting_type', 'leader', 'closed', 'sum_budget'
-        )
+        fields = ('id', 'title', 'accounting_type', 'leader', 'closed', 'sum_budget')
 
     def get_sum_budget(self, obj):
         query_result = ProjectApproval.objects.filter(
@@ -30,37 +28,28 @@ class ProjectDetailSerializer(ProjectSerializer):
     class Meta:
         model = Project
         fields = (
-            'id', 'title', 'accounting_type', 'leader', 'closed', 'sum_budget',
-            'sum_req_budget', 'sum_purchase_price', 'approvals', 'purchases'
+            'id', 'title', 'accounting_type', 'leader', 'closed', 'sum_budget', 'sum_req_budget', 'sum_purchase_price', 'approvals',
+            'purchases'
         )
 
     def get_purchases(self, obj):
         try:
-            return PurchaseSerializer(
-                Purchase.objects.filter(project_id=obj.id), many=True
-            ).data
+            return PurchaseSerializer(Purchase.objects.filter(project_id=obj.id), many=True).data
         except:
             return []
 
     def get_approvals(self, obj):
         try:
-            return ProjectApprovalSerializer(
-                ProjectApproval.objects.filter(project_id=obj.id), many=True
-            ).data
+            return ProjectApprovalSerializer(ProjectApproval.objects.filter(project_id=obj.id), many=True).data
         except:
             return []
 
     def get_sum_req_budget(self, obj):
-        query_result = ProjectApproval.objects.filter(project_id=obj.id
-                                                     ).aggregate(
-                                                         Sum('budget_amount')
-                                                     )['budget_amount__sum']
+        query_result = ProjectApproval.objects.filter(project_id=obj.id).aggregate(Sum('budget_amount'))['budget_amount__sum']
         return query_result or 0
 
     def get_sum_purchase_price(self, obj):
-        query_result = Purchase.objects.filter(project_id=obj.id
-                                              ).aggregate(Sum('price')
-                                                         )['price__sum']
+        query_result = Purchase.objects.filter(project_id=obj.id).aggregate(Sum('price'))['price__sum']
         return query_result or 0
 
 
@@ -75,7 +64,4 @@ class PurchaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Purchase
-        fields = (
-            'id', 'title', 'description', 'project_id', 'evidence_media_key',
-            'price', 'returned', 'approved'
-        )
+        fields = ('id', 'title', 'description', 'project_id', 'evidence_media_key', 'price', 'returned', 'approved')

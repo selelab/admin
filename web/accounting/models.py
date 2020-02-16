@@ -13,12 +13,8 @@ ACCOUNTING_TYPES = (
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
-    accounting_type = models.CharField(
-        max_length=10, choices=ACCOUNTING_TYPES, default='soft'
-    )
-    leader = models.ForeignKey(
-        User, on_delete=models.PROTECT, null=True, blank=True
-    )
+    accounting_type = models.CharField(max_length=10, choices=ACCOUNTING_TYPES, default='soft')
+    leader = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     closed = models.BooleanField(default=False)
 
 

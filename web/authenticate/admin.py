@@ -38,14 +38,10 @@ class MyUserAdmin(UserAdmin):
             'fields': ('last_login',)
         }),
     )
-    add_fieldsets = (
-        (
-            None, {
-                'classes': ('wide',),
-                'fields': ('email', 'password1', 'password2'),
-            }
-        ),
-    )
+    add_fieldsets = ((None, {
+        'classes': ('wide',),
+        'fields': ('email', 'password1', 'password2'),
+    }),)
     form = MyUserChangeForm
     add_form = MyUserCreationForm
     list_display = ('email', 'display_name', 'is_staff')

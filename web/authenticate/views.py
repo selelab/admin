@@ -45,13 +45,8 @@ class OwnerPermission(permissions.BasePermission):
 class UserPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        allowed_perm_classes = [
-            AdminPermission, ReadOnlyPermission, OwnerPermission
-        ]
-        return any(
-            perm_class().has_permission(request, view)
-            for perm_class in allowed_perm_classes
-        )
+        allowed_perm_classes = [AdminPermission, ReadOnlyPermission, OwnerPermission]
+        return any(perm_class().has_permission(request, view) for perm_class in allowed_perm_classes)
 
 
 class UserViewSet(viewsets.ModelViewSet):
