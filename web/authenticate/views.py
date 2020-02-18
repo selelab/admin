@@ -6,6 +6,7 @@ from rest_framework import decorators, filters, permissions, response, viewsets
 
 from accounting.models import Project
 
+from web import settings
 from .models import User
 from .serializer import UserDetailSerializer, UserSerializer
 
@@ -50,6 +51,7 @@ class UserPermission(permissions.BasePermission):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    http_method_names = settings.DEFAULT_HTTP_METHOD_NAMES
     permission_classes = (UserPermission,)
     queryset = User.objects.all()
     serializer_class = UserSerializer

@@ -54,7 +54,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/api-auth/login'
 LOGOUT_URL = '/api-auth/logout'
 
-REST_FRAMEWORK = {'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',)}
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+}
 
 TEMPLATES = [
     {
@@ -144,3 +147,6 @@ LOGGING = {
         },
     },
 }
+
+
+DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'post', 'patch', 'delete']
