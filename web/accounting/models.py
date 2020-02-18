@@ -13,6 +13,7 @@ ACCOUNTING_TYPES = (
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
     accounting_type = models.CharField(max_length=10, choices=ACCOUNTING_TYPES, default='soft')
     leader = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     closed = models.BooleanField(default=False)
@@ -21,7 +22,7 @@ class Project(models.Model):
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    approver = models.ForeignKey(User, on_delete=models.PROTECT)
+    approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
     approved = models.BooleanField(null=True)
 
@@ -29,9 +30,10 @@ class ProjectApproval(models.Model):
 class Purchase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     evidence_media_key = models.UUIDField()
     price = models.IntegerField(default=0)
+    approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     returned = models.BooleanField(default=False)
-    approved = models.BooleanField(default=False)
+    approved = models.BooleanField(null=True, default=False)

@@ -6,15 +6,20 @@ from .models import Project, ProjectApproval, Purchase
 
 class ProjectSerializer(serializers.ModelSerializer):
     sum_budget = serializers.SerializerMethodField()
+    sum_purchase_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
-        fields = ('id', 'title', 'accounting_type', 'leader', 'closed', 'sum_budget')
+        fields = ('id', 'title', 'description', 'accounting_type', 'leader', 'closed', 'sum_budget', 'sum_purchase_price')
 
     def get_sum_budget(self, obj):
         query_result = ProjectApproval.objects.filter(
             project_id=obj.id, approved=True
         ).aggregate(Sum('budget_amount'))['budget_amount__sum']
+        return query_result or 0
+
+    def get_sum_purchase_price(self, obj):
+        query_result = Purchase.objects.filter(project_id=obj.id).aggregate(Sum('price'))['price__sum']
         return query_result or 0
 
 
@@ -23,7 +28,6 @@ class ProjectDetailSerializer(ProjectSerializer):
     approvals = serializers.SerializerMethodField()
 
     sum_req_budget = serializers.SerializerMethodField()
-    sum_purchase_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -48,10 +52,6 @@ class ProjectDetailSerializer(ProjectSerializer):
         query_result = ProjectApproval.objects.filter(project_id=obj.id).aggregate(Sum('budget_amount'))['budget_amount__sum']
         return query_result or 0
 
-    def get_sum_purchase_price(self, obj):
-        query_result = Purchase.objects.filter(project_id=obj.id).aggregate(Sum('price'))['price__sum']
-        return query_result or 0
-
 
 class ProjectApprovalSerializer(serializers.ModelSerializer):
 
@@ -64,4 +64,4 @@ class PurchaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Purchase
-        fields = ('id', 'title', 'description', 'project_id', 'evidence_media_key', 'price', 'returned', 'approved')
+        fields = ('id', 'title', 'description', 'project_id', 'evidence_media_key', 'price', 'approver', 'returned', 'approved')
