@@ -8,7 +8,7 @@ from accounting.models import Project
 from web import settings
 
 from .models import User
-from .serializer import UserDetailSerializer, UserSerializer
+from .serializer import UserCreationSerializer, UserDetailSerializer, UserSerializer
 
 
 class AdminPermission(permissions.BasePermission):
@@ -59,4 +59,6 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return UserDetailSerializer
+        elif self.action in ['create', 'partial_update']:
+            return UserCreationSerializer
         return self.serializer_class
