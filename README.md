@@ -3,6 +3,9 @@
 ## 環境構築
 ### API系
 
+- Macの方はこちらも併せてご覧ください
+  https://asciinema.org/a/meIg2rzA2Ka6pnMrWwc4Xey1q
+
 - Python(>=3.7), MySQLは事前にインストールしておいてください
     - Windowsの場合
         - Python: https://www.python.org/downloads/
@@ -75,6 +78,8 @@
     cd web  # admin-api/webに移動する
     python manage.py runserver
     ```
+    ブラウザで http://localhost:8000 にアクセスすると以下のように Swagger が表示されます。
+    ![Swaggerの画像](./doc_images/swagger.png)
 
 - エンドポイントにアクセス
     - ユーザーの一覧を取得する
@@ -160,6 +165,7 @@
     ]
     ```
 
+<!--
 ### ドキュメント系
 
 - 初期設定
@@ -183,3 +189,4 @@
     ```
     aglio -i spec.md -o docs/spec.html
     ```
+-->
