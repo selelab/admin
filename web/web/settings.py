@@ -148,5 +148,4 @@ LOGGING = {
     },
 }
 
-
 DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'post', 'patch', 'delete']

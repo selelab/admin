@@ -5,8 +5,8 @@ from django.shortcuts import render
 from rest_framework import decorators, filters, permissions, response, viewsets
 
 from accounting.models import Project
-
 from web import settings
+
 from .models import User
 from .serializer import UserDetailSerializer, UserSerializer
 
