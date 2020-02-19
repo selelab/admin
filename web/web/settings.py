@@ -36,7 +36,7 @@ ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages',
-    'django.contrib.staticfiles', 'accounting', 'authenticate', 'rest_framework', 'drf_yasg'
+    'django.contrib.staticfiles', 'accounting', 'authenticate', 'rest_framework', 'drf_yasg', 'web'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +76,9 @@ TEMPLATES = [
             },
     },
 ]
+
+PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
+STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'),)
 
 WSGI_APPLICATION = 'web.wsgi.application'
 

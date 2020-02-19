@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
@@ -47,4 +47,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),
+    url(r'^app/', TemplateView.as_view(template_name='index.html')),
 ]

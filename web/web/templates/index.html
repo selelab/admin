@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <title>会計システム | SEL</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <div style="width:80%; margin:auto">
+      <h1>[[ title ]]</h1>
+      <nav>
+        <router-link to="/">ホーム</router-link>
+        <router-link to="/dashboard">Dashboard</router-link>
+        <router-link to="/login">Log In</router-link>
+      </nav>
+      <router-view></router-view>
+    </div>
+  </div>
+  <script type="module" src='/static/main.js'></script>
+</body>
+
+</html>
