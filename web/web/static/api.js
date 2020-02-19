@@ -47,7 +47,6 @@ const form = (path, request) => {
   };
   return axios.post(HOST + path, formData, config)
     .then((response) => Promise.resolve(
-      console.log(response)
     ))
     .catch((error) => Promise.reject(error));
 }
