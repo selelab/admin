@@ -4,16 +4,16 @@ const ProjectList = {
   data() {
     return {
       project_lists: [],
-      isShow: {}
+      isShow: []
     }
   },
   template: `
   <div>
     <h1>ProjectList</h1>
     <ul>
-        <li v-for="project in project_lists">
-              <p v-on:click="show(project.title)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-              <div v-show="isShow[project.title]">
+        <li v-for="(project,index) in project_lists">
+              <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
+              <div v-show="isShow[index]">
                 説明: {{ project.description }} <br>
                 会計種別: {{ project.accounting_type }} <br>
                 完了フラグ: {{ project.closed }} <br>
@@ -29,7 +29,7 @@ const ProjectList = {
       .then(response => {
         this.project_lists = response.data;
         for (let cnt = 0; cnt < response.data.length; cnt++) {
-          this.$set(this.isShow, response.data[cnt].title, false);
+          this.isShow.push(false);
         }
         console.log(this.isShow);
       })
@@ -38,8 +38,8 @@ const ProjectList = {
       });
   },
   methods: {
-    show: function (title) {
-      this.$set(this.isShow, title, !this.isShow[title]);
+    show: function (index) {
+      this.$set(this.isShow, index, !this.isShow[index]);
     }
   }
 
