@@ -9,6 +9,8 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 
@@ -17,9 +19,9 @@
     <div style="width: 600px; margin:auto">
       <h1>[[ title ]]</h1>
       <nav>
-        <router-link to="/">ホーム</router-link> / 
-        <router-link to="/users">UserList</router-link> / 
-        <router-link to="/projects">ProjectList</router-link> / 
+        <router-link to="/">ホーム</router-link> /
+        <router-link to="/users">UserList</router-link> /
+        <router-link to="/projects">ProjectList</router-link> /
         <router-link to="/login">Log In</router-link>
       </nav>
       <router-view></router-view>
