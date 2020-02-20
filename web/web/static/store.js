@@ -1,13 +1,13 @@
 const store = new Vuex.Store({
     state: {
-        sessionid:"",
+        sessionid: "",
     },
     mutations: {
-        setSessionid(sessionid){
+        setSessionid(sessionid) {
             state.sessionid = sessionid;
         },
-        getSessionid(){
-          return state.sessionid;
+        getSessionid() {
+            return state.sessionid;
         }
     }
 });

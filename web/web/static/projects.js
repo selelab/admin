@@ -4,7 +4,7 @@ const ProjectList = {
   data() {
     return {
       project_lists: [],
-      isShow:{}
+      isShow: {}
     }
   },
   template: `
@@ -28,8 +28,8 @@ const ProjectList = {
     api.get('/v1/api/projects/')
       .then(response => {
         this.project_lists = response.data;
-        for (let cnt = 0;cnt < response.data.length;cnt ++ ){
-          this.$set(this.isShow,response.data[cnt].title,false);
+        for (let cnt = 0; cnt < response.data.length; cnt++) {
+          this.$set(this.isShow, response.data[cnt].title, false);
         }
         console.log(this.isShow);
       })
@@ -37,9 +37,9 @@ const ProjectList = {
         console.log(error);
       });
   },
-  methods:{
-    show: function( title ){
-      this.$set(this.isShow,title,!this.isShow[title]);
+  methods: {
+    show: function (title) {
+      this.$set(this.isShow, title, !this.isShow[title]);
     }
   }
 
