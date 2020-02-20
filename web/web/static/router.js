@@ -1,8 +1,9 @@
 import { Login, State } from './auth.js';
-import { UserList } from './users.js'
+import { UserList, UserDetail } from './users.js'
 import { ProjectList } from './projects.js'
 import * as api from './api.js'
-var About = { template: `
+var About = {
+  template: `
   <div>
     <h1>About</h1>
     このサイトは上智大学エレクトロニクスラボの会計を管理するために作られたサイトです。
@@ -12,6 +13,7 @@ var About = { template: `
 var routes = [
   { path: '/', component: About, meta: { isPublic: true } },
   { path: '/users', component: UserList },
+  { path: '/users/:id', component: UserDetail, name: 'user_detail' },
   { path: '/projects', component: ProjectList },
   { path: '/login', component: Login, meta: { isPublic: true } }
 ];
@@ -21,7 +23,8 @@ var router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => !record.meta.isPublic) && !State.loggedIn && Cookies.get('sessionid') === undefined) {
+  if (to.matched.some(record => !record.meta.isPublic) && !State.loggedIn) {
+    // projectsが取れるかどうかでログイン状態を判別する
     api.get('/v1/api/projects/')
       .then(response => {
         next();
