@@ -1,6 +1,9 @@
 import { Login, State } from './auth.js';
 import { UserList, UserDetail } from './users.js'
 import { ProjectList } from './projects.js'
+import { SampleList } from './samples.js'
+import { Sample1 } from './sample/1.js'
+
 import * as api from './api.js'
 var About = {
   template: `
@@ -14,6 +17,8 @@ var routes = [
   { path: '/', component: About, meta: { isPublic: true } },
   { path: '/users', component: UserList },
   { path: '/users/:id', component: UserDetail, name: 'user_detail' },
+  { path: '/samples',  component: SampleList },
+  { path: '/samples/1', component: Sample1},
   { path: '/projects', component: ProjectList },
   { path: '/login', component: Login, meta: { isPublic: true } }
 ];
