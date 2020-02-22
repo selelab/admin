@@ -1,0 +1,8 @@
+django
+djangorestframework
+django-filter
+mysqlclient
+django-environ
+pymysql
+django-rest-swagger
+drf-yasg
