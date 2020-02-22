@@ -8,6 +8,7 @@ const UserList = {
   },
   template: `
   <div>
+    <router-link to="/users/create"> ユーザーを作る </router-link>
     <h1>UserList</h1>
     <ul>
       <li v-for="user in user_lists">
@@ -65,4 +66,60 @@ const UserDetail = {
   }
 };
 
-export { UserList, UserDetail };
+const CreateUser = {
+  data() {
+    return {
+      display_name: "",
+      password: "",
+      email: "",
+      icon_media_key: "",
+      is_active: true,
+      is_superuser: false
+    }
+  },
+  methods: {
+    create_user: function () {
+      api.post(
+        '/v1/api/users/',
+        {
+          display_name: this.display_name,
+          password: this.password,
+          email: this.email,
+          icon_media_key: this.icon_media_key,
+          is_active: true,
+          is_superuser: false
+        }
+      )
+      .then(response => {
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      router.push(this.$route.query.redirect || '/');
+    }
+  },
+  template: `
+           <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
+            <p>名前
+              <input type="text" v-model="title" class="user_name">
+            </p>
+            <p>パスワード
+              <input type="passward" v-model="passward">
+            </p>
+            <p>email
+              <input type="email" v-model="email">
+            </p>
+          <p>icon_media_key
+          <input type="file" v-model="icon_media_key">
+          </p>
+            <p>
+              <input type="submit" @click="create_user">
+            </p>
+
+          </form>
+    `
+};
+
+
+
+export { UserList, UserDetail, CreateUser};

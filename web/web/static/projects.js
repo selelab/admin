@@ -79,6 +79,7 @@ const CreateProject = {
       description: "",
       accounting_type: "",
       leader: "",
+      user_lists: [],
       closed: false
     }
   },
@@ -111,10 +112,17 @@ const CreateProject = {
               <input type="text" v-model="description">
             </p>
             <p>会計種別
-              <input type="text" v-model="accounting_type">
+            <select v-model="accounting_type" size=1>
+              <option value="hard">ハードウェア会計</option>
+              <option value="soft">ソフトウェア会計</option>
+            </select>
             </p>
             <p>リーダー
-            <input type="text" v-model="leader">
+            <select type="text" v-model="leader">
+            <option v-for="(user) in user_lists" :value="user.id">
+            {{user.display_name}}
+            </option> 
+
           </p>
             </p>
             <p>
@@ -122,7 +130,16 @@ const CreateProject = {
             </p>
 
           </form>
-    `
+    `,
+    created() {
+      api.get('/v1/api/users/')
+        .then(response => {
+          this.user_lists = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
 };
 
 
