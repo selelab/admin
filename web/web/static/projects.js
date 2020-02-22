@@ -19,6 +19,9 @@ const ProjectList = {
                 完了フラグ: {{ project.closed }} <br>
                 承認済予算: {{ project.sum_budget }} <br>
                 支出済予算: {{ project.sum_purchase_price }} <br>
+                <router-link :to="{ name: 'project_detail', params: {id: project.id}}">
+                  詳細
+                </router-link>
               </div>
         </li>
     </ul>
@@ -44,4 +47,40 @@ const ProjectList = {
 
 };
 
-export { ProjectList };
+
+const ProjectDetail = {
+  data() {
+    return {
+      project_info: {
+        title: "",
+        description: "",
+        accounting_type: "",
+        leader: "991cf939-8af4-4a30-95b3-82aa516a4bc4",
+        closed: false,
+        sum_budget: 0,
+        sum_purchase_price: 0
+      },
+    }
+  },
+  template: `
+  <div>
+    <h1>ProjectInfo</h1>
+        タイトル: {{ project_info.title }} <br>
+        会計種別: {{ project_info.accounting_type }} <br>
+        完了フラグ: {{ project_info.closed }} <br>
+        承認済予算: {{ project_info.sum_budget }} <br>
+  </div>
+  `,
+  created() {
+    const project_id = this.$route.params.id;
+    api.get('/v1/api/projects/' + project_id)
+      .then(response => {
+        this.project_info = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+};
+
+export { ProjectList, ProjectDetail };
