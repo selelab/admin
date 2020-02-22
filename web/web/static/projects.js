@@ -24,6 +24,7 @@ const ProjectList = {
         </li>
       -----------------------------------------------------------------
 
+      
         <li v-for="(project,index) in dead_project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
               <div v-show="isShow[index]">
