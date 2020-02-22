@@ -10,7 +10,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'title', 'description', 'accounting_type', 'leader', 'closed', 'sum_budget', 'sum_purchase_price')
+        fields = ('id', 'title', 'description', 'accounting_type', 'leader', 'closed', 'sum_budget', 'date_created', 'sum_purchase_price')
 
     def get_sum_budget(self, obj):
         query_result = ProjectApproval.objects.filter(
