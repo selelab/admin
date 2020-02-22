@@ -12,6 +12,7 @@ const ProjectList = {
   template: `
   <div>
     <h1>ProjectList</h1>
+    許可されたプロジェクト
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
             <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
@@ -24,7 +25,7 @@ const ProjectList = {
             </div>
         </li>
       -----------------------------------------------------------------
-
+      却下されたプトジェクト
 
         <li v-for="(project,index) in dead_project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
