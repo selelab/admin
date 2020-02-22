@@ -47,5 +47,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),
+    url(r'^app/check.html', TemplateView.as_view(template_name='check.html')),
     url(r'^app/', TemplateView.as_view(template_name='index.html')),
 ]
