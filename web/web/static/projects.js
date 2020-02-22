@@ -20,7 +20,7 @@ const ProjectList = {
                 承認済予算: {{ project.sum_budget }} <br>
                 支出済予算: {{ project.sum_purchase_price }} <br>
                 <router-link :to="{ name: 'project_detail', params: {id: project.id}}">
-                  詳細
+                  審査
                 </router-link>
               </div>
         </li>
@@ -70,7 +70,7 @@ const ProjectDetail = {
         会計種別: {{ project_info.accounting_type }} <br>
         完了フラグ: {{ project_info.closed }} <br>
         承認済予算: {{ project_info.sum_budget }} <br>
-        <button v-on:click="approve"　v-if="project_info.closed">解除</button>
+        <button v-on:click="approve"　v-if="project_info.closed">取消</button>
         <button v-on:click="approve"　v-if="!project_info.closed">承認</button>
         </div>
         `
