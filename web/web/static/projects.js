@@ -7,7 +7,11 @@ const ProjectList = {
       project_lists: [],
       dead_project_lists: [],
       on_going_project_lists: [],
-      isShow: []
+      isShow: [],
+      num_soft: 0,
+      num_hard: 0,
+      soft_fee: 0,
+      hard_fee: 0
     }
   },
   template: `
@@ -15,6 +19,11 @@ const ProjectList = {
     <router-link to="/projects/create" class="myButton">
      </router-link>
     <h1>ProjectList</h1>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    soft_fee:{{soft_fee}}
+    hard_fee:{{hard_fee}}
+    num_soft:{{num_soft}}
+    num_hard:{{num_hard}}
     <h3>許可されたプロジェクト</h3>
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
@@ -50,6 +59,16 @@ const ProjectList = {
         this.project_lists = response.data;
         for (let cnt = 0; cnt < response.data.length; cnt++) {
           let project = response.data[cnt];
+          if (project.accounting_type === "soft")
+          {
+            this.soft_fee += project.sum_purchase_price;
+            this.num_soft += 1; 
+          }
+          else
+          {
+            this.hard_fee += project.sum_purchase_price;
+            this.num_hard += 1;
+          }
           if (project.closed)
           {
             this.dead_project_lists.push(project);
@@ -59,16 +78,51 @@ const ProjectList = {
             this.on_going_project_lists.push(project);
           }
           this.isShow.push(false);
+          this.createGraph();
         }
       })
       .catch(error => {
         console.log(error);
       });
   },
+  mounted: function(){
+    this.createGraph()
+  },
   methods: {
     show: function (index) {
       this.$set(this.isShow, index, !this.isShow[index]);
-    }
+    },
+      createGraph: function(){
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['ハード', 'ソフト'],
+              datasets: [{
+                  label: '合計費用',
+                  data: [this.hard_fee, this.soft_fee],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+      },
   }
 
 };
