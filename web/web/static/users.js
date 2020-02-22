@@ -122,4 +122,4 @@ const CreateUser = {
 
 
 
-export { UserList, UserDetail, CreateUser};
+export { UserList, UserDetail, CreateUser };
