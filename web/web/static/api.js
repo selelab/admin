@@ -1,16 +1,14 @@
 const requestHeader = () => {
   return {
     headers: {
-      'X-CSRFToken': Cookies.get('csrftoken'),
-      'sessionid': Cookies.get('sessionid')
+      'X-CSRFToken': Cookies.get('csrftoken')
     }
   }
 };
 const requestHeaderWithNullData = () => {
   return {
     headers: {
-      'X-CSRFToken': Cookies.get('csrftoken'),
-      'sessionid': Cookies.get('sessionid')
+      'X-CSRFToken': Cookies.get('csrftoken')
     },
     data: {}
   }
