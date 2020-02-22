@@ -11,6 +11,7 @@ const ProjectList = {
   },
   template: `
   <div>
+    <router-link to="/projects/create"> プロジェクトを作る </router-link>
     <h1>ProjectList</h1>
     <h3>許可されたプロジェクト</h3>
     <ul class="projects">
@@ -70,4 +71,59 @@ const ProjectList = {
 
 };
 
-export { ProjectList };
+
+const CreateProject = {
+  data() {
+    return {
+      title: "",
+      description: "",
+      accounting_type: "",
+      leader: "",
+      closed: false
+    }
+  },
+  methods: {
+    create_project: function () {
+      api.post(
+        '/v1/api/projects/',
+        {
+          title: this.title,
+          description: this.description,
+          accounting_type: this.accounting_type,
+          leader: this.leader,
+          closed: false
+        }
+      )
+      .then(response => {
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      router.push(this.$route.query.redirect || '/');
+    }
+  },
+  template: `
+           <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
+            <p>タイトル
+              <input type="text" v-model="title" class="form-control">
+            </p>
+            <p>説明
+              <input type="text" v-model="description">
+            </p>
+            <p>会計種別
+              <input type="text" v-model="accounting_type">
+            </p>
+            <p>リーダー
+            <input type="text" v-model="leader">
+          </p>
+            </p>
+            <p>
+              <input type="submit" @click="create_project">
+            </p>
+
+          </form>
+    `
+};
+
+
+export { ProjectList, CreateProject };
