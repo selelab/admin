@@ -38,6 +38,7 @@ const ProjectList = {
               </div>
         </li>
     </ul>
+    <img src="/static/image.jpg" />
   </div>
   `,
   created() {
