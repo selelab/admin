@@ -1,13 +1,17 @@
 .router-view{
   margin-top:10%;
+  background-color:　black;
+  color: red;
+
 }
 
 .projects {
   list-style: none;
+  background-color: black;
 }
 
 .sample1a {
-  background-color: red;
+  background-color: black;
 }
 
 .sample2a {
@@ -50,7 +54,7 @@
 	max-width: 800px;
 	padding: 30px 30px 15px;
 	box-sizing: border-box;
-	background: #fff;
+	background: #000000;
 	line-height: 1.4em;
 	transition: 0.5s;
 }
