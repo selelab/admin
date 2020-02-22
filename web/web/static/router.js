@@ -3,8 +3,9 @@ import { UserList, UserDetail } from './users.js'
 import { ProjectList } from './projects.js'
 import { SampleList } from './samples.js'
 import { Sample1 } from './sample/1.js'
-
+import { Sample2 } from './sample/2.js'
 import * as api from './api.js'
+
 var About = {
   template: `
   <div>
@@ -18,7 +19,8 @@ var routes = [
   { path: '/users', component: UserList },
   { path: '/users/:id', component: UserDetail, name: 'user_detail' },
   { path: '/samples',  component: SampleList },
-  { path: '/samples/1', component: Sample1},
+  { path: '/samples/1', component: Sample1 },
+  { path: '/samples/2', component: Sample2 },
   { path: '/projects', component: ProjectList },
   { path: '/login', component: Login, meta: { isPublic: true } }
 ];
@@ -29,15 +31,7 @@ var router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => !record.meta.isPublic) && !State.loggedIn) {
-    // projectsが取れるかどうかでログイン状態を判別する
-    api.get('/v1/api/projects/')
-      .then(response => {
-        next();
-      })
-      .catch(error => {
-        next({ path: '/login', query: { redirect: to.fullPath } });
-      });
-
+    next({ path: '/login', query: { redirect: to.fullPath } });
   } else {
     next();
   }

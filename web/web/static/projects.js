@@ -10,7 +10,7 @@ const ProjectList = {
   template: `
   <div>
     <h1>ProjectList</h1>
-    <ul>
+    <ul class="projects">
         <li v-for="(project,index) in project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
               <div v-show="isShow[index]">
@@ -31,7 +31,6 @@ const ProjectList = {
         for (let cnt = 0; cnt < response.data.length; cnt++) {
           this.isShow.push(false);
         }
-        console.log(this.isShow);
       })
       .catch(error => {
         console.log(error);
