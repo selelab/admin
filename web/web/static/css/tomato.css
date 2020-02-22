@@ -1,0 +1,39 @@
+.form-wrapper{
+    margin: 0 20%;
+    text-align: center;
+}
+
+.form-item{
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+ul{
+    list-style:none;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+h1{
+    font: normal;
+    
+}
+
+
+
+
+#app{
+    background-image:url(/static/img/cat.jpg
+    );
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 70%;
+    background-color: wheat;
+    opacity: 0.4;
+    
+}
