@@ -12,7 +12,7 @@ const ProjectList = {
   template: `
   <div>
     <h1>ProjectList</h1>
-    許可されたプロジェクト
+    <h3>許可されたプロジェクト</h3>
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
             <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
@@ -24,8 +24,9 @@ const ProjectList = {
               支出済予算: {{ project.sum_purchase_price }} <br>
             </div>
         </li>
-      -----------------------------------------------------------------
-      却下されたプトジェクト
+      <p>-----------------------------------------------------------------</p>
+      &nbsp
+      <h3>却下されたプロジェクト</h3>
 
         <li v-for="(project,index) in dead_project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
