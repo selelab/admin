@@ -2,7 +2,7 @@ version: "2"
 services:
   python:
     build: ./web
-    command: python manage.py runserver
+    command: python3 manage.py runserver
     expose:
       - "8000"
     depends_on:

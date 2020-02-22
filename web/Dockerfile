@@ -4,16 +4,11 @@ FROM ubuntu:16.04
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-# 適当なディレクトリ作って移動
 RUN mkdir /var/app
 WORKDIR /var/app
 
-# python, curl install
-RUN apt update && apt install -y python3 curl mysql-client
-
-RUN apt install -y python-dev libmysqlclient-dev
-RUN apt install -y gcc
-RUN apt install -y python3-dev
+RUN apt update
+RUN apt install -y python3 curl gcc python3-dev libmysqlclient-dev
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
@@ -26,7 +21,7 @@ COPY . /var/app
 
 RUN cd web
 
-RUN python manage.py migrate
-RUN python manage.py loaddata prod_seed_authenticate prod_seed_accounting
+RUN python3 manage.py migrate
+RUN python3 manage.py loaddata prod_seed_authenticate prod_seed_accounting
 
-ENTRYPOINT ["python", "manage.py", "runserver"]
+ENTRYPOINT ["python3", "manage.py", "runserver"]
