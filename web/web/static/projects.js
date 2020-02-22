@@ -109,16 +109,16 @@ const CreateProject = {
               <input type="text" v-model="title" class="form-control">
             </p>
             <p>説明
-              <input type="text" v-model="description">
+              <input type="text" v-model="description"　class="form-control">
             </p>
             <p>会計種別
-            <select v-model="accounting_type" size=1>
+            <select v-model="accounting_type" size=1 class="form-control">
               <option value="hard">ハードウェア会計</option>
               <option value="soft">ソフトウェア会計</option>
             </select>
             </p>
             <p>リーダー
-            <select type="text" v-model="leader">
+            <select type="text" v-model="leader" class="form-control">
             <option v-for="(user) in user_lists" :value="user.id">
             {{user.display_name}}
             </option> 

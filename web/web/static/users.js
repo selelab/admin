@@ -101,16 +101,16 @@ const CreateUser = {
   template: `
            <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
             <p>名前
-              <input type="text" v-model="title" class="user_name">
+              <input type="text" v-model="title" class="user_name" class="form-control">
             </p>
             <p>パスワード
-              <input type="passward" v-model="passward">
+              <input type="passward" v-model="passward" class="form-control">
             </p>
             <p>email
-              <input type="email" v-model="email">
+              <input type="email" v-model="email" class="form-control">
             </p>
           <p>icon_media_key
-          <input type="file" v-model="icon_media_key">
+          <input type="file" v-model="icon_media_key" class="form-control">
           </p>
             <p>
               <input type="submit" @click="create_user">
