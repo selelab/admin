@@ -52,6 +52,7 @@ const ProjectDetail = {
   data() {
     return {
       project_info: {
+        id: "",
         title: "",
         description: "",
         accounting_type: "",
@@ -69,8 +70,26 @@ const ProjectDetail = {
         会計種別: {{ project_info.accounting_type }} <br>
         完了フラグ: {{ project_info.closed }} <br>
         承認済予算: {{ project_info.sum_budget }} <br>
-  </div>
-  `,
+        <button v-on:click="approve"　v-if="project_info.closed">解除</button>
+        <button v-on:click="approve"　v-if="!project_info.closed">承認</button>
+        </div>
+        `
+        ,
+        methods:{
+          approve: async function() {
+            
+            let result = window.confirm("本当によろしいですか？。");
+            if ( result ){
+              await api.patch("/v1/api/projects/" + this.project_info.id + "/",
+              {
+                closed: true
+              });
+              this.project_info.closed = !this.project_info.closed;
+            }            
+          }
+        }
+
+,
   created() {
     const project_id = this.$route.params.id;
     api.get('/v1/api/projects/' + project_id)
@@ -81,6 +100,7 @@ const ProjectDetail = {
         console.log(error);
       });
   }
+  
 };
 
 export { ProjectList, ProjectDetail };

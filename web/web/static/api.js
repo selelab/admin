@@ -32,6 +32,13 @@ const post = (path, request) => {
     .catch((error) => Promise.reject(error));
 }
 
+const patch = (path, request) => {
+  return axios.patch(HOST + path, request, requestHeader())
+    .then((response) => Promise.resolve(
+    ))
+    .catch((error) => Promise.reject(error));
+}
+
 const form = (path, request) => {
   let formData = new FormData();
   for (var key in request) {
@@ -49,4 +56,4 @@ const form = (path, request) => {
     .catch((error) => Promise.reject(error));
 }
 
-export { get, post, form };
+export { get, post, form, patch };
