@@ -12,7 +12,8 @@ const ProjectList = {
   },
   template: `
   <div>
-    <router-link to="/projects/create"> プロジェクトを作る </router-link>
+    <router-link to="/projects/create" class="myButton">
+     </router-link>
     <h1>ProjectList</h1>
     <h3>許可されたプロジェクト</h3>
     <ul class="projects">
@@ -106,6 +107,8 @@ const CreateProject = {
   },
   template: `
            <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
+           &nbsp
+           <p>こちらの質問にお答えください。</p>
             <p>タイトル
               <input type="text" v-model="title" class="form-control">
             </p>
