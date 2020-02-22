@@ -68,10 +68,11 @@ const ProjectDetail = {
     <h1>ProjectInfo</h1>
         タイトル: {{ project_info.title }} <br>
         会計種別: {{ project_info.accounting_type }} <br>
-        完了フラグ: {{ project_info.closed }} <br>
+        承認: <p v-if="project_info.closed">済 </p>
+        承認: <p v-else>削除 </p>
         承認済予算: {{ project_info.sum_budget }} <br>
         <button v-on:click="approve"　v-if="project_info.closed">取消</button>
-        <button v-on:click="approve"　v-if="!project_info.closed">承認</button>
+        <button v-on:click="approve"　v-else>承認</button>
         </div>
         `
         ,
