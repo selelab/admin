@@ -26,8 +26,8 @@ const SampleList  = {
             <label for="trigger" class="modal_trigger">shit</label>
             <div class="modal_content">
                 <label for="trigger" class="close_button">&#x2716;&#xfe0f;</label>
-                <h2>Modal Content</h2>
-                <p>Lorem ipsum ...</p>
+                <h2>なぜ起きているんだ</h2>
+                <p>意味がわからん</p>
             </div>
         </div>
     </div>
