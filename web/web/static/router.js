@@ -1,5 +1,5 @@
 import { Login, State } from './auth.js';
-import { UserList, UserDetail } from './users.js'
+import { UserList, UserDetail, UserCreate } from './users.js'
 import { ProjectList, ProjectDetail } from './projects.js'
 import { SampleList } from './samples.js'
 import { Sample1 } from './sample/1.js'
@@ -17,6 +17,7 @@ var About = {
 var routes = [
   { path: '/', component: About, meta: { isPublic: true } },
   { path: '/users', component: UserList },
+  { path: '/users/create', component: UserCreate, name: 'user_create' },
   { path: '/users/:id', component: UserDetail, name: 'user_detail' },
   { path: '/samples',  component: SampleList },
   { path: '/samples/1', component: Sample1 },
