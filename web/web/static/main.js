@@ -6,7 +6,7 @@ var app = new Vue({
   el: '#app',
   router,
   data: {
-    title: "エレラボ教室申請システム",
+    title: "エレラボ会計システム",
     auth_text: "Log In",
     auth_path:  "/login"
   },
