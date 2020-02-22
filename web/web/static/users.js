@@ -12,7 +12,7 @@ const UserList = {
     <ul>
       <li v-for="user in user_lists">
         <router-link :to="{ name: 'user_detail', params: {id: user.id}}">
-          名前: {{ user.display_name }}
+          {{ user.display_name }}
         </router-link>
       </li>
     </ul>
@@ -40,8 +40,8 @@ const UserDetail = {
   <div>
     <h1>UserInfo</h1>
         名前: {{ user_info.display_name }} <br>
-        メアド: {{ user_info.email }} <br>
-        <a v-bind:href="user_info.email" v-bind:id="id">メール</a><br>
+        メールアドレス: {{ user_info.email }} <br>
+        <a v-bind:href="user_info.email" v-bind:id="id">メールを送る</a><br>
         リーダーをしているプロジェクト <br>
         <ul>
           <li v-for="project in user_info.projects">
