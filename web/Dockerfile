@@ -12,6 +12,7 @@ WORKDIR /var/app
 RUN apt update && apt install -y python3 curl mysql-client
 
 RUN apt install -y python-dev libmysqlclient-dev
+RUN apt install -y gcc
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
@@ -28,4 +29,3 @@ RUN python manage.py migrate
 RUN python manage.py loaddata prod_seed_authenticate prod_seed_accounting
 
 ENTRYPOINT ["python", "manage.py", "runserver"]
-
