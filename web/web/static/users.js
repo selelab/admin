@@ -12,9 +12,8 @@ const UserList = {
     <ul>
       <li v-for="user in user_lists">
         <router-link :to="{ name: 'user_detail', params: {id: user.id}}">
-          名前: {{ user.display_name }}<br>
+          名前: {{ user.display_name }}
         </router-link>
-        メアド: {{ user.email }}
       </li>
     </ul>
   </div>
@@ -23,6 +22,7 @@ const UserList = {
     api.get('/v1/api/users/')
       .then(response => {
         this.user_lists = response.data;
+
       })
       .catch(error => {
         console.log(error);
@@ -41,6 +41,7 @@ const UserDetail = {
     <h1>UserInfo</h1>
         名前: {{ user_info.display_name }} <br>
         メアド: {{ user_info.email }} <br>
+        <a v-bind:href="user_info.email" v-bind:id="id">メール</a><br>
         リーダーをしているプロジェクト <br>
         <ul>
           <li v-for="project in user_info.projects">
@@ -58,6 +59,8 @@ const UserDetail = {
     api.get('/v1/api/users/' + user_id)
       .then(response => {
         this.user_info = response.data;
+                
+        this.user_info.email = "mailto:" + this.user_info.email;
       })
       .catch(error => {
         console.log(error);
