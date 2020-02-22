@@ -17,7 +17,7 @@ const ProjectList = {
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
             <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-            <div v-show="isShow[index]">
+            <div v-show="isShow[index]" class="detail" style="background-color:red;">
               説明: {{ project.description }} <br>
               会計種別: {{ project.accounting_type }} <br>
               承認済予算: {{ project.sum_budget }} <br>
