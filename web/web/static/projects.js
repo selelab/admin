@@ -19,12 +19,13 @@ const ProjectList = {
               説明: {{ project.description }} <br>
               会計種別: {{ project.accounting_type }} <br>
               承認済予算: {{ project.sum_budget }} <br>
+              完了フラグ: {{ project.closed }} <br>
               支出済予算: {{ project.sum_purchase_price }} <br>
             </div>
         </li>
       -----------------------------------------------------------------
 
-      
+
         <li v-for="(project,index) in dead_project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
               <div v-show="isShow[index]">
