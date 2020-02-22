@@ -92,7 +92,7 @@ const CreateProject = {
           description: this.description,
           accounting_type: this.accounting_type,
           leader: this.leader,
-          closed: false
+          closed: ture
         }
       )
       .then(response => {
