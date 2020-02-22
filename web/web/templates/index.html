@@ -4,7 +4,7 @@
 <head>
   {% csrf_token %}
   <meta charset="UTF-8">
-  <title>会計システム | SEL</title>
+  <title>エレラ簿システム | SEL</title>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -13,19 +13,25 @@
   <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/master.css">
+  <link rel="stylesheet" href="/static/css/tomato.css">
 </head>
 
 <body>
   <div id="app">
     <div class="text-center" style="width:600px;margin:auto;" >
-      <h1>[[ title ]]</h1>
-      <nav>
-        <router-link to="/">ホーム</router-link> /
-        <router-link to="/users">UserList</router-link> /
-        <router-link to="/projects">ProjectList</router-link> /
-        <router-link to="/samples">SampleList</router-link> /
-        <router-link :to="auth_path">[[ auth_text ]]</router-link>
-      </nav>
+      <div>
+       <header><h1>[[ title ]]</h1></header>
+      
+       <nav>
+         <router-link to="/">ホーム</router-link> /
+         <router-link to="/users">UserList</router-link> /
+         <router-link to="/projects">ProjectList</router-link> /
+         <router-link to="/samples">SampleList</router-link> /
+         <router-link to="/tomatojuice">Totmatojuice</router-link> /
+         <router-link :to="auth_path">[[ auth_text ]]</router-link>
+       </nav>
+      </div>
+      </div>
       <div class="router-view">
         <router-view></router-view>
       </div>
