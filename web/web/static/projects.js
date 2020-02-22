@@ -1,4 +1,5 @@
 import * as api from './api.js'
+import { router } from './router.js'
 
 const ProjectList = {
   data() {
@@ -17,7 +18,7 @@ const ProjectList = {
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
             <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-            <div v-show="isShow[index]" class="detail" style="background-color:red;">
+            <div v-show="isShow[index]" >
               説明: {{ project.description }} <br>
               会計種別: {{ project.accounting_type }} <br>
               承認済予算: {{ project.sum_budget }} <br>
@@ -80,7 +81,7 @@ const CreateProject = {
       accounting_type: "",
       leader: "",
       user_lists: [],
-      closed: false
+      closed: true
     }
   },
   methods: {
@@ -92,7 +93,7 @@ const CreateProject = {
           description: this.description,
           accounting_type: this.accounting_type,
           leader: this.leader,
-          closed: ture
+          closed: true
         }
       )
       .then(response => {
@@ -118,12 +119,11 @@ const CreateProject = {
             </select>
             </p>
             <p>リーダー
-            <select type="text" v-model="leader" class="form-control">
-            <option v-for="(user) in user_lists" :value="user.id">
-            {{user.display_name}}
-            </option> 
-
-          </p>
+              <select  v-model="leader" class="form-control">
+                <option v-for="(user) in user_lists" :value="user.id">
+                {{user.display_name}}
+                </option> 
+              </select>
             </p>
             <p>
               <input type="submit" @click="create_project">
