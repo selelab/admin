@@ -1,0 +1,15 @@
+.router-view{
+  margin-top:10%;
+}
+
+.projects {
+  list-style: none;
+}
+
+.sample1a {
+  background-color: red;
+}
+
+.sample2a {
+  background-color: blue;
+}
