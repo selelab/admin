@@ -13,6 +13,7 @@ RUN apt update && apt install -y python3 curl mysql-client
 
 RUN apt install -y python-dev libmysqlclient-dev
 RUN apt install -y gcc
+RUN apt install -y python3-dev
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
