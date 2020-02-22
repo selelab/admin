@@ -11,6 +11,8 @@ WORKDIR /var/app
 # python, curl install
 RUN apt update && apt install -y python3 curl mysql-client
 
+RUN apt install -y python-dev libmysqlclient-dev
+
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
 RUN python3 get-pip.py
