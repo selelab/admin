@@ -1,9 +1,10 @@
 .router-view{
-  margin-top:10%;
+  padding-top: 20%;
 }
 
+
 .projects {
-  list-style: none;
+  text-align: left;
 }
 
 .sample1a {
@@ -12,4 +13,24 @@
 
 .sample2a {
   background-color: blue;
+}
+
+.header {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+}
+
+#users {
+  list-style: none;
+  display: grid;
+  grid-template-rows: 200px 200px 200px 200px;
+  grid-template-columns: 200px 200px 200px;
+}
+
+.profile_image {
+  width: 80%;
+  height: 80%;
 }

@@ -9,6 +9,7 @@ const UserList = {
   },
   template: `
   <div id="users">
+  <h1>User List</h1>
     <li>
       <router-link to="/users/create">
         ユーザーを作る<br>
@@ -52,7 +53,7 @@ const UserDetail = {
     <h1>UserInfo</h1>
         名前: {{ user_info.display_name }} <br>
         メールアドレス: {{ user_info.email }} <br>
-        <a v-bind:href="user_info.email" v-bind:id="id">メールを送る</a><br>
+        <a v-bind:href="user_info.email" v-bind:id="id">Outlookでメールを送る</a><br>
         リーダーをしているプロジェクト <br>
         <ul>
           <li v-for="project in user_info.projects">

@@ -19,19 +19,7 @@ const Login = {
     }
   },
   template: `
-           <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
-           <!--
-            <p>
-              <input type="text" v-model="email" class="form-control">
-            </p>
-            <p>
-              <input type="password" v-model="password">
-            </p>
-            </p>
-            <p>
-              <input type="submit" @click="login">
-            </p>
-            -->
+           <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;"> 
 
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
