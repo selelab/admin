@@ -1,4 +1,5 @@
 import * as api from './api.js'
+import { router } from './router.js'
 
 const UserList = {
   data() {
@@ -74,10 +75,28 @@ const CreateUser = {
       email: "",
       icon_media_key: "",
       is_active: true,
+      uploadedImage: '',
+      img_name: '',
       is_superuser: false
     }
   },
   methods: {
+    onFileChange(e) {
+      const files = e.target.files || e.dataTransfer.files;
+      this.createImage(files[0]);
+      this.img_name = files[0].name;
+    },
+    // アップロードした画像を表示
+    createImage(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.uploadedImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    remove() {
+      this.uploadedImage = false;
+    },
     create_user: function () {
       api.post(
         '/v1/api/users/',
@@ -85,7 +104,7 @@ const CreateUser = {
           display_name: this.display_name,
           password: this.password,
           email: this.email,
-          icon_media_key: this.icon_media_key,
+          icon_media_key: null,
           is_active: true,
           is_superuser: false
         }
@@ -101,21 +120,40 @@ const CreateUser = {
   template: `
            <form class="form-signin border" style="width:300px;margin:auto;margin-auto:5%;">
             <p>名前
-              <input type="text" v-model="title" class="user_name" class="form-control">
+              <input type="text" v-model="display_name" class="user_name form-control">
             </p>
             <p>パスワード
-              <input type="passward" v-model="passward" class="form-control">
+              <input type="passward" v-model="password" class="form-control">
             </p>
             <p>email
               <input type="email" v-model="email" class="form-control">
             </p>
-          <p>icon_media_key
-          <input type="file" v-model="icon_media_key" class="form-control">
-          </p>
+          
+
+            <div class="contents">
+            <label v-show="!uploadedImage" class="input-item__label"
+              >アイコンを選択
+              <input type="file" @change="onFileChange" class="form-contorol"/>
+            </label>
+            <div class="preview-item">
+              <img
+                v-show="uploadedImage"
+                class="preview-item-file"
+                :src="uploadedImage"
+                alt=""
+              />
+              <div v-show="uploadedImage" class="preview-item-btn" @click="remove">
+                <p class="preview-item-name">{{ img_name }}</p>
+              </div>
+            </div>
+          </div>
+
             <p>
               <input type="submit" @click="create_user">
             </p>
 
+
+            
           </form>
     `
 };
