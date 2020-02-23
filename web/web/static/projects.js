@@ -12,9 +12,18 @@ const ProjectList = {
   },
   template: `
   <div>
-    <router-link to="/projects/create" class="myButton">
-     </router-link>
     <h1>ProjectList</h1>
+  
+    <p>おめでとうございます！</p>
+    <p>あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
+  
+    <router-link to="/projects/create" class="myButton">  
+      <p>こちらをクリック！</p>
+    </router-link>
+    &nbsp
+    &nbsp
+    &nbsp
+    
     <h3>許可されたプロジェクト</h3>
     <ul class="projects">
         <li v-for="(project,index) in on_going_project_lists">
