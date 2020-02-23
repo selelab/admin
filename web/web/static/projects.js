@@ -19,10 +19,6 @@ const ProjectList = {
   <div>
     <h1>ProjectList</h1>
     <canvas id="myChart" width="400" height="400"></canvas>
-    soft_fee:{{soft_fee}}
-    hard_fee:{{hard_fee}}
-    num_soft:{{num_soft}}
-    num_hard:{{num_hard}}
   
     <p>おめでとうございます！</p>
     <p>あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
@@ -115,7 +111,7 @@ const ProjectList = {
           data: {
               labels: ['ハード', 'ソフト'],
               datasets: [{
-                  label: '合計費用',
+                  label: '合計費用（円）',
                   data: [this.hard_fee, this.soft_fee],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
