@@ -12,7 +12,7 @@ const ProjectList = {
     <h1>ProjectList</h1>
     <ul class="projects">
         <li v-for="(project,index) in project_lists">
-              <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
+              <p class="project-title" v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
               <div v-show="isShow[index]">
                 説明: {{ project.description }} <br>
                 会計種別: {{ project.accounting_type }} <br>
