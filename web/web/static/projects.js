@@ -23,13 +23,15 @@ const ProjectList = {
     num_soft:{{num_soft}}
     num_hard:{{num_hard}}
   
-    <p>おめでとうございます！</p>
-    <p>あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
-  
-    <router-link to="/projects/create" class="myButton">  
-      <p>こちらをクリック！</p>
-    </router-link>
+    <div>  
+      <p>おめでとうございます！<br>
+      あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
     
+      <router-link to="/projects/create" class="myButton">  
+        <p>こちらをクリック！</p>
+      </router-link>
+    </div>
+
     <br>
     <br>
 
