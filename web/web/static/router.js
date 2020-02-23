@@ -14,10 +14,29 @@ var About = {
       このサイトは上智大学エレクトロニクスラボの会計を管理するために作られたサイトです。
     </div>
 
-    <div>
-      <p> shit</p>
-      <center><img src="/static/kumamon.png" /></center>
+    <div><br>
+    <br>
+    <br>
+      <p> みて！くまモンがいるよ<br>
+      かわいいね</p>
+      <label for="trigger" class="open_button"><center><img src="/static/kumamon.png" /></center></label>
     </div>
+
+    <div class="modal_wrap">
+        <input id="trigger" type="checkbox">
+        <div class="modal_overlay">
+            <label for="trigger" class="modal_trigger">shit</label>
+            <div class="modal_content">
+                <label for="trigger" class="close_button">&#x2716;&#xfe0f;</label>
+                <h2>shit</h2>
+                <p>あなたがクリックしてしまったので<br>
+                くまモンが隠れてしまいました<br>
+                あ〜あ</p>
+            </div>
+        </div>
+    </div>
+    
+  </div>
   </div>
   }
 ` };

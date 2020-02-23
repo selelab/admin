@@ -24,7 +24,7 @@ const ProjectList = {
   <br>
   <br>
 
-    <div class="box" style="text-align:center;"><br>
+    <div class="box"><br>
       <p>おめでとうございます！<br>
       あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
     
