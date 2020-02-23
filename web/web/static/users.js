@@ -73,7 +73,7 @@ const CreateUser = {
       display_name: "",
       password: "",
       email: "",
-      icon_media_key: "",
+      icon: "",
       is_active: true,
       uploadedImage: '',
       img_name: '',
@@ -104,7 +104,7 @@ const CreateUser = {
           display_name: this.display_name,
           password: this.password,
           email: this.email,
-          icon_media_key: null,
+          icon: this.icon,
           is_active: true,
           is_superuser: false
         }
@@ -131,9 +131,9 @@ const CreateUser = {
           
 
             <div class="contents">
-            <label v-show="!uploadedImage" class="input-item__label"
+            <label v-show="!uploadedImage" class="input-item__label" 
               >アイコンを選択
-              <input type="file" @change="onFileChange" class="form-contorol"/>
+              <input type="file" @change="onFileChange" class="form-contorol" v-on="icon"/>
             </label>
             <div class="preview-item">
               <img

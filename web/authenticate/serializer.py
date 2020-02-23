@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'display_name', 'email', 'last_modified', 'icon_media_key', 'date_registered', 'is_active')
+        fields = ('id', 'display_name', 'email', 'last_modified', 'icon_path', 'date_registered', 'is_active')
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'display_name', 'email', 'last_modified', 'icon_media_key', 'date_registered', 'is_active', 'is_superuser', 'projects'
+            'id', 'display_name', 'email', 'last_modified', 'icon_path', 'date_registered', 'is_active', 'is_superuser', 'projects'
         )
 
     def get_projects(self, obj):
@@ -30,16 +30,34 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 
 class UserCreationSerializer(serializers.ModelSerializer):
+    
+    def create(self, request):
+        created = False
 
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password'],
-            display_name=validated_data['display_name'],
-            icon_media_key=validated_data['icon_media_key'],
-            is_active=validated_data['is_active'],
-            is_superuser=validated_data['is_superuser'],
-        )
+        if 'icon' in request:
+            icon = request['icon']
+            path = os.path.join(settings.IMAGE_ROOT, icon_file.name)
+            with open(path, 'wb') as icon_fs:
+                for chunk in file.chunks():
+                    icon_fs.write(chunk)
+
+            if not os.path.exists(path):
+                print('failed to save image:', path)
+                return {'error': 'failed to save image'}
+            
+            user, created = User.objects.get_or_create(icon_path=path)
+        else:
+            path = '/static/images/profile.png'
+            user, created = User.objects.get_or_create(email=request['email'])
+
+        if created:
+            user.display_name = request['display_name']
+            user.email = request['email']
+            user.icon_path = path
+            user.is_active = request['is_active']
+            user.is_superuser = request['is_superuser']
+            user.save()
+
         return user
 
     def update(self, instance, validated_data):
@@ -56,9 +74,10 @@ class UserCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'display_name', 'password', 'email', 'icon_media_key', 'is_active', 'is_superuser'
+            'display_name', 'password', 'email', 'icon_path', 'is_active', 'is_superuser'
         )
         extra_kwargs = {
             'password': {'write_only': True},
+            'icon_path': {'read_only': True},
         }
 
