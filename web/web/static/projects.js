@@ -8,6 +8,7 @@ const ProjectList = {
       dead_project_lists: [],
       on_going_project_lists: [],
       isShow: [],
+      isShowDead: [],
       num_soft: 0,
       num_hard: 0,
       soft_fee: 0,
@@ -51,8 +52,8 @@ const ProjectList = {
      <div class="floatco1"> 
       <h3>まだ許可が下りていないプロジェクト</h3>
         <li v-for="(project,index) in dead_project_lists">
-              <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-              <div v-show="isShow[index]">
+              <p v-on:click="showDead(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
+              <div v-show="isShowDead[index]">
                 説明: {{ project.description }} <br>
                 会計種別: {{ project.accounting_type }} <br>
                 承認済予算: {{ project.sum_budget }} <br>
@@ -83,12 +84,13 @@ const ProjectList = {
           if (project.closed)
           {
             this.dead_project_lists.push(project);
+            this.isShowDead.push(false)
           }
           else
           {
             this.on_going_project_lists.push(project);
+            this.isShow.push(false);
           }
-          this.isShow.push(false);
           this.createGraph();
         }
       })
@@ -102,6 +104,9 @@ const ProjectList = {
   methods: {
     show: function (index) {
       this.$set(this.isShow, index, !this.isShow[index]);
+    },
+    showDead: function (index) {
+      this.$set(this.isShowDead, index, !this.isShowDead[index]);
     },
       createGraph: function(){
         var ctx = document.getElementById('myChart').getContext('2d');
