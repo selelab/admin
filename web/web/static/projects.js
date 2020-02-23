@@ -20,26 +20,27 @@ const ProjectList = {
     <router-link to="/projects/create" class="myButton">  
       <p>こちらをクリック！</p>
     </router-link>
-    &nbsp
-    &nbsp
-    &nbsp
     
-    <h3>許可されたプロジェクト</h3>
-    <ul class="projects">
-        <li v-for="(project,index) in on_going_project_lists">
-            <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-            <div v-show="isShow[index]" >
-              説明: {{ project.description }} <br>
-              会計種別: {{ project.accounting_type }} <br>
-              承認済予算: {{ project.sum_budget }} <br>
-              完了フラグ: {{ project.closed }} <br>
-              支出済予算: {{ project.sum_purchase_price }} <br>
-            </div>
-        </li>
-      <p>-----------------------------------------------------------------</p>
-      &nbsp
-      <h3>却下されたプロジェクト</h3>
+    <br>
+    <br>
 
+    <ul class="projects">
+    <div class="floatco1">
+      <h3>許可されたプロジェクト</h3>
+          <li v-for="(project,index) in on_going_project_lists">
+              <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
+              <div v-show="isShow[index]" >
+                説明: {{ project.description }} <br>
+                会計種別: {{ project.accounting_type }} <br>
+                承認済予算: {{ project.sum_budget }} <br>
+                完了フラグ: {{ project.closed }} <br>
+                支出済予算: {{ project.sum_purchase_price }} <br>
+              </div>
+          </li>
+    </div>
+    
+     <div class="floatco1"> 
+      <h3>まだ許可が下りていないプロジェクト</h3>
         <li v-for="(project,index) in dead_project_lists">
               <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
               <div v-show="isShow[index]">
@@ -49,6 +50,7 @@ const ProjectList = {
                 支出済予算: {{ project.sum_purchase_price }} <br>
               </div>
         </li>
+    </div>
     </ul>
     <img src="/static/image.jpg" />
   </div>
@@ -111,7 +113,7 @@ const CreateProject = {
       .catch(error => {
         console.log(error);
       });
-      router.push(this.$route.query.redirect || '/');
+      router.push('/projects/');
     }
   },
   template: `
