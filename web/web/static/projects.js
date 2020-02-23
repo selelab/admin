@@ -19,15 +19,19 @@ const ProjectList = {
   <div>
     <h1>ProjectList</h1>
     <canvas id="myChart" width="400" height="400"></canvas>
-  
-    <div>  
+    
+  <br>
+  <br>
+  <br>
+
+    <div class="box" style="text-align:center;"><br>
       <p>おめでとうございます！<br>
       あなたはプロジェクトを申請して500億円を受け取る資格を得ました。</p>
     
       <router-link to="/projects/create" class="myButton">  
         <p>こちらをクリック！</p>
       </router-link>
-    </div>
+    </center></div>
 
     <br>
     <br>
@@ -60,7 +64,7 @@ const ProjectList = {
         </li>
     </div>
     </ul>
-    <img src="/static/image.jpg" />
+    
   </div>
   `,
   created() {

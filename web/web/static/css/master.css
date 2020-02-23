@@ -110,3 +110,15 @@
 }
 
 
+.box{
+	height:200px;
+	width:400px;
+	background:#808080;
+	position: relative;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+	transform: translate(-50%, -50%);
+ }
+
+	
