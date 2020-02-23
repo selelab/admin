@@ -34,8 +34,11 @@ const Vmodel  = {
         
       </div>
       <div class="form-item">
-        時間：<input type="time" v-model="time">-<input type="time" v-model="time">
-        
+        時間：<input type="time" list ="one" v-model="time">-<input type ="text" v-model ="time">
+        <datalist id = "one">
+        <option value ="15:00"></option>
+        <option value ="16:00"></option>
+        <option value ="17:00"></option>
       </div>
       <div class="form-item">
         場所：<input type="text" v-model="place">
