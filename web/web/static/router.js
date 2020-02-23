@@ -9,9 +9,17 @@ import * as api from './api.js'
 var About = {
   template: `
   <div>
-    <h1>About</h1>
-    このサイトは上智大学エレクトロニクスラボの会計を管理するために作られたサイトです。
+    <div>
+      <h1>About</h1>
+      このサイトは上智大学エレクトロニクスラボの会計を管理するために作られたサイトです。
+    </div>
+
+    <div>
+      <p> shit</p>
+      <center><img src="/static/kumamon.png" /></center>
+    </div>
   </div>
+  }
 ` };
 
 var routes = [
