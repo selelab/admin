@@ -8,6 +8,7 @@ const ProjectList = {
       dead_project_lists: [],
       on_going_project_lists: [],
       isShow: [],
+      isShowDead: [],
       num_soft: 0,
       num_hard: 0,
       soft_fee: 0,
@@ -18,10 +19,6 @@ const ProjectList = {
   <div>
     <h1>ProjectList</h1>
     <canvas id="myChart" width="400" height="400"></canvas>
-    soft_fee:{{soft_fee}}
-    hard_fee:{{hard_fee}}
-    num_soft:{{num_soft}}
-    num_hard:{{num_hard}}
   
     <div>  
       <p>おめでとうございます！<br>
@@ -53,8 +50,8 @@ const ProjectList = {
      <div class="floatco1"> 
       <h3>まだ許可が下りていないプロジェクト</h3>
         <li v-for="(project,index) in dead_project_lists">
-              <p v-on:click="show(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
-              <div v-show="isShow[index]">
+              <p v-on:click="showDead(index)" style="cursor:pointer">プロジェクト名: {{ project.title }}</p>
+              <div v-show="isShowDead[index]">
                 説明: {{ project.description }} <br>
                 会計種別: {{ project.accounting_type }} <br>
                 承認済予算: {{ project.sum_budget }} <br>
@@ -85,12 +82,13 @@ const ProjectList = {
           if (project.closed)
           {
             this.dead_project_lists.push(project);
+            this.isShowDead.push(false)
           }
           else
           {
             this.on_going_project_lists.push(project);
+            this.isShow.push(false);
           }
-          this.isShow.push(false);
           this.createGraph();
         }
       })
@@ -105,6 +103,9 @@ const ProjectList = {
     show: function (index) {
       this.$set(this.isShow, index, !this.isShow[index]);
     },
+    showDead: function (index) {
+      this.$set(this.isShowDead, index, !this.isShowDead[index]);
+    },
       createGraph: function(){
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -112,7 +113,7 @@ const ProjectList = {
           data: {
               labels: ['ハード', 'ソフト'],
               datasets: [{
-                  label: '合計費用',
+                  label: '合計費用（円）',
                   data: [this.hard_fee, this.soft_fee],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
