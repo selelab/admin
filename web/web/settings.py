@@ -162,4 +162,4 @@ LOGGING = {
     },
 }
 
-DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'post', 'patch', 'delete']
+DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'patch', 'delete']
