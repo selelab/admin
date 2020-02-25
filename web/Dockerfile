@@ -3,9 +3,9 @@ FROM python:3.8
 RUN mkdir /var/app
 WORKDIR /var/app
 
-ADD Pipfile /var/app/
-
 RUN pip install pipenv
+
+ADD Pipfile /var/app/
 RUN pipenv install
 
 COPY .env /var/
