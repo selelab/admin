@@ -2,83 +2,61 @@
 
 ## 環境構築
 ### API系
-
-- Macの方はこちらも併せてご覧ください
-  https://asciinema.org/a/meIg2rzA2Ka6pnMrWwc4Xey1q
-
-- Python(>=3.7), MySQLは事前にインストールしておいてください
-    - Windowsの場合
-        - Python: https://www.python.org/downloads/
-        - MySQL: https://dev.mysql.com/downloads/installer/
-    - MacOSの場合
-        - Pythonのインストール
-            ```bash
-            brew install pyenv
-            pyenv install 3.8.0
-            echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-            echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-            echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-
-        - MySQLのインストール
-            ```bash
-            brew install mysql
-            brew services start mysql
-            ```
-
-- pipenvをインストールする(初回のみ)
+- データベース系のセットアップ
+  - こちらの手順通りDocker上でデータベース系を構築してください。
+    - https://github.com/Tsutomu-Ikeda/docker-database
+  - admin-api用のデータベースを用意します。
     ```bash
-    # Macの場合
-    brew install pipenv
-    # Windowsの場合
-    pip install pipenv
-    # anacondaを使っている場合
-    conda install -c conda-forge pipenv
+    mysql --host=127.0.0.1 -u root -p
+    Enter password: (パスワードを入力:初期設定は"mysql")
+    mysql> create database `selelab-admin-api`
+    mysql> grant all privileges on `selelab-admin-api`.* to `user`@`%`;
     ```
 
-- 必要なモジュールをインストールする(初回のみ)
+- 環境変数の設定
+  - `.env` ファイルを `docker-compose.yml` と同じ階層に配置します。
     ```
-    pipenv install
+    $ tree . -a -L 1
+        .
+        ├── .env
+        ├── .git
+        ├── .gitignore
+        ├── .vscode
+        ├── LICENSE
+        ├── README.md
+        ├── doc_images
+        ├── docker-compose.yml
+        ├── docs
+        ├── setup.cfg
+        ├── spec.md
+        └── web
     ```
+    .envの内容は以下の通りです。
+    ```conf
+    DJANGO_SECRET_KEY=selelab*****admin-api
 
-- MySQLで `selelab-admin-api` というデータベースを作っておく(初回のみ)
-    ```bash
-    $ mysql -u root
-    Welcome to the MySQL monitor.  Commands end with ; or \g.
+    # mysql://db:3306/selelab-admin-api
+    DB_NAME=selelab-admin-api
+    DB_USER=user
+    DB_PASS=pass
+    DB_HOST=db
+    DB_PORT=3306
 
-    ... (中略) ...
-
-    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-    mysql> create database `selelab-admin-api`;
+    # redis
+    REDIS_HOST=redis
+    REDIS_PORT=6379
+    REDIS_DB=0
+    REDIS_PASS=
     ```
+    `DJANGO_SECRET_KEY` は https://djecrety.ir/ これを使って乱数を生成した後、`*****` の部分を置き換えてください。
 
-- `.env` ファイルを以下のように設定する(初回のみ)
+- 起動
+  - docker-composeさえ使えばあとはもう簡単です。
+  ```bash
+  docker-compose up -d --build
+  ```
 
-    ```env
-    DB_NAME='selelab-admin-api'
-    DB_USER='root'
-    DB_PASS=''
-    DB_HOST=''
-    DB_PORT=''
-    ```
-
-ただし、パスワードはMySQLの設定による
-
-- djangoの初期化(初回のみ)
-
-    ```bash
-    pipenv shell  # VSCodeの機能でpipenvが自動的に起動される場合は不要
-    cd web  # admin-api/webに移動する
-    python manage.py migrate
-    python manage.py loaddata seed_auth seed_accounting
-    python manage.py createsuperuser
-    ```
-
-    - サーバーの起動
-    ```bash
-    cd web  # admin-api/webに移動する
-    python manage.py runserver
-    ```
-    ブラウザで http://localhost:8000 にアクセスすると以下のように Swagger が表示されます。
+- ブラウザで http://localhost:8000 にアクセスすると以下のように Swagger が表示されます。
     ![Swaggerの画像](./doc_images/swagger.png)
 
 - エンドポイントにアクセス
