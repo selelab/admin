@@ -8,7 +8,7 @@ from accounting.models import Project
 from web import settings
 
 from .models import User
-from .serializer import TokenCreationSerializer, UserCreationSerializer, UserDetailSerializer, UserSerializer
+from .serializer import UserCreationSerializer, UserDetailSerializer, UserSerializer
 
 
 class AdminPermission(permissions.BasePermission):
