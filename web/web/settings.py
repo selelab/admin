@@ -63,16 +63,14 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        'OPTIONS':
-            {
-                'context_processors':
-                    [
-                        'django.template.context_processors.debug',
-                        'django.template.context_processors.request',
-                        'django.contrib.auth.context_processors.auth',
-                        'django.contrib.messages.context_processors.messages',
-                    ],
-            },
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
 
@@ -147,15 +145,51 @@ STATIC_URL = '/static/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s a',
+        },
+        'heibon': {
+            'format': '\t'.join([
+                "[%(levelname)s]",
+                "%(asctime)s",
+                "%(name)s:%(lineno)d",
+                "%(message)s",
+                "%(threadName)s",
+            ])
+        },
+    },
     'handlers': {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+            'formatter': 'heibon',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/debug.log',
+            'formatter': 'heibon',
         },
     },
+    # "root": {
+    #     "level": "DEBUG",
+    #     "handlers": [
+    #         "file"
+    #     ]
+    # },
     'loggers': {
+        'django': {
+            'handlers': [
+                'file',
+            ],
+            'level': 'INFO',
+        },
         'django.db.backends': {
-            'handlers': ['console'],
+            'handlers': [
+                'console',
+            ],
             'level': 'DEBUG',
         },
     },
