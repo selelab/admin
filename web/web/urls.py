@@ -18,7 +18,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    permission_classes=(permissions.AllowAny,),
+    permission_classes=(permissions.AllowAny, ),
 )
 
 
@@ -26,7 +26,6 @@ class RouterExtendable(routers.DefaultRouter):
     """
     Extends `DefaultRouter` class to add a method for extending url routes from another router.
     """
-
     def extend(self, router):
         """
         Extend the routes with url routes of the passed in router.
@@ -43,7 +42,9 @@ api_router.extend(accounting_router)
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/swagger/')),
-    url(r'^swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^swagger/',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='schema-swagger-ui'),
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),

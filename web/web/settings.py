@@ -34,8 +34,10 @@ ALLOWED_HOSTS: List[str] = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.messages',
-    'django.contrib.staticfiles', 'accounting', 'authenticate', 'rest_framework', 'drf_yasg', 'web'
+    'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.messages',
+    'django.contrib.staticfiles', 'accounting', 'authenticate',
+    'rest_framework', 'drf_yasg', 'web'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +56,9 @@ LOGIN_URL = '/api-auth/login'
 LOGOUT_URL = '/api-auth/logout'
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
+    'DEFAULT_PERMISSION_CLASSES':
+    ('rest_framework.permissions.IsAuthenticated', ),
 }
 
 TEMPLATES = [
@@ -75,7 +78,7 @@ TEMPLATES = [
 ]
 
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
-STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'),)
+STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), )
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
@@ -83,15 +86,14 @@ WSGI_APPLICATION = 'web.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default':
-        {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': env.str('DB_NAME'),
-            'USER': env.str('DB_USER'),
-            'PASSWORD': env.str('DB_PASS'),
-            'HOST': env.str('DB_HOST'),
-            'PORT': env.str('DB_PORT'),
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASS'),
+        'HOST': env.str('DB_HOST'),
+        'PORT': env.str('DB_PORT'),
+    }
 }
 
 # Redis session
@@ -110,16 +112,20 @@ SESSION_REDIS = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 AUTH_USER_MODEL = 'authenticate.User'
@@ -151,7 +157,8 @@ LOGGING = {
             'format': '[%(server_time)s] %(message)s a',
         },
         'heibon': {
-            'format': '\t'.join([
+            'format':
+            '\t'.join([
                 "[%(levelname)s]",
                 "%(asctime)s",
                 "%(name)s:%(lineno)d",
@@ -173,12 +180,6 @@ LOGGING = {
             'formatter': 'heibon',
         },
     },
-    # "root": {
-    #     "level": "DEBUG",
-    #     "handlers": [
-    #         "file"
-    #     ]
-    # },
     'loggers': {
         'django': {
             'handlers': [
