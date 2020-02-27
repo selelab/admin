@@ -277,8 +277,8 @@ FORMAT: 1A
         + purchase (PurchaseInfo)
             + title : `test_purchase_1`
             + description : エレラボのAPIを作成する。
-            + id : `purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8` 
-            + project_id : `projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae` 
+            + id : `purchases/b8780093-fe3e-4f76-8ab2-678e68b02ad8`
+            + project_id : `projects/9e7710bf-e864-44f9-aa7f-fe5f589317ae`
 
 ## 購入単体の管理 [/purchases/{purchase_id}]
 

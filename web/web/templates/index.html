@@ -11,6 +11,7 @@
   <script src="/static/cdn/js.cookie.min.js"></script>
   <script src="/static/cdn/vuex"></script>
   <script src="/static/cdn/es6-promise.auto.js"></script>
+  <script src="/static/cdn/Chart.js"></script>
   <link rel="stylesheet" href="/static/cdn/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/master.css">
   <link rel="stylesheet" href="/static/css/tomato.css">
@@ -27,12 +28,11 @@
          <router-link to="/users">ユーザー</router-link> /
          <router-link to="/projects">プロジェクト</router-link> /
          <router-link to="/samples">SampleList</router-link> /
-         <a href="https://github.com/selelab/regulations/blob/master/%E4%BC%9A%E5%89%87.md">会則</a> /
+         <a href="https://github.com/selelab/regulations/blob/master/%E4%BC%9A%E5%89%87.md" target="_blank">会則</a> /
          <router-link to="/tomatojuice">Totmatojuice</router-link> /
          <router-link :to="auth_path">[[ auth_text ]]</router-link>
        </nav>
       </div>
-
       <div class="router-view">
         <router-view></router-view>
       </div>

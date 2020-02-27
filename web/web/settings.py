@@ -77,8 +77,9 @@ TEMPLATES = [
     },
 ]
 
+IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
-STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), )
+STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), IMAGE_ROOT)
 
 WSGI_APPLICATION = 'web.wsgi.application'
 

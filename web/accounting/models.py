@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django import utils
 
 from authenticate.models import User
 
@@ -22,6 +23,7 @@ class Project(models.Model):
                                null=True,
                                blank=True)
     closed = models.BooleanField(default=False)
+    date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
 
 class ProjectApproval(models.Model):

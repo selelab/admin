@@ -7,7 +7,7 @@ const UserList = {
       user_lists: [],
     }
   },
-  template: 
+  template:
   `
   <div id="user_list_wrapper">
     <h1>User List</h1>
@@ -82,7 +82,7 @@ const UserDetail = {
   }
 };
 
-const UserCreate = {
+const CreateUser = {
   data() {
     return {
       display_name: "",
@@ -150,4 +150,4 @@ const UserCreate = {
   }
 };
 
-export { UserList, UserDetail, UserCreate };
+export { UserList, UserDetail, CreateUser };

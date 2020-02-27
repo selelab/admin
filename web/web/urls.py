@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView, TemplateView
 from drf_yasg import openapi
@@ -7,6 +8,7 @@ from rest_framework import permissions, routers
 
 from accounting.urls import router as accounting_router
 from authenticate.urls import router as authenticate_router
+from . import settings
 
 schema_view = get_schema_view(
     openapi.Info(

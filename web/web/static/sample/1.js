@@ -11,7 +11,7 @@ const Sample1  = {
     <h1>初めてのVue.js</h1>
     <h2>Hello!</h2>
     エディタから admin-api/web/web/static/sample/1.js を開いてみましょう。<br>
-    またWindowsなら　ctrl + Shift + i を、Macならば　option + command + i を押してデバックツールを開きましょう。<br>
+    またWindowsなら ctrl + Shift + i を、Macならば option + command + i を押してデバックツールを開きましょう。<br>
 
     書き込まれている内容が見えるはずです。<br><br>
 
