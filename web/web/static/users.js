@@ -7,25 +7,27 @@ const UserList = {
       user_lists: [],
     }
   },
-  template: `
-  <div id="users">
-  <h1>User List</h1>
-    <li>
-      <router-link to="/users/create">
-        ユーザーを作る<br>
-        <img class="profile_image" src="/static/images/create_button.png"/>
-      </router-link>      
-    </li>
-    <li v-for="user in user_lists">
-        <router-link :to="{ name: 'user_detail', params: {id: user.id}}">
-
-          {{ user.display_name }} <br>
-          <img class="profile_image" :src="'/static/images/' + (user.icon_media_key || '43db3fc4-f249-4909-9954-1a7fc7d5129d') + '.jpg'"/>
-
+  template: 
+  `
+  <div id="user_list_wrapper">
+    <h1>User List</h1>
+    <div id="users">
+      <li>
+        <router-link to="/users/create">
+          ユーザーを作る<br>
+          <img class="profile_image" src="/static/images/create_button.png"/>
         </router-link>
-    </li>
+      </li>
+      <li v-for="user in user_lists">
+          <router-link :to="{ name: 'user_detail', params: {id: user.id}}">
+
+            {{ user.display_name }} <br>
+            <img class="profile_image" :src="'/static/images/' + (user.icon_media_key || '43db3fc4-f249-4909-9954-1a7fc7d5129d') + '.jpg'"/>
+
+          </router-link>
+      </li>
+    </div>
   </div>
-  
   `,
   created() {
     api.get('/v1/api/users/')

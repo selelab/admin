@@ -1,5 +1,5 @@
 .form-wrapper{
-    margin: 0 20%;
+    /* margin: 0 20%; */
     text-align: center;
     font-weight: bold;
     color: black;
@@ -23,12 +23,7 @@ a{
 
 h1{
     font: normal;
-    
 }
-
-
-
-
 
 #app{
     position: relative;
@@ -56,9 +51,3 @@ html{
     font-size: 20px;
 }
 
-
-
-
-
-  
-  

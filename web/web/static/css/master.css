@@ -1,8 +1,7 @@
 .router-view{
   margin-top:10%;
-  padding-top: 20%;
+  /* padding-top: 20%; */
 }
-
 
 .projects {
   text-align: left;
@@ -22,6 +21,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #FFFFFF;
+}
+
+#user_list_wrapper {
+  width: 600px;
+  margin: auto;
 }
 
 #users {
