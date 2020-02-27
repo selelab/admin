@@ -1,0 +1,53 @@
+.form-wrapper{
+    /* margin: 0 20%; */
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+
+.form-item{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+ul{
+    list-style:none;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+h1{
+    font: normal;
+}
+
+#app{
+    position: relative;
+    margin:auto;
+    width: 70%;
+}
+
+.content-wrapper{
+    position: fixed;
+    height: 800px;
+    background-image:url(/static/img/cat.jpg
+    );
+    background-color: beige;
+    opacity: 0.3;
+    background-size: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    color: white;
+    font-style: oblique;
+}
+
+html{
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+

@@ -1,7 +1,4 @@
 
-# 複数のPythonのバージョンに対応するため
-Pipfile.lock
-
 # 本番データのシードは含めないようにする
 prod_seed*.json
 
@@ -407,3 +404,5 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/django
+
+mysql

@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView, TemplateView
 from drf_yasg import openapi
@@ -7,6 +8,7 @@ from rest_framework import permissions, routers
 
 from accounting.urls import router as accounting_router
 from authenticate.urls import router as authenticate_router
+from . import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -18,7 +20,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    permission_classes=(permissions.AllowAny,),
+    permission_classes=(permissions.AllowAny, ),
 )
 
 
@@ -26,7 +28,6 @@ class RouterExtendable(routers.DefaultRouter):
     """
     Extends `DefaultRouter` class to add a method for extending url routes from another router.
     """
-
     def extend(self, router):
         """
         Extend the routes with url routes of the passed in router.
@@ -43,9 +44,12 @@ api_router.extend(accounting_router)
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/swagger/')),
-    url(r'^swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^swagger/',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='schema-swagger-ui'),
     url(r'^admin/', admin.site.urls),
     url(r'^v1/api/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),
+    url(r'^app/check.html', TemplateView.as_view(template_name='check.html')),
     url(r'^app/', TemplateView.as_view(template_name='index.html')),
 ]

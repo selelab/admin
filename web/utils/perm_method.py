@@ -30,12 +30,16 @@ def request_param_validation(model, forbidden_queries, received_query):
         elif type(rule) in [list]:
             for r in rule:
                 if 'when' in r and any(
-                        eval(f'model.{key}') != r['when'][key] for key, model in zip(r['when'].keys(), itertools.repeat(model))):
+                        eval(f'model.{key}') != r['when'][key]
+                        for key, model in zip(r['when'].keys(),
+                                              itertools.repeat(model))):
                     continue
 
-                if 'to' in r and (r['to'] == any_value or r['to'] == received_query[q]):
+                if 'to' in r and (r['to'] == any_value
+                                  or r['to'] == received_query[q]):
                     return False
-                elif 'from' in r and (r['from'] == any_value or r['from'] == eval(f'model.{q}')):
+                elif 'from' in r and (r['from'] == any_value
+                                      or r['from'] == eval(f'model.{q}')):
                     return False
 
     return True
