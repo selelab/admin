@@ -1,0 +1,32 @@
+version: '3'
+services:
+  python:
+    build: ./web
+    environment:
+      - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASS=$DB_PASS
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_DB=$REDIS_DB
+      - REDIS_PASS=$REDIS_PASS
+    entrypoint:
+      - /bin/sh
+      - entrypoint.sh
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./web/:/var/app/
+    # depends_on:
+    #   - "docker_db"
+    networks:
+     - "default"
+     - "db_sharing"
+networks:
+  default:
+    external: false
+  db_sharing:
+    external: true

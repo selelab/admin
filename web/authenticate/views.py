@@ -12,19 +12,16 @@ from .serializer import UserCreationSerializer, UserDetailSerializer, UserSerial
 
 
 class AdminPermission(permissions.BasePermission):
-
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
 
 
 class ReadOnlyPermission(permissions.BasePermission):
-
     def has_permission(self, request, view):
         return request.user and request.user.is_authenticated and request.method in permissions.SAFE_METHODS
 
 
 class OwnerPermission(permissions.BasePermission):
-
     def has_permission(self, request, view):
         if 'pk' not in view.kwargs:
             return False
@@ -44,15 +41,17 @@ class OwnerPermission(permissions.BasePermission):
 
 
 class UserPermission(permissions.BasePermission):
-
     def has_permission(self, request, view):
-        allowed_perm_classes = [AdminPermission, ReadOnlyPermission, OwnerPermission]
-        return any(perm_class().has_permission(request, view) for perm_class in allowed_perm_classes)
+        allowed_perm_classes = [
+            AdminPermission, ReadOnlyPermission, OwnerPermission
+        ]
+        return any(perm_class().has_permission(request, view)
+                   for perm_class in allowed_perm_classes)
 
 
 class UserViewSet(viewsets.ModelViewSet):
     http_method_names = settings.DEFAULT_HTTP_METHOD_NAMES
-    permission_classes = (UserPermission,)
+    permission_classes = (UserPermission, )
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

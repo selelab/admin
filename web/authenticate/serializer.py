@@ -7,10 +7,10 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = ('id', 'display_name', 'email', 'last_modified', 'icon_media_key', 'date_registered', 'is_active')
+        fields = ('id', 'display_name', 'email', 'last_modified',
+                  'icon_media_key', 'date_registered', 'is_active')
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -18,19 +18,19 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-            'id', 'display_name', 'email', 'last_modified', 'icon_media_key', 'date_registered', 'is_active', 'is_superuser', 'projects'
-        )
+        fields = ('id', 'display_name', 'email', 'last_modified',
+                  'icon_media_key', 'date_registered', 'is_active',
+                  'is_superuser', 'projects')
 
     def get_projects(self, obj):
         try:
-            return ProjectSerializer(Project.objects.filter(leader=obj.id), many=True).data
+            return ProjectSerializer(Project.objects.filter(leader=obj.id),
+                                     many=True).data
         except:
             return []
 
 
 class UserCreationSerializer(serializers.ModelSerializer):
-
     def create(self, validated_data):
         user = User.objects.create_user(
             email=validated_data['email'],
@@ -55,10 +55,10 @@ class UserCreationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-            'display_name', 'password', 'email', 'icon_media_key', 'is_active', 'is_superuser'
-        )
+        fields = ('display_name', 'password', 'email', 'icon_media_key',
+                  'is_active', 'is_superuser')
         extra_kwargs = {
-            'password': {'write_only': True},
+            'password': {
+                'write_only': True
+            },
         }
-

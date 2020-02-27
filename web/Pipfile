@@ -21,6 +21,7 @@ django-environ = "*"
 pymysql = "*"
 django-rest-swagger = "*"
 drf-yasg = "*"
+django-redis-sessions = "*"
 
 [pipenv]
 allow_prereleases = true

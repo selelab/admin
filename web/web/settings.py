@@ -16,7 +16,6 @@ from typing import List
 import environ
 
 env = environ.Env()
-env.read_env('../.env')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,18 +24,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sx_g#il*p$-ppeb2=1%reb9s2rin!7m0u4#u*l7f)-!ykw0g5^'
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS: List[str] = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages',
-    'django.contrib.staticfiles', 'accounting', 'authenticate', 'rest_framework', 'drf_yasg', 'web'
+    'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.messages',
+    'django.contrib.staticfiles', 'accounting', 'authenticate',
+    'rest_framework', 'drf_yasg', 'web'
 ]
 
 MIDDLEWARE = [
@@ -55,8 +56,9 @@ LOGIN_URL = '/api-auth/login'
 LOGOUT_URL = '/api-auth/logout'
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
+    'DEFAULT_PERMISSION_CLASSES':
+    ('rest_framework.permissions.IsAuthenticated', ),
 }
 
 TEMPLATES = [
@@ -64,21 +66,19 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        'OPTIONS':
-            {
-                'context_processors':
-                    [
-                        'django.template.context_processors.debug',
-                        'django.template.context_processors.request',
-                        'django.contrib.auth.context_processors.auth',
-                        'django.contrib.messages.context_processors.messages',
-                    ],
-            },
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
 
 PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
-STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'),)
+STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), )
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
@@ -86,15 +86,25 @@ WSGI_APPLICATION = 'web.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default':
-        {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': env.str('DB_NAME'),
-            'USER': env.str('DB_USER'),
-            'PASSWORD': env.str('DB_PASS'),
-            'HOST': env.str('DB_HOST'),
-            'PORT': env.str('DB_PORT'),
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASS'),
+        'HOST': env.str('DB_HOST'),
+        'PORT': env.str('DB_PORT'),
+    }
+}
+
+# Redis session
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS = {
+    'host': env.str('REDIS_HOST'),
+    'port': env.str('REDIS_PORT'),
+    'db': env.str('REDIS_DB'),
+    'password': env.str('REDIS_PASS') or None,
+    'prefix': 'django_session',
+    'socket_timeout': 1
 }
 
 # Password validation
@@ -102,16 +112,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 AUTH_USER_MODEL = 'authenticate.User'
@@ -137,18 +151,49 @@ STATIC_URL = '/static/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s a',
+        },
+        'heibon': {
+            'format':
+            '\t'.join([
+                "[%(levelname)s]",
+                "%(asctime)s",
+                "%(name)s:%(lineno)d",
+                "%(message)s",
+                "%(threadName)s",
+            ])
+        },
+    },
     'handlers': {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+            'formatter': 'heibon',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/debug.log',
+            'formatter': 'heibon',
         },
     },
     'loggers': {
+        'django': {
+            'handlers': [
+                'file',
+            ],
+            'level': 'INFO',
+        },
         'django.db.backends': {
-            'handlers': ['console'],
+            'handlers': [
+                'console',
+            ],
             'level': 'DEBUG',
         },
     },
 }
 
-DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'post', 'patch', 'delete']
+DEFAULT_HTTP_METHOD_NAMES = ['get', 'post', 'head', 'patch', 'delete']
