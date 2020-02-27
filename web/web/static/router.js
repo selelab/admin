@@ -1,6 +1,6 @@
 import { Login, State } from './auth.js';
-import { UserList, UserDetail } from './users.js'
-import { ProjectList } from './projects.js'
+import { UserList, UserDetail, UserCreate } from './users.js'
+import { ProjectList, ProjectDetail, AddProject } from './projects.js'
 import { SampleList } from './samples.js'
 import { Sample1 } from './sample/1.js'
 import { Sample2 } from './sample/2.js'
@@ -19,14 +19,17 @@ var About = {
 var routes = [
   { path: '/', component: About, meta: { isPublic: true } },
   { path: '/users', component: UserList },
+  { path: '/users/create', component: UserCreate, name: 'user_create' },
   { path: '/users/:id', component: UserDetail, name: 'user_detail' },
   { path: '/samples',  component: SampleList },
   { path: '/samples/1', component: Sample1 },
   { path: '/samples/2', component: Sample2 },
   { path: '/projects', component: ProjectList },
   { path: '/tomatojuice', component: Vmodel },
-  { path: '/login', component: Login, meta: { isPublic: true } },
   { path: '/check', component: Check, name: 'check' }
+  { path: '/projects/create', component: AddProject, name: 'add_project' },
+  { path: '/projects/:id', component: ProjectDetail, name: 'project_detail' },
+  { path: '/login', component: Login, meta: { isPublic: true } }
 ];
 
 var router = new VueRouter({
