@@ -21,12 +21,12 @@ var routes = [
   { path: '/users', component: UserList },
   { path: '/users/create', component: UserCreate, name: 'user_create' },
   { path: '/users/:id', component: UserDetail, name: 'user_detail' },
-  { path: '/samples',  component: SampleList },
-  { path: '/samples/1', component: Sample1 },
-  { path: '/samples/2', component: Sample2 },
+  { path: '/samples',  component: SampleList, meta: { isPublic: true } },
+  { path: '/samples/1', component: Sample1, meta: { isPublic: true }  },
+  { path: '/samples/2', component: Sample2, meta: { isPublic: true } },
   { path: '/projects', component: ProjectList },
   { path: '/tomatojuice', component: Vmodel },
-  { path: '/check', component: Check, name: 'check' }
+  { path: '/check', component: Check, name: 'check' },
   { path: '/projects/create', component: AddProject, name: 'add_project' },
   { path: '/projects/:id', component: ProjectDetail, name: 'project_detail' },
   { path: '/login', component: Login, meta: { isPublic: true } }

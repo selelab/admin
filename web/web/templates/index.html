@@ -5,13 +5,13 @@
   {% csrf_token %}
   <meta charset="UTF-8">
   <title>エレラ簿システム | SEL</title>
-  <script src="/static/vue.js"></script>
-  <script src="/static/vue-router.js"></script>
-  <script src="/static/axios.min.js"></script>
-  <script src="/static/js.cookie.min.js"></script>
-  <script src="/static/vuex"></script>
-  <script src="/static/es6-promise.auto.js"></script>
-  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <script src="/static/cdn/vue.js"></script>
+  <script src="/static/cdn/vue-router.js"></script>
+  <script src="/static/cdn/axios.min.js"></script>
+  <script src="/static/cdn/js.cookie.min.js"></script>
+  <script src="/static/cdn/vuex"></script>
+  <script src="/static/cdn/es6-promise.auto.js"></script>
+  <link rel="stylesheet" href="/static/cdn/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/master.css">
   <link rel="stylesheet" href="/static/css/tomato.css">
 </head>
@@ -19,7 +19,7 @@
 <body>
   <div class="content-wrapper"></div>
   <div id="app">
-    <div class="text-center" style="width:600px;margin:auto;background-color: beige;opacity: 0.7;" >
+    <div class="text-center" style="width:600px;margin:auto;" >
       <div>
        <header><h1>[[ title ]]</h1></header>
        <nav>
@@ -31,6 +31,10 @@
          <router-link to="/tomatojuice">Totmatojuice</router-link> /
          <router-link :to="auth_path">[[ auth_text ]]</router-link>
        </nav>
+      </div>
+
+      <div class="router-view">
+        <router-view></router-view>
       </div>
   </div>
   <script type="module" src='/static/main.js'></script>
