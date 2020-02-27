@@ -31,7 +31,7 @@
         ├── spec.md
         └── web
     ```
-    .envの内容は以下の通りです。
+    .envの内容は以下のように設定してください。
     ```conf
     DJANGO_SECRET_KEY=selelab*****admin-api
 
@@ -49,6 +49,10 @@
     REDIS_PASS=
     ```
     `DJANGO_SECRET_KEY` は https://djecrety.ir/ これを使って乱数を生成した後、`*****` の部分を置き換えてください。
+    `.env.sample` をコピーしてから作業するとやりやすいかもしれません。
+    ```bash
+    cp .env.sample .env
+    ```
 
 - 起動
   - docker-composeさえ使えばあとはもう簡単です。
