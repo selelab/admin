@@ -9,16 +9,6 @@ services:
       - ./static:/var/static
     depends_on:
       - python
-  # nginx:
-  #   image: nginx:1.13
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./nginx/conf:/etc/nginx/conf.d
-  #     - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-  #     - ./static:/static
-  #   depends_on:
-  #     - python
   python:
     build:
       context: django
