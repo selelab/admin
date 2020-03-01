@@ -15,9 +15,12 @@ const requestHeaderWithNullData = () => {
 };
 
 const HOST = '';
+const FORCE_SCRIPT_NAME = '/kusatsu';
+
+const PREFIX = HOST + FORCE_SCRIPT_NAME;
 
 const get = (path) => {
-  return axios.get(HOST + path, requestHeaderWithNullData(),
+  return axios.get(PREFIX + path, requestHeaderWithNullData(),
     {
       withCredentials: true
     })
@@ -26,14 +29,14 @@ const get = (path) => {
 }
 
 const post = (path, request) => {
-  return axios.post(HOST + path, request, requestHeader())
+  return axios.post(PREFIX + path, request, requestHeader())
     .then((response) => Promise.resolve(
     ))
     .catch((error) => Promise.reject(error));
 }
 
 const patch = (path, request) => {
-  return axios.patch(HOST + path, request, requestHeader())
+  return axios.patch(PREFIX + path, request, requestHeader())
     .then((response) => Promise.resolve(
     ))
     .catch((error) => Promise.reject(error));
@@ -50,7 +53,7 @@ const form = (path, request) => {
       'content-type': 'multipart/form-data'
     }
   };
-  return axios.post(HOST + path, formData, config)
+  return axios.post(PREFIX + path, formData, config)
     .then((response) => Promise.resolve(
     ))
     .catch((error) => Promise.reject(error));

@@ -43,7 +43,7 @@ api_router.extend(authenticate_router)
 api_router.extend(accounting_router)
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='/swagger/')),
+    url(r'^$', RedirectView.as_view(url='./swagger/')),
     url(r'^swagger/',
         schema_view.with_ui('swagger', cache_timeout=0),
         name='schema-swagger-ui'),

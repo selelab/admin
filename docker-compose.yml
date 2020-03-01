@@ -3,19 +3,20 @@ services:
   python:
     build: 
       context: django
-      args:
-        - DJANGO_SETTINGS_MODULE=web.settings
-        - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
-        - DEBUG=True
-        - DB_NAME=$DB_NAME
-        - DB_USER=$DB_USER
-        - DB_PASS=$DB_PASS
-        - DB_HOST=$DB_HOST
-        - DB_PORT=$DB_PORT
-        - REDIS_HOST=$REDIS_HOST
-        - REDIS_PORT=$REDIS_PORT
-        - REDIS_DB=$REDIS_DB
-        - REDIS_PASS=$REDIS_PASS
+    environment:
+      - DJANGO_SETTINGS_MODULE=web.settings
+      - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+      - DJANGO_FORCE_SCRIPT_NAME=$DJANGO_FORCE_SCRIPT_NAME
+      - DEBUG=True
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASS=$DB_PASS
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_DB=$REDIS_DB
+      - REDIS_PASS=$REDIS_PASS
     entrypoint:
       - /bin/sh
       - entrypoint.sh
@@ -23,8 +24,6 @@ services:
       - "8000:8000"
     volumes:
       - ./django/:/var/app/
-    # depends_on:
-    #   - "docker_db"
     networks:
      - "default"
      - "db_sharing"

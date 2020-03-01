@@ -55,10 +55,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+FORCE_SCRIPT_NAME = env.str('DJANGO_FORCE_SCRIPT_NAME', '')
+
 ROOT_URLCONF = 'web.urls'
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/api-auth/login'
-LOGOUT_URL = '/api-auth/logout'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
+LOGIN_URL = FORCE_SCRIPT_NAME + '/api-auth/login'
+LOGOUT_URL = FORCE_SCRIPT_NAME + '/api-auth/logout'
+STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
@@ -147,8 +150,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 LOGGING = {
     'version': 1,
