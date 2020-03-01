@@ -9,6 +9,12 @@ services:
       - ./static:/var/static
     depends_on:
       - python
+  redis:
+    image: redis
+    ports:
+      - "16379:6379"
+    volumes:
+      - "./data/redis:/data"
   python:
     build:
       context: django
@@ -37,8 +43,3 @@ services:
     networks:
      - "default"
      - "db_sharing"
-networks:
-  default:
-    external: false
-  db_sharing:
-    external: true
