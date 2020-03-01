@@ -61,7 +61,7 @@ ROOT_URLCONF = 'web.urls'
 LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
 LOGIN_URL = FORCE_SCRIPT_NAME + '/api-auth/login'
 LOGOUT_URL = FORCE_SCRIPT_NAME + '/api-auth/logout'
-STATIC_URL = '/static/'
+STATIC_URL = '/dj-static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),

@@ -34,7 +34,7 @@ h1{
 .content-wrapper{
     position: fixed;
     height: 800px;
-    background-image:url(/static/img/cat.jpg
+    background-image:url(/dj-static/img/cat.jpg
     );
     background-color: beige;
     opacity: 0.3;

@@ -15,14 +15,14 @@ const UserList = {
       <li>
         <router-link to="/users/create">
           ユーザーを作る<br>
-          <img class="profile_image" src="/static/images/create_button.png"/>
+          <img class="profile_image" src="/dj-static/images/create_button.png"/>
         </router-link>
       </li>
       <li v-for="user in user_lists">
           <router-link :to="{ name: 'user_detail', params: {id: user.id}}">
 
             {{ user.display_name }} <br>
-            <img class="profile_image" :src="'/static/images/' + (user.icon_media_key || '43db3fc4-f249-4909-9954-1a7fc7d5129d') + '.jpg'"/>
+            <img class="profile_image" :src="'/dj-static/images/' + (user.icon_media_key || '43db3fc4-f249-4909-9954-1a7fc7d5129d') + '.jpg'"/>
 
           </router-link>
       </li>
@@ -128,7 +128,7 @@ const CreateUser = {
                   {{ option.text }}
               </option>
           </select>
-          <img class="profile_image" v-bind:src="'/static/images/' + icon_media_key + '.jpg'" />
+          <img class="profile_image" v-bind:src="'/dj-static/images/' + icon_media_key + '.jpg'" />
           <button class="btn btn-lg btn-primary btn-block" type="submit" @click="create_user">Sign up</button>
       </form>
   </div>

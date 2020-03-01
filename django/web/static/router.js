@@ -21,7 +21,7 @@ var About = {
     <br>
       <p> みて！くまモンがいるよ<br>
       かわいいね</p>
-      <label for="trigger" class="open_button"><center><img src="/static/kumamon.png" /></center></label>
+      <label for="trigger" class="open_button"><center><img src="/dj-static/kumamon.png" /></center></label>
     </div>
 
     <div class="modal_wrap">
