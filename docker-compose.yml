@@ -1,7 +1,7 @@
 version: '3'
 services:
   python:
-    build: ./web
+    build: ./django
     environment:
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DB_NAME=$DB_NAME
@@ -19,7 +19,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./web/:/var/app/
+      - ./django/:/var/app/
     # depends_on:
     #   - "docker_db"
     networks:

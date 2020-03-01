@@ -18,7 +18,7 @@ services:
       - python
   python:
     build:
-      context: web
+      context: django
       args:
         - DJANGO_SETTINGS_MODULE=web.settings
         - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
@@ -37,7 +37,7 @@ services:
     expose:
       - "8001"
     volumes:
-      - ./web/:/var/app/
+      - ./django/:/var/app/
       - ./static/:/var/static
     networks:
      - "default"
