@@ -22,7 +22,7 @@ services:
       args:
         - DJANGO_SETTINGS_MODULE=web.settings
         - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
-        - DEBUG=$DEBUG
+        - DEBUG=False
         - DB_NAME=$DB_NAME
         - DB_USER=$DB_USER
         - DB_PASS=$DB_PASS
