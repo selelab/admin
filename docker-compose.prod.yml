@@ -1,0 +1,49 @@
+version: '3'
+services:
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - "./data/redis:/data"
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+      - ./static:/static
+    depends_on:
+      - python
+  python:
+    build:
+      context: web
+      args:
+        - DJANGO_SETTINGS_MODULE=web.settings
+        - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+        - DEBUG=$DEBUG
+        - DB_NAME=$DB_NAME
+        - DB_USER=$DB_USER
+        - DB_PASS=$DB_PASS
+        - DB_HOST=$DB_HOST
+        - DB_PORT=$DB_PORT
+        - REDIS_HOST=$REDIS_HOST
+        - REDIS_PORT=$REDIS_PORT
+        - REDIS_DB=$REDIS_DB
+        - REDIS_PASS=$REDIS_PASS
+    entrypoint:
+      pipenv run uwsgi --socket :8001 --module web.wsgi --py-autoreload 1 --logto /tmp/mylog.log
+    expose:
+      - "8001"
+    volumes:
+      - ./web/:/var/app/
+      - ./static/:/var/static
+    networks:
+     - "default"
+     - "db_sharing"
+networks:
+  default:
+    external: false
+  db_sharing:
+    external: true

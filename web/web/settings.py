@@ -20,6 +20,11 @@ env = environ.Env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
+IMAGE_ROOT = os.path.join(PACKAGE_ROOT, 'static/images')
+STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), IMAGE_ROOT)
+STATIC_ROOT = '/var/static'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -27,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS: List[str] = ['*']
 
@@ -76,10 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
-IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
-PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
-STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'static'), IMAGE_ROOT)
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
