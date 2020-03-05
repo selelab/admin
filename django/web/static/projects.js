@@ -80,8 +80,7 @@ const ProjectList = {
         this.projects = Array.from(response.data);
         this.projects.forEach((project) => {
           this.isShow.push(false);
-          let url = project.description.match(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi);
-          project.description = project.description.replace(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi, "<a href=" + url + ">" + url + "</a>");
+          project.description = project.description.replace(/(https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/gi, "<a href='$1' target='_blank'>$1</a>");
           if (project.accounting_type === "soft")
           {
             this.soft_fee += project.sum_purchase_price;
