@@ -70,7 +70,7 @@ const UserDetail = {
   `,
   created() {
     const user_id = this.$route.params.id;
-    api.get('/v1/api/users/' + user_id)
+    api.get('/v1/api/users/' + user_id + '/')
       .then(response => {
         this.user_info = response.data;
 

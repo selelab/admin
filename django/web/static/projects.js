@@ -194,7 +194,7 @@ const ProjectDetail = {
   ,
   created() {
     const project_id = this.$route.params.id;
-    api.get('/v1/api/projects/' + project_id)
+    api.get('/v1/api/projects/' + project_id + '/')
       .then(response => {
         this.project_info = response.data;
       })
