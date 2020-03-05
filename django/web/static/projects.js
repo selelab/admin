@@ -4,16 +4,17 @@ import { router } from './router.js'
 const ProjectList = {
   data() {
     return {
-      project_lists: [],
+      projects: [],
+      open_approvals: [],
       isShow: [],
       url: [],
       sh_check: {
         soft: true,
         hard: true,
       },
-      approved_check: {
-        approved: true,
-        not_approved: true
+      closed_check: {
+        closed: true,
+        in_progress: true
       },
       isShowDead: [],
       num_soft: 0,
@@ -24,7 +25,7 @@ const ProjectList = {
   },
   template: `
   <div>
-    <h1>Project List</h1>
+    <h1>プロジェクト</h1>
     <canvas id="myChart"></canvas>
     <div class="box"><br>
       <p>おめでとうございます！<br>
@@ -35,23 +36,34 @@ const ProjectList = {
       </center>
     </div>
 
+    <h2>承認待ち予算</h2>
+    <ul class="approvals">
+      <li v-for="(approval,index) in open_approvals" style="line-style:none;margin-bottom:2em;">
+        <h3> {{ approval.project.title }} </h3>
+        申請予算: {{ approval.budget_amount }} <br>
+      </li>
+    </ul>
+
     <input type="checkbox" id="hard" value="hard" v-model="sh_check.hard">
     <label for="hard">HARD</label>
     <input type="checkbox" id="soft" value="soft" v-model="sh_check.soft">
     <label for="soft">SOFT</label>
-    <input type="checkbox" id="approved" value="approved" v-model="approved_check.approved">
-    <label for="approved">承認済</label>
-    <input type="checkbox" id="not_approved" value="not_approved" v-model="approved_check.not_approved">
-    <label for="not_approved">承認無</label>
+    <input type="checkbox" id="closed" value="closed" v-model="closed_check.closed">
+    <label for="closed">完了</label>
+    <input type="checkbox" id="in_progress" value="in_progress" v-model="closed_check.in_progress">
+    <label for="in_progress">進行中</label>
     <br>
+
+    <h2>プロジェクト一覧</h2>
+
     <ul class="projects">
-      <li v-for="(project,index) in project_lists" style="line-style:none;margin-bottom:2em;"
-        v-show="sh_check[project.accounting_type]&&(approved_check.approved&project.closed||approved_check.not_approved&&!project.closed)">
+      <li v-for="(project,index) in projects" style="line-style:none;margin-bottom:2em;"
+        v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)">
         <h3 v-on:click="show(index)" style="cursor:pointer;margin-bottom:0px"> > {{ project.title }}</h3>
         <div v-show="isShow[index]" class="project_info">
           <span v-html="project.description"> </span> <br>
           会計種別: {{ project.accounting_type }} <br>
-          承認: <p v-if="project.closed">済 </p> <p v-else>無</p>
+          <p v-if="project.closed">状態: 完了</p> <p v-else>状態: 進行中</p>
           承認済予算: {{ project.sum_budget }} <br>
           支出済予算: {{ project.sum_purchase_price }} <br>
           <router-link :to="{ name: 'project_detail', params: {id: project.id}}">
@@ -65,20 +77,11 @@ const ProjectList = {
   created() {
     api.get('/v1/api/projects/')
       .then(response => {
-        //this.project_lists = response.data;
-        for (let cnt = 0; cnt < response.data.length; cnt++) {
-          this.project_lists.push(response.data[cnt]);
+        this.projects = Array.from(response.data);
+        this.projects.forEach((project) => {
           this.isShow.push(false);
-        }
-        for (let cnt = 0; cnt < response.data.length; cnt++) {
-          this.$set(this.url, cnt, this.project_lists[cnt].description.match(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi));
-        }
-        for (let cnt = 0; cnt < response.data.length; cnt++) {
-          this.project_lists[cnt].description = this.project_lists[cnt].description.replace(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi, "<a href=" + this.url[cnt] + ">" + this.url[cnt] + "</a>");
-          //console.log(this.project_lists[cnt].description.replace(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi, "<a href="  + this.url[cnt] + ">"+ this.url[cnt] + "</a>"));
-        }
-        for (let cnt = 0; cnt < response.data.length; cnt++) {
-          let project = response.data[cnt];
+          let url = project.description.match(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi);
+          project.description = project.description.replace(/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/gi, "<a href=" + url + ">" + url + "</a>");
           if (project.accounting_type === "soft")
           {
             this.soft_fee += project.sum_purchase_price;
@@ -89,8 +92,16 @@ const ProjectList = {
             this.hard_fee += project.sum_purchase_price;
             this.num_hard += 1;
           }
-          this.createGraph();
-        }
+        });
+        this.createGraph();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    api.get('/v1/api/approvals/', {'is_open': true})
+      .then(response => {
+        this.open_approvals = Array.from(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -166,7 +177,6 @@ const ProjectDetail = {
         承認済予算: {{ project_info.sum_budget }} <br>
         <button v-on:click="approve" v-if="project_info.closed">取消</button>
         <button v-on:click="approve" v-else>承認</button>
-
         </div>
         `
   ,
@@ -201,7 +211,7 @@ const CreateProject = {
       description: "",
       accounting_type: "",
       leader: "",
-      user_lists: [],
+      users: [],
       closed: true
     }
   },
@@ -243,7 +253,7 @@ const CreateProject = {
             </p>
             <p>リーダー
               <select  v-model="leader" class="form-control">
-                <option v-for="(user) in user_lists" :value="user.id">
+                <option v-for="(user) in users" :value="user.id">
                 {{user.display_name}}
                 </option>
               </select>
@@ -257,7 +267,7 @@ const CreateProject = {
   created() {
     api.get('/v1/api/users/')
       .then(response => {
-        this.user_lists = response.data;
+        this.users = response.data;
       })
       .catch(error => {
         console.log(error);

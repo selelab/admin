@@ -19,8 +19,8 @@ const FORCE_SCRIPT_NAME = '/kusatsu';
 
 const PREFIX = HOST + FORCE_SCRIPT_NAME;
 
-const get = (path) => {
-  return axios.get(PREFIX + path, requestHeaderWithNullData(),
+const get = (path, request) => {
+  return axios.get(PREFIX + path, {params: request}, requestHeaderWithNullData(),
     {
       withCredentials: true
     })

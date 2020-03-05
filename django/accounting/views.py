@@ -126,3 +126,11 @@ class ProjectApprovalViewSet(viewsets.ModelViewSet):
     permission_classes = (ProjectApprovalPermission, )
     queryset = ProjectApproval.objects.all()
     serializer_class = ProjectApprovalSerializer
+
+    def get_queryset(self):
+        is_open = self.request.GET.get('is_open')
+
+        if is_open:
+            return ProjectApproval.objects.filter(approver__isnull=True)
+        else:
+            return ProjectApproval.objects.all()
