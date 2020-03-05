@@ -9,12 +9,12 @@ services:
       - ./static:/var/static
       - ../web/build:/var/react
     depends_on:
-      - python
+      - api
   redis:
     image: redis
     volumes:
       - "./data/redis:/data"
-  python:
+  api:
     build:
       context: api
     environment:

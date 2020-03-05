@@ -61,7 +61,7 @@
     ```
   - なお、このままだとユーザーが作られておらず、何もできないので以下のようにseedを走らせてください。
     ```bash
-    docker-compose run --entrypoint '' python pipenv run python manage.py loaddata seed_auth.json seed_accounting.json
+    docker-compose run --entrypoint '' api pipenv run python manage.py loaddata seed_auth.json seed_accounting.json
     ```
 
 - ブラウザで http://localhost:8000 にアクセスすると以下のように Swagger が表示されます。

@@ -1,6 +1,6 @@
 version: '3'
 services:
-  python:
+  api:
     build:
       context: api
     environment:
