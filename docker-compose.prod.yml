@@ -16,7 +16,7 @@ services:
       - "./data/redis:/data"
   python:
     build:
-      context: django
+      context: api
     environment:
       - DJANGO_SETTINGS_MODULE=web.settings
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
@@ -37,5 +37,5 @@ services:
     expose:
       - "8001"
     volumes:
-      - ./django/:/var/app/
+      - ./api/:/var/app/
       - ./static/:/var/static

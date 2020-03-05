@@ -2,7 +2,7 @@ version: '3'
 services:
   python:
     build:
-      context: django
+      context: api
     environment:
       - DJANGO_SETTINGS_MODULE=web.settings
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
@@ -23,7 +23,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./django/:/var/app/
+      - ./api/:/var/app/
     networks:
      - "default"
      - "db_sharing"
