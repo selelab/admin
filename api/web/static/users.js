@@ -1,5 +1,5 @@
 import { router } from './router.js'
-import * as api from './api.js'
+import api from './api.js'
 
 const UserList = {
   data() {

@@ -1,5 +1,4 @@
 import { router } from './router.js'
-import api from './api.js'
 
 const Login = {
   data() {
@@ -11,15 +10,11 @@ const Login = {
   },
   methods: {
     login: async function () {
-      State.send_login_form({
-        email: this.email,
+      await State.send_login_form({
+        username: this.email,
         password: this.password
-      }).then(() => {
-        State.loggedIn = true;
-        router.push(this.$route.query.redirect || '/');
-      }).catch(error => {
-        console.log(error);
       });
+      router.push(this.$route.query.redirect || '/');
     }
   },
   template: `
@@ -37,19 +32,13 @@ const Login = {
 
 const State = {
   loggedIn: false,
-  send_login_form: async function (params) {
+  send_login_form: async function () {
     this.is_sign_in_disabled = true;
-    api.post(
-      '/jwt-token/',
-      params
-    ).then(response => {
-      Cookies.set('jwt', response.data.token);
-    }).catch(error => {
-      console.log(error);
-    });
+    this.loggedIn = true;
   },
   remove_session: function () {
-    this.$cookies.remove('jwt');
+    // Cookies.remove('sessionid');
+    this.$cookies.remove('sessionid');
     this.loggedIn = false;
   }
 };

@@ -23,6 +23,8 @@ django-rest-swagger = "*"
 drf-yasg = "*"
 django-redis-sessions = "*"
 uwsgi = "*"
+django-cors-headers = "*"
+djangorestframework-jwt = "*"
 
 [pipenv]
 allow_prereleases = true

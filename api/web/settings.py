@@ -42,14 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.messages',
     'django.contrib.staticfiles', 'accounting', 'authenticate',
-    'rest_framework', 'drf_yasg', 'web'
+    'rest_framework', 'drf_yasg', 'web',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -67,6 +69,9 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticated', ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    )
 }
 
 TEMPLATES = [
@@ -84,6 +89,14 @@ TEMPLATES = [
         },
     },
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    "https://selelab.com",
+    "http://localhost:8080",
+    "http://localhost",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
