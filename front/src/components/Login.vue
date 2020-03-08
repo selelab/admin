@@ -1,28 +1,54 @@
 
 <template>
   <div>
-    <v-card style="width: 80%; max-width: 480px; margin: auto" height="260px">
+    <v-card style="width: 80%; max-width: 480px; margin: auto">
       <v-card-title primary-title>
-        <h4>ログインしてください</h4>
+        <h4>ログイン画面</h4>
       </v-card-title>
-      <ValidationObserver ref="observer">
-        <form class="login_form">
-          <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
-            <v-text-field v-model="email" :error-messages="errors" label="E-mail" required></v-text-field>
-          </ValidationProvider>
-          <ValidationProvider v-slot="{ errors }" name="password" rules="required">
-            <v-text-field
-              v-model="password"
-              type="password"
-              label="Password"
-              :error-messages="errors"
-              required
-            ></v-text-field>
-          </ValidationProvider>
+      <v-card-text>
+        <v-alert
+          v-model="alert"
+          :value="!!error_message"
+          type="error"
+          width="80%"
+          style="margin: auto; margin-bottom: 30px"
+          outlined
+          dismissible
+        >{{ error_message }}</v-alert>
 
-          <v-btn style="float: right" class="mr-4" @click="login">ログイン</v-btn>
-        </form>
-      </ValidationObserver>
+        <ValidationObserver ref="observer">
+          <v-form class="login_form">
+            <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+              <v-text-field v-model="email" :error-messages="errors" label="E-mail" required></v-text-field>
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }" name="password" rules="required">
+              <v-text-field
+                v-model="password"
+                type="password"
+                label="Password"
+                :error-messages="errors"
+                required
+              ></v-text-field>
+            </ValidationProvider>
+            <v-card-actions>
+              <v-col></v-col>
+              <v-col></v-col>
+              <v-col></v-col>
+              <v-col></v-col>
+              <v-col class="text-right">
+                <v-btn
+                  transition="slide-y-transition"
+                  style="float: right; margin: 0"
+                  width="100%"
+                  class="mr-4"
+                  align="right"
+                  @click="login"
+                >ログイン</v-btn>
+              </v-col>
+            </v-card-actions>
+          </v-form>
+        </ValidationObserver>
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -35,6 +61,8 @@ import {
   ValidationProvider,
   setInteractionMode
 } from "vee-validate";
+
+import { KJUR, b64utoutf8 } from "jsrsasign";
 
 import router from "../router";
 import api from "../api";
@@ -59,12 +87,28 @@ const Login = {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error_message: "",
+      alert: false
     };
   },
   components: {
     ValidationProvider,
     ValidationObserver
+  },
+  created() {
+    let token = this.$store.getters.getJwtToken;
+    let has_valid_jwt_token = false;
+
+    if (token) {
+      let jwt_binary = b64utoutf8(token.split(".")[1]);
+      let payload = KJUR.jws.JWS.readSafeJSONString(jwt_binary);
+      has_valid_jwt_token = payload.exp >= Date.now() / 1000;
+    }
+
+    if (has_valid_jwt_token) {
+      router.push(this.$route.query.redirect || "/");
+    }
   },
   methods: {
     login: function() {
@@ -78,13 +122,18 @@ const Login = {
           router.push(this.$route.query.redirect || "/");
         })
         .catch(error => {
+          let error_messages = {
+            400: "メールアドレスまたはパスワードが正しくありません。",
+            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
+          };
+          this.error_message = error_messages[error.response.status];
+          this.alert = true;
+
           console.log(error);
         });
     },
     clear() {
       this.email = "";
-      this.select = null;
-      this.checkbox = null;
       this.$refs.observer.reset();
     }
   }
