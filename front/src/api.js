@@ -1,9 +1,10 @@
-import Vue from 'vue'
 import Axios from 'axios'
+
+import { store } from './store'
 
 var api = Axios.create({
   // axiosインスタンスの作成
-  baseURL: 'http://localhost/kusatsu',
+  baseURL: location.protocol + '//' + location.hostname + ':' + 80 + '/kusatsu',
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
@@ -11,14 +12,14 @@ var api = Axios.create({
   responseType: 'json'
 })
 
-api.interceptors.request.use((config) => {
-  if (Vue.$cookies.get('jwt')) {
-    config.headers.Authorization = `jwt ${Vue.$cookies.get('jwt')}`
-    return config
+export const setTokenToHeader = (token) => {
+  api.defaults.headers.common['Authorization'] = `jwt ${token}`;
+};
+
+store.subscribe((mutation, state) => {
+  if (mutation.type === 'setJwtToken') {
+    setTokenToHeader(state.jwtToken);
   }
-  return config
-}, function (error) {
-  return Promise.reject(error)
-})
+});
 
 export default api;

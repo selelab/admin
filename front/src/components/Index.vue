@@ -1,15 +1,12 @@
 <template>
-  <div class="hello">
-    index
-  </div>
+  <div>index</div>
 </template>
+
+<style scoped>
+</style>
 
 <script>
 export default {
-  name: 'Index',
-}
+  name: "Index"
+};
 </script>
-
-<style scoped>
-
-</style>

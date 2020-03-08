@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import datetime
 import os
 from typing import List
 
@@ -39,10 +40,16 @@ ALLOWED_HOSTS: List[str] = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.messages',
-    'django.contrib.staticfiles', 'accounting', 'authenticate',
-    'rest_framework', 'drf_yasg', 'web',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'accounting',
+    'authenticate',
+    'rest_framework',
+    'drf_yasg',
+    'web',
     'corsheaders',
 ]
 
@@ -69,9 +76,15 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticated', ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES':
+    ('rest_framework_jwt.authentication.JSONWebTokenAuthentication', ),
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
 }
 
 TEMPLATES = [
@@ -94,9 +107,18 @@ CORS_ORIGIN_WHITELIST = [
     "https://selelab.com",
     "http://localhost:8080",
     "http://localhost",
+    "http://192.168.2.107:8080",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': env.str('JWT_SECRET_KEY', SECRET_KEY),
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
 
 WSGI_APPLICATION = 'web.wsgi.application'
 

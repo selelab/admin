@@ -1,30 +1,76 @@
 <template>
   <div>
     <h1>プロジェクト</h1>
-    <canvas id="myChart"></canvas>
-    <div class="box">
+    <div class="campaign_box">
       <br />
       <p>
         おめでとうございます！
         <br />あなたはプロジェクトを申請して500億円を受け取る資格を得ました。
       </p>
-      <router-link to="/projects/create" class="myButton">
+      <router-link to="/projects/create" class="button">
         <p>こちらをクリック！</p>
       </router-link>
     </div>
-    <h2>承認待ち予算</h2>
-    <ul class="approvals">
-      <li
-        v-for="(approval,index) in open_approvals"
-        :key="index"
-        style="line-style:none;margin-bottom:2em;"
-      >
-        <h3>{{ approval.project.title }}</h3>
-        申請予算: {{ approval.budget_amount }}
-        <br />
-      </li>
-    </ul>
+    <br />
+    <h2>予算申請中のプロジェクト</h2>新規申請
+    <v-container fluid>
+      <v-row dense>
+        <v-col v-for="(approval,index) in open_approvals" :key="index">
+          <v-card height="100%" class="approval.project_card">
+            <v-list-item class="grow">
+              <v-list-item-avatar color="grey darken-3">
+                <img class="card_profile_icon" src="../assets/shika.jpg" />
+              </v-list-item-avatar>
+              <v-list-item-content class="card_header_text">
+                <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  <v-chip
+                    x-small
+                    chip
+                    :color="approval.project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                    text-color="grey darken-3"
+                    class="chip_wrapper"
+                  >{{ approval.project.accounting_type }}</v-chip>
+                  <v-chip
+                    x-small
+                    chip
+                    class="chip_wrapper"
+                  >{{ approval.project.closed ? "完了" : "進行中" }}</v-chip>
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-card-text>
+              <div>
+                <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+                {{ approval.project.sum_purchase_price | addComma }}円 /
+                <v-chip x-small chip>予算額</v-chip>
+                {{ approval.project.sum_budget | addComma }}円
+                +
+                <span
+                  class="important_text"
+                >{{ approval.budget_amount | addComma }}円</span>
+              </div>
 
+              <br />
+
+              <div style="height: 80px">{{ approval.project.desc_summary }}</div>
+            </v-card-text>
+
+            <v-card-actions class="card_actions">
+              <v-col></v-col>
+              <v-col></v-col>
+              <v-col></v-col>
+              <v-col class="text-right">
+                <v-btn text align="right">詳細</v-btn>
+              </v-col>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <h2>その他プロジェクト一覧</h2>新規プロジェクト
+    <br />
     <input type="checkbox" id="hard" value="hard" v-model="sh_check.hard" />
     <label for="hard">HARD</label>
     <input type="checkbox" id="soft" value="soft" v-model="sh_check.soft" />
@@ -35,41 +81,64 @@
     <label for="in_progress">進行中</label>
     <br />
 
-    <h2>プロジェクト一覧</h2>
+    <div class="project_list">
+      <v-container fluid>
+        <v-row dense>
+          <v-col
+            v-for="(project,index) in projects"
+            :key="index"
+            v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
+          >
+            <v-card height="100%" class="project_card">
+              <v-list-item class="grow">
+                <v-list-item-avatar color="grey darken-3">
+                  <img class="card_profile_icon" src="../assets/shika.jpg" />
+                </v-list-item-avatar>
+                <v-list-item-content class="card_header_text">
+                  <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
+                  <v-list-item-subtitle>
+                    <v-chip
+                      x-small
+                      chip
+                      :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                      text-color="grey darken-3"
+                      class="chip_wrapper"
+                    >{{ project.accounting_type }}</v-chip>
+                    <v-chip v-if="!project.closed" x-small chip class="chip_wrapper">進行中</v-chip>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-text>
+                <div>
+                  <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+                  {{ project.sum_purchase_price | addComma }}円 /
+                  <v-chip x-small chip color="light-green lighten-4">承認額</v-chip>
+                  {{ project.sum_budget | addComma }}円
+                </div>
 
-    <ul class="projects">
-      <li
-        v-for="(project,index) in projects"
-        :key="index"
-        style="line-style:none;margin-bottom:2em;"
-        v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
-      >
-        <h3 v-on:click="show(index)" style="cursor:pointer;margin-bottom:0px">> {{ project.title }}</h3>
-        <div v-show="isShow[index]" class="project_info">
-          <span v-html="project.description"></span>
-          <br />
-          会計種別: {{ project.accounting_type }}
-          <br />
-          <p v-if="project.closed">状態: 完了</p>
-          <p v-else>状態: 進行中</p>
-          承認済予算: {{ project.sum_budget }}
-          <br />
-          支出済予算: {{ project.sum_purchase_price }}
-          <br />
-          <!-- <router-link :to="{ name: 'project_detail', params: {id: project.id}}">
-            審査
-            <br />
-            <br />
-          </router-link>-->
-        </div>
-      </li>
-    </ul>
+                <br />
+
+                <div style="height: 80px">{{ project.desc_summary }}</div>
+              </v-card-text>
+
+              <v-card-actions class="card_actions">
+                <v-col></v-col>
+                <v-col></v-col>
+                <v-col></v-col>
+                <v-col class="text-right">
+                  <v-btn text align="right">詳細</v-btn>
+                </v-col>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
 <script>
 import api from "../api";
-import Vue from "vue";
 
 export default {
   data() {
@@ -94,23 +163,36 @@ export default {
     };
   },
   created() {
+    let maxlength = 60;
+
     api
-      .post("/jwt-token/", {
-        email: "user1@example.com",
-        password: "12345678"
-      })
+      .get("/v1/api/approvals/", { params: { is_open: true } })
       .then(response => {
-        Vue.$cookies.set("jwt", response.data.token);
+        let approvalable_project_ids = new Set();
+        this.open_approvals = Array.from(response.data);
+        this.open_approvals.forEach(approval => {
+          if (approval.project.description.length < maxlength) {
+            approval.project.desc_summary = approval.project.description;
+          } else {
+            approval.project.desc_summary =
+              approval.project.description.substr(0, maxlength - 3) + "...";
+          }
+          approvalable_project_ids.add(approval.project.id);
+        });
+
         api
           .get("/v1/api/projects/")
           .then(response => {
             this.projects = Array.from(response.data);
             this.projects.forEach(project => {
               this.isShow.push(false);
-              project.description = project.description.replace(
-                "/(https?://[-_.!~*'()a-zA-Z0-9;/?:@&=+$,%#]+)/gi",
-                "<a href='$1' target='_blank'>$1</a>"
-              );
+              if (project.description.length < maxlength) {
+                project.desc_summary = project.description;
+              } else {
+                project.desc_summary =
+                  project.description.substr(0, maxlength - 3) + "...";
+              }
+
               if (project.accounting_type === "soft") {
                 this.soft_fee += project.sum_purchase_price;
                 this.num_soft += 1;
@@ -119,7 +201,11 @@ export default {
                 this.num_hard += 1;
               }
             });
-            this.createGraph();
+
+            this.projects = this.projects.filter(
+              project => !approvalable_project_ids.has(project.id)
+            );
+            // this.createGraph();
           })
           .catch(error => {
             console.log(error);
@@ -138,5 +224,78 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.v-card {
+  width: 380px;
+  margin: auto;
+}
+
+.card_header_text {
+  padding-left: 20px;
+}
+
+.chip_wrapper {
+  padding: 8px;
+  margin: 2px;
+}
+.chip_icon {
+  margin-right: 4px;
+}
+
+.project_card {
+  position: relative;
+  padding-bottom: 50px;
+}
+
+.card_actions {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.project_list {
+  margin: auto;
+}
+
+.important_text {
+  font-weight: 900;
+}
+
+.campaign_box {
+  height: 250px;
+  width: 300px;
+  background: #808080;
+  color: white;
+  padding: 20px;
+  position: relative;
+  top: 150px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.campaign_box .button {
+  box-shadow: inset 0px 3px 0px 0px #cf866c;
+  background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+  background-color: #d0451b;
+  border-radius: 6px;
+  border: 1px solid #942911;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 10px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #854629;
+}
+
+.campaign_box .button:hover {
+  background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+  background-color: #bc3315;
+}
+
+.campaign_box .button:active {
+  position: relative;
+  top: 1px;
+}
 </style>
