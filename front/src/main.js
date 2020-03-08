@@ -17,7 +17,19 @@ Vue.filter('addComma', function (val) {
 
 new Vue({
   router,
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({
+    theme: {
+      themes: {
+        light: {
+          primary: '#51a9dc',
+          secondary: '#b0bec5',
+          accent: '#8c9eff',
+          error: '#b71c1c',
+        },
+        dark: false,
+      }
+    }
+  }),
   store,
   render: h => h(App),
   created() {

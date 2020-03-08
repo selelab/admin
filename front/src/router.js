@@ -1,10 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import { KJUR, b64utoutf8 } from 'jsrsasign'
-
 import Index from "./components/Index"
 import Projects from "./components/Projects"
 import Login from "./components/Login"
+import NotFound from "./components/NotFound"
 import { store } from "./store";
 
 Vue.use(Router);
@@ -29,6 +28,10 @@ const router = new Router({
       component: Login,
       name: 'login',
     },
+    {
+      path: '*',
+      component: NotFound
+    }
   ]
 })
 
@@ -38,16 +41,7 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  let token = store.getters.getJwtToken;
-  let has_valid_jwt_token = false;
-
-  if (token) {
-    let jwt_binary = b64utoutf8(token.split('.')[1]);
-    let payload = KJUR.jws.JWS.readSafeJSONString(jwt_binary);
-    has_valid_jwt_token = payload.exp >= (Date.now() / 1000);
-  }
-
-  if (has_valid_jwt_token) {
+  if (store.getters.hasValidJwtToken) {
     next();
   } else {
     next({ path: '/login', query: { redirect: to.fullPath } });

@@ -37,7 +37,7 @@
               <v-col></v-col>
               <v-col class="text-right">
                 <v-btn
-                  transition="slide-y-transition"
+                  transition="scale-transition"
                   style="float: right; margin: 0"
                   width="100%"
                   class="mr-4"
@@ -61,8 +61,6 @@ import {
   ValidationProvider,
   setInteractionMode
 } from "vee-validate";
-
-import { KJUR, b64utoutf8 } from "jsrsasign";
 
 import router from "../router";
 import api from "../api";
@@ -97,16 +95,7 @@ const Login = {
     ValidationObserver
   },
   created() {
-    let token = this.$store.getters.getJwtToken;
-    let has_valid_jwt_token = false;
-
-    if (token) {
-      let jwt_binary = b64utoutf8(token.split(".")[1]);
-      let payload = KJUR.jws.JWS.readSafeJSONString(jwt_binary);
-      has_valid_jwt_token = payload.exp >= Date.now() / 1000;
-    }
-
-    if (has_valid_jwt_token) {
+    if (this.$store.getters.hasValidJwtToken) {
       router.push(this.$route.query.redirect || "/");
     }
   },
