@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import moment from 'moment';
+
 import App from './App.vue';
 import router from './router';
 
@@ -13,6 +15,10 @@ import { setTokenToHeader } from './api';
 
 Vue.filter('addComma', function (val) {
   return val.toLocaleString();
+});
+
+Vue.filter('yymmdd', function (val) {
+  return val && moment(val).format('YYYY年MM月DD日');
 });
 
 new Vue({

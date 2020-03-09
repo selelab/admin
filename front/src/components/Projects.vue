@@ -16,7 +16,11 @@
     <v-container fluid>
       <v-row dense>
         <v-col v-for="(approval,index) in open_approvals" :key="index">
-          <v-card height="100%" class="approval.project_card">
+          <v-card
+            height="100%"
+            class="approval.project_card"
+            @click="open_dialog(approval.project)"
+          >
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
                 <img class="card_profile_icon" src="../assets/shika.jpg" />
@@ -55,15 +59,6 @@
 
               <div style="height: 80px">{{ approval.project.desc_summary }}</div>
             </v-card-text>
-
-            <v-card-actions class="card_actions">
-              <v-col></v-col>
-              <v-col></v-col>
-              <v-col></v-col>
-              <v-col class="text-right">
-                <v-btn text align="right">詳細</v-btn>
-              </v-col>
-            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -89,7 +84,7 @@
             :key="index"
             v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
           >
-            <v-card height="100%" class="project_card">
+            <v-card height="100%" class="project_card" @click="open_dialog(project)">
               <v-list-item class="grow">
                 <v-list-item-avatar color="grey darken-3">
                   <img class="card_profile_icon" src="../assets/shika.jpg" />
@@ -120,18 +115,36 @@
 
                 <div style="height: 80px">{{ project.desc_summary }}</div>
               </v-card-text>
-
-              <v-card-actions class="card_actions">
-                <v-col></v-col>
-                <v-col></v-col>
-                <v-col></v-col>
-                <v-col class="text-right">
-                  <v-btn text align="right">詳細</v-btn>
-                </v-col>
-              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
+        <v-dialog v-model="project_detail_dialog" width="80%">
+          <v-card width="100%">
+            <v-card-title>
+              <span class="headline">{{ dialog_project.title }}</span>
+            </v-card-title>
+            <v-list-item>
+              <v-list-item-avatar>
+                <img src="../assets/shika.jpg" />
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title  v-text="dialog_project.leader_detail && dialog_project.leader_detail.display_name"></v-list-item-title>
+                <v-list-item-subtitle v-text="dialog_project.leader_detail && dialog_project.leader_detail.email"></v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-action>
+                <v-btn icon>
+                  <v-icon color="grey lighten-1">mdi-information</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+
+            <v-card-text>{{dialog_project.description}}</v-card-text>
+            <v-card-actions>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </div>
   </div>
@@ -159,15 +172,19 @@ export default {
       num_soft: 0,
       num_hard: 0,
       soft_fee: 0,
-      hard_fee: 0
+      hard_fee: 0,
+      project_detail_dialog: false,
+      dialog_project: {}
     };
   },
   created() {
     let maxlength = 60;
 
-    api
-      .get("/v1/api/approvals/", { params: { is_open: true } })
-      .then(response => {
+    (async () => {
+      try {
+        let response = await api.get("/v1/api/approvals/", {
+          params: { is_open: true }
+        });
         let approvalable_project_ids = new Set();
         this.open_approvals = Array.from(response.data);
         this.open_approvals.forEach(approval => {
@@ -180,44 +197,63 @@ export default {
           approvalable_project_ids.add(approval.project.id);
         });
 
-        api
-          .get("/v1/api/projects/")
-          .then(response => {
-            this.projects = Array.from(response.data);
-            this.projects.forEach(project => {
-              this.isShow.push(false);
-              if (project.description.length < maxlength) {
-                project.desc_summary = project.description;
-              } else {
-                project.desc_summary =
-                  project.description.substr(0, maxlength - 3) + "...";
-              }
+        response = await api.get("/v1/api/projects/");
+        this.projects = Array.from(response.data);
+        this.projects.forEach(project => {
+          this.isShow.push(false);
+          if (project.description.length < maxlength) {
+            project.desc_summary = project.description;
+          } else {
+            project.desc_summary =
+              project.description.substr(0, maxlength - 3) + "...";
+          }
 
-              if (project.accounting_type === "soft") {
-                this.soft_fee += project.sum_purchase_price;
-                this.num_soft += 1;
-              } else {
-                this.hard_fee += project.sum_purchase_price;
-                this.num_hard += 1;
-              }
-            });
+          if (project.accounting_type === "soft") {
+            this.soft_fee += project.sum_purchase_price;
+            this.num_soft += 1;
+          } else {
+            this.hard_fee += project.sum_purchase_price;
+            this.num_hard += 1;
+          }
 
-            this.projects = this.projects.filter(
-              project => !approvalable_project_ids.has(project.id)
-            );
-            // this.createGraph();
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
+          this.projects = this.projects.filter(
+            project => !approvalable_project_ids.has(project.id)
+          );
+          // this.createGraph();
+        });
+      } catch (error) {
         console.log(error);
-      });
+      }
+    })();
   },
   methods: {
     show: function(index) {
       this.$set(this.isShow, index, !this.isShow[index]);
+    },
+    open_dialog: function(project) {
+      this.dialog_project = project;
+      this.project_detail_dialog = true;
+
+      (async () => {
+        try {
+          let dialog_project = this.dialog_project;
+          let response = await api.get(`/v1/api/projects/${project.id}/`);
+          dialog_project.detail = response.data;
+
+          if (project.leader) {
+            response = await api.get(`/v1/api/users/${project.leader}/`);
+            dialog_project.leader_detail = response.data;
+          } else {
+            dialog_project.leader_detail = {
+              display_name: "リーダーはまだいません。"
+            }
+          }
+
+          this.$set(this.dialog_project, dialog_project);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
     }
   },
   name: "Projects"
