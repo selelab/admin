@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <br />
     <v-card style="width: 80%; max-width: 480px; margin: auto">
       <v-card-title primary-title>
         <h4>ログイン画面</h4>
