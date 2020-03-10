@@ -63,7 +63,7 @@ export default {
     auth_clicked: function() {
       if (this.hasValidJwtToken) {
         this.$store.commit("setJwtToken", undefined);
-        router.push("/");
+        if (router.currentRoute.path != "/") router.push("/");
       } else {
         router.push("/login");
       }
