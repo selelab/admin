@@ -39,7 +39,7 @@ const store = new Vuex.Store({
     storage: {
       getItem: key => Cookies.get(key),
       setItem: (key, value) => Cookies.set(key, value, {
-        sameSite: true,
+        sameSite: 'strict',
         expires: cookieExpireDateTime,
         secure: location.protocol == 'https:'
       }),
