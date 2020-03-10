@@ -38,7 +38,11 @@ const store = new Vuex.Store({
   plugins: [createPersistedState({
     storage: {
       getItem: key => Cookies.get(key),
-      setItem: (key, value) => Cookies.set(key, value, { expires: cookieExpireDateTime, secure: location.protocol == 'https' }),
+      setItem: (key, value) => Cookies.set(key, value, {
+        sameSite: true,
+        expires: cookieExpireDateTime,
+        secure: location.protocol == 'https:'
+      }),
       removeItem: key => Cookies.remove(key)
     }
   })]
