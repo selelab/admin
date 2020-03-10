@@ -22,7 +22,7 @@ services:
       - DJANGO_SETTINGS_MODULE=web.settings
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DJANGO_FORCE_SCRIPT_NAME=$DJANGO_FORCE_SCRIPT_NAME
-      - DEBUG=False
+      - DJANGO_DEBUG=$DJANGO_DEBUG
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
       - DB_PASS=$DB_PASS
@@ -40,3 +40,4 @@ services:
     volumes:
       - ./api/:/var/app/
       - ./static/:/var/static
+      - ./log/django/:/var/log/django/

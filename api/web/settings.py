@@ -33,7 +33,7 @@ STATIC_ROOT = '/var/static'
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 ALLOWED_HOSTS: List[str] = ['*']
 
@@ -78,13 +78,17 @@ REST_FRAMEWORK = {
     ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_AUTHENTICATION_CLASSES':
     ('rest_framework_jwt.authentication.JSONWebTokenAuthentication', ),
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'jwt': {
             'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
-        }
-    }
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
 }
 
 TEMPLATES = [
@@ -190,10 +194,6 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'django.server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '[%(server_time)s] %(message)s a',
-        },
         'heibon': {
             'format':
             '\t'.join([
@@ -206,13 +206,14 @@ LOGGING = {
         },
     },
     'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'heibon',
-        },
         'file': {
             'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/info.log',
+            'formatter': 'heibon',
+        },
+        'debug_log': {
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/var/log/django/debug.log',
             'formatter': 'heibon',
@@ -227,7 +228,7 @@ LOGGING = {
         },
         'django.db.backends': {
             'handlers': [
-                'console',
+                'debug_log',
             ],
             'level': 'DEBUG',
         },
