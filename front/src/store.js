@@ -2,8 +2,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { KJUR, b64utoutf8 } from 'jsrsasign'
 import createPersistedState from "vuex-persistedstate";
+import Cookies from 'js-cookie';
 
 Vue.use(Vuex);
+
+const thirtyMinutes = 30 * 60 * 1000;
+const cookieExpireDateTime = new Date(new Date().getTime() + thirtyMinutes);
 
 const store = new Vuex.Store({
   state: {
@@ -31,7 +35,13 @@ const store = new Vuex.Store({
       return has_valid_jwt_token;
     }
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    storage: {
+      getItem: key => Cookies.get(key),
+      setItem: (key, value) => Cookies.set(key, value, { expires: cookieExpireDateTime, secure: location.protocol == 'https' }),
+      removeItem: key => Cookies.remove(key)
+    }
+  })]
 });
 
 export { store }
