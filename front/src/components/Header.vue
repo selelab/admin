@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar flat color="primary" dark app hide-on-scroll clipped-left>
+    <v-app-bar flat color="primary" dark app :hide-on-scroll="showBottomNavi" clipped-left>
       <v-app-bar-nav-icon v-if="showMenuDetailButton" @click="menu_detail_clicked"></v-app-bar-nav-icon>
 
       <v-toolbar-title>エレラ簿</v-toolbar-title>
@@ -48,6 +48,15 @@
               <v-list-item-title>ユーザー</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item to="/alerts">
+            <v-list-item-icon>
+              <v-icon>mdi-bell-ring</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>通知</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -62,6 +71,7 @@ export default {
     drawer: window.innerWidth >= 960,
     showNaviDrawerAlways: window.innerWidth >= 960,
     showMenuDetailButton: window.innerWidth >= 600 && window.innerWidth < 960,
+    showBottomNavi: window.innerWidth < 600,
     group: null
   }),
   computed: {
@@ -107,6 +117,7 @@ export default {
       }
       this.showMenuDetailButton =
         window.innerWidth >= 600 && window.innerWidth < 960;
+      this.showBottomNavi = window.innerWidth < 600;
     }
   },
   mounted: function() {
