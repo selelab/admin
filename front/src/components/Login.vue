@@ -2,7 +2,7 @@
 <template>
   <div>
     <br />
-    <v-card style="width: 80%; max-width: 480px; margin: auto">
+    <v-card style="max-width: 480px;">
       <v-card-title primary-title>
         <h4>ログイン画面</h4>
       </v-card-title>
@@ -31,7 +31,6 @@
               ></v-text-field>
             </ValidationProvider>
             <v-card-actions>
-              <v-col></v-col>
               <v-col></v-col>
               <v-col></v-col>
               <v-col></v-col>
