@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>プロジェクト</h1>
+    <h1>ユーザー</h1>
     <h2>ユーザー一覧</h2>
     <div class="user_list">
       <v-container fluid>

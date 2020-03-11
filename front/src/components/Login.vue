@@ -11,7 +11,6 @@
           v-model="alert"
           :value="!!error_message"
           type="error"
-          width="80%"
           style="margin: auto; margin-bottom: 30px"
           outlined
           dismissible

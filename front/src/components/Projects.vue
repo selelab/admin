@@ -13,56 +13,50 @@
     </div>
     <br />
     <h2>予算申請中のプロジェクト</h2>新規申請
-    <v-container fluid>
-      <v-row dense>
-        <v-col v-for="(approval,index) in open_approvals" :key="index">
-          <v-card
-            height="100%"
-            class="approval.project_card"
-            @click="open_dialog(approval.project)"
-          >
-            <v-list-item class="grow">
-              <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" src="../assets/shika.jpg" />
-              </v-list-item-avatar>
-              <v-list-item-content class="card_header_text">
-                <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
-                <v-list-item-subtitle>
-                  <v-chip
-                    x-small
-                    chip
-                    :color="approval.project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
-                    text-color="grey darken-3"
-                    class="chip_wrapper"
-                  >{{ approval.project.accounting_type }}</v-chip>
-                  <v-chip
-                    x-small
-                    chip
-                    class="chip_wrapper"
-                  >{{ approval.project.closed ? "完了" : "進行中" }}</v-chip>
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-card-text>
-              <div>
-                <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
-                {{ approval.project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip>予算額</v-chip>
-                {{ approval.project.sum_budget | addComma }}円
-                +
-                <span
-                  class="important_text"
-                >{{ approval.budget_amount | addComma }}円</span>
-              </div>
+    <v-row dense>
+      <v-col v-for="(approval,index) in open_approvals" :key="index">
+        <v-card height="100%" class="approval.project_card" @click="open_dialog(approval.project)">
+          <v-list-item class="grow">
+            <v-list-item-avatar color="grey darken-3">
+              <img class="card_profile_icon" src="../assets/shika.jpg" />
+            </v-list-item-avatar>
+            <v-list-item-content class="card_header_text">
+              <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
+              <v-list-item-subtitle>
+                <v-chip
+                  x-small
+                  chip
+                  :color="approval.project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                  text-color="grey darken-3"
+                  class="chip_wrapper"
+                >{{ approval.project.accounting_type }}</v-chip>
+                <v-chip
+                  x-small
+                  chip
+                  class="chip_wrapper"
+                >{{ approval.project.closed ? "完了" : "進行中" }}</v-chip>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-text>
+            <div>
+              <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+              {{ approval.project.sum_purchase_price | addComma }}円 /
+              <v-chip x-small chip>予算額</v-chip>
+              {{ approval.project.sum_budget | addComma }}円
+              +
+              <span
+                class="important_text"
+              >{{ approval.budget_amount | addComma }}円</span>
+            </div>
 
-              <br />
+            <br />
 
-              <div style="height: 80px">{{ approval.project.desc_summary }}</div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+            <div style="height: 80px">{{ approval.project.desc_summary }}</div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
 
     <h2>その他プロジェクト一覧</h2>新規プロジェクト
     <br />
@@ -77,75 +71,76 @@
     <br />
 
     <div class="project_list">
-      <v-container fluid>
-        <v-row dense>
-          <v-col
-            v-for="(project,index) in projects"
-            :key="index"
-            v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
-          >
-            <v-card height="100%" class="project_card" @click="open_dialog(project)">
-              <v-list-item class="grow">
-                <v-list-item-avatar color="grey darken-3">
-                  <img class="card_profile_icon" src="../assets/shika.jpg" />
-                </v-list-item-avatar>
-                <v-list-item-content class="card_header_text">
-                  <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
-                  <v-list-item-subtitle>
-                    <v-chip
-                      x-small
-                      chip
-                      :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
-                      text-color="grey darken-3"
-                      class="chip_wrapper"
-                    >{{ project.accounting_type }}</v-chip>
-                    <v-chip v-if="!project.closed" x-small chip class="chip_wrapper">進行中</v-chip>
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <v-card-text>
-                <div>
-                  <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
-                  {{ project.sum_purchase_price | addComma }}円 /
-                  <v-chip x-small chip color="light-green lighten-4">承認額</v-chip>
-                  {{ project.sum_budget | addComma }}円
-                </div>
-
-                <br />
-
-                <div style="height: 80px">{{ project.desc_summary }}</div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-dialog v-model="project_detail_dialog" width="80%">
-          <v-card width="100%">
-            <v-card-title>
-              <span class="headline">{{ dialog_project.title }}</span>
-            </v-card-title>
-            <v-list-item>
-              <v-list-item-avatar>
-                <img src="../assets/shika.jpg" />
+      <v-row dense>
+        <v-col
+          v-for="(project,index) in projects"
+          :key="index"
+          v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
+        >
+          <v-card height="100%" class="project_card" @click="open_dialog(project)">
+            <v-list-item class="grow">
+              <v-list-item-avatar color="grey darken-3">
+                <img class="card_profile_icon" src="../assets/shika.jpg" />
               </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title  v-text="dialog_project.leader_detail && dialog_project.leader_detail.display_name"></v-list-item-title>
-                <v-list-item-subtitle v-text="dialog_project.leader_detail && dialog_project.leader_detail.email"></v-list-item-subtitle>
+              <v-list-item-content class="card_header_text">
+                <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
+                <v-list-item-subtitle>
+                  <v-chip
+                    x-small
+                    chip
+                    :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                    text-color="grey darken-3"
+                    class="chip_wrapper"
+                  >{{ project.accounting_type }}</v-chip>
+                  <v-chip v-if="!project.closed" x-small chip class="chip_wrapper">進行中</v-chip>
+                </v-list-item-subtitle>
               </v-list-item-content>
-
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey lighten-1">mdi-information</v-icon>
-                </v-btn>
-              </v-list-item-action>
             </v-list-item>
+            <v-card-text>
+              <div>
+                <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+                {{ project.sum_purchase_price | addComma }}円 /
+                <v-chip x-small chip color="light-green lighten-4">承認額</v-chip>
+                {{ project.sum_budget | addComma }}円
+              </div>
 
-            <v-card-text>{{dialog_project.description}}</v-card-text>
-            <v-card-actions>
-            </v-card-actions>
+              <br />
+
+              <div style="height: 80px">{{ project.desc_summary }}</div>
+            </v-card-text>
           </v-card>
-        </v-dialog>
-      </v-container>
+        </v-col>
+      </v-row>
+      <v-dialog v-model="project_detail_dialog" width="80%">
+        <v-card width="100%">
+          <v-card-title>
+            <span class="headline">{{ dialog_project.title }}</span>
+          </v-card-title>
+          <v-list-item>
+            <v-list-item-avatar>
+              <img src="../assets/shika.jpg" />
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title
+                v-text="dialog_project.leader_detail && dialog_project.leader_detail.display_name"
+              ></v-list-item-title>
+              <v-list-item-subtitle
+                v-text="dialog_project.leader_detail && dialog_project.leader_detail.email"
+              ></v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn icon>
+                <v-icon color="grey lighten-1">mdi-information</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+
+          <v-card-text>{{dialog_project.description}}</v-card-text>
+          <v-card-actions></v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>
@@ -197,8 +192,10 @@ export default {
           approvalable_project_ids.add(approval.project.id);
         });
 
-        response = await api.get("/v1/api/projects/");
-        this.projects = Array.from(response.data);
+        response = await api.get("/v1/api/projects/", {
+          params: { limit: 10 }
+        });
+        this.projects = Array.from(response.data.results);
         this.projects.forEach(project => {
           this.isShow.push(false);
           if (project.description.length < maxlength) {
@@ -246,7 +243,7 @@ export default {
           } else {
             dialog_project.leader_detail = {
               display_name: "リーダーはまだいません。"
-            }
+            };
           }
 
           this.$set(this.dialog_project, dialog_project);
@@ -299,7 +296,8 @@ export default {
 
 .campaign_box {
   height: 250px;
-  width: 300px;
+  width: 100%;
+  max-width: 380px;
   background: #808080;
   color: white;
   padding: 20px;

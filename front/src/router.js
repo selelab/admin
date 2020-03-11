@@ -17,6 +17,7 @@ const router = new Router({
       path: '/',
       component: Index,
       name: 'index',
+      meta: { requiresAuth: true }
     },
     {
       path: '/projects',

@@ -23,6 +23,7 @@ Vue.filter('yymmdd', function (val) {
 
 new Vue({
   router,
+  el: '#app',
   vuetify: new Vuetify({
     theme: {
       themes: {
