@@ -119,9 +119,8 @@ CORS_ALLOW_CREDENTIALS = True
 JWT_AUTH = {
     'JWT_SECRET_KEY': env.str('JWT_SECRET_KEY', SECRET_KEY),
     'JWT_ALGORITHM': 'HS256',
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=30),
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=3),
 }
 
 WSGI_APPLICATION = 'web.wsgi.application'

@@ -6,8 +6,8 @@ import Cookies from 'js-cookie';
 
 Vue.use(Vuex);
 
-const thirtyMinutes = 30 * 60 * 1000;
-const cookieExpireDateTime = new Date(new Date().getTime() + thirtyMinutes);
+const threeHours = 3 * 60 * 60 * 1000;
+const cookieExpireDateTime = new Date(new Date().getTime() + threeHours);
 
 const store = new Vuex.Store({
   state: {
