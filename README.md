@@ -63,13 +63,21 @@
     ```bash
     docker-compose run --entrypoint '' api pipenv run python manage.py loaddata seed_auth.json seed_accounting.json
     ```
+  - また、開発用のVueを立ち上げるには、以下のコマンドを実行してください。デフォルトでは http://localhost:8080/admin で立ち上がります。
+    ```bash
+    cd front
+    yarn serve
+    ```
 
-- ブラウザで http://localhost:8000 にアクセスすると以下のように Swagger が表示されます。
+- ブラウザで http://localhost にアクセスすると以下のように Swagger が表示されます。
     ![Swaggerの画像](./doc_images/swagger.png)
+
+- Vueの開発モードを立ち上げた場合、 http://localhost:8080/admin で管理画面が表示出来ます。
+    ![http://localhost:8080/admin](https://user-images.githubusercontent.com/40418321/76577652-6a415900-6509-11ea-9b11-4194caddef7c.png)
 
 - エンドポイントにアクセス
     - ユーザーの一覧を取得する
-    http://localhost:8000/v1/api/users/
+    http://localhost/v1/api/users/
         ```json
         [
             {
@@ -91,7 +99,7 @@
         ]
         ```
     - プロジェクトの一覧を取得する
-    http://localhost:8000/v1/api/projects/
+    http://localhost/v1/api/projects/
         ```json
         [
             {
@@ -125,7 +133,7 @@
         ]
         ```
     - 購入の一覧を取得する
-    http://localhost:8000/v1/api/purchases/
+    http://localhost/v1/api/purchases/
         ```json
         [
             {
