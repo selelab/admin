@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import datetime
 import os
 from typing import List
 
@@ -32,24 +33,32 @@ STATIC_ROOT = '/var/static'
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 ALLOWED_HOSTS: List[str] = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.messages',
-    'django.contrib.staticfiles', 'accounting', 'authenticate',
-    'rest_framework', 'drf_yasg', 'web'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'accounting',
+    'authenticate',
+    'rest_framework',
+    'drf_yasg',
+    'web',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -67,6 +76,19 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
     'DEFAULT_PERMISSION_CLASSES':
     ('rest_framework.permissions.IsAuthenticated', ),
+    'DEFAULT_AUTHENTICATION_CLASSES':
+    ('rest_framework_jwt.authentication.JSONWebTokenAuthentication', ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'jwt': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
 }
 
 TEMPLATES = [
@@ -84,6 +106,22 @@ TEMPLATES = [
         },
     },
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    "https://selelab.com",
+    "http://localhost:8080",
+    "http://localhost",
+    "http://192.168.2.107:8080",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': env.str('JWT_SECRET_KEY', SECRET_KEY),
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=3),
+}
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
@@ -155,10 +193,6 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'django.server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '[%(server_time)s] %(message)s a',
-        },
         'heibon': {
             'format':
             '\t'.join([
@@ -171,13 +205,14 @@ LOGGING = {
         },
     },
     'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'heibon',
-        },
         'file': {
             'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/info.log',
+            'formatter': 'heibon',
+        },
+        'debug_log': {
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/var/log/django/debug.log',
             'formatter': 'heibon',
@@ -192,7 +227,7 @@ LOGGING = {
         },
         'django.db.backends': {
             'handlers': [
-                'console',
+                'debug_log',
             ],
             'level': 'DEBUG',
         },

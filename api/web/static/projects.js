@@ -1,4 +1,4 @@
-import * as api from './api.js'
+import api from './api.js'
 import { router } from './router.js'
 
 const ProjectList = {
@@ -33,7 +33,6 @@ const ProjectList = {
       <router-link to="/projects/create" class="myButton">
         <p>こちらをクリック！</p>
       </router-link>
-      </center>
     </div>
 
     <h2>承認待ち予算</h2>
@@ -81,13 +80,11 @@ const ProjectList = {
         this.projects.forEach((project) => {
           this.isShow.push(false);
           project.description = project.description.replace(/(https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/gi, "<a href='$1' target='_blank'>$1</a>");
-          if (project.accounting_type === "soft")
-          {
+          if (project.accounting_type === "soft") {
             this.soft_fee += project.sum_purchase_price;
             this.num_soft += 1;
           }
-          else
-          {
+          else {
             this.hard_fee += project.sum_purchase_price;
             this.num_hard += 1;
           }
@@ -98,7 +95,7 @@ const ProjectList = {
         console.log(error);
       });
 
-    api.get('/v1/api/approvals/', {'is_open': true})
+    api.get('/v1/api/approvals/', { 'params': { 'is_open': true } })
       .then(response => {
         this.open_approvals = Array.from(response.data);
       })

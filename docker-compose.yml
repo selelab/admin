@@ -1,13 +1,28 @@
 version: '3'
 services:
-  python:
+  web_server:
     build:
-      context: django
+      context: apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./static:/var/static
+      - ../web/build:/var/react
+      - "./front/dist:/var/admin-front"
+    depends_on:
+      - api
+  redis:
+    image: redis
+    volumes:
+      - "./data/redis:/data"
+  api:
+    build:
+      context: api
     environment:
       - DJANGO_SETTINGS_MODULE=web.settings
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DJANGO_FORCE_SCRIPT_NAME=$DJANGO_FORCE_SCRIPT_NAME
-      - DEBUG=True
+      - DJANGO_DEBUG=$DJANGO_DEBUG
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
       - DB_PASS=$DB_PASS
@@ -19,16 +34,10 @@ services:
       - REDIS_PASS=$REDIS_PASS
     entrypoint:
       - /bin/sh
-      - entrypoint.sh
-    ports:
-      - "8000:8000"
+      - prod_entrypoint.sh
+    expose:
+      - "8001"
     volumes:
-      - ./django/:/var/app/
-    networks:
-     - "default"
-     - "db_sharing"
-networks:
-  default:
-    external: false
-  db_sharing:
-    external: true
+      - ./api/:/var/app/
+      - ./static/:/var/static
+      - ./log/django/:/var/log/django/

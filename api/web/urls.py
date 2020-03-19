@@ -5,6 +5,7 @@ from django.views.generic import RedirectView, TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 
 from accounting.urls import router as accounting_router
 from authenticate.urls import router as authenticate_router
@@ -43,6 +44,9 @@ api_router.extend(authenticate_router)
 api_router.extend(accounting_router)
 
 urlpatterns = [
+    url(r'^jwt-token/', obtain_jwt_token),
+    url(r'^jwt-token/verify/', verify_jwt_token),
+    url(r'^jwt-token/refresh/', refresh_jwt_token),
     url(r'^$', RedirectView.as_view(url='./swagger/')),
     url(r'^swagger/',
         schema_view.with_ui('swagger', cache_timeout=0),
