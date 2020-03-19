@@ -125,9 +125,6 @@
               <v-list-item-title
                 v-text="dialog_project.leader_detail && dialog_project.leader_detail.display_name"
               ></v-list-item-title>
-              <v-list-item-subtitle
-                v-text="dialog_project.leader_detail && dialog_project.leader_detail.email"
-              ></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
