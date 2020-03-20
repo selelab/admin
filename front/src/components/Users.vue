@@ -11,13 +11,12 @@
             <v-divider v-else-if="user.divider" :key="index" :inset="user.inset" style="padding: 0"></v-divider>
 
             <v-list-item v-else :key="user.email" style="padding: 4px" @click="open_dialog(user)">
-              <v-list-item-avatar>
+              <v-list-item-avatar class="user_list_avatar">
                 <img src="../assets/shika.jpg" />
               </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-list-item-title v-html="user.display_name"></v-list-item-title>
-                <v-list-item-subtitle v-html="user.email"></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -37,9 +36,6 @@
                 <v-list-item-title
                   v-text="dialog_user.display_name"
                 ></v-list-item-title>
-                <v-list-item-subtitle
-                  v-text="dialog_user.email"
-                ></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -160,5 +156,10 @@ export default {
 .campaign_box .button:active {
   position: relative;
   top: 1px;
+}
+
+.user_list_avatar {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
 }
 </style>
