@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "./components/Index"
 import Projects from "./components/Projects"
+import CreateProject from "./components/CreateProject"
 import Users from "./components/Users"
 import Login from "./components/Login"
 import NotFound from "./components/NotFound"
@@ -23,6 +24,12 @@ const router = new Router({
       path: '/projects',
       component: Projects,
       name: 'projects',
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/projects/create',
+      component: CreateProject,
+      name: 'create_project',
       meta: { requiresAuth: true },
     },
     {
