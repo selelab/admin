@@ -42,7 +42,7 @@
             <div>
               <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
-              <v-chip x-small chip>予算額</v-chip>
+              <v-chip x-small chip>予算上限</v-chip>
               {{ approval.project.sum_budget | addComma }}円
               +
               <span
@@ -100,7 +100,7 @@
               <div>
                 <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
                 {{ project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip color="light-green lighten-4">承認額</v-chip>
+                <v-chip x-small chip color="light-green lighten-4">予算上限</v-chip>
                 {{ project.sum_budget | addComma }}円
               </div>
 

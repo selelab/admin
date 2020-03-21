@@ -7,7 +7,7 @@
       <v-textarea outlined required name="input-7-4" label="プロジェクト説明" value="## 概要
 ## 予算内訳
 "></v-textarea>
-      <v-text-field v-model="budget" type="number" label="予算額" suffix="円"></v-text-field>
+      <v-text-field v-model="budget" type="number" label="予算上限額" suffix="円"></v-text-field>
       <v-col class="text-right">
         <v-btn color="primary">申請</v-btn>
       </v-col>
