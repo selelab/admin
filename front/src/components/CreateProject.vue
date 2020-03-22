@@ -19,6 +19,11 @@ export default {
     return {
       title: "",
       budget: 0,
+      accounting_type: "",
+      accounting_types: [
+        { text: "ソフトウェア会計", value: "soft" },
+        { text: "ハードウェア会計", value: "hard" }
+      ],
       description: "## 概要\n## 予算内訳\n"
     };
   }
