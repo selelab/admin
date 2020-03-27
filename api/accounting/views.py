@@ -7,7 +7,7 @@ from web import settings
 
 from .models import Project, ProjectApproval, Purchase
 from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer,
-                         ProjectSerializer, PurchaseSerializer)
+                         ProjectSerializer, PurchaseSerializer, CreateProjectApprovalSerializer)
 
 
 class AdminPermission(permissions.BasePermission):
@@ -38,6 +38,30 @@ class ProjectOwnerPermission(permissions.BasePermission):
 
         return True
 
+
+class ProjectCreatePermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if not request.user:
+            return False
+
+        if request.method not in {'POST'}:
+            return False
+
+        return True
+
+class ProjectApprovalRequestPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if not request.user:
+            return False
+
+        if request.method not in {'POST'}:
+            return False
+
+        # project = Project.objects.get(pk=request.data['project_id_id'])
+        # if request.user != project.leader:
+        #     return False
+
+        return True
 
 class PurchaseOwnerPermission(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -80,7 +104,7 @@ class PurchaseOwnerPermission(permissions.BasePermission):
 class ProjectPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         allowed_perm_classes = [
-            AdminPermission, ReadOnlyPermission, ProjectOwnerPermission
+            AdminPermission, ReadOnlyPermission, ProjectOwnerPermission, ProjectCreatePermission
         ]
         return any(perm_class().has_permission(request, view)
                    for perm_class in allowed_perm_classes)
@@ -97,7 +121,7 @@ class PurchasePermission(permissions.BasePermission):
 
 class ProjectApprovalPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        allowed_perm_classes = [AdminPermission, ReadOnlyPermission]
+        allowed_perm_classes = [AdminPermission, ReadOnlyPermission, ProjectApprovalRequestPermission]
         return any(perm_class().has_permission(request, view)
                    for perm_class in allowed_perm_classes)
 
@@ -134,3 +158,8 @@ class ProjectApprovalViewSet(viewsets.ModelViewSet):
             return ProjectApproval.objects.filter(approver__isnull=True)
         else:
             return ProjectApproval.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CreateProjectApprovalSerializer
+        return self.serializer_class
