@@ -31,4 +31,9 @@ export default {
   width: 80%;
   margin: 50px auto 100px;
 }
+
+#inspire {
+  background-color: var(--v-background-base);
+  color: var(--v-text_color-base);
+}
 </style>
