@@ -32,9 +32,14 @@ new Vue({
           secondary: '#b0bec5',
           accent: '#8c9eff',
           error: '#b71c1c',
+          background: '#fffbf5',
+          text_color: '#603e2a',
         },
         dark: false,
-      }
+      },
+      options: {
+          customProperties: true,
+      },
     }
   }),
   store,

@@ -128,3 +128,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.v-navigation-drawer__content {
+  background-color: var(--v-background-base);
+}
+</style>
