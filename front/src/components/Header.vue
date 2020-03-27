@@ -79,7 +79,10 @@ export default {
       return this.$store.getters.hasValidJwtToken;
     },
     isLoginPage() {
-      return this.$route.path == "/login";
+      return this.$route.path == this.loginPage;
+    },
+    loginPage() {
+      return "/login";
     }
   },
   watch: {
@@ -91,9 +94,9 @@ export default {
     auth_clicked: function() {
       if (this.hasValidJwtToken) {
         this.$store.commit("setJwtToken", undefined);
-        if (router.currentRoute.path != "/") router.push("/");
+        if (!this.isLoginPage) router.push(this.loginPage);
       } else {
-        router.push("/login");
+        router.push(this.loginPage);
       }
     },
     menu_detail_clicked: function() {
