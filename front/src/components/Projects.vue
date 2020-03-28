@@ -28,6 +28,7 @@
     </div>
     <br />
 
+    <div v-if="!open_approvals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
     <v-row dense>
       <v-col v-for="(approval,index) in open_approvals" :key="index">
         <v-card height="100%" class="approval.project_card" @click="open_dialog(approval.project)">
@@ -57,7 +58,7 @@
             <div>
               <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
+              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
               {{ approval.project.sum_budget | addComma }}円
               +
               <span
@@ -74,18 +75,8 @@
     </v-row>
 
     <div class="project_header">
-      <div
-        class="list_header_text"
-      >その他のプロジェクト</div>
-      <v-btn
-        to="/projects/create"
-        class="mx-2"
-        fab
-        dark
-        x-small
-        depressed
-        color="primary"
-      >
+      <div class="list_header_text">その他のプロジェクト</div>
+      <v-btn to="/projects/create" class="mx-2" fab dark x-small depressed color="primary">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </div>
@@ -373,6 +364,6 @@ export default {
   max-width: 200px;
   float: left;
   font-size: 20px;
-  font-weight: 700;;
+  font-weight: 700;
 }
 </style>
