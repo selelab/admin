@@ -114,10 +114,15 @@ const Login = {
             400: "メールアドレスまたはパスワードが正しくありません。",
             500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
           };
-          this.error_message = error_messages[error.response.status];
-          this.alert = true;
-
           console.log(error);
+          if (error.response) {
+            this.error_message = error_messages[error.response.status];
+            this.alert = true;
+          } else {
+            this.error_message =
+              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+            this.alert = true;
+          }
         });
     },
     clear() {
