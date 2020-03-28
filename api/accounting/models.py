@@ -25,13 +25,15 @@ class Project(models.Model):
     closed = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
+    class Meta:
+        ordering = ['-date_created']
 
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
-    approved = models.BooleanField(null=True)
+    approved = models.BooleanField(null=False, default=False)
 
 
 class Purchase(models.Model):

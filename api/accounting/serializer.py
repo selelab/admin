@@ -67,6 +67,13 @@ class ProjectApprovalSerializer(serializers.ModelSerializer):
     def get_project(self, obj):
         return ProjectSerializer(obj.project_id).data
 
+
+class CreateProjectApprovalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectApproval
+        fields = ('id', 'project_id', 'budget_amount')
+
+
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase

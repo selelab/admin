@@ -5,14 +5,30 @@
       <br />
       <p>
         おめでとうございます！
-        <br />あなたはプロジェクトを申請して最大500億円を受け取る資格を得ました。
+        <br />あなたはプロジェクトを申請して最大21億4748万3647円を受け取るチャンスを得ました。
       </p>
       <router-link to="/projects/create" class="button">
         <p>こちらをクリック！</p>
       </router-link>
     </div>
     <br />
-    <h2>予算申請中のプロジェクト</h2>新規申請
+    <div class="project_header">
+      <div class="list_header_text">承認待ちプロジェクト</div>
+      <v-btn
+        to="/projects/create"
+        class="mx-2 list_append_button"
+        fab
+        dark
+        x-small
+        depressed
+        color="primary"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </div>
+    <br />
+
+    <div v-if="!open_approvals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
     <v-row dense>
       <v-col v-for="(approval,index) in open_approvals" :key="index">
         <v-card height="100%" class="approval.project_card" @click="open_dialog(approval.project)">
@@ -42,7 +58,7 @@
             <div>
               <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
-              <v-chip x-small chip>予算額</v-chip>
+              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
               {{ approval.project.sum_budget | addComma }}円
               +
               <span
@@ -58,7 +74,12 @@
       </v-col>
     </v-row>
 
-    <h2>その他プロジェクト一覧</h2>新規プロジェクト
+    <div class="project_header">
+      <div class="list_header_text">その他のプロジェクト</div>
+      <v-btn to="/projects/create" class="mx-2" fab dark x-small depressed color="primary">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </div>
     <br />
     <input type="checkbox" id="hard" value="hard" v-model="sh_check.hard" />
     <label for="hard">HARD</label>
@@ -100,7 +121,7 @@
               <div>
                 <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
                 {{ project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip color="light-green lighten-4">承認額</v-chip>
+                <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
                 {{ project.sum_budget | addComma }}円
               </div>
 
@@ -328,5 +349,21 @@ export default {
 .campaign_box .button:active {
   position: relative;
   top: 1px;
+}
+
+.project_header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 10px;
+}
+
+.list_header_text {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 80%;
+  max-width: 200px;
+  float: left;
+  font-size: 20px;
+  font-weight: 700;
 }
 </style>
