@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-scroll="on_scroll" id="entire_component">
     <h1>プロジェクト</h1>
     <div class="campaign_box">
       <br />
@@ -58,7 +58,7 @@
             <div>
               <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
-              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
+              <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
               {{ approval.project.sum_budget | addComma }}円
               +
               <span
@@ -121,7 +121,7 @@
               <div>
                 <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
                 {{ project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
+                <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
                 {{ project.sum_budget | addComma }}円
               </div>
 
@@ -132,10 +132,13 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-dialog v-model="project_detail_dialog" width="80%">
+      <v-dialog v-model="project_detail_dialog" width="80%" @input="v => v || close_dialog()">
         <v-card width="100%">
           <v-card-title>
             <span class="headline">{{ dialog_project.title }}</span>
+            <v-btn icon absolute right>
+              <v-icon color="grey lighten-1">mdi-pencil</v-icon>
+            </v-btn>
           </v-card-title>
           <v-list-item>
             <v-list-item-avatar>
@@ -148,15 +151,23 @@
               ></v-list-item-title>
             </v-list-item-content>
 
-            <v-list-item-action>
-              <v-btn icon>
-                <v-icon color="grey lighten-1">mdi-information</v-icon>
-              </v-btn>
-            </v-list-item-action>
+            <v-list-item-action></v-list-item-action>
           </v-list-item>
 
-          <v-card-text>{{dialog_project.description}}</v-card-text>
-          <v-card-actions></v-card-actions>
+          <v-card-text>
+            <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+            {{ dialog_project.sum_purchase_price | addComma }}円
+            <br />
+            <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
+            {{ dialog_project.sum_budget | addComma }}円
+            <br />
+            {{dialog_project.description}}
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn small color="primary" outlined right>予算超過申請</v-btn>
+            <v-btn small color="red" outlined right>完了</v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
@@ -165,6 +176,7 @@
 
 <script>
 import api from "../api";
+import router from "../router";
 
 export default {
   data() {
@@ -187,55 +199,28 @@ export default {
       soft_fee: 0,
       hard_fee: 0,
       project_detail_dialog: false,
-      dialog_project: {}
+      dialog_project: {},
+      maxlength: 60,
+      project_offset: 0,
     };
   },
   created() {
-    let maxlength = 60;
-
     (async () => {
       try {
         let response = await api.get("/v1/api/approvals/", {
           params: { is_open: true }
         });
-        let approvalable_project_ids = new Set();
         this.open_approvals = Array.from(response.data);
         this.open_approvals.forEach(approval => {
-          if (approval.project.description.length < maxlength) {
+          if (approval.project.description.length < this.maxlength) {
             approval.project.desc_summary = approval.project.description;
           } else {
             approval.project.desc_summary =
-              approval.project.description.substr(0, maxlength - 3) + "...";
+              approval.project.description.substr(0, this.maxlength - 3) +
+              "...";
           }
-          approvalable_project_ids.add(approval.project.id);
         });
-
-        response = await api.get("/v1/api/projects/", {
-          params: { limit: 10 }
-        });
-        this.projects = Array.from(response.data.results);
-        this.projects.forEach(project => {
-          this.isShow.push(false);
-          if (project.description.length < maxlength) {
-            project.desc_summary = project.description;
-          } else {
-            project.desc_summary =
-              project.description.substr(0, maxlength - 3) + "...";
-          }
-
-          if (project.accounting_type === "soft") {
-            this.soft_fee += project.sum_purchase_price;
-            this.num_soft += 1;
-          } else {
-            this.hard_fee += project.sum_purchase_price;
-            this.num_hard += 1;
-          }
-
-          this.projects = this.projects.filter(
-            project => !approvalable_project_ids.has(project.id)
-          );
-          // this.createGraph();
-        });
+        this.load_projects();
       } catch (error) {
         console.log(error);
       }
@@ -248,6 +233,7 @@ export default {
     open_dialog: function(project) {
       this.dialog_project = project;
       this.project_detail_dialog = true;
+      router.push(`/projects/${project.id}`);
 
       (async () => {
         try {
@@ -269,6 +255,55 @@ export default {
           console.log(error);
         }
       })();
+    },
+    close_dialog: function() {
+      router.push("/projects");
+    },
+    load_projects: function() {
+      (async () => {
+        try {
+          let response = await api.get("/v1/api/projects/", {
+            params: { limit: 10, offset: this.project_offset }
+          });
+          let projects = Array.from(response.data.results);
+          projects.forEach(project => {
+            this.isShow.push(false);
+            if (project.description.length < this.maxlength) {
+              project.desc_summary = project.description;
+            } else {
+              project.desc_summary =
+                project.description.substr(0, this.maxlength - 3) + "...";
+            }
+
+            if (project.accounting_type === "soft") {
+              this.soft_fee += project.sum_purchase_price;
+              this.num_soft += 1;
+            } else {
+              this.hard_fee += project.sum_purchase_price;
+              this.num_hard += 1;
+            }
+          });
+          Array.prototype.push.apply(this.projects, projects);
+
+          let approvalable_project_ids = new Set(this.open_approvals.map(approval => approval.project.id));
+
+          this.projects = this.projects.filter(
+            project => !approvalable_project_ids.has(project.id)
+          );
+          this.project_offset += projects.length;
+          console.log(this.project_offset);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    },
+    on_scroll: function() {
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ==
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.load_projects();
+      }
     }
   },
   name: "Projects"

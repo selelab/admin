@@ -26,7 +26,7 @@ class Project(models.Model):
     date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['-date_created', 'id']
 
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
