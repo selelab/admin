@@ -16,6 +16,7 @@
     "minimist": ">=1.2.2",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
+    "sanitize-html": "^1.22.1",
     "sass-loader": "^8.0.2",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",

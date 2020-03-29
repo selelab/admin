@@ -68,7 +68,10 @@
 
             <br />
 
-            <div style="height: 80px">{{ approval.project.desc_summary }}</div>
+            <div
+              style="height: 80px"
+              v-html="$replaceNewline($sanitize(approval.project.desc_summary))"
+            ></div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -127,7 +130,7 @@
 
               <br />
 
-              <div style="height: 80px">{{ project.desc_summary }}</div>
+              <div style="height: 80px" v-html="$replaceNewline($sanitize(project.desc_summary))"></div>
             </v-card-text>
           </v-card>
         </v-col>
@@ -161,7 +164,7 @@
             <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
             {{ dialog_project.sum_budget | addComma }}円
             <br />
-            {{dialog_project.description}}
+            <div v-html="$replaceNewline($sanitize(dialog_project.description))"></div>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
