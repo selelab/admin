@@ -34,7 +34,7 @@ class ProjectDetailSerializer(ProjectSerializer):
         model = Project
         fields = ('id', 'title', 'accounting_type', 'leader', 'closed',
                   'sum_budget', 'sum_req_budget', 'sum_purchase_price',
-                  'approvals', 'purchases')
+                  'approvals', 'purchases', 'description')
 
     def get_purchases(self, obj):
         try:

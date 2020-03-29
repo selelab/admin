@@ -158,18 +158,25 @@
           </v-list-item>
 
           <v-card-text>
-            <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+            <v-chip x-small chip color="amber lighten-4">支出済み</v-chip>
             {{ dialog_project.sum_purchase_price | addComma }}円
             <br />
-            <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
+            <v-chip x-small chip color="red lighten-2" style="color: white">予算上限</v-chip>
             {{ dialog_project.sum_budget | addComma }}円
             <br />
+            <div
+              v-if="dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget"
+            >
+              <v-chip x-small chip color="green lighten-2" style="color: white">承認待ち</v-chip>
+              {{ dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget | addComma }}円
+              <br />
+            </div>
             <div v-html="$replaceNewline($sanitize(dialog_project.description))"></div>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn small color="primary" outlined right>予算超過申請</v-btn>
-            <v-btn small color="red" outlined right>完了</v-btn>
+            <v-btn small color="primary" outlined rounded right>予算超過申請</v-btn>
+            <v-btn small color="red" outlined rounded right>完了</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -204,8 +211,23 @@ export default {
       project_detail_dialog: false,
       dialog_project: {},
       maxlength: 60,
-      project_offset: 0,
+      project_offset: 0
     };
+  },
+  watch: {
+    routerPath: function() {
+      if (this.$route.path.match(/^\/projects\/?$/)) {
+        this.project_detail_dialog = false;
+      } else {
+        this.project_detail_dialog = true;
+      }
+      return this.$route.path;
+    }
+  },
+  computed: {
+    routerPath: function() {
+      return this.$route.path;
+    }
   },
   created() {
     (async () => {
@@ -224,6 +246,12 @@ export default {
           }
         });
         this.load_projects();
+
+        let dialog_projct_id = this.$route.params.id;
+        if (dialog_projct_id) {
+          response = await api.get(`/v1/api/projects/${dialog_projct_id}/`);
+          this.open_dialog(response.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -236,7 +264,8 @@ export default {
     open_dialog: function(project) {
       this.dialog_project = project;
       this.project_detail_dialog = true;
-      router.push(`/projects/${project.id}`);
+      let project_path = `/projects/${project.id}`;
+      if (this.$route.path != project_path) router.push(project_path);
 
       (async () => {
         try {
@@ -288,13 +317,14 @@ export default {
           });
           Array.prototype.push.apply(this.projects, projects);
 
-          let approvalable_project_ids = new Set(this.open_approvals.map(approval => approval.project.id));
+          let approvalable_project_ids = new Set(
+            this.open_approvals.map(approval => approval.project.id)
+          );
 
           this.projects = this.projects.filter(
             project => !approvalable_project_ids.has(project.id)
           );
           this.project_offset += projects.length;
-          console.log(this.project_offset);
         } catch (error) {
           console.log(error);
         }
