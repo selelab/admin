@@ -58,7 +58,7 @@
             <div>
               <v-chip x-small chip color="amber lighten-4">支出</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
-              <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
+              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
               {{ approval.project.sum_budget | addComma }}円
               +
               <span
@@ -122,9 +122,9 @@
             </v-list-item>
             <v-card-text>
               <div>
-                <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+                <v-chip x-small chip color="amber lighten-4">支出</v-chip>
                 {{ project.sum_purchase_price | addComma }}円 /
-                <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
+                <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
                 {{ project.sum_budget | addComma }}円
               </div>
 
@@ -161,16 +161,18 @@
           </v-list-item>
 
           <v-card-text>
-            <v-chip x-small chip color="amber lighten-4">支出済み</v-chip>
+            <v-chip x-small chip color="amber lighten-4">支出</v-chip>
             {{ dialog_project.sum_purchase_price | addComma }}円
             <br />
-            <v-chip x-small chip color="red lighten-2" style="color: white">予算上限</v-chip>
-            {{ dialog_project.sum_budget | addComma }}円
-            <br />
+            <div style="width: 50%; margin: 0; float: left">
+              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
+              {{ dialog_project.sum_budget | addComma }}円
+            </div>
             <div
+              style="width: 50%; margin: 0; float: right"
               v-if="dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget"
             >
-              <v-chip x-small chip color="green lighten-2" style="color: white">承認待ち</v-chip>
+              <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
               {{ dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget | addComma }}円
             </div>
             <br />
@@ -178,8 +180,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn small color="primary" outlined rounded right>予算超過申請</v-btn>
-            <v-btn small color="red" outlined rounded right>完了</v-btn>
+            <v-btn small color="red" outlined rounded right>完了にする</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
