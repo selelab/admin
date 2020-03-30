@@ -34,7 +34,10 @@ class ProjectApproval(models.Model):
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
     approved = models.BooleanField(null=False, default=False)
+    date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
+    class Meta:
+        ordering = ['-date_created', 'id']
 
 class Purchase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -46,3 +49,7 @@ class Purchase(models.Model):
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     returned = models.BooleanField(default=False)
     approved = models.BooleanField(null=True, default=False)
+    date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
+
+    class Meta:
+        ordering = ['-date_created', 'id']
