@@ -21,13 +21,6 @@ Vue.filter('yymmdd', function (val) {
   return val && moment(val).format('YYYY年MM月DD日');
 });
 
-import sanitizeHTML from 'sanitize-html';
-
-Vue.prototype.$sanitize = sanitizeHTML;
-Vue.prototype.$replaceNewline = function (val) {
-  return (val || "").replace(/\n/g, "<br>");
-};
-
 new Vue({
   router,
   el: '#app',

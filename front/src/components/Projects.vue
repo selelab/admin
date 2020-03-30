@@ -56,7 +56,7 @@
           </v-list-item>
           <v-card-text>
             <div>
-              <v-chip x-small chip color="amber lighten-4">支出額</v-chip>
+              <v-chip x-small chip color="amber lighten-4">支出</v-chip>
               {{ approval.project.sum_purchase_price | addComma }}円 /
               <v-chip x-small chip color="red lighten-2" style="color: white">上限額</v-chip>
               {{ approval.project.sum_budget | addComma }}円
@@ -70,7 +70,7 @@
 
             <div
               style="height: 80px"
-              v-html="$replaceNewline($sanitize(approval.project.desc_summary))"
+              v-html="convert_to_safe_html(summarize(approval.project.description))"
             ></div>
           </v-card-text>
         </v-card>
@@ -130,7 +130,10 @@
 
               <br />
 
-              <div style="height: 80px" v-html="$replaceNewline($sanitize(project.desc_summary))"></div>
+              <div
+                style="height: 80px"
+                v-html="convert_to_safe_html(summarize(project.description))"
+              ></div>
             </v-card-text>
           </v-card>
         </v-col>
@@ -169,9 +172,9 @@
             >
               <v-chip x-small chip color="green lighten-2" style="color: white">承認待ち</v-chip>
               {{ dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget | addComma }}円
-              <br />
             </div>
-            <div v-html="$replaceNewline($sanitize(dialog_project.description))"></div>
+            <br />
+            <div v-html="convert_to_safe_html(dialog_project.description)"></div>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -187,6 +190,7 @@
 <script>
 import api from "../api";
 import router from "../router";
+import sanitizeHTML from "sanitize-html";
 
 export default {
   data() {
@@ -211,6 +215,7 @@ export default {
       project_detail_dialog: false,
       dialog_project: {},
       maxlength: 60,
+      maxLines: 4,
       project_offset: 0
     };
   },
@@ -236,15 +241,7 @@ export default {
           params: { is_open: true }
         });
         this.open_approvals = Array.from(response.data);
-        this.open_approvals.forEach(approval => {
-          if (approval.project.description.length < this.maxlength) {
-            approval.project.desc_summary = approval.project.description;
-          } else {
-            approval.project.desc_summary =
-              approval.project.description.substr(0, this.maxlength - 3) +
-              "...";
-          }
-        });
+
         this.load_projects();
 
         let dialog_projct_id = this.$route.params.id;
@@ -291,6 +288,26 @@ export default {
     close_dialog: function() {
       router.push("/projects");
     },
+    summarize: function(text) {
+      const newLineCount = (text.match(/\n/g) || []).length;
+      if (text.length < this.maxlength && newLineCount < this.maxLines) {
+        return text;
+      } else {
+        return (
+          text
+            .substr(0, this.maxlength - 3)
+            .split("\n")
+            .slice(0, this.maxLines)
+            .join("\n") + "..."
+        );
+      }
+    },
+    convert_to_safe_html: function(raw_text) {
+      return this.replaceNewLine(sanitizeHTML(raw_text));
+    },
+    replaceNewLine: function(text) {
+      return (text || "").replace(/\n/g, "<br>");
+    },
     load_projects: function() {
       (async () => {
         try {
@@ -300,12 +317,6 @@ export default {
           let projects = Array.from(response.data.results);
           projects.forEach(project => {
             this.isShow.push(false);
-            if (project.description.length < this.maxlength) {
-              project.desc_summary = project.description;
-            } else {
-              project.desc_summary =
-                project.description.substr(0, this.maxlength - 3) + "...";
-            }
 
             if (project.accounting_type === "soft") {
               this.soft_fee += project.sum_purchase_price;
