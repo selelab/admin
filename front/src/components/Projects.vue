@@ -142,7 +142,7 @@
         <v-card width="100%">
           <v-card-title>
             <span class="headline">{{ dialog_project.title }}</span>
-            <v-btn icon absolute right>
+            <v-btn icon absolute right v-if="dialog_project.leader == userId">
               <v-icon color="grey lighten-1">mdi-pencil</v-icon>
             </v-btn>
           </v-card-title>
@@ -180,7 +180,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn small color="red" outlined rounded right>完了にする</v-btn>
+            <v-btn small color="red" outlined rounded right v-if="dialog_project.leader == userId">完了にする</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -191,6 +191,7 @@
 <script>
 import api from "../api";
 import router from "../router";
+import { store } from "../store";
 import sanitizeHTML from "sanitize-html";
 
 export default {
@@ -233,6 +234,9 @@ export default {
   computed: {
     routerPath: function() {
       return this.$route.path;
+    },
+    userId: function() {
+      return store.state.user_id;
     }
   },
   created() {
