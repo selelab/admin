@@ -53,13 +53,15 @@ export default {
             leader: store.state.user_id
           });
 
-          let project_id = create_project_result.data.id;
+          if (this.budget && this.budget > 0) {
+            let project_id = create_project_result.data.id;
 
-          await api.post("/v1/api/approvals/", {
-            approver: null,
-            project_id,
-            budget_amount: this.budget,
-          });
+            await api.post("/v1/api/approvals/", {
+              approver: null,
+              project_id,
+              budget_amount: this.budget
+            });
+          }
 
           router.push("/projects");
         } catch (error) {
