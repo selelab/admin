@@ -37,7 +37,7 @@ export default {
         { text: "ソフトウェア会計", value: "soft" },
         { text: "ハードウェア会計", value: "hard" }
       ],
-      description: "## 概要\n## 予算内訳\n",
+      description: "### 概要\n### 予算内訳\n",
       error_message: "",
       alert: false
     };

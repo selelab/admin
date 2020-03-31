@@ -69,8 +69,8 @@
             <br />
 
             <div
-              style="height: 80px"
-              v-html="convert_to_safe_html(summarize(approval.project.description))"
+              style="height: 80px; overflow: hidden"
+              v-html="convertToSafeHTML(summarize(approval.project.description))"
             ></div>
           </v-card-text>
         </v-card>
@@ -131,8 +131,8 @@
               <br />
 
               <div
-                style="height: 80px"
-                v-html="convert_to_safe_html(summarize(project.description))"
+                style="height: 80px; overflow: hidden"
+                v-html="convertToSafeHTML(summarize(project.description))"
               ></div>
             </v-card-text>
           </v-card>
@@ -190,6 +190,17 @@
 
 <script>
 import api from "../api";
+import marked from "marked";
+import sanitizeHTML from "sanitize-html";
+const renderer = new marked.Renderer();
+const linkRenderer = renderer.link;
+renderer.link = (href, title, text) => {
+  const html = linkRenderer.call(renderer, href, title, text);
+  return html.replace(/^<a/, '<a target="_blank" rel="nofollow" ');
+};
+marked.setOptions({
+  sanitize: true,
+});
 import router from "../router";
 import { store } from "../store";
 import sanitizeHTML from "sanitize-html";
@@ -307,11 +318,8 @@ export default {
         );
       }
     },
-    convert_to_safe_html: function(raw_text) {
-      return this.replaceNewLine(sanitizeHTML(raw_text));
-    },
-    replaceNewLine: function(text) {
-      return (text || "").replace(/\n/g, "<br>");
+    convertToSafeHTML: function(raw_text) {
+      return marked(sanitizeHTML(raw_text), { renderer });
     },
     load_projects: function() {
       (async () => {
