@@ -41,3 +41,7 @@ services:
       - ./api/:/var/app/
       - ./static/:/var/static
       - ./log/django/:/var/log/django/
+networks:
+  default:
+    external:
+      name: db_sharing
