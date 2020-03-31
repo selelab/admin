@@ -1,5 +1,5 @@
 <template>
-  <div v-scroll="on_scroll" id="entire_component">
+  <div v-scroll="onScroll" id="entire_component">
     <h1>プロジェクト</h1>
     <div class="campaign_box">
       <br />
@@ -26,12 +26,22 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </div>
-    <br />
-
-    <div v-if="!open_approvals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
+    <div class="approval_summary_wrapper">
+      <div class="approval_summary" style="float: left">
+        <v-chip x-small chip color="cyan lighten-4">ソフト会計</v-chip>
+        <div>{{ openApprovalSummary.soft.count }} プロジェクト</div>
+        <div>{{ openApprovalSummary.soft.budget | addComma }}円</div>
+      </div>
+      <div class="approval_summary" style="float: right">
+        <v-chip x-small chip color="orange lighten-4">ハード会計</v-chip>
+        <div>{{ openApprovalSummary.hard.count }} プロジェクト</div>
+        <div>{{ openApprovalSummary.hard.budget | addComma }}円</div>
+      </div>
+    </div>
+    <div v-if="!openApprovals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
     <v-row dense>
-      <v-col v-for="(approval,index) in open_approvals" :key="index">
-        <v-card height="100%" class="approval.project_card" @click="open_dialog(approval.project)">
+      <v-col v-for="(approval,index) in openApprovals" :key="index">
+        <v-card height="100%" class="approval.project_card" @click="openDialog(approval.project)">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
               <img class="card_profile_icon" src="../assets/shika.jpg" />
@@ -84,13 +94,13 @@
       </v-btn>
     </div>
     <br />
-    <input type="checkbox" id="hard" value="hard" v-model="sh_check.hard" />
+    <input type="checkbox" id="hard" value="hard" v-model="shCheck.hard" />
     <label for="hard">HARD</label>
-    <input type="checkbox" id="soft" value="soft" v-model="sh_check.soft" />
+    <input type="checkbox" id="soft" value="soft" v-model="shCheck.soft" />
     <label for="soft">SOFT</label>
-    <input type="checkbox" id="closed" value="closed" v-model="closed_check.closed" />
+    <input type="checkbox" id="closed" value="closed" v-model="closedCheck.closed" />
     <label for="closed">完了</label>
-    <input type="checkbox" id="in_progress" value="in_progress" v-model="closed_check.in_progress" />
+    <input type="checkbox" id="in_progress" value="in_progress" v-model="closedCheck.in_progress" />
     <label for="in_progress">進行中</label>
     <br />
 
@@ -99,9 +109,9 @@
         <v-col
           v-for="(project,index) in projects"
           :key="index"
-          v-show="sh_check[project.accounting_type]&&(closed_check.closed&project.closed||closed_check.in_progress&&!project.closed)"
+          v-show="shCheck[project.accounting_type] && (closedCheck.closed & project.closed || closedCheck.in_progress && !project.closed)"
         >
-          <v-card height="100%" class="project_card" @click="open_dialog(project)">
+          <v-card height="100%" class="project_card" @click="openDialog(project)">
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
                 <img class="card_profile_icon" src="../assets/shika.jpg" />
@@ -138,11 +148,11 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-dialog v-model="project_detail_dialog" width="80%" @input="v => v || close_dialog()">
+      <v-dialog v-model="projectDetailDialog" width="80%" @input="v => v || closeDialog()">
         <v-card width="100%">
           <v-card-title>
-            <span class="headline">{{ dialog_project.title }}</span>
-            <v-btn icon absolute right v-if="dialog_project.leader == userId">
+            <span class="headline">{{ dialogProject.title }}</span>
+            <v-btn icon absolute right v-if="dialogProject.leader == userId">
               <v-icon color="grey lighten-1">mdi-pencil</v-icon>
             </v-btn>
           </v-card-title>
@@ -152,35 +162,42 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title
-                v-text="dialog_project.leader_detail && dialog_project.leader_detail.display_name"
-              ></v-list-item-title>
+              <v-list-item-title v-text="dialogProjectLeaderName"></v-list-item-title>
             </v-list-item-content>
 
             <v-list-item-action></v-list-item-action>
           </v-list-item>
 
           <v-card-text>
-            <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-            {{ dialog_project.sum_purchase_price | addComma }}円
-            <br />
-            <div style="width: 50%; margin: 0; float: left">
+            <div class="top_chips">
+              <v-chip x-small chip color="amber lighten-4">支出</v-chip>
+              {{ dialogProject.sum_purchase_price | addComma }}円
+            </div>
+            <div class="top_chips">
               <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-              {{ dialog_project.sum_budget | addComma }}円
+              {{ dialogProject.sum_budget | addComma }}円
             </div>
             <div
-              style="width: 50%; margin: 0; float: right"
-              v-if="dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget"
+              class="top_chips"
+              v-if="dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget"
             >
               <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
-              {{ dialog_project && dialog_project.detail && dialog_project.detail.sum_req_budget | addComma }}円
+              {{ dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget | addComma }}円
             </div>
             <br />
-            <div v-html="convert_to_safe_html(dialog_project.description)"></div>
+            <br />
+            <div v-html="convertToSafeHTML(dialogProject.description)"></div>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn small color="red" outlined rounded right v-if="dialog_project.leader == userId">完了にする</v-btn>
+            <v-btn
+              small
+              color="red"
+              outlined
+              rounded
+              right
+              v-if="dialogProject.leader == userId"
+            >完了にする</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -199,45 +216,38 @@ renderer.link = (href, title, text) => {
   return html.replace(/^<a/, '<a target="_blank" rel="nofollow" ');
 };
 marked.setOptions({
-  sanitize: true,
+  sanitize: true
 });
 import router from "../router";
 import { store } from "../store";
-import sanitizeHTML from "sanitize-html";
 
 export default {
   data() {
     return {
       projects: [],
-      open_approvals: [],
+      openApprovals: [],
       isShow: [],
-      url: [],
-      sh_check: {
+      shCheck: {
         soft: true,
         hard: true
       },
-      closed_check: {
+      closedCheck: {
         closed: true,
         in_progress: true
       },
-      isShowDead: [],
-      num_soft: 0,
-      num_hard: 0,
-      soft_fee: 0,
-      hard_fee: 0,
-      project_detail_dialog: false,
-      dialog_project: {},
+      projectDetailDialog: false,
+      dialogProject: {},
       maxlength: 60,
       maxLines: 4,
-      project_offset: 0
+      projectOffset: 0
     };
   },
   watch: {
     routerPath: function() {
       if (this.$route.path.match(/^\/projects\/?$/)) {
-        this.project_detail_dialog = false;
+        this.projectDetailDialog = false;
       } else {
-        this.project_detail_dialog = true;
+        this.projectDetailDialog = true;
       }
       return this.$route.path;
     }
@@ -248,22 +258,57 @@ export default {
     },
     userId: function() {
       return store.state.user_id;
+    },
+    dialogProjectLeaderName: function() {
+      return (
+        (this.dialogProject &&
+          this.dialogProject.leader_detail &&
+          this.dialogProject.leader_detail.display_name) ||
+        "リーダーはまだいません。"
+      );
+    },
+    openApprovalSummary: function() {
+      const defaultApprovalSummary = {
+        soft: {
+          count: 0,
+          budget: 0
+        },
+        hard: {
+          count: 0,
+          budget: 0
+        }
+      };
+      if (!this.openApprovals) {
+        return defaultApprovalSummary;
+      }
+      return this.openApprovals.reduce((prev, item) => {
+        if (item.project.accounting_type === "soft") {
+          prev.soft.count += 1;
+          prev.soft.budget += item.budget_amount;
+        } else {
+          prev.hard.count += 1;
+          prev.hard.budget += item.budget_amount;
+        }
+        return prev;
+      }, defaultApprovalSummary);
     }
   },
   created() {
     (async () => {
       try {
-        let response = await api.get("/v1/api/approvals/", {
-          params: { is_open: true }
-        });
-        this.open_approvals = Array.from(response.data);
-
-        this.load_projects();
-
+        this.openApprovals = Array.from(
+          (
+            await api.get("/v1/api/approvals/", {
+              params: { is_open: true }
+            })
+          ).data
+        );
+        this.loadProjects();
         let dialog_projct_id = this.$route.params.id;
         if (dialog_projct_id) {
-          response = await api.get(`/v1/api/projects/${dialog_projct_id}/`);
-          this.open_dialog(response.data);
+          this.openDialog(
+            (await api.get(`/v1/api/projects/${dialog_projct_id}/`)).data
+          );
         }
       } catch (error) {
         console.log(error);
@@ -271,37 +316,33 @@ export default {
     })();
   },
   methods: {
-    show: function(index) {
-      this.$set(this.isShow, index, !this.isShow[index]);
-    },
-    open_dialog: function(project) {
-      this.dialog_project = project;
-      this.project_detail_dialog = true;
+    openDialog: function(project) {
+      this.dialogProject = project;
+      this.projectDetailDialog = true;
       let project_path = `/projects/${project.id}`;
       if (this.$route.path != project_path) router.push(project_path);
 
       (async () => {
         try {
-          let dialog_project = this.dialog_project;
-          let response = await api.get(`/v1/api/projects/${project.id}/`);
-          dialog_project.detail = response.data;
+          let dialog_project = this.dialogProject;
+
+          dialog_project.detail = (
+            await api.get(`/v1/api/projects/${project.id}/`)
+          ).data;
 
           if (project.leader) {
-            response = await api.get(`/v1/api/users/${project.leader}/`);
-            dialog_project.leader_detail = response.data;
-          } else {
-            dialog_project.leader_detail = {
-              display_name: "リーダーはまだいません。"
-            };
+            dialog_project.leader_detail = (
+              await api.get(`/v1/api/users/${project.leader}/`)
+            ).data;
           }
 
-          this.$set(this.dialog_project, dialog_project);
+          this.$set(this.dialogProject, dialog_project);
         } catch (error) {
           console.log(error);
         }
       })();
     },
-    close_dialog: function() {
+    closeDialog: function() {
       router.push("/projects");
     },
     summarize: function(text) {
@@ -321,45 +362,38 @@ export default {
     convertToSafeHTML: function(raw_text) {
       return marked(sanitizeHTML(raw_text), { renderer });
     },
-    load_projects: function() {
+    loadProjects: function() {
       (async () => {
         try {
-          let response = await api.get("/v1/api/projects/", {
-            params: { limit: 10, offset: this.project_offset }
-          });
-          let projects = Array.from(response.data.results);
-          projects.forEach(project => {
+          let projects = Array.from(
+            (
+              await api.get("/v1/api/projects/", {
+                params: { limit: 10, offset: this.projectOffset }
+              })
+            ).data.results
+          );
+          projects.forEach(() => {
             this.isShow.push(false);
-
-            if (project.accounting_type === "soft") {
-              this.soft_fee += project.sum_purchase_price;
-              this.num_soft += 1;
-            } else {
-              this.hard_fee += project.sum_purchase_price;
-              this.num_hard += 1;
-            }
           });
           Array.prototype.push.apply(this.projects, projects);
-
           let approvalable_project_ids = new Set(
-            this.open_approvals.map(approval => approval.project.id)
+            this.openApprovals.map(approval => approval.project.id)
           );
-
           this.projects = this.projects.filter(
             project => !approvalable_project_ids.has(project.id)
           );
-          this.project_offset += projects.length;
+          this.projectOffset += projects.length;
         } catch (error) {
           console.log(error);
         }
       })();
     },
-    on_scroll: function() {
+    onScroll: function() {
       let bottomOfWindow =
         document.documentElement.scrollTop + window.innerHeight ==
         document.documentElement.offsetHeight;
       if (bottomOfWindow) {
-        this.load_projects();
+        this.loadProjects();
       }
     }
   },
@@ -457,5 +491,26 @@ export default {
   float: left;
   font-size: 20px;
   font-weight: 700;
+}
+
+.approval_summary_wrapper {
+  height: 120px;
+  max-width: 380px;
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.approval_summary {
+  width: 50%;
+  max-width: 320px;
+}
+
+.top_chips {
+  width: 100%;
+  max-width: 160px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
 }
 </style>
