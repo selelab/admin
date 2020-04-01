@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Index from "./components/Index"
-import Projects from "./components/Projects"
-import CreateProject from "./components/CreateProject"
-import Users from "./components/Users"
-import Login from "./components/Login"
-import NotFound from "./components/NotFound"
+import Index from "./views/Index"
+import Projects from "./views/Projects"
+import CreateProject from "./views/CreateProject"
+import Users from "./views/Users"
+import Login from "./views/Login"
+import NotFound from "./views/NotFound"
 import { store } from "./store";
 
 Vue.use(Router);
