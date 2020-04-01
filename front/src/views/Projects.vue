@@ -78,10 +78,10 @@
 
             <br />
 
-            <div
+            <Markdown
               style="height: 80px; overflow: hidden"
-              v-html="convertToSafeHTML(summarize(approval.project.description))"
-            ></div>
+              :src="summarize(approval.project.description)"
+            ></Markdown>
           </v-card-text>
         </v-card>
       </v-col>
@@ -139,11 +139,10 @@
               </div>
 
               <br />
-
-              <div
+              <Markdown
                 style="height: 80px; overflow: hidden"
-                v-html="convertToSafeHTML(summarize(project.description))"
-              ></div>
+                :src="summarize(project.description)"
+              ></Markdown>
             </v-card-text>
           </v-card>
         </v-col>
@@ -186,7 +185,7 @@
             </div>
             <br />
             <br />
-            <div v-html="convertToSafeHTML(dialogProject.description)"></div>
+            <Markdown :src="dialogProject.description"></Markdown>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -207,33 +206,10 @@
 
 <script>
 import api from "../api";
-import marked from "marked";
-import sanitizeHTML from "sanitize-html";
-const renderer = new marked.Renderer();
-const linkRenderer = renderer.link;
-renderer.link = (href, title, text) => {
-  const html = linkRenderer.call(renderer, href, title, text);
-  return html.replace(/^<a/, '<a target="_blank" rel="nofollow" ');
-};
-
-renderer.image = function(href, title, text) {
-  if (title) {
-    var size = title.split("x");
-    if (size[1]) {
-      size = "width=" + size[0] + " height=" + size[1];
-    } else {
-      size = "width=" + size[0];
-    }
-  } else {
-    size = "";
-  }
-  return '<img src="' + href + '" alt="' + text + '" style="max-width: 100%; height: auto;"' + size + ">";
-};
-marked.setOptions({
-  sanitize: true
-});
 import router from "../router";
 import { store } from "../store";
+
+import Markdown from "../components/Markdown";
 
 export default {
   data() {
@@ -373,9 +349,6 @@ export default {
         );
       }
     },
-    convertToSafeHTML: function(raw_text) {
-      return marked(sanitizeHTML(raw_text), { renderer });
-    },
     loadProjects: function() {
       (async () => {
         try {
@@ -411,7 +384,10 @@ export default {
       }
     }
   },
-  name: "Projects"
+  name: "Projects",
+  components: {
+    Markdown
+  }
 };
 </script>
 
