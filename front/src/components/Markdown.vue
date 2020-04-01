@@ -34,9 +34,6 @@ renderer.image = function(href, title, text) {
     ">"
   );
 };
-marked.setOptions({
-  sanitize: true
-});
 export default {
   props: {
     src: String,

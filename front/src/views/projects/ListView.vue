@@ -1,16 +1,8 @@
 <template>
   <div v-scroll="onScroll" id="entire_component">
     <h1>プロジェクト</h1>
-    <div class="campaign_box">
-      <br />
-      <p>
-        おめでとうございます！
-        <br />あなたはプロジェクトを申請して最大21億4748万3647円を受け取るチャンスを得ました。
-      </p>
-      <router-link to="/projects/create" class="button">
-        <p>こちらをクリック！</p>
-      </router-link>
-    </div>
+    <br />
+    <CampaignBox text="おめでとうございます！<br>あなたはプロジェクトを申請して最大21億4748万3647円を受け取るチャンスを得ました。"></CampaignBox>
     <br />
     <div class="project_header">
       <div class="list_header_text">承認待ちプロジェクト</div>
@@ -147,59 +139,17 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-dialog v-model="projectDetailDialog" @input="v => v || closeDialog()">
-        <v-card width="100%">
-          <v-card-title>
-            <span class="headline">{{ dialogProject.title }}</span>
-            <v-btn icon absolute right v-if="dialogProject.leader == userId">
-              <v-icon color="grey lighten-1">mdi-pencil</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-list-item>
-            <v-list-item-avatar>
-              <img src="@/assets/shika.jpg" />
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="dialogProjectLeaderName"></v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action></v-list-item-action>
-          </v-list-item>
-
-          <v-card-text>
-            <div class="top_chips">
-              <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-              {{ dialogProject.sum_purchase_price | addComma }}円
-            </div>
-            <div class="top_chips">
-              <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-              {{ dialogProject.sum_budget | addComma }}円
-            </div>
-            <div
-              class="top_chips"
-              v-if="dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget"
-            >
-              <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
-              {{ dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget | addComma }}円
-            </div>
-            <br />
-            <br />
-            <Markdown :src="dialogProject.description"></Markdown>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              small
-              color="red"
-              outlined
-              rounded
-              right
-              v-if="dialogProject.leader == userId"
-            >完了にする</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <Dialog
+        v-bind:isOpen="projectDetailDialog"
+        v-bind:title="dialogProject.title"
+        v-bind:editable="dialogProject.leader == userId"
+        v-bind:leaderName="dialogProjectLeaderName"
+        v-bind:sumPurchasePrice="dialogProject.sum_purchage_price"
+        v-bind:sumBudget="dialogProject.sum_budget"
+        v-bind:sumReqBudget="dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget"
+        v-bind:description="dialogProject.description"
+        originUrl="/projects"
+      ></Dialog>
     </div>
   </div>
 </template>
@@ -209,6 +159,8 @@ import api from "@/api";
 import router from "@/router";
 import { store } from "@/store";
 
+import CampaignBox from "@/components/CampaignBox";
+import Dialog from "@/components/Dialog";
 import Markdown from "@/components/Markdown";
 
 export default {
@@ -332,9 +284,6 @@ export default {
         }
       })();
     },
-    closeDialog: function() {
-      router.push("/projects");
-    },
     summarize: function(text) {
       const newLineCount = (text.match(/\n/g) || []).length;
       if (text.length < this.maxlength && newLineCount < this.maxLines) {
@@ -386,7 +335,9 @@ export default {
   },
   name: "Projects",
   components: {
-    Markdown
+    Markdown,
+    Dialog,
+    CampaignBox
   }
 };
 </script>
@@ -428,45 +379,6 @@ export default {
   font-weight: 900;
 }
 
-.campaign_box {
-  height: 250px;
-  width: 100%;
-  max-width: 380px;
-  background: #808080;
-  color: white;
-  padding: 20px;
-  position: relative;
-  top: 150px;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-}
-
-.campaign_box .button {
-  box-shadow: inset 0px 3px 0px 0px #cf866c;
-  background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
-  background-color: #d0451b;
-  border-radius: 6px;
-  border: 1px solid #942911;
-  display: inline-block;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 17px;
-  padding: 10px 24px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #854629;
-}
-
-.campaign_box .button:hover {
-  background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-  background-color: #bc3315;
-}
-
-.campaign_box .button:active {
-  position: relative;
-  top: 1px;
-}
-
 .project_header {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -494,13 +406,5 @@ export default {
 .approval_summary {
   width: 50%;
   max-width: 320px;
-}
-
-.top_chips {
-  width: 100%;
-  max-width: 160px;
-  padding-left: 10px;
-  padding-right: 10px;
-  display: inline-block;
 }
 </style>
