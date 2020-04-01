@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import api from "../api";
-import router from "../router";
-import { store } from "../store";
+import api from "@/api";
+import router from "@/router";
+import { store } from "@/store";
 
 export default {
   data() {

@@ -44,7 +44,7 @@
         <v-card height="100%" class="approval.project_card" @click="openDialog(approval.project)">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
-              <img class="card_profile_icon" src="../assets/shika.jpg" />
+              <img class="card_profile_icon" src="@/assets/shika.jpg" />
             </v-list-item-avatar>
             <v-list-item-content class="card_header_text">
               <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
@@ -114,7 +114,7 @@
           <v-card height="100%" class="project_card" @click="openDialog(project)">
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" src="../assets/shika.jpg" />
+                <img class="card_profile_icon" src="@/assets/shika.jpg" />
               </v-list-item-avatar>
               <v-list-item-content class="card_header_text">
                 <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
@@ -157,7 +157,7 @@
           </v-card-title>
           <v-list-item>
             <v-list-item-avatar>
-              <img src="../assets/shika.jpg" />
+              <img src="@/assets/shika.jpg" />
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -205,11 +205,11 @@
 </template>
 
 <script>
-import api from "../api";
-import router from "../router";
-import { store } from "../store";
+import api from "@/api";
+import router from "@/router";
+import { store } from "@/store";
 
-import Markdown from "../components/Markdown";
+import Markdown from "@/components/Markdown";
 
 export default {
   data() {
