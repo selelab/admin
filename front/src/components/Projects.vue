@@ -148,7 +148,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-dialog v-model="projectDetailDialog" width="80%" @input="v => v || closeDialog()">
+      <v-dialog v-model="projectDetailDialog" @input="v => v || closeDialog()">
         <v-card width="100%">
           <v-card-title>
             <span class="headline">{{ dialogProject.title }}</span>
@@ -214,6 +214,20 @@ const linkRenderer = renderer.link;
 renderer.link = (href, title, text) => {
   const html = linkRenderer.call(renderer, href, title, text);
   return html.replace(/^<a/, '<a target="_blank" rel="nofollow" ');
+};
+
+renderer.image = function(href, title, text) {
+  if (title) {
+    var size = title.split("x");
+    if (size[1]) {
+      size = "width=" + size[0] + " height=" + size[1];
+    } else {
+      size = "width=" + size[0];
+    }
+  } else {
+    size = "";
+  }
+  return '<img src="' + href + '" alt="' + text + '" style="max-width: 100%; height: auto;"' + size + ">";
 };
 marked.setOptions({
   sanitize: true
