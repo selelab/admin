@@ -2,7 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "./views/Index"
 import Projects from "./views/projects/ListView"
-import CreateProject from "./views/projects/CreateView"
+import ProjectCreator from "./views/projects/CreateView"
+import ProjectEditor from "./views/projects/EditView"
 import Users from "./views/Users"
 import Login from "./views/Login"
 import NotFound from "./views/NotFound"
@@ -28,7 +29,7 @@ const router = new Router({
     },
     {
       path: '/projects/create',
-      component: CreateProject,
+      component: ProjectCreator,
       name: 'create_project',
       meta: { requiresAuth: true },
     },
@@ -36,6 +37,12 @@ const router = new Router({
       path: '/projects/:id',
       component: Projects,
       name: 'project_detail',
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/projects/:id/edit',
+      component: ProjectEditor,
+      name: 'project_editor',
       meta: { requiresAuth: true },
     },
     {
