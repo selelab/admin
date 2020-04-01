@@ -34,7 +34,7 @@ services:
       - REDIS_PASS=$REDIS_PASS
     entrypoint:
       - /bin/sh
-      - prod_entrypoint.sh
+      - entrypoint.sh
     expose:
       - "8001"
     volumes:
