@@ -4,20 +4,9 @@
     <br />
     <CampaignBox text="おめでとうございます！<br>あなたはプロジェクトを申請して最大21億4748万3647円を受け取るチャンスを得ました。"></CampaignBox>
     <br />
-    <div class="project_header">
-      <div class="list_header_text">承認待ちプロジェクト</div>
-      <v-btn
-        to="/projects/create"
-        class="mx-2 list_append_button"
-        fab
-        dark
-        x-small
-        depressed
-        color="primary"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div>
+
+    <ListHeading text="承認待ちプロジェクト" append="/projects/create"></ListHeading>
+
     <div class="approval_summary_wrapper">
       <div class="approval_summary" style="float: left">
         <v-chip x-small chip color="cyan lighten-4">ソフト会計</v-chip>
@@ -79,12 +68,7 @@
       </v-col>
     </v-row>
 
-    <div class="project_header">
-      <div class="list_header_text">その他のプロジェクト</div>
-      <v-btn to="/projects/create" class="mx-2" fab dark x-small depressed color="primary">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div>
+    <ListHeading text="その他のプロジェクト" append="/projects/create"></ListHeading>
     <br />
     <input type="checkbox" id="hard" value="hard" v-model="shCheck.hard" />
     <label for="hard">HARD</label>
@@ -149,6 +133,7 @@
         v-bind:sumReqBudget="dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget"
         v-bind:description="dialogProject.description"
         originUrl="/projects"
+        :editPath="'/projects/' + dialogProjectId + '/edit'"
       ></Dialog>
     </div>
   </div>
@@ -161,6 +146,7 @@ import { store } from "@/store";
 
 import CampaignBox from "@/components/CampaignBox";
 import Dialog from "@/components/Dialog";
+import ListHeading from "@/components/ListHeading";
 import Markdown from "@/components/Markdown";
 
 export default {
@@ -209,6 +195,9 @@ export default {
         "リーダーはまだいません。"
       );
     },
+    dialogProjectId: function() {
+      return this.$route.params.id;
+    },
     openApprovalSummary: function() {
       const defaultApprovalSummary = {
         soft: {
@@ -246,10 +235,9 @@ export default {
           ).data
         );
         this.loadProjects();
-        let dialog_projct_id = this.$route.params.id;
-        if (dialog_projct_id) {
+        if (this.dialogProjectId) {
           this.openDialog(
-            (await api.get(`/v1/api/projects/${dialog_projct_id}/`)).data
+            (await api.get(`/v1/api/projects/${this.dialogProjectId}/`)).data
           );
         }
       } catch (error) {
@@ -337,7 +325,8 @@ export default {
   components: {
     Markdown,
     Dialog,
-    CampaignBox
+    CampaignBox,
+    ListHeading
   }
 };
 </script>
@@ -377,22 +366,6 @@ export default {
 
 .important_text {
   font-weight: 900;
-}
-
-.project_header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  height: 10px;
-}
-
-.list_header_text {
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 80%;
-  max-width: 200px;
-  float: left;
-  font-size: 20px;
-  font-weight: 700;
 }
 
 .approval_summary_wrapper {

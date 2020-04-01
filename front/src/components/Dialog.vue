@@ -3,7 +3,7 @@
     <v-card width="100%">
       <v-card-title>
         <span class="headline">{{ title }}</span>
-        <v-btn icon absolute right v-if="editable">
+        <v-btn icon absolute right :to="editPath" v-if="editable">
           <v-icon color="grey lighten-1">mdi-pencil</v-icon>
         </v-btn>
       </v-card-title>
@@ -59,7 +59,8 @@ export default {
     sumBudget: Number,
     sumReqBudget: Number,
     description: String,
-    originUrl: String
+    originUrl: String,
+    editPath: String,
   },
   methods: {
     closeDialog: function() {
