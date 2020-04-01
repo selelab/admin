@@ -9,7 +9,7 @@
     ```bash
     mysql --host=127.0.0.1 -u root -p
     Enter password: (パスワードを入力:初期設定は"mysql")
-    mysql> create database `selelab-admin-api`
+    mysql> create database `selelab-admin-api`;
     mysql> grant all privileges on `selelab-admin-api`.* to `user`@`%`;
     ```
 
