@@ -12,7 +12,7 @@
 
             <v-list-item v-else :key="user.email" style="padding: 4px" @click="open_dialog(user)">
               <v-list-item-avatar class="user_list_avatar">
-                <img src="../assets/shika.jpg" />
+                <img src="@/assets/shika.jpg" />
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -29,7 +29,7 @@
             </v-card-title>
             <v-list-item>
               <v-list-item-avatar>
-                <img src="../assets/shika.jpg" />
+                <img src="@/assets/shika.jpg" />
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import api from "../api";
+import api from "@/api";
 
 export default {
   data() {

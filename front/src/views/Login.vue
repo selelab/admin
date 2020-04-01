@@ -61,8 +61,8 @@ import {
   setInteractionMode
 } from "vee-validate";
 
-import router from "../router";
-import api from "../api";
+import router from "@/router";
+import api from "@/api";
 
 setInteractionMode("eager");
 
