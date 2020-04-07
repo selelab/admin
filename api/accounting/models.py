@@ -24,9 +24,10 @@ class Project(models.Model):
                                blank=True)
     closed = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
+    date_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['-date_updated', '-date_created', 'id']
 
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -34,15 +35,19 @@ class ProjectApproval(models.Model):
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
     approved = models.BooleanField(null=False, default=False)
+    date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
+    class Meta:
+        ordering = ['-date_created', 'id']
 
 class Purchase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    evidence_media_key = models.UUIDField()
     price = models.IntegerField(default=0)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
-    returned = models.BooleanField(default=False)
     approved = models.BooleanField(null=True, default=False)
+    date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
+
+    class Meta:
+        ordering = ['-date_created', 'id']

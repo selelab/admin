@@ -15,7 +15,7 @@
       >{{ hasValidJwtToken ? "ログアウト" : "ログイン" }}</v-btn>
 
       <v-list-item-avatar color="grey darken-3" v-if="hasValidJwtToken">
-        <img class="card_profile_icon" src="../assets/shika.jpg" />
+        <img class="card_profile_icon" src="@/assets/shika.jpg" />
       </v-list-item-avatar>
     </v-app-bar>
 
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import router from "../router";
+import router from "@/router";
 
 export default {
   data: () => ({

@@ -14,7 +14,7 @@ import { store } from './store';
 import { setTokenToHeader } from './api';
 
 Vue.filter('addComma', function (val) {
-  return val.toLocaleString();
+  return (val || 0).toLocaleString();
 });
 
 Vue.filter('yymmdd', function (val) {

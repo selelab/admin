@@ -19,13 +19,27 @@
         <v-btn color="primary" @click="create_project">申請</v-btn>
       </v-col>
     </v-form>
+    <v-dialog v-model="confirm_dialog" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Use Google's location service?</v-card-title>
+
+        <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
+
+          <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import api from "../api";
-import router from "../router";
-import { store } from "../store";
+import api from "@/api";
+import router from "@/router";
 
 export default {
   data() {
@@ -37,9 +51,10 @@ export default {
         { text: "ソフトウェア会計", value: "soft" },
         { text: "ハードウェア会計", value: "hard" }
       ],
-      description: "## 概要\n## 予算内訳\n",
+      description: "### 概要\n### 予算内訳\n",
       error_message: "",
-      alert: false
+      alert: false,
+      confirm_dialog: false,
     };
   },
   methods: {
@@ -50,16 +65,18 @@ export default {
             title: this.title,
             description: this.description,
             accounting_type: this.accounting_type,
-            leader: store.state.user_id
+            leader: this.$store.getters.getUserId
           });
 
-          let project_id = create_project_result.data.id;
+          if (this.budget && this.budget > 0) {
+            let project_id = create_project_result.data.id;
 
-          await api.post("/v1/api/approvals/", {
-            approver: null,
-            project_id,
-            budget_amount: this.budget,
-          });
+            await api.post("/v1/api/approvals/", {
+              approver: null,
+              project_id,
+              budget_amount: this.budget
+            });
+          }
 
           router.push("/projects");
         } catch (error) {

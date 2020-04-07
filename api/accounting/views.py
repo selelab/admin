@@ -39,12 +39,12 @@ class ProjectOwnerPermission(permissions.BasePermission):
         return True
 
 
-class ProjectCreatePermission(permissions.BasePermission):
+class UserProjectPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        if not request.user:
+        if not request.user or not request.user.is_authenticated:
             return False
 
-        if request.method not in {'POST'}:
+        if request.method not in {'POST', 'PATCH', 'GET'}:
             return False
 
         return True
@@ -54,29 +54,58 @@ class ProjectApprovalRequestPermission(permissions.BasePermission):
         if not request.user:
             return False
 
-        if request.method not in {'POST'}:
+        if request.method not in {'POST', 'PATCH'}:
             return False
-
-        # project = Project.objects.get(pk=request.data['project_id_id'])
-        # if request.user != project.leader:
-        #     return False
 
         return True
 
 class PurchaseOwnerPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        if 'pk' not in view.kwargs:
-            return False
-
         if not request.user:
             return False
 
         if request.method in {'DELETE'}:
             return False
 
-        # データベース参照は最後の手段
-        purchase = Purchase.objects.get(pk=view.kwargs['pk'])
+        return True
 
+
+class ProjectPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        allowed_perm_classes = [
+            AdminPermission, ReadOnlyPermission, UserProjectPermission
+        ]
+        return any(perm_class().has_permission(request, view)
+                   for perm_class in allowed_perm_classes)
+
+    def has_object_permission(self, request, view, obj):
+        if not request.user:
+            return False
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        if request.method not in {'PATCH'}:
+            return False
+
+        if request.user != obj.leader:
+            return False
+
+        if obj.closed:
+            return False
+
+        return True
+
+
+class PurchasePermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        allowed_perm_classes = [
+            AdminPermission, ReadOnlyPermission, PurchaseOwnerPermission
+        ]
+        return any(perm_class().has_permission(request, view)
+                   for perm_class in allowed_perm_classes)
+
+    def has_object_permission(self, request, view, obj):
         if request.method == 'PATCH':
             forbidden_queries = {
                 'returned':
@@ -95,28 +124,11 @@ class PurchaseOwnerPermission(permissions.BasePermission):
                     purchase, forbidden_queries, request.data):
                 return False
 
-        if request.user.id != purchase.project_id.leader.id:
+            return request.user.id == obj.project_id.leader.id
+        elif request.method == 'POST':
+            return True
+        else:
             return False
-
-        return True
-
-
-class ProjectPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        allowed_perm_classes = [
-            AdminPermission, ReadOnlyPermission, ProjectOwnerPermission, ProjectCreatePermission
-        ]
-        return any(perm_class().has_permission(request, view)
-                   for perm_class in allowed_perm_classes)
-
-
-class PurchasePermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        allowed_perm_classes = [
-            AdminPermission, ReadOnlyPermission, PurchaseOwnerPermission
-        ]
-        return any(perm_class().has_permission(request, view)
-                   for perm_class in allowed_perm_classes)
 
 
 class ProjectApprovalPermission(permissions.BasePermission):
