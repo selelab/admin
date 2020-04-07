@@ -1,8 +1,20 @@
 <template>
-  <v-dialog v-model="isOpen" @input="v => v || closeDialog()">
-    <v-card width="100%">
+  <v-dialog v-model="isOpen" @input="v => v || close()" width="640px">
+    <v-card class="main">
       <v-card-title>
-        <span class="headline">{{ title }}</span>
+        <span class="headline">{{ project.title }}</span>
+        <v-list-item-subtitle>
+          <div>
+            <v-chip
+              x-small
+              chip
+              :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+              text-color="grey darken-3"
+              class="chip_wrapper"
+            >{{ project.accounting_type }}</v-chip>
+            <v-chip x-small chip class="chip_wrapper">{{ project.closed ? "完了" : "進行中" }}</v-chip>
+          </div>
+        </v-list-item-subtitle>
         <v-btn icon absolute right :to="editPath" v-if="editable">
           <v-icon color="grey lighten-1">mdi-pencil</v-icon>
         </v-btn>
@@ -13,7 +25,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title v-text="leaderName"></v-list-item-title>
+          <v-list-item-title v-text="projectLeaderName"></v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-action></v-list-item-action>
@@ -22,19 +34,19 @@
       <v-card-text>
         <div class="top_chips">
           <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-          {{ sumPurchasePrice | addComma }}円
+          {{ project.sum_purchase_price | addComma }}円
         </div>
         <div class="top_chips">
           <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-          {{ sumBudget | addComma }}円
+          {{ project.sum_budget | addComma }}円
         </div>
-        <div class="top_chips" v-if="sumReqBudget">
+        <div class="top_chips" v-if="project.detail && project.detail.sum_req_budget">
           <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
-          {{ sumReqBudget | addComma }}円
+          {{ project.detail.sum_req_budget | addComma }}円
         </div>
         <br />
         <br />
-        <Markdown :src="description"></Markdown>
+        <Markdown :src="project.description"></Markdown>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -51,7 +63,7 @@ import Markdown from "@/components/Markdown";
 
 export default {
   props: {
-    isOpen: Boolean,
+    project: Object,
     title: String,
     editable: Boolean,
     leaderName: String,
@@ -60,11 +72,30 @@ export default {
     sumReqBudget: Number,
     description: String,
     originUrl: String,
-    editPath: String,
+    editPath: String
+  },
+  data() {
+    return {
+      isOpen: false
+    };
+  },
+  computed: {
+    projectLeaderName: function() {
+      return (
+        (this.project &&
+          this.project.leader_detail &&
+          this.project.leader_detail.display_name) ||
+        "リーダーはまだいません。"
+      );
+    }
   },
   methods: {
-    closeDialog: function() {
-      router.push(this.originUrl);
+    open: function() {
+      this.isOpen = true;
+    },
+    close: function() {
+      this.isOpen = false;
+      if (this.$route.path != this.originUrl) router.push(this.originUrl);
     }
   },
   components: {
@@ -73,7 +104,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .top_chips {
   width: 100%;
   max-width: 160px;

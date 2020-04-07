@@ -6,15 +6,12 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./static:/var/static
+      - ./static:/var/static/kusatsu/
+      - ../contests/static:/var/static/contests/
       - ../web/build:/var/react
       - "./front/dist:/var/admin-front"
     depends_on:
       - api
-  redis:
-    image: redis
-    volumes:
-      - "./data/redis:/data"
   api:
     build:
       context: api
@@ -41,7 +38,9 @@ services:
       - ./api/:/var/app/
       - ./static/:/var/static
       - ./log/django/:/var/log/django/
+    networks:
+      - default
+      - db_sharing
 networks:
-  default:
-    external:
-      name: db_sharing
+  db_sharing:
+    external: true

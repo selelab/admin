@@ -4,7 +4,7 @@
     <v-btn
       v-if="append"
       :to="append"
-      class="mx-2 list_append_button"
+      class="mx-2"
       fab
       dark
       x-small

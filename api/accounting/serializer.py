@@ -10,7 +10,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ('id', 'title', 'description', 'accounting_type', 'leader', 'closed', 'sum_budget', 'date_created', 'sum_purchase_price')
+        fields = ('id', 'title', 'description', 'accounting_type', 'leader', 'closed', 'sum_budget', 'date_created', 'date_updated', 'sum_purchase_price')
 
     def get_sum_budget(self, obj):
         query_result = ProjectApproval.objects.filter(
@@ -34,7 +34,7 @@ class ProjectDetailSerializer(ProjectSerializer):
         model = Project
         fields = ('id', 'title', 'accounting_type', 'leader', 'closed',
                   'sum_budget', 'sum_req_budget', 'sum_purchase_price',
-                  'approvals', 'purchases', 'description', 'date_created')
+                  'approvals', 'purchases', 'description', 'date_created', 'date_updated')
 
     def get_purchases(self, obj):
         try:
@@ -60,6 +60,7 @@ class ProjectDetailSerializer(ProjectSerializer):
 
 class ProjectApprovalSerializer(serializers.ModelSerializer):
     project = serializers.SerializerMethodField()
+
     class Meta:
         model = ProjectApproval
         fields = ('id', 'project', 'approver', 'budget_amount', 'approved', 'date_created')
@@ -77,6 +78,4 @@ class CreateProjectApprovalSerializer(serializers.ModelSerializer):
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
-        fields = ('id', 'title', 'description', 'project_id',
-                  'evidence_media_key', 'price', 'approver', 'returned',
-                  'approved', 'date_created')
+        fields = ('id', 'title', 'project_id', 'price', 'approver', 'approved', 'date_created')

@@ -40,7 +40,6 @@
 <script>
 import api from "@/api";
 import router from "@/router";
-import { store } from "@/store";
 
 export default {
   data() {
@@ -66,7 +65,7 @@ export default {
             title: this.title,
             description: this.description,
             accounting_type: this.accounting_type,
-            leader: store.state.user_id
+            leader: this.$store.getters.getUserId
           });
 
           if (this.budget && this.budget > 0) {

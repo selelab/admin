@@ -11,12 +11,12 @@
       <div class="approval_summary" style="float: left">
         <v-chip x-small chip color="cyan lighten-4">ソフト会計</v-chip>
         <div>{{ openApprovalSummary.soft.count }} プロジェクト</div>
-        <div>{{ openApprovalSummary.soft.budget | addComma }}円</div>
+        <div>{{ openApprovalSummary.soft.budget | addComma }} 円</div>
       </div>
       <div class="approval_summary" style="float: right">
         <v-chip x-small chip color="orange lighten-4">ハード会計</v-chip>
         <div>{{ openApprovalSummary.hard.count }} プロジェクト</div>
-        <div>{{ openApprovalSummary.hard.budget | addComma }}円</div>
+        <div>{{ openApprovalSummary.hard.budget | addComma }} 円</div>
       </div>
     </div>
     <div v-if="!openApprovals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
@@ -123,26 +123,20 @@
           </v-card>
         </v-col>
       </v-row>
-      <Dialog
-        v-bind:isOpen="projectDetailDialog"
-        v-bind:title="dialogProject.title"
-        v-bind:editable="dialogProject.leader == userId"
-        v-bind:leaderName="dialogProjectLeaderName"
-        v-bind:sumPurchasePrice="dialogProject.sum_purchage_price"
-        v-bind:sumBudget="dialogProject.sum_budget"
-        v-bind:sumReqBudget="dialogProject && dialogProject.detail && dialogProject.detail.sum_req_budget"
-        v-bind:description="dialogProject.description"
-        originUrl="/projects"
-        :editPath="'/projects/' + dialogProjectId + '/edit'"
-      ></Dialog>
     </div>
+    <Dialog
+      v-bind:project="dialogProject"
+      v-bind:editable="dialogProject.leader == userId && !dialogProject.closed"
+      ref="detailDialog"
+      originUrl="/projects"
+      :editPath="'/projects/' + dialogProjectId + '/edit'"
+    ></Dialog>
   </div>
 </template>
 
 <script>
 import api from "@/api";
 import router from "@/router";
-import { store } from "@/store";
 
 import CampaignBox from "@/components/CampaignBox";
 import Dialog from "@/components/Dialog";
@@ -163,7 +157,6 @@ export default {
         closed: true,
         in_progress: true
       },
-      projectDetailDialog: false,
       dialogProject: {},
       maxlength: 60,
       maxLines: 4,
@@ -173,9 +166,9 @@ export default {
   watch: {
     routerPath: function() {
       if (this.$route.path.match(/^\/projects\/?$/)) {
-        this.projectDetailDialog = false;
+        this.$refs.detailDialog.close();
       } else {
-        this.projectDetailDialog = true;
+        this.$refs.detailDialog.open();
       }
       return this.$route.path;
     }
@@ -185,15 +178,7 @@ export default {
       return this.$route.path;
     },
     userId: function() {
-      return store.state.user_id;
-    },
-    dialogProjectLeaderName: function() {
-      return (
-        (this.dialogProject &&
-          this.dialogProject.leader_detail &&
-          this.dialogProject.leader_detail.display_name) ||
-        "リーダーはまだいません。"
-      );
+      return this.$store.getters.getUserId;
     },
     dialogProjectId: function() {
       return this.$route.params.id;
@@ -248,7 +233,7 @@ export default {
   methods: {
     openDialog: function(project) {
       this.dialogProject = project;
-      this.projectDetailDialog = true;
+      this.$refs.detailDialog.open();
       let project_path = `/projects/${project.id}`;
       if (this.$route.path != project_path) router.push(project_path);
 
@@ -314,9 +299,10 @@ export default {
     },
     onScroll: function() {
       let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ==
-        document.documentElement.offsetHeight;
+        document.documentElement.offsetHeight -
+          (document.documentElement.scrollTop + window.innerHeight) < 10;
       if (bottomOfWindow) {
+        console.log("bottom");
         this.loadProjects();
       }
     }
