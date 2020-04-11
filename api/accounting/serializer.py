@@ -44,7 +44,7 @@ class ProjectDetailSerializer(ProjectSerializer):
     def get_purchases(self, obj):
         try:
             return PurchaseSerializer(
-                Purchase.objects.filter(Q(approver__isnull=True) | Q(approved=True), project_id=obj.id), many=True).data
+                Purchase.objects.filter(project_id=obj.id), many=True).data
         except:
             return []
 
@@ -64,14 +64,11 @@ class ProjectDetailSerializer(ProjectSerializer):
 
 
 class ProjectApprovalSerializer(serializers.ModelSerializer):
-    project = serializers.SerializerMethodField()
+    project = ProjectSerializer()
 
     class Meta:
         model = ProjectApproval
         fields = ('id', 'project', 'comment', 'approver', 'budget_amount', 'approved', 'date_created')
-
-    def get_project(self, obj):
-        return ProjectSerializer(obj.project_id).data
 
 
 class CreateProjectApprovalSerializer(serializers.ModelSerializer):
@@ -81,11 +78,15 @@ class CreateProjectApprovalSerializer(serializers.ModelSerializer):
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
-    project = serializers.SerializerMethodField()
+    project = ProjectSerializer()
 
     class Meta:
         model = Purchase
         fields = ('id', 'title', 'project', 'comment', 'price', 'approver', 'approved', 'date_created')
 
-    def get_project(self, obj):
-        return ProjectSerializer(obj.project_id).data
+
+class CreatePurchaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Purchase
+        fields = ('id', 'title', 'project', 'price')
+

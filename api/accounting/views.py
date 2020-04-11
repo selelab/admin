@@ -7,7 +7,7 @@ from web import settings
 
 from .models import Project, ProjectApproval, Purchase
 from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer,
-                         ProjectSerializer, PurchaseSerializer, CreateProjectApprovalSerializer)
+                         ProjectSerializer, PurchaseSerializer, CreateProjectApprovalSerializer, CreatePurchaseSerializer)
 
 
 class AdminPermission(permissions.BasePermission):
@@ -127,7 +127,7 @@ class PurchasePermission(permissions.BasePermission):
                     obj, forbidden_queries, request.data):
                 return False
 
-            return request.user.id == obj.project_id.leader.id
+            return request.user.id == obj.project.leader.id
         elif request.method == 'POST':
             return True
         else:
@@ -166,6 +166,11 @@ class PurchaseViewSet(viewsets.ModelViewSet):
             return Purchase.objects.filter(approver__isnull=True)
         else:
             return Purchase.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CreatePurchaseSerializer
+        return self.serializer_class
 
 
 class ProjectApprovalViewSet(viewsets.ModelViewSet):

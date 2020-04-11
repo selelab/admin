@@ -231,7 +231,7 @@ export default {
               item.project.title.endsWith("プロジェクト")
                 ? item.project.title
                 : item.project.title + " プロジェクト",
-              `品目 ${item.title} を承認し、返却済みとしますか？<br>この操作を行うにはプロジェクトリーダーに返金済みである必要があります。`,
+              `品目 ${item.title} を承認し、返却済みとしますか？<br>この操作を行うにはプロジェクトリーダーに<b>返金済みである必要</b>があります。`,
               {
                 color: "orange"
               }

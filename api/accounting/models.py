@@ -31,7 +31,7 @@ class Project(models.Model):
 
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
     comment = models.CharField(max_length=1024, null=True)
@@ -44,7 +44,7 @@ class ProjectApproval(models.Model):
 class Purchase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
     comment = models.CharField(max_length=1024, null=True)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)

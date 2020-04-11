@@ -248,74 +248,99 @@ export default {
         }
       })();
     },
+    requestErrorHandler(error) {
+      let error_messages = {
+        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
+        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
+      };
+      if (error.response) {
+        this.error_message =
+          error_messages[error.response.status] ||
+          "正しく処理することができませんでした。管理者へお問い合わせください。";
+        this.alert = true;
+      } else {
+        this.error_message =
+          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+        this.alert = true;
+      }
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    },
     updateProject: function() {
       (async () => {
         try {
+          if (this.isPurchaseChanged) {
+            let sumNewPurchasePrice = this.budgetInfo.purchases.reduce(
+              (acc, item) => acc + parseInt(item.price),
+              0
+            );
+            console.log(
+              sumNewPurchasePrice,
+              this.formerProjectInfo.sum_purchase_price,
+              this.formerProjectInfo.sum_req_budget
+            );
+            if (
+              sumNewPurchasePrice + this.formerProjectInfo.sum_purchase_price >
+              this.formerProjectInfo.sum_budget
+            ) {
+              this.error_message =
+                "予算上限値を超えて購入を報告することはできません。";
+              this.alert = true;
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+              return;
+            }
+          }
+
           if (this.isBudgetChanged) {
-            await (async () => {
-              if (this.openApprovalId) {
-                await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
-                  budget_amount: this.budgetInfo.additionalBudgetAmount
-                });
-              } else if (
-                await this.$refs.confirm.open(
-                  "確認",
-                  "予算超過申請は幹部の承認を伴います。<br>予算超過申請を行いますか？",
-                  {
-                    color: "orange"
-                  }
-                )
-              ) {
-                await api.post("/v1/api/approvals/", {
-                  approver: null,
-                  project_id: this.projectId,
-                  budget_amount: this.budgetInfo.additionalBudgetAmount
-                });
-              }
-            })();
+            if (this.openApprovalId) {
+              await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
+                budget_amount: this.budgetInfo.additionalBudgetAmount
+              });
+            } else if (
+              await this.$refs.confirm.open(
+                "確認",
+                "予算超過申請は幹部の承認を伴います。<br>予算超過申請を行いますか？",
+                {
+                  color: "orange"
+                }
+              )
+            ) {
+              await api.post("/v1/api/approvals/", {
+                approver: null,
+                project_id: this.projectId,
+                budget_amount: this.budgetInfo.additionalBudgetAmount
+              });
+            } else {
+              return;
+            }
           }
 
           if (this.isProjectChanged) {
-            await (async () => {
-              await api.patch(`/v1/api/projects/${this.projectId}/`, {
-                title: this.title,
-                description: this.description
-              });
-            })();
+            await api.patch(`/v1/api/projects/${this.projectId}/`, {
+              title: this.title,
+              description: this.description
+            });
           }
 
           if (this.isPurchaseChanged) {
-            await (async () => {
-              this.budgetInfo.purchases.forEach(async ({ title, price }) => {
-                await api.post("/v1/api/purchases/", {
-                  project_id: this.projectId,
-                  title,
-                  price
-                });
+            for (let i = 0; i < this.budgetInfo.purchases.length; i++) {
+              const { title, price } = this.budgetInfo.purchases[i];
+              await api.post("/v1/api/purchases/", {
+                project: this.projectId,
+                title,
+                price
               });
-            })();
+            }
           }
 
           this.backToDetailPage();
         } catch (error) {
-          let error_messages = {
-            403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-          };
-          if (error.response) {
-            this.error_message =
-              error_messages[error.response.status] ||
-              "正しく処理することができませんでした。管理者へお問い合わせください。";
-            this.alert = true;
-          } else {
-            this.error_message =
-              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-            this.alert = true;
-          }
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
+          this.requestErrorHandler(error);
         }
       })();
     }

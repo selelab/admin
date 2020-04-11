@@ -37,6 +37,10 @@
           {{ project.sum_purchase_price | addComma }}円
         </div>
         <div class="top_chips">
+          <v-chip x-small chip color="orange lighten-3">返金済</v-chip>
+          {{ sumReturned | addComma }}円
+        </div>
+        <div class="top_chips">
           <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
           {{ project.sum_budget | addComma }}円
         </div>
@@ -52,12 +56,34 @@
         <v-spacer />
         <v-btn small color="red" outlined rounded right v-if="editable">完了にする</v-btn>
       </v-card-actions>
+      <v-divider style="margin: 20px"></v-divider>
+      <v-card-text>
+        <div v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0">
+          <h3>購入一覧</h3>
+          <div width="100%" max-width="400">
+            <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
+              <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+              <template v-slot:item.status="{ item }">
+                <v-icon
+                  small
+                  class="mr-2"
+                  color="green"
+                  v-if="getStatus(item)=='approved'"
+                >mdi-check</v-icon>
+                <v-icon small color="red" v-else-if="getStatus(item)=='rejected'">mdi-cancel</v-icon>
+                <div v-else></div>
+              </template>
+            </v-data-table>
+          </div>
+        </div>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
 import router from "@/router";
+import moment from "moment";
 
 import Markdown from "@/components/Markdown";
 
@@ -76,7 +102,29 @@ export default {
   },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      purchaseHeaders: [
+        {
+          text: "品目",
+          align: "center",
+          value: "title"
+        },
+        {
+          text: "金額",
+          align: "right",
+          value: "price"
+        },
+        {
+          text: "申請日",
+          align: "center",
+          value: "date_created"
+        },
+        {
+          text: "状態",
+          align: "center",
+          value: "status"
+        }
+      ]
     };
   },
   computed: {
@@ -87,7 +135,19 @@ export default {
           this.project.leader_detail.display_name) ||
         "リーダーはまだいません。"
       );
-    }
+    },
+    sumReturned: function() {
+      return (
+        this.project.detail &&
+        this.project.detail.purchases
+          .filter(item => {
+            return item.approved;
+          })
+          .reduce((val, item) => {
+            return val + item.price;
+          }, 0)
+      );
+    },
   },
   methods: {
     open: function() {
@@ -96,6 +156,19 @@ export default {
     close: function() {
       this.isOpen = false;
       if (this.$route.path != this.originUrl) router.push(this.originUrl);
+    },
+    getDateText(datetime) {
+      return (
+        datetime &&
+        moment(datetime)
+          .format("YYYY年MM月DD日")
+          .replace(`${new Date().getFullYear()}年`, "")
+      );
+    },
+    getStatus(item) {
+      if (item.approved) return "approved";
+      if (!item.approver) return "pending";
+      return "rejected";
     }
   },
   components: {
@@ -107,7 +180,7 @@ export default {
 <style scoped>
 .top_chips {
   width: 100%;
-  max-width: 160px;
+  max-width: 25%;
   padding-left: 10px;
   padding-right: 10px;
   display: inline-block;
