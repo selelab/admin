@@ -287,33 +287,11 @@ export default {
           if (this.isPurchaseChanged) {
             await (async () => {
               this.budgetInfo.purchases.forEach(async ({ title, price }) => {
-                try {
-                  await api.post("/v1/api/purchases/", {
-                    project_id: this.projectId,
-                    title,
-                    price
-                  });
-                } catch (error) {
-                  let error_messages = {
-                    403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-                    500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-                  };
-                  if (error.response) {
-                    this.error_message =
-                      error_messages[error.response.status] ||
-                      "正しく処理することができませんでした。管理者へお問い合わせください。";
-                    this.alert = true;
-                  } else {
-                    this.error_message =
-                      "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-                    this.alert = true;
-                  }
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                  });
-                  return;
-                }
+                await api.post("/v1/api/purchases/", {
+                  project_id: this.projectId,
+                  title,
+                  price
+                });
               });
             })();
           }
