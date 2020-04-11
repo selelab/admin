@@ -23,7 +23,7 @@ export default {
     title: null,
     options: {
       color: 'primary',
-      width: 290,
+      width: 480,
       zIndex: 200
     }
   }),

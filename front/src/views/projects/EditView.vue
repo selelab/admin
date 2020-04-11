@@ -113,7 +113,7 @@
 import api from "@/api";
 import router from "@/router";
 
-import Confirm from "@/components/Comfirm";
+import Confirm from "@/components/Confirm";
 
 export default {
   data() {
