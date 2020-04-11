@@ -27,13 +27,13 @@
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>トップ</v-list-item-title>
+              <v-list-item-title>総合</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item to="/projects">
             <v-list-item-icon>
-              <v-icon>mdi-file-chart-outline</v-icon>
+              <v-icon>mdi-buffer</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>プロジェクト</v-list-item-title>
@@ -42,10 +42,10 @@
 
           <v-list-item to="/users">
             <v-list-item-icon>
-              <v-icon>mdi-account-group</v-icon>
+              <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>ユーザー</v-list-item-title>
+              <v-list-item-title>登録情報</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
