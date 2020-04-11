@@ -49,12 +49,12 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/alerts">
+          <v-list-item to="/manage">
             <v-list-item-icon>
-              <v-icon>mdi-bell-ring</v-icon>
+              <v-icon>mdi-stamper</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>通知</v-list-item-title>
+              <v-list-item-title>承認・運営</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>

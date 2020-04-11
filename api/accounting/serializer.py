@@ -1,12 +1,14 @@
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from rest_framework import serializers
 
 from .models import Project, ProjectApproval, Purchase
+import authenticate as auth
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     sum_budget = serializers.SerializerMethodField()
     sum_purchase_price = serializers.SerializerMethodField()
+    leader = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -19,9 +21,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         return query_result or 0
 
     def get_sum_purchase_price(self, obj):
-        query_result = Purchase.objects.filter(project_id=obj.id).aggregate(
+        query_result = Purchase.objects.filter(Q(approver__isnull=True) | Q(approved=True), project_id=obj.id).aggregate(
             Sum('price'))['price__sum']
         return query_result or 0
+
+    def get_leader(self, obj):
+        return auth.serializer.UserSerializer(obj.leader).data
 
 
 class ProjectDetailSerializer(ProjectSerializer):
@@ -39,7 +44,7 @@ class ProjectDetailSerializer(ProjectSerializer):
     def get_purchases(self, obj):
         try:
             return PurchaseSerializer(
-                Purchase.objects.filter(project_id=obj.id), many=True).data
+                Purchase.objects.filter(Q(approver__isnull=True) | Q(approved=True), project_id=obj.id), many=True).data
         except:
             return []
 
@@ -63,7 +68,7 @@ class ProjectApprovalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProjectApproval
-        fields = ('id', 'project', 'approver', 'budget_amount', 'approved', 'date_created')
+        fields = ('id', 'project', 'comment', 'approver', 'budget_amount', 'approved', 'date_created')
 
     def get_project(self, obj):
         return ProjectSerializer(obj.project_id).data
@@ -76,6 +81,11 @@ class CreateProjectApprovalSerializer(serializers.ModelSerializer):
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
+    project = serializers.SerializerMethodField()
+
     class Meta:
         model = Purchase
-        fields = ('id', 'title', 'project_id', 'price', 'approver', 'approved', 'date_created')
+        fields = ('id', 'title', 'project', 'comment', 'price', 'approver', 'approved', 'date_created')
+
+    def get_project(self, obj):
+        return ProjectSerializer(obj.project_id).data

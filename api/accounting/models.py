@@ -34,6 +34,7 @@ class ProjectApproval(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     budget_amount = models.IntegerField(default=0)
+    comment = models.CharField(max_length=1024, null=True)
     approved = models.BooleanField(null=False, default=False)
     date_created = models.DateTimeField(default=utils.timezone.now, editable=False)
 
@@ -45,6 +46,7 @@ class Purchase(models.Model):
     title = models.CharField(max_length=50)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
+    comment = models.CharField(max_length=1024, null=True)
     approver = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     approved = models.BooleanField(null=True, default=False)
     date_created = models.DateTimeField(default=utils.timezone.now, editable=False)

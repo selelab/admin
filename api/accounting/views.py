@@ -107,6 +107,9 @@ class PurchasePermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if request.method == 'PATCH':
+            if request.user.is_superuser:
+                return True
+
             forbidden_queries = {
                 'returned':
                 False,
@@ -121,7 +124,7 @@ class PurchasePermission(permissions.BasePermission):
             }
 
             if not perm_method.request_param_validation(
-                    purchase, forbidden_queries, request.data):
+                    obj, forbidden_queries, request.data):
                 return False
 
             return request.user.id == obj.project_id.leader.id
@@ -155,6 +158,14 @@ class PurchaseViewSet(viewsets.ModelViewSet):
     permission_classes = (PurchasePermission, )
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
+
+    def get_queryset(self):
+        is_open = self.request.GET.get('is_open')
+
+        if is_open:
+            return Purchase.objects.filter(approver__isnull=True)
+        else:
+            return Purchase.objects.all()
 
 
 class ProjectApprovalViewSet(viewsets.ModelViewSet):
