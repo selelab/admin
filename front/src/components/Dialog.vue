@@ -56,25 +56,33 @@
         <v-spacer />
         <v-btn small color="red" outlined rounded right v-if="editable">完了にする</v-btn>
       </v-card-actions>
-      <v-divider style="margin: 20px"></v-divider>
-      <v-card-text>
-        <div v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0">
-          <h3>購入一覧</h3>
-          <div width="100%" max-width="400">
-            <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
-              <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
-              <template v-slot:item.status="{ item }">
-                <v-icon
-                  small
-                  class="mr-2"
-                  color="green"
-                  v-if="getStatus(item)=='approved'"
-                >mdi-check</v-icon>
-                <v-icon small color="red" v-else-if="getStatus(item)=='rejected'">mdi-cancel</v-icon>
-                <div v-else></div>
-              </template>
-            </v-data-table>
-          </div>
+
+      <v-card-text
+        v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0"
+      >
+        <v-divider style="margin: 20px 0"></v-divider>
+        <h3>購入一覧</h3>
+        <div width="100%" max-width="400">
+          <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
+            <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+            <template v-slot:item.status="{ item }">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon
+                      small
+                      class="mr-2"
+                      color="green"
+                      v-if="getStatus(item)=='approved'"
+                    >mdi-check</v-icon>
+                    <v-icon small color="red" v-else-if="getStatus(item)=='rejected'">mdi-cancel</v-icon>
+                    <div v-else></div>
+                  </v-btn>
+                </template>
+                <span>{{getStatusMessage(item)}}</span>
+              </v-tooltip>
+            </template>
+          </v-data-table>
         </div>
       </v-card-text>
     </v-card>
@@ -147,7 +155,7 @@ export default {
             return val + item.price;
           }, 0)
       );
-    },
+    }
   },
   methods: {
     open: function() {
@@ -169,6 +177,17 @@ export default {
       if (item.approved) return "approved";
       if (!item.approver) return "pending";
       return "rejected";
+    },
+    getStatusMessage(item) {
+      console.log(item);
+      switch (this.getStatus(item)) {
+        case "approved":
+          return "承認済み";
+        case "pending":
+          return "審査中";
+        case "rejected":
+          return "不承認: " + item.comment;
+      }
     }
   },
   components: {
@@ -180,7 +199,7 @@ export default {
 <style scoped>
 .top_chips {
   width: 100%;
-  max-width: 25%;
+  max-width: 140px;
   padding-left: 10px;
   padding-right: 10px;
   display: inline-block;
