@@ -63,6 +63,11 @@ class ProjectDetailSerializer(ProjectSerializer):
         return query_result or 0
 
 
+class CreateProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ('id', 'title', 'description', 'accounting_type', 'leader')
+
 class ProjectApprovalSerializer(serializers.ModelSerializer):
     project = ProjectSerializer()
 
@@ -74,7 +79,7 @@ class ProjectApprovalSerializer(serializers.ModelSerializer):
 class CreateProjectApprovalSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectApproval
-        fields = ('id', 'project_id', 'budget_amount')
+        fields = ('id', 'project', 'budget_amount')
 
 
 class PurchaseSerializer(serializers.ModelSerializer):

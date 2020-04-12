@@ -54,11 +54,11 @@ export default {
           });
 
           if (this.budget && this.budget > 0) {
-            let project_id = create_project_result.data.id;
+            let project = create_project_result.data.id;
 
             await api.post("/v1/api/approvals/", {
               approver: null,
-              project_id,
+              project,
               budget_amount: this.budget
             });
           }

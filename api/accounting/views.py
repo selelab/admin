@@ -1,4 +1,5 @@
 import django_filters
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework import filters, permissions, viewsets
 
@@ -6,7 +7,7 @@ from utils import perm_method
 from web import settings
 
 from .models import Project, ProjectApproval, Purchase
-from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer,
+from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer, CreateProjectSerializer,
                          ProjectSerializer, PurchaseSerializer, CreateProjectApprovalSerializer, CreatePurchaseSerializer)
 
 
@@ -63,10 +64,6 @@ class PurchaseOwnerPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if not request.user:
             return False
-
-        if request.method in {'DELETE'}:
-            return False
-
         return True
 
 
@@ -128,6 +125,14 @@ class PurchasePermission(permissions.BasePermission):
                 return False
 
             return request.user.id == obj.project.leader.id
+        elif request.method == 'DELETE':
+            if request.user.is_superuser:
+                return True
+
+            if obj.approved or obj.approver is not None:
+                return False
+
+            return request.user.id == obj.project.leader.id
         elif request.method == 'POST':
             return True
         else:
@@ -150,6 +155,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return ProjectDetailSerializer
+        if self.action == 'create':
+            return CreateProjectSerializer
         return self.serializer_class
 
 
@@ -163,7 +170,7 @@ class PurchaseViewSet(viewsets.ModelViewSet):
         is_open = self.request.GET.get('is_open')
 
         if is_open:
-            return Purchase.objects.filter(approver__isnull=True)
+            return Purchase.objects.filter(Q(approved__isnull=True) | Q(approved=False), approver__isnull=True)
         else:
             return Purchase.objects.all()
 
@@ -183,7 +190,7 @@ class ProjectApprovalViewSet(viewsets.ModelViewSet):
         is_open = self.request.GET.get('is_open')
 
         if is_open:
-            return ProjectApproval.objects.filter(approver__isnull=True)
+            return ProjectApproval.objects.filter(Q(approved__isnull=True) | Q(approved=False), approver__isnull=True)
         else:
             return ProjectApproval.objects.all()
 

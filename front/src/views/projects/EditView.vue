@@ -312,7 +312,7 @@ export default {
             ) {
               await api.post("/v1/api/approvals/", {
                 approver: null,
-                project_id: this.projectId,
+                project: this.projectId,
                 budget_amount: this.budgetInfo.additionalBudgetAmount
               });
             } else {
