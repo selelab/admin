@@ -1,6 +1,16 @@
 <template>
   <v-dialog v-model="isOpen" @input="v => v || close()" width="640px">
     <v-card class="main">
+      <v-card-text style="padding-top: 20px" v-if="alert && !!error_message">
+        <v-alert
+          v-model="alert"
+          :value="!!error_message"
+          type="error"
+          style="margin: auto;"
+          outlined
+          dismissible
+        >{{ error_message }}</v-alert>
+      </v-card-text>
       <v-card-title>
         <span class="headline">{{ project.title }}</span>
         <v-list-item-subtitle>
@@ -54,7 +64,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn small color="red" outlined rounded right v-if="editable">完了にする</v-btn>
+        <v-btn small color="red" outlined rounded right v-if="editable" @click="closeProject">完了にする</v-btn>
       </v-card-actions>
 
       <v-card-text
@@ -86,13 +96,16 @@
         </div>
       </v-card-text>
     </v-card>
+    <Confirm ref="confirm"></Confirm>
   </v-dialog>
 </template>
 
 <script>
+import api from "@/api";
 import router from "@/router";
 import moment from "moment";
 
+import Confirm from "@/components/Confirm";
 import Markdown from "@/components/Markdown";
 
 export default {
@@ -111,6 +124,8 @@ export default {
   data() {
     return {
       isOpen: false,
+      error_message: "",
+      alert: false,
       purchaseHeaders: [
         {
           text: "品目",
@@ -188,10 +203,50 @@ export default {
         case "rejected":
           return "不承認: " + item.comment;
       }
+    },
+    requestErrorHandler(error) {
+      let error_messages = {
+        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
+        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
+      };
+      if (error.response) {
+        this.error_message =
+          error_messages[error.response.status] ||
+          "正しく処理することができませんでした。管理者へお問い合わせください。";
+        this.alert = true;
+      } else {
+        this.error_message =
+          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+        this.alert = true;
+      }
+    },
+    closeProject() {
+      (async () => {
+        try {
+          if (
+            await this.$refs.confirm.open(
+              this.project.title.endsWith("プロジェクト")
+                ? this.project.title
+                : this.project.title + " プロジェクト",
+              "本当に完了にしますか？<br>この操作は管理者でないと取り消せません。",
+              {
+                color: "red"
+              }
+            )
+          ) {
+            await api.patch(`/v1/api/projects/${this.project.id}/`, {
+              closed: true
+            });
+          }
+        } catch (error) {
+          this.requestErrorHandler(error);
+        }
+      })();
     }
   },
   components: {
-    Markdown
+    Markdown,
+    Confirm
   }
 };
 </script>
