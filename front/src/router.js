@@ -4,6 +4,7 @@ import Index from "./views/Index"
 import Projects from "./views/projects/ListView"
 import ProjectCreator from "./views/projects/CreateView"
 import ProjectEditor from "./views/projects/EditView"
+import Manager from "./views/manage/Home"
 import Users from "./views/Users"
 import Login from "./views/Login"
 import NotFound from "./views/NotFound"
@@ -43,6 +44,12 @@ const router = new Router({
       path: '/projects/:id/edit',
       component: ProjectEditor,
       name: 'project_editor',
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/manage',
+      component: Manager,
+      name: 'Manager',
       meta: { requiresAuth: true },
     },
     {

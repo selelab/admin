@@ -126,7 +126,7 @@
     </div>
     <Dialog
       v-bind:project="dialogProject"
-      v-bind:editable="dialogProject.leader == userId && !dialogProject.closed"
+      v-bind:editable="dialogProject.leader && dialogProject.leader.id == userId && !dialogProject.closed"
       ref="detailDialog"
       originUrl="/projects"
       :editPath="'/projects/' + dialogProjectId + '/edit'"
@@ -246,9 +246,7 @@ export default {
           ).data;
 
           if (project.leader) {
-            dialog_project.leader_detail = (
-              await api.get(`/v1/api/users/${project.leader}/`)
-            ).data;
+            dialog_project.leader_detail = project.leader;
           }
 
           this.$set(this.dialogProject, dialog_project);

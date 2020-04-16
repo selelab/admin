@@ -1,56 +1,7 @@
 <template>
   <div>
-    <h1>ユーザー</h1>
-    <h2>ユーザー一覧</h2>
-    <div class="user_list">
-      <v-container fluid>
-        <v-list three-line>
-          <template v-for="(user, index) in users">
-            <v-subheader v-if="user.header" :key="user.header" v-text="user.header"></v-subheader>
-
-            <v-divider v-else-if="user.divider" :key="index" :inset="user.inset" style="padding: 0"></v-divider>
-
-            <v-list-item v-else :key="user.email" style="padding: 4px" @click="open_dialog(user)">
-              <v-list-item-avatar class="user_list_avatar">
-                <img src="@/assets/shika.jpg" />
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title v-html="user.display_name"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-        </v-list>
-
-        <v-dialog v-model="user_detail_dialog" width="80%">
-          <v-card width="100%">
-            <v-card-title>
-              <span class="headline">{{ dialog_user.title }}</span>
-            </v-card-title>
-            <v-list-item>
-              <v-list-item-avatar>
-                <img src="@/assets/shika.jpg" />
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title
-                  v-text="dialog_user.display_name"
-                ></v-list-item-title>
-              </v-list-item-content>
-
-              <v-list-item-action>
-                <v-btn icon>
-                  <v-icon color="grey lighten-1">mdi-information</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </v-list-item>
-
-            <v-card-text>登録日: {{dialog_user.date_registered | yymmdd}}</v-card-text>
-            <v-card-actions></v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-container>
-    </div>
+    <h1>登録情報</h1>
+    <h2>ユーザー</h2>
   </div>
 </template>
 

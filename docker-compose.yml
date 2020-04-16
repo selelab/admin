@@ -7,9 +7,10 @@ services:
       - "80:80"
     volumes:
       - ./static:/var/static/kusatsu/
-      - ../contests/static:/var/static/contests/
+      - ../contests/static:/var/contests/static/
+      - ../contests/front/dist:/var/contests/dist/
       - ../web/build:/var/react
-      - "./front/dist:/var/admin-front"
+      - ./front/dist:/var/admin-front
     depends_on:
       - api
   api:

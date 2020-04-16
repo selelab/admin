@@ -179,7 +179,7 @@
 
 - spec.htmlを出力する
 
-    GitHub上にアップロードした後、https://htmlpreview.github.io/?https://github.com/selelab/admin-api/blob/master/docs/spec.html で見ることができる。
+    GitHub上にアップロードした後、https://htmlpreview.github.io/?https://github.com/selelab/admin/blob/master/docs/spec.html で見ることができる。
     ```
     aglio -i spec.md -o docs/spec.html
     ```

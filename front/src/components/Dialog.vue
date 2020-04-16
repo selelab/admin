@@ -1,6 +1,16 @@
 <template>
   <v-dialog v-model="isOpen" @input="v => v || close()" width="640px">
     <v-card class="main">
+      <v-card-text style="padding-top: 20px" v-if="alert && !!error_message">
+        <v-alert
+          v-model="alert"
+          :value="!!error_message"
+          type="error"
+          style="margin: auto;"
+          outlined
+          dismissible
+        >{{ error_message }}</v-alert>
+      </v-card-text>
       <v-card-title>
         <span class="headline">{{ project.title }}</span>
         <v-list-item-subtitle>
@@ -37,6 +47,10 @@
           {{ project.sum_purchase_price | addComma }}円
         </div>
         <div class="top_chips">
+          <v-chip x-small chip color="orange lighten-3">返金済</v-chip>
+          {{ sumReturned | addComma }}円
+        </div>
+        <div class="top_chips">
           <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
           {{ project.sum_budget | addComma }}円
         </div>
@@ -50,15 +64,48 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn small color="red" outlined rounded right v-if="editable">完了にする</v-btn>
+        <v-btn small color="red" outlined rounded right v-if="editable" @click="closeProject">完了にする</v-btn>
       </v-card-actions>
+
+      <v-card-text
+        v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0"
+      >
+        <v-divider style="margin: 20px 0"></v-divider>
+        <h3>購入一覧</h3>
+        <div width="100%" max-width="400">
+          <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
+            <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+            <template v-slot:item.status="{ item }">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon
+                      small
+                      class="mr-2"
+                      color="green"
+                      v-if="getStatus(item)=='approved'"
+                    >mdi-check</v-icon>
+                    <v-icon small color="red" v-else-if="getStatus(item)=='rejected'">mdi-cancel</v-icon>
+                    <div v-else></div>
+                  </v-btn>
+                </template>
+                <span>{{getStatusMessage(item)}}</span>
+              </v-tooltip>
+            </template>
+          </v-data-table>
+        </div>
+      </v-card-text>
     </v-card>
+    <Confirm ref="confirm"></Confirm>
   </v-dialog>
 </template>
 
 <script>
+import api from "@/api";
 import router from "@/router";
+import moment from "moment";
 
+import Confirm from "@/components/Confirm";
 import Markdown from "@/components/Markdown";
 
 export default {
@@ -76,7 +123,31 @@ export default {
   },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      error_message: "",
+      alert: false,
+      purchaseHeaders: [
+        {
+          text: "品目",
+          align: "center",
+          value: "title"
+        },
+        {
+          text: "金額",
+          align: "right",
+          value: "price"
+        },
+        {
+          text: "申請日",
+          align: "center",
+          value: "date_created"
+        },
+        {
+          text: "状態",
+          align: "center",
+          value: "status"
+        }
+      ]
     };
   },
   computed: {
@@ -87,6 +158,18 @@ export default {
           this.project.leader_detail.display_name) ||
         "リーダーはまだいません。"
       );
+    },
+    sumReturned: function() {
+      return (
+        this.project.detail &&
+        this.project.detail.purchases
+          .filter(item => {
+            return item.approved;
+          })
+          .reduce((val, item) => {
+            return val + item.price;
+          }, 0)
+      );
     }
   },
   methods: {
@@ -96,10 +179,74 @@ export default {
     close: function() {
       this.isOpen = false;
       if (this.$route.path != this.originUrl) router.push(this.originUrl);
+    },
+    getDateText(datetime) {
+      return (
+        datetime &&
+        moment(datetime)
+          .format("YYYY年MM月DD日")
+          .replace(`${new Date().getFullYear()}年`, "")
+      );
+    },
+    getStatus(item) {
+      if (item.approved) return "approved";
+      if (!item.approver) return "pending";
+      return "rejected";
+    },
+    getStatusMessage(item) {
+      console.log(item);
+      switch (this.getStatus(item)) {
+        case "approved":
+          return "承認済み";
+        case "pending":
+          return "審査中";
+        case "rejected":
+          return "不承認: " + item.comment;
+      }
+    },
+    requestErrorHandler(error) {
+      let error_messages = {
+        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
+        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
+      };
+      if (error.response) {
+        this.error_message =
+          error_messages[error.response.status] ||
+          "正しく処理することができませんでした。管理者へお問い合わせください。";
+        this.alert = true;
+      } else {
+        this.error_message =
+          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+        this.alert = true;
+      }
+    },
+    closeProject() {
+      (async () => {
+        try {
+          if (
+            await this.$refs.confirm.open(
+              this.project.title.endsWith("プロジェクト")
+                ? this.project.title
+                : this.project.title + " プロジェクト",
+              "本当に完了にしますか？<br>この操作は管理者でないと取り消せません。",
+              {
+                color: "red"
+              }
+            )
+          ) {
+            await api.patch(`/v1/api/projects/${this.project.id}/`, {
+              closed: true
+            });
+          }
+        } catch (error) {
+          this.requestErrorHandler(error);
+        }
+      })();
     }
   },
   components: {
-    Markdown
+    Markdown,
+    Confirm
   }
 };
 </script>
@@ -107,7 +254,7 @@ export default {
 <style scoped>
 .top_chips {
   width: 100%;
-  max-width: 160px;
+  max-width: 140px;
   padding-left: 10px;
   padding-right: 10px;
   display: inline-block;

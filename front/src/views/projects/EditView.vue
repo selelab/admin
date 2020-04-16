@@ -50,31 +50,65 @@
         {{ sumReturned | addComma }}円
       </div>
 
-      <v-card
-        v-for="(purchase, index) in budgetInfo.purchases"
-        :key="index"
-        style="padding: 20px; margin: 20px 0px;"
-      >
-        <v-btn
-          icon
-          absolute
-          right
-          @click="removePurchase(index)"
-          v-if="budgetInfo.purchases.length > 1"
-        >
-          <v-icon color="grey lighten-1">mdi-close-circle</v-icon>
-        </v-btn>
-        <div style="width: 90%; margin: auto">
-          <h6>購入項目 {{index + 1}}</h6>
-          <v-text-field v-model="purchase.title" label="購入名"></v-text-field>
-          <v-text-field v-model="purchase.price" type="number" label="購入金額" suffix="円"></v-text-field>
-          <v-fab-transition v-if="index == budgetInfo.purchases.length - 1">
-            <v-btn color="primary" fab dark x-small absolute bottom right @click="appendPurchase">
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
-          </v-fab-transition>
-        </div>
-      </v-card>
+      <v-data-table dense :headers="purchaseHeaders" selected-key="id" :items="purchases">
+        <template v-slot:item.disposeButton="{ item }">
+          <v-btn
+            icon
+            @click="removePurchase(item)"
+            v-if="!(item.approver || item.approved) && purchases.length > 1"
+          >
+            <v-icon color="grey lighten-1">mdi-close-circle</v-icon>
+          </v-btn>
+        </template>
+        <template v-slot:item.title="{ item }">
+          <v-text-field
+            v-model="item.title"
+            style="height: 40px"
+            solo
+            flat
+            dense
+            required
+            :disabled="!!(item.approver || item.approved)"
+          ></v-text-field>
+        </template>
+        <template v-slot:item.price="{ item }">
+          <v-text-field
+            dense
+            style="height: 40px"
+            class="right-aligned-input"
+            v-model="item.price"
+            type="number"
+            suffix="円"
+            solo
+            flat
+            required
+            :disabled="!!(item.approver || item.approved)"
+          ></v-text-field>
+        </template>
+        <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+        <template v-slot:item.status="{ item }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on">
+                <v-icon
+                  small
+                  class="mr-2"
+                  color="green"
+                  v-if="getStatus(item)=='approved'"
+                >mdi-check</v-icon>
+                <v-icon small color="red" v-else-if="getStatus(item)=='rejected'">mdi-cancel</v-icon>
+                <div v-else></div>
+              </v-btn>
+            </template>
+            <span>{{getStatusMessage(item)}}</span>
+          </v-tooltip>
+        </template>
+        <template v-slot:extension>
+          <v-btn fab color="cyan accent-2" bottom left absolute @click="appendPurchase">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </template>
+      </v-data-table>
 
       <h3>予算上限</h3>
       <div class="top_chips">
@@ -110,10 +144,12 @@
 </template>
 
 <script>
+import moment from "moment";
+
 import api from "@/api";
 import router from "@/router";
 
-import Confirm from "@/components/Comfirm";
+import Confirm from "@/components/Confirm";
 
 export default {
   data() {
@@ -131,15 +167,40 @@ export default {
       readyToEdit: false,
       confirm_dialog: false,
       formerProjectInfo: {},
+      purchases: [],
       budgetInfo: {
-        purchases: [
-          {
-            title: "",
-            price: null
-          }
-        ],
         additionalBudgetAmount: 0
-      }
+      },
+      purchaseHeaders: [
+        {
+          text: "品目",
+          align: "center",
+          value: "title",
+          sortable: false
+        },
+        {
+          text: "金額",
+          align: "center",
+          value: "price",
+          sortable: false,
+          width: "200px"
+        },
+        {
+          text: "申請日",
+          align: "center",
+          value: "date_created"
+        },
+        {
+          text: "状態",
+          align: "center",
+          value: "status"
+        },
+        {
+          text: "",
+          align: "center",
+          value: "disposeButton"
+        }
+      ]
     };
   },
   computed: {
@@ -148,6 +209,8 @@ export default {
     },
     isProjectChanged: function() {
       return Object.entries(this.formerProjectInfo).some(([key, value]) => {
+        if (key == "purchases") return false;
+
         if (this[key] != undefined && value != this[key]) return true;
         return false;
       });
@@ -161,10 +224,38 @@ export default {
 
       return false;
     },
+    purchasesDict: function() {
+      return this.formerProjectInfo.purchases
+        .filter(item => item.id)
+        .reduce((result, current) => {
+          result[current.id] = current;
+          return result;
+        }, {});
+    },
     isPurchaseChanged: function() {
-      return this.budgetInfo.purchases.some(item => {
-        return !!(item.title || item.price);
-      });
+      if (
+        this.purchases.some(item => {
+          if (!item || item.approver || item.approved) return false;
+          if (item.id) {
+            return item.price != this.purchasesDict[item.id].price;
+          }
+          return !!(item.title || item.price);
+        })
+      )
+        return true;
+
+      if (this.isPurchaseDeleted) return true;
+
+      return false;
+    },
+    isPurchaseDeleted: function() {
+      const formPurchasesIds = new Set(
+        this.purchases.map(item => item.id).filter(item => item)
+      );
+
+      return Object.keys(this.purchasesDict).some(
+        id => !formPurchasesIds.has(id)
+      );
     },
     sumReturned: function() {
       return (
@@ -209,6 +300,11 @@ export default {
         this.description = this.formerProjectInfo.description;
         this.budgetInfo.additionalBudgetAmount = this.formerProjectInfo.sum_req_budget;
         this.readyToEdit = true;
+        if (this.formerProjectInfo.purchases)
+          this.purchases = JSON.parse(
+            JSON.stringify(this.formerProjectInfo.purchases)
+          );
+        this.appendPurchase();
       } catch (error) {
         console.log(error);
       }
@@ -222,13 +318,19 @@ export default {
       router.push(`/projects/${this.projectId}`);
     },
     appendPurchase: function() {
-      this.budgetInfo.purchases.push({
+      this.purchases.push({
         title: "",
-        price: null
+        price: null,
+        id: null,
+        approved: null,
+        approver: null
       });
     },
-    removePurchase: function(index) {
-      this.budgetInfo.purchases.splice(index, 1);
+    removePurchase: function(item) {
+      this.purchases.splice(
+        this.purchases.findIndex(seek => seek.id == item.id),
+        1
+      );
     },
     cancelEditing: function() {
       (async () => {
@@ -248,96 +350,165 @@ export default {
         }
       })();
     },
+    getDateText(datetime) {
+      return (
+        datetime &&
+        moment(datetime)
+          .format("YYYY年MM月DD日")
+          .replace(`${new Date().getFullYear()}年`, "")
+      );
+    },
+    getStatus(item) {
+      if (item.approved) return "approved";
+      if (!item.approver) return "pending";
+      return "rejected";
+    },
+    getStatusMessage(item) {
+      switch (this.getStatus(item)) {
+        case "approved":
+          return "承認済み";
+        case "pending":
+          return "審査中";
+        case "rejected":
+          return "不承認: " + item.comment;
+      }
+    },
+    requestErrorHandler(error) {
+      let error_messages = {
+        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
+        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
+      };
+      if (error.response) {
+        this.error_message =
+          error_messages[error.response.status] ||
+          "正しく処理することができませんでした。管理者へお問い合わせください。";
+        this.alert = true;
+      } else {
+        this.error_message =
+          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+        this.alert = true;
+      }
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    },
     updateProject: function() {
       (async () => {
         try {
+          if (this.isPurchaseChanged) {
+            let sumPurchasePrice = this.purchases.reduce(
+              (acc, item) => acc + parseInt(item.price),
+              0
+            );
+            if (sumPurchasePrice > this.formerProjectInfo.sum_budget) {
+              this.error_message =
+                "予算上限値を超えて購入を報告することはできません。";
+              this.alert = true;
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+              return;
+            }
+            if (sumPurchasePrice < 0) {
+              this.error_message =
+                "支出予算の合計値を負の値にすることはできません。";
+              this.alert = true;
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+              return;
+            }
+          }
+
+          if (this.isPurchaseDeleted) {
+            if (
+              !(await this.$refs.confirm.open(
+                "確認",
+                "一部の購入報告が削除されます。<br>本当によろしいですか？",
+                {
+                  color: "orange"
+                }
+              ))
+            ) {
+              return;
+            }
+          }
+
           if (this.isBudgetChanged) {
-            await (async () => {
-              if (this.openApprovalId) {
-                await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
-                  budget_amount: this.budgetInfo.additionalBudgetAmount
-                });
-              } else if (
-                await this.$refs.confirm.open(
-                  "確認",
-                  "予算超過申請は幹部の承認を伴います。<br>予算超過申請を行いますか？",
-                  {
-                    color: "orange"
-                  }
-                )
-              ) {
-                await api.post("/v1/api/approvals/", {
-                  approver: null,
-                  project_id: this.projectId,
-                  budget_amount: this.budgetInfo.additionalBudgetAmount
-                });
+            if (this.openApprovalId) {
+              await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
+                budget_amount: this.budgetInfo.additionalBudgetAmount
+              });
+            } else if (
+              await this.$refs.confirm.open(
+                "確認",
+                "予算超過申請は幹部の承認を伴います。<br>予算超過申請を行いますか？",
+                {
+                  color: "orange"
+                }
+              )
+            ) {
+              await api.post("/v1/api/approvals/", {
+                approver: null,
+                project: this.projectId,
+                budget_amount: this.budgetInfo.additionalBudgetAmount
+              });
+            } else {
+              return;
+            }
+          }
+
+          if (this.isPurchaseDeleted) {
+            const formPurchasesIds = new Set(
+              this.purchases.map(item => item.id).filter(item => item)
+            );
+            const purchaseIds = Object.keys(this.purchasesDict);
+
+            for (let i = 0; i < purchaseIds.length; i++) {
+              if (!formPurchasesIds.has(purchaseIds[i])) {
+                await api.delete(`/v1/api/purchases/${purchaseIds[i]}/`);
               }
-            })();
+            }
           }
 
           if (this.isProjectChanged) {
-            await (async () => {
-              await api.patch(`/v1/api/projects/${this.projectId}/`, {
-                title: this.title,
-                description: this.description
-              });
-            })();
+            await api.patch(`/v1/api/projects/${this.projectId}/`, {
+              title: this.title,
+              description: this.description
+            });
           }
 
           if (this.isPurchaseChanged) {
-            await (async () => {
-              this.budgetInfo.purchases.forEach(async ({ title, price }) => {
-                try {
-                  await api.post("/v1/api/purchases/", {
-                    project_id: this.projectId,
-                    title,
-                    price
-                  });
-                } catch (error) {
-                  let error_messages = {
-                    403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-                    500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-                  };
-                  if (error.response) {
-                    this.error_message =
-                      error_messages[error.response.status] ||
-                      "正しく処理することができませんでした。管理者へお問い合わせください。";
-                    this.alert = true;
-                  } else {
-                    this.error_message =
-                      "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-                    this.alert = true;
-                  }
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                  });
-                  return;
-                }
-              });
-            })();
+            for (let i = 0; i < this.purchases.length; i++) {
+              const purchase = this.purchases[i];
+              if (purchase.approver || purchase.approved) continue;
+              const { title, price } = purchase;
+              if (!title || !price) continue;
+
+              if (!purchase.id) {
+                await api.post("/v1/api/purchases/", {
+                  project: this.projectId,
+                  title,
+                  price
+                });
+              } else if (
+                purchase.price != this.purchasesDict[purchase.id].price
+              ) {
+                await api.patch(`/v1/api/purchases/${purchase.id}/`, {
+                  title,
+                  price
+                });
+              }
+            }
           }
 
           this.backToDetailPage();
         } catch (error) {
-          let error_messages = {
-            403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-          };
-          if (error.response) {
-            this.error_message =
-              error_messages[error.response.status] ||
-              "正しく処理することができませんでした。管理者へお問い合わせください。";
-            this.alert = true;
-          } else {
-            this.error_message =
-              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-            this.alert = true;
-          }
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
+          console.log(error);
+          this.requestErrorHandler(error);
         }
       })();
     }
@@ -345,5 +516,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.right-aligned-input >>> input {
+  text-align: right;
+}
 </style>

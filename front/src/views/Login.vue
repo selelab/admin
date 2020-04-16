@@ -42,6 +42,7 @@
                   class="mr-4"
                   align="right"
                   @click="login"
+                  :disabled="connecting"
                 >ログイン</v-btn>
               </v-col>
             </v-card-actions>
@@ -86,7 +87,8 @@ const Login = {
       email: "",
       password: "",
       error_message: "",
-      alert: false
+      alert: false,
+      connecting: false,
     };
   },
   components: {
@@ -100,6 +102,7 @@ const Login = {
   },
   methods: {
     login: function() {
+      this.connecting = true;
       api
         .post("/jwt-token/", {
           email: this.email,
@@ -123,6 +126,7 @@ const Login = {
               "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
             this.alert = true;
           }
+          this.connecting = false;
         });
     },
     clear() {
