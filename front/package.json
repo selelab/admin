@@ -15,7 +15,7 @@
     "js-cookie": "*",
     "jsrsasign": "*",
     "marked": "*",
-    "minimist": "*",
+    "minimist": "^0.2.1",
     "moment": "*",
     "node-sass": "*",
     "sanitize-html": "*",
