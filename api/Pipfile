@@ -13,6 +13,7 @@ isort = "*"
 yapf = "*"
 
 [packages]
+boto3 = "*"
 django = "*"
 djangorestframework = "*"
 django-filter = "*"

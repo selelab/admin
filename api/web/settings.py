@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounting',
     'authenticate',
+    'storaging',
     'rest_framework',
     'drf_yasg',
     'web',

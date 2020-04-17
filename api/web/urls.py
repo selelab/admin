@@ -9,6 +9,7 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh
 
 from accounting.urls import router as accounting_router
 from authenticate.urls import router as authenticate_router
+from storaging.views import StoragingView
 from . import settings
 
 schema_view = get_schema_view(
@@ -56,4 +57,5 @@ urlpatterns = [
     url(r'api-auth/', include('rest_framework.urls')),
     url(r'^app/check.html', TemplateView.as_view(template_name='check.html')),
     url(r'^app/', TemplateView.as_view(template_name='index.html')),
+    url(r'^v1/api/storaging/', StoragingView.as_view(), name='storaging')
 ]
