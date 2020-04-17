@@ -13,6 +13,7 @@ services:
       - ./front/dist:/var/admin-front
     depends_on:
       - api
+    restart: always
   api:
     build:
       context: api
@@ -42,6 +43,7 @@ services:
     networks:
       - default
       - db_sharing
+    restart: always
 networks:
   db_sharing:
     external: true
