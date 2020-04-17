@@ -25,7 +25,12 @@
         <v-card height="100%" class="approval.project_card" @click="openDialog(approval.project)">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
-              <img class="card_profile_icon" src="@/assets/shika.jpg" />
+              <img
+                class="card_profile_icon"
+                :src="getIconUrl(approval.project.leader)"
+                v-if="!isDebug"
+              />
+              <img src="@/assets/shika.jpg" />
             </v-list-item-avatar>
             <v-list-item-content class="card_header_text">
               <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
@@ -90,7 +95,8 @@
           <v-card height="100%" class="project_card" @click="openDialog(project)">
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" src="@/assets/shika.jpg" />
+                <img class="card_profile_icon" :src="getIconUrl(project.leader)" v-if="!isDebug" />
+                <img src="@/assets/shika.jpg" />
               </v-list-item-avatar>
               <v-list-item-content class="card_header_text">
                 <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
@@ -136,6 +142,7 @@
 
 <script>
 import api from "@/api";
+import * as utils from "@/utils";
 import router from "@/router";
 
 import CampaignBox from "@/components/CampaignBox";
@@ -207,7 +214,8 @@ export default {
         }
         return prev;
       }, defaultApprovalSummary);
-    }
+    },
+    isDebug: () => utils.isDebug()
   },
   created() {
     (async () => {
@@ -295,10 +303,14 @@ export default {
         }
       })();
     },
+    getIconUrl: function(user) {
+      return utils.getIconUrl(user);
+    },
     onScroll: function() {
       let bottomOfWindow =
         document.documentElement.offsetHeight -
-          (document.documentElement.scrollTop + window.innerHeight) < 10;
+          (document.documentElement.scrollTop + window.innerHeight) <
+        10;
       if (bottomOfWindow) {
         console.log("bottom");
         this.loadProjects();

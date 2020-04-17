@@ -31,6 +31,7 @@
       </v-card-title>
       <v-list-item>
         <v-list-item-avatar>
+          <img :src="getIconUrl(project.leader)" v-if="!isDebug" />
           <img src="@/assets/shika.jpg" />
         </v-list-item-avatar>
 
@@ -103,6 +104,7 @@
 <script>
 import api from "@/api";
 import router from "@/router";
+import * as utils from "@/utils";
 import moment from "moment";
 
 import Confirm from "@/components/Confirm";
@@ -170,7 +172,8 @@ export default {
             return val + item.price;
           }, 0)
       );
-    }
+    },
+    isDebug: () => utils.isDebug()
   },
   methods: {
     open: function() {
@@ -203,6 +206,9 @@ export default {
         case "rejected":
           return "不承認: " + item.comment;
       }
+    },
+    getIconUrl: function(user) {
+      return utils.getIconUrl(user);
     },
     requestErrorHandler(error) {
       let error_messages = {

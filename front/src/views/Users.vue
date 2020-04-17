@@ -2,64 +2,87 @@
   <div>
     <h1>登録情報</h1>
     <h2>ユーザー</h2>
+    <v-form>
+      <v-text-field label="表示名"></v-text-field>
+      <v-file-input
+        :rules="rules"
+        accept="image/png, image/jpeg, image/bmp"
+        placeholder="Pick an avatar"
+        prepend-icon="mdi-camera"
+        v-model="avatar"
+        label="Avatar"
+      ></v-file-input>
+      <v-btn class="mr-4" @click="upload_image">submit</v-btn>
+    </v-form>
   </div>
 </template>
 
 <script>
 import api from "@/api";
+import Axios from "axios";
 
 export default {
   data() {
     return {
-      users: [],
-      open_approvals: [],
-      isShow: [],
-      url: [],
-      sh_check: {
-        soft: true,
-        hard: true
-      },
-      closed_check: {
-        closed: true,
-        in_progress: true
-      },
-      user_detail_dialog: false,
-      dialog_user: {}
+      user_information: {},
+      rules: [
+        value =>
+          !value ||
+          value.size < 2000000 ||
+          "2MB以下のファイルを選択してください！"
+      ],
+      avatar: null
     };
   },
+  computed: {
+    userId: function() {
+      return this.$store.getters.getUserId;
+    }
+  },
   created() {
-    api
-      .get("/v1/api/users/")
-      .then(response => {
-        this.users = Array.from(response.data);
-        for (let i = this.users.length - 1; i > 0; i--) {
-          this.users.splice(i, 0, { divider: true, inset: true });
-        }
-        this.users.splice(0, 0, { header: "正会員" });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.retrive_user_information();
   },
   methods: {
     show: function(index) {
       this.$set(this.isShow, index, !this.isShow[index]);
     },
-    open_dialog: function(user) {
-      this.dialog_user = user;
-      this.user_detail_dialog = true;
+    retrive_user_information: async function() {
+      this.user_information = (
+        await api.get(`/v1/api/users/${this.userId}/`)
+      ).data;
+    },
+    save_information: async function() {
+      let icon_media_key = "";
+      if (this.avatar) {
+        icon_media_key = await this.upload_image();
+      }
 
-      (async () => {
-        try {
-          let dialog_user = this.dialog_user;
-          let response = await api.get(`/v1/api/users/${user.id}/`);
-          dialog_user.detail = response.data;
+      await api.patch(`/v1/api/users/${this.userId}/`, {
+        icon_media_key,
+      });
+    },
+    upload_image: async function() {
+      try {
+        const data = (
+          await api.post("/v1/api/storaging/", {
+            scope: "profile-images",
+            content_type: this.avatar.type
+          })
+        ).data;
 
-          this.$set(this.dialog_user, dialog_user);
-        } catch (error) {
-          console.log(error);
-        }
-      })();
+        await Axios({
+          method: "PUT",
+          url: data.pre_signed_url,
+          headers: {
+            "Content-Type": this.avatar.type
+          },
+          data: this.avatar
+        });
+
+        return data.id;
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
   name: "users"
