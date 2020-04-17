@@ -3,6 +3,7 @@
     <v-app-bar flat color="primary" dark app :hide-on-scroll="showBottomNavi" clipped-left>
       <v-app-bar-nav-icon v-if="showMenuDetailButton" @click="menu_detail_clicked"></v-app-bar-nav-icon>
 
+      <img alt="SEL" src="@/assets/SEL_180x180.png" width="24px" style="margin-right: 10px" />
       <v-toolbar-title>エレラ簿</v-toolbar-title>
 
       <v-spacer></v-spacer>
