@@ -17,7 +17,7 @@
         <v-icon>mdi-file-chart-outline</v-icon>
       </v-btn>
 
-      <v-btn to="/users">
+      <v-btn to="/profile">
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
 

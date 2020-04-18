@@ -5,7 +5,7 @@ import Projects from "./views/projects/ListView"
 import ProjectCreator from "./views/projects/CreateView"
 import ProjectEditor from "./views/projects/EditView"
 import Manager from "./views/manage/Home"
-import Users from "./views/Users"
+import UserEdit from "./views/UserEdit"
 import Login from "./views/Login"
 import NotFound from "./views/NotFound"
 import { store } from "./store";
@@ -53,9 +53,9 @@ const router = new Router({
       meta: { requiresAuth: true },
     },
     {
-      path: '/users',
-      component: Users,
-      name: 'users',
+      path: '/profile',
+      component: UserEdit,
+      name: 'profile',
       meta: { requiresAuth: true },
     },
     {

@@ -41,7 +41,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/users">
+          <v-list-item to="/profile">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
