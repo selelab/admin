@@ -102,21 +102,20 @@ const Login = {
     }
   },
   methods: {
-    login: function() {
+    login: async function() {
       this.connecting = true;
-      api
-        .post("/jwt-token/", {
+      try {
+        const response = await api.post("/jwt-token/", {
           email: this.email,
           password: this.password
-        })
-        .then(response => {
-          this.$store.commit("setJwtToken", response.data.token);
-          router.push(this.$route.query.redirect || "/");
-        })
-        .catch(error => {
-          this.errorMessage = utils.getErrorMessage(error.response)
-          this.alert = true;
         });
+        this.$store.commit("setJwtToken", response.data.token);
+        router.push(this.$route.query.redirect || "/");
+      } catch (error) {
+        this.errorMessage = utils.getErrorMessage(error.response);
+        this.alert = true;
+      }
+      this.connecting = false;
     },
     clear() {
       this.email = "";
