@@ -9,12 +9,12 @@
       <v-card-text>
         <v-alert
           v-model="alert"
-          :value="!!error_message"
+          :value="!!errorMessage"
           type="error"
           style="margin: auto; margin-bottom: 30px"
           outlined
           dismissible
-        >{{ error_message }}</v-alert>
+        >{{ errorMessage }}</v-alert>
 
         <ValidationObserver ref="observer">
           <v-form class="login_form">
@@ -64,6 +64,7 @@ import {
 
 import router from "@/router";
 import api from "@/api";
+import * as utils from "@/utils";
 
 setInteractionMode("eager");
 
@@ -86,9 +87,9 @@ const Login = {
     return {
       email: "",
       password: "",
-      error_message: "",
+      errorMessage: "",
       alert: false,
-      connecting: false,
+      connecting: false
     };
   },
   components: {
@@ -113,20 +114,8 @@ const Login = {
           router.push(this.$route.query.redirect || "/");
         })
         .catch(error => {
-          let error_messages = {
-            400: "メールアドレスまたはパスワードが正しくありません。",
-            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-          };
-          console.log(error);
-          if (error.response) {
-            this.error_message = error_messages[error.response.status];
-            this.alert = true;
-          } else {
-            this.error_message =
-              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-            this.alert = true;
-          }
-          this.connecting = false;
+          this.errorMessage = utils.getErrorMessage(error.response)
+          this.alert = true;
         });
     },
     clear() {

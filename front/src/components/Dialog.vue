@@ -1,15 +1,15 @@
 <template>
   <v-dialog v-model="isOpen" @input="v => v || close()" width="640px">
     <v-card class="main">
-      <v-card-text style="padding-top: 20px" v-if="alert && !!error_message">
+      <v-card-text style="padding-top: 20px" v-if="alert && !!errorMessage">
         <v-alert
           v-model="alert"
-          :value="!!error_message"
+          :value="!!errorMessage"
           type="error"
           style="margin: auto;"
           outlined
           dismissible
-        >{{ error_message }}</v-alert>
+        >{{ errorMessage }}</v-alert>
       </v-card-text>
       <v-card-title>
         <span class="headline">{{ project.title }}</span>
@@ -32,7 +32,7 @@
       <v-list-item>
         <v-list-item-avatar>
           <img :src="getIconUrl(project.leader)" v-if="!isDebug" />
-          <img src="@/assets/shika.jpg" />
+          <img v-else src="@/assets/shika.jpg" />
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       isOpen: false,
-      error_message: "",
+      errorMessage: "",
       alert: false,
       purchaseHeaders: [
         {
@@ -197,7 +197,6 @@ export default {
       return "rejected";
     },
     getStatusMessage(item) {
-      console.log(item);
       switch (this.getStatus(item)) {
         case "approved":
           return "承認済み";
@@ -211,18 +210,8 @@ export default {
       return utils.getIconUrl(user);
     },
     requestErrorHandler(error) {
-      let error_messages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.error_message =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
     },

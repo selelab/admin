@@ -2,12 +2,12 @@
   <div>
     <v-alert
       v-model="alert"
-      :value="!!error_message"
+      :value="!!errorMessage"
       type="error"
       style="margin: auto; margin-bottom: 30px"
       outlined
       dismissible
-    >{{ error_message }}</v-alert>
+    >{{ errorMessage }}</v-alert>
     <h1>プロジェクト編集</h1>
     <h2>基本情報</h2>
     <v-form ref="form">
@@ -23,12 +23,12 @@
 
       <v-select v-model="accounting_type" label="会計種別" :disabled="true" :items="accounting_types"></v-select>
       <v-col class="text-right">
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
         <v-btn
           color="primary"
           :disabled="!readyToEdit || !(isProjectChanged || isBudgetChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
+        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
 
@@ -131,12 +131,12 @@
         suffix="円"
       ></v-text-field>
       <v-col class="text-right">
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
         <v-btn
           color="primary"
           :disabled="!readyToEdit || !(isBudgetChanged || isProjectChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
+        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
     <Confirm ref="confirm"></Confirm>
@@ -147,6 +147,7 @@
 import moment from "moment";
 
 import api from "@/api";
+import * as utils from "@/utils";
 import router from "@/router";
 
 import Confirm from "@/components/Confirm";
@@ -162,7 +163,7 @@ export default {
         { text: "ハードウェア会計", value: "hard" }
       ],
       description: "### 概要\n### 予算内訳\n",
-      error_message: "",
+      errorMessage: "",
       alert: false,
       readyToEdit: false,
       confirm_dialog: false,
@@ -374,18 +375,8 @@ export default {
       }
     },
     requestErrorHandler(error) {
-      let error_messages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.error_message =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error && error.response) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
       window.scrollTo({
@@ -402,7 +393,7 @@ export default {
               0
             );
             if (sumPurchasePrice > this.formerProjectInfo.sum_budget) {
-              this.error_message =
+              this.errorMessage =
                 "予算上限値を超えて購入を報告することはできません。";
               this.alert = true;
               window.scrollTo({
@@ -412,7 +403,7 @@ export default {
               return;
             }
             if (sumPurchasePrice < 0) {
-              this.error_message =
+              this.errorMessage =
                 "支出予算の合計値を負の値にすることはできません。";
               this.alert = true;
               window.scrollTo({

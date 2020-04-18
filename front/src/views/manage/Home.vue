@@ -2,12 +2,12 @@
   <div>
     <v-alert
       v-model="alert"
-      :value="!!error_message"
+      :value="!!errorMessage"
       type="error"
       style="margin: auto; margin-bottom: 30px"
       outlined
       dismissible
-    >{{ error_message }}</v-alert>
+    >{{ errorMessage }}</v-alert>
     <h1>管理画面</h1>
     <h2>承認系</h2>
     <h3>購入報告</h3>
@@ -39,6 +39,7 @@
 
 <script>
 import api from "@/api";
+import * as utils from "@/utils";
 import moment from "moment";
 
 import Confirm from "@/components/Confirm";
@@ -49,7 +50,7 @@ export default {
     return {
       openApprovals: [],
       openPurchases: [],
-      error_message: "",
+      errorMessage: "",
       alert: false,
       approvalHeaders: [
         {
@@ -146,18 +147,8 @@ export default {
   },
   methods: {
     requestErrorHandler(error) {
-      let error_messages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.error_message =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error && error.response) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
       window.scrollTo({
@@ -185,7 +176,7 @@ export default {
               }
             )
           ) {
-            this.error_message = "";
+            this.errorMessage = "";
             await api.patch(`/v1/api/approvals/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
@@ -210,7 +201,7 @@ export default {
             }
           );
           if (reason) {
-            this.error_message = "";
+            this.errorMessage = "";
             await api.patch(`/v1/api/approvals/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
@@ -237,7 +228,7 @@ export default {
               }
             )
           ) {
-            this.error_message = "";
+            this.errorMessage = "";
             await api.patch(`/v1/api/purchases/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
@@ -262,7 +253,7 @@ export default {
             }
           );
           if (reason) {
-            this.error_message = "";
+            this.errorMessage = "";
             await api.patch(`/v1/api/purchases/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
