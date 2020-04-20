@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./static:/var/static/kusatsu/
+      - ./static:/var/static/api/admin/
       - ../contests/static:/var/contests/static/
       - ../contests/front/dist:/var/contests/dist/
       - ../web/build:/var/react
@@ -36,16 +36,10 @@ services:
     entrypoint:
       - /bin/sh
       - entrypoint.sh
-    expose:
-      - "8001"
+    ports:
+      - "8001:8001"
     volumes:
       - ./api/:/var/app/
       - ./static/:/var/static
       - ./log/django/:/var/log/django/
-    networks:
-      - default
-      - db_sharing
     restart: always
-networks:
-  db_sharing:
-    external: true
