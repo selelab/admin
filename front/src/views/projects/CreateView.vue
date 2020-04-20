@@ -47,7 +47,7 @@ export default {
     create_project: function() {
       (async () => {
         try {
-          let create_project_result = await api.post("/v1/api/projects/", {
+          let create_project_result = await api.post("/v1/projects/", {
             title: this.title,
             description: this.description,
             accounting_type: this.accounting_type,
@@ -57,7 +57,7 @@ export default {
           if (this.budget && this.budget > 0) {
             let project = create_project_result.data.id;
 
-            await api.post("/v1/api/approvals/", {
+            await api.post("/v1/approvals/", {
               approver: null,
               project,
               budget_amount: this.budget

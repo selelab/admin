@@ -229,7 +229,7 @@ export default {
               }
             )
           ) {
-            await api.patch(`/v1/api/projects/${this.project.id}/`, {
+            await api.patch(`/v1/projects/${this.project.id}/`, {
               closed: true
             });
           }

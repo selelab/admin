@@ -77,7 +77,7 @@
 
 - エンドポイントにアクセス
     - ユーザーの一覧を取得する
-    http://localhost/v1/api/users/
+    http://localhost/api/admin/v1/users/
         ```json
         [
             {
@@ -99,7 +99,7 @@
         ]
         ```
     - プロジェクトの一覧を取得する
-    http://localhost/v1/api/projects/
+    http://localhost/api/admin/v1/projects/
         ```json
         [
             {
@@ -133,7 +133,7 @@
         ]
         ```
     - 購入の一覧を取得する
-    http://localhost/v1/api/purchases/
+    http://localhost/api/admin/v1/purchases/
         ```json
         [
             {

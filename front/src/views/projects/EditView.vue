@@ -293,7 +293,7 @@ export default {
     (async () => {
       try {
         this.formerProjectInfo = (
-          await api.get(`/v1/api/projects/${this.projectId}/`)
+          await api.get(`/v1/projects/${this.projectId}/`)
         ).data;
 
         this.title = this.formerProjectInfo.title;
@@ -430,7 +430,7 @@ export default {
 
           if (this.isBudgetChanged) {
             if (this.openApprovalId) {
-              await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
+              await api.patch(`/v1/approvals/${this.openApprovalId}/`, {
                 budget_amount: this.budgetInfo.additionalBudgetAmount
               });
             } else if (
@@ -442,7 +442,7 @@ export default {
                 }
               )
             ) {
-              await api.post("/v1/api/approvals/", {
+              await api.post("/v1/approvals/", {
                 approver: null,
                 project: this.projectId,
                 budget_amount: this.budgetInfo.additionalBudgetAmount
@@ -460,13 +460,13 @@ export default {
 
             for (let i = 0; i < purchaseIds.length; i++) {
               if (!formPurchasesIds.has(purchaseIds[i])) {
-                await api.delete(`/v1/api/purchases/${purchaseIds[i]}/`);
+                await api.delete(`/v1/purchases/${purchaseIds[i]}/`);
               }
             }
           }
 
           if (this.isProjectChanged) {
-            await api.patch(`/v1/api/projects/${this.projectId}/`, {
+            await api.patch(`/v1/projects/${this.projectId}/`, {
               title: this.title,
               description: this.description
             });
@@ -480,7 +480,7 @@ export default {
               if (!title || !price) continue;
 
               if (!purchase.id) {
-                await api.post("/v1/api/purchases/", {
+                await api.post("/v1/purchases/", {
                   project: this.projectId,
                   title,
                   price
@@ -488,7 +488,7 @@ export default {
               } else if (
                 purchase.price != this.purchasesDict[purchase.id].price
               ) {
-                await api.patch(`/v1/api/purchases/${purchase.id}/`, {
+                await api.patch(`/v1/purchases/${purchase.id}/`, {
                   title,
                   price
                 });

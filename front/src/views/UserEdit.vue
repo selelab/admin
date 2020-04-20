@@ -311,7 +311,7 @@ export default {
       return true;
     },
     retriveUserInfo: async function() {
-      this.userInfo = (await api.get(`/v1/api/users/${this.userId}/`)).data;
+      this.userInfo = (await api.get(`/v1/users/${this.userId}/`)).data;
       this.displayName = this.userInfo.display_name;
     },
     cancelSelect: function() {
@@ -376,7 +376,7 @@ export default {
           this.displayName != this.userInfo.display_name && this.displayName;
 
         await api.patch(
-          `/v1/api/users/${this.userId}/`,
+          `/v1/users/${this.userId}/`,
           utils.filterFalsy({
             display_name: displayName,
             icon_media_key: iconMediaKey
@@ -386,7 +386,7 @@ export default {
 
       if (this.isAuthInfoChanged) {
         await api.patch(
-          `/v1/api/users/${this.userId}/`,
+          `/v1/users/${this.userId}/`,
           utils.filterFalsy({
             password: this.newPassword
           })

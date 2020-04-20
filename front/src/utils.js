@@ -5,7 +5,7 @@ import api from "@/api";
 
 const uploadImage = async function (data, contentType, onUploadProgress) {
   const storagingInfo = (
-    await api.post("/v1/api/storaging/", {
+    await api.post("/v1/storaging/", {
       scope: "profile-images",
       content_type: contentType
     })

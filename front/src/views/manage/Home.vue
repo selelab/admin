@@ -127,7 +127,7 @@ export default {
       try {
         this.openApprovals = Array.from(
           (
-            await api.get("/v1/api/approvals/", {
+            await api.get("/v1/approvals/", {
               params: { is_open: true }
             })
           ).data
@@ -135,7 +135,7 @@ export default {
 
         this.openPurchases = Array.from(
           (
-            await api.get("/v1/api/purchases/", {
+            await api.get("/v1/purchases/", {
               params: { is_open: true }
             })
           ).data
@@ -177,7 +177,7 @@ export default {
             )
           ) {
             this.errorMessage = "";
-            await api.patch(`/v1/api/approvals/${item.id}/`, {
+            await api.patch(`/v1/approvals/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
             });
@@ -202,7 +202,7 @@ export default {
           );
           if (reason) {
             this.errorMessage = "";
-            await api.patch(`/v1/api/approvals/${item.id}/`, {
+            await api.patch(`/v1/approvals/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
               comment: reason
@@ -229,7 +229,7 @@ export default {
             )
           ) {
             this.errorMessage = "";
-            await api.patch(`/v1/api/purchases/${item.id}/`, {
+            await api.patch(`/v1/purchases/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
             });
@@ -254,7 +254,7 @@ export default {
           );
           if (reason) {
             this.errorMessage = "";
-            await api.patch(`/v1/api/purchases/${item.id}/`, {
+            await api.patch(`/v1/purchases/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
               comment: reason
