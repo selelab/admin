@@ -2,12 +2,12 @@
   <div>
     <v-alert
       v-model="alert"
-      :value="!!error_message"
+      :value="!!errorMessage"
       type="error"
       style="margin: auto; margin-bottom: 30px"
       outlined
       dismissible
-    >{{ error_message }}</v-alert>
+    >{{ errorMessage }}</v-alert>
     <h1>プロジェクト編集</h1>
     <h2>基本情報</h2>
     <v-form ref="form">
@@ -162,7 +162,7 @@ export default {
         { text: "ハードウェア会計", value: "hard" }
       ],
       description: "### 概要\n### 予算内訳\n",
-      error_message: "",
+      errorMessage: "",
       alert: false,
       readyToEdit: false,
       confirm_dialog: false,
@@ -292,7 +292,7 @@ export default {
     (async () => {
       try {
         this.formerProjectInfo = (
-          await api.get(`/v1/api/projects/${this.projectId}/`)
+          await api.get(`/v1/projects/${this.projectId}/`)
         ).data;
 
         this.title = this.formerProjectInfo.title;
@@ -374,17 +374,17 @@ export default {
       }
     },
     requestErrorHandler(error) {
-      let error_messages = {
+      let errorMessages = {
         403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
         500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
       };
       if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
+        this.errorMessage =
+          errorMessages[error.response.status] ||
           "正しく処理することができませんでした。管理者へお問い合わせください。";
         this.alert = true;
       } else {
-        this.error_message =
+        this.errorMessage =
           "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
         this.alert = true;
       }
@@ -402,7 +402,7 @@ export default {
               0
             );
             if (sumPurchasePrice > this.formerProjectInfo.sum_budget) {
-              this.error_message =
+              this.errorMessage =
                 "予算上限値を超えて購入を報告することはできません。";
               this.alert = true;
               window.scrollTo({
@@ -412,7 +412,7 @@ export default {
               return;
             }
             if (sumPurchasePrice < 0) {
-              this.error_message =
+              this.errorMessage =
                 "支出予算の合計値を負の値にすることはできません。";
               this.alert = true;
               window.scrollTo({
@@ -439,7 +439,7 @@ export default {
 
           if (this.isBudgetChanged) {
             if (this.openApprovalId) {
-              await api.patch(`/v1/api/approvals/${this.openApprovalId}/`, {
+              await api.patch(`/v1/approvals/${this.openApprovalId}/`, {
                 budget_amount: this.budgetInfo.additionalBudgetAmount
               });
             } else if (
@@ -451,7 +451,7 @@ export default {
                 }
               )
             ) {
-              await api.post("/v1/api/approvals/", {
+              await api.post("/v1/approvals/", {
                 approver: null,
                 project: this.projectId,
                 budget_amount: this.budgetInfo.additionalBudgetAmount
@@ -469,13 +469,13 @@ export default {
 
             for (let i = 0; i < purchaseIds.length; i++) {
               if (!formPurchasesIds.has(purchaseIds[i])) {
-                await api.delete(`/v1/api/purchases/${purchaseIds[i]}/`);
+                await api.delete(`/v1/purchases/${purchaseIds[i]}/`);
               }
             }
           }
 
           if (this.isProjectChanged) {
-            await api.patch(`/v1/api/projects/${this.projectId}/`, {
+            await api.patch(`/v1/projects/${this.projectId}/`, {
               title: this.title,
               description: this.description
             });
@@ -489,7 +489,7 @@ export default {
               if (!title || !price) continue;
 
               if (!purchase.id) {
-                await api.post("/v1/api/purchases/", {
+                await api.post("/v1/purchases/", {
                   project: this.projectId,
                   title,
                   price
@@ -497,7 +497,7 @@ export default {
               } else if (
                 purchase.price != this.purchasesDict[purchase.id].price
               ) {
-                await api.patch(`/v1/api/purchases/${purchase.id}/`, {
+                await api.patch(`/v1/purchases/${purchase.id}/`, {
                   title,
                   price
                 });

@@ -52,7 +52,7 @@ urlpatterns = [
         schema_view.with_ui('swagger', cache_timeout=0),
         name='schema-swagger-ui'),
     url(r'^admin/', admin.site.urls),
-    url(r'^v1/api/', include(api_router.urls)),
+    url(r'^v1/', include(api_router.urls)),
     url(r'api-auth/', include('rest_framework.urls')),
     url(r'^app/check.html', TemplateView.as_view(template_name='check.html')),
     url(r'^app/', TemplateView.as_view(template_name='index.html')),

@@ -214,7 +214,7 @@ export default {
       try {
         this.openApprovals = Array.from(
           (
-            await api.get("/v1/api/approvals/", {
+            await api.get("/v1/approvals/", {
               params: { is_open: true }
             })
           ).data
@@ -222,7 +222,7 @@ export default {
         this.loadProjects();
         if (this.dialogProjectId) {
           this.openDialog(
-            (await api.get(`/v1/api/projects/${this.dialogProjectId}/`)).data
+            (await api.get(`/v1/projects/${this.dialogProjectId}/`)).data
           );
         }
       } catch (error) {
@@ -242,7 +242,7 @@ export default {
           let dialog_project = this.dialogProject;
 
           dialog_project.detail = (
-            await api.get(`/v1/api/projects/${project.id}/`)
+            await api.get(`/v1/projects/${project.id}/`)
           ).data;
 
           if (project.leader) {
@@ -274,7 +274,7 @@ export default {
         try {
           let projects = Array.from(
             (
-              await api.get("/v1/api/projects/", {
+              await api.get("/v1/projects/", {
                 params: { limit: 10, offset: this.projectOffset }
               })
             ).data.results
