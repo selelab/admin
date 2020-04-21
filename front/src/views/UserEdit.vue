@@ -109,7 +109,12 @@
                   ></v-text-field>
                 </v-list-item-content>
                 <v-list-item-icon>
-                  <v-icon>mdi-information</v-icon>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on">mdi-information</v-icon>
+                    </template>
+                    <span>メールアドレスの変更は管理者へ連絡してください</span>
+                  </v-tooltip>
                 </v-list-item-icon>
               </v-list-item>
               <v-list-item>
