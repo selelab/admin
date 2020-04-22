@@ -11,6 +11,7 @@
     "@babel/preset-env": "=7.9.0",
     "@mdi/font": "*",
     "axios": "*",
+    "camelcase-keys": "^6.2.2",
     "core-js": "*",
     "js-cookie": "*",
     "jsrsasign": "*",

@@ -3,12 +3,15 @@ import Vuex from 'vuex';
 import { KJUR, b64utoutf8 } from 'jsrsasign'
 import createPersistedState from "vuex-persistedstate";
 import Cookies from 'js-cookie';
+import camelcaseKeys from "camelcase-keys";
+
+import api from "@/api";
 
 Vue.use(Vuex);
 
 const threeHours = 3 * 60 * 60 * 1000;
 const cookieExpireDateTime = new Date(new Date().getTime() + threeHours);
-const getPayload = function(state) {
+const getPayload = function (state) {
   let payload = null;
   if (state.jwtToken) {
     let jwt_binary = b64utoutf8(state.jwtToken.split('.')[1]);
@@ -21,14 +24,16 @@ const store = new Vuex.Store({
   state: {
     jwtToken: null,
     hasValidJwtToken: false,
-    user_id: null,
+    userInfo: null
   },
   mutations: {
     setJwtToken(state, token) {
       state.jwtToken = token;
       state.hasValidJwtToken = this.getters.hasValidJwtToken;
-      state.user_id = this.getters.getUserId;
-    }
+    },
+    setUserInfo(state, payload) {
+      state.userInfo = payload;
+    },
   },
   getters: {
     getJwtToken(state) {
@@ -42,14 +47,30 @@ const store = new Vuex.Store({
         return null;
       }
     },
+    getUserInfo(state) {
+      return state.userInfo;
+    },
     hasValidJwtToken(state) {
       let has_valid_jwt_token = false;
       let payload = getPayload(state);
 
-      if (payload){
+      if (payload) {
         has_valid_jwt_token = payload.exp >= (Date.now() / 1000);
       }
       return has_valid_jwt_token;
+    },
+  },
+  actions: {
+    setJwtToken(context, payload) {
+      context.commit('setJwtToken', payload);
+      context.dispatch('retrieveUserInfo')
+    },
+    async retrieveUserInfo(context) {
+      if (!context.getters.getUserId) return null;
+      context.commit(
+        'setUserInfo',
+        camelcaseKeys((await api.get(`/v1/users/${context.getters.getUserId}/`)).data)
+      )
     }
   },
   plugins: [createPersistedState({

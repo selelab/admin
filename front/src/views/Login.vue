@@ -109,7 +109,7 @@ const Login = {
           email: this.email,
           password: this.password
         });
-        this.$store.commit("setJwtToken", response.data.token);
+        this.$store.dispatch("setJwtToken", response.data.token);
         router.push(this.$route.query.redirect || "/");
       } catch (error) {
         this.errorMessage = utils.getErrorMessage(error.response);

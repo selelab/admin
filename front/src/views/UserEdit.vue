@@ -105,7 +105,7 @@
                     type="email"
                     autocomplete="email"
                     disabled
-                    v-model="userInfo.email"
+                    :value="userInfo && userInfo.email"
                   ></v-text-field>
                 </v-list-item-content>
                 <v-list-item-icon>
@@ -201,7 +201,6 @@ export default {
   },
   data() {
     return {
-      userInfo: {},
       displayName: "",
       alert: false,
       errorMessage: "",
@@ -224,6 +223,9 @@ export default {
     userId: function() {
       return this.$store.getters.getUserId;
     },
+    userInfo: function() {
+      return this.$store.getters.getUserInfo;
+    },
     cropSrc() {
       return this.croppedImage || this.value;
     },
@@ -236,7 +238,8 @@ export default {
     },
     isProfileChanged() {
       if (this.croppedImage) return true;
-      if (this.displayName != this.userInfo.display_name) return true;
+      if (this.userInfo && this.displayName != this.userInfo.displayName)
+        return true;
       return false;
     },
     isAuthInfoChanged() {
@@ -289,7 +292,12 @@ export default {
     }
   },
   created() {
-    this.retriveUserInfo();
+    this.retrieveUserInfo();
+  },
+  watch: {
+    userInfo: function(val) {
+      this.displayName = val && val.displayName;
+    }
   },
   methods: {
     getIconUrl: function(user) {
@@ -315,9 +323,8 @@ export default {
       }
       return true;
     },
-    retriveUserInfo: async function() {
-      this.userInfo = (await api.get(`/v1/users/${this.userId}/`)).data;
-      this.displayName = this.userInfo.display_name;
+    retrieveUserInfo: async function() {
+      await this.$store.dispatch("retrieveUserInfo");
     },
     cancelSelect: function() {
       if (!this.croppedImage) {
@@ -378,7 +385,7 @@ export default {
         }
 
         let displayName =
-          this.displayName != this.userInfo.display_name && this.displayName;
+          this.displayName != this.userInfo.displayName && this.displayName;
 
         await api.patch(
           `/v1/users/${this.userId}/`,
@@ -401,7 +408,7 @@ export default {
       }
 
       this.errorMessage = "";
-      this.retriveUserInfo();
+      this.retrieveUserInfo();
     },
     uploadImage: async function() {
       try {

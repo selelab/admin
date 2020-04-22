@@ -5,19 +5,42 @@
 
       <img alt="SEL" src="@/assets/SEL_180x180.png" width="24px" style="margin-right: 10px" />
       <v-toolbar-title>エレラ簿</v-toolbar-title>
-
       <v-spacer></v-spacer>
 
-      <v-btn
-        v-model="hasValidJwtToken"
-        @click="auth_clicked"
-        v-if="!isLoginPage"
-        text
-      >{{ hasValidJwtToken ? "ログアウト" : "ログイン" }}</v-btn>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn class="mx-1" dark icon v-on="on">
+            <v-avatar size="36" color="grey darken-3" v-if="hasValidJwtToken">
+              <img class="card_profile_icon" src="@/assets/shika.jpg" />
+            </v-avatar>
+          </v-btn>
+        </template>
 
-      <v-list-item-avatar color="grey darken-3" v-if="hasValidJwtToken">
-        <img class="card_profile_icon" src="@/assets/shika.jpg" />
-      </v-list-item-avatar>
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar>
+                <img class="card_profile_icon" src="@/assets/shika.jpg" />
+              </v-list-item-avatar>
+            </v-list-item>
+
+            <v-list-item link to="/profile/">
+              <v-list-item-content>
+                <v-list-item-title class="title">{{userInfo && userInfo.displayName}}</v-list-item-title>
+                <v-list-item-subtitle>{{userInfo && userInfo.email}}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <v-divider></v-divider>
+          <v-list dense>
+            <v-list-item @click="changeAuth">
+              <v-list-item-content>
+                <v-list-item-title>ログアウト</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <v-navigation-drawer app clipped v-model="drawer" mobile-break-point="600">
@@ -38,15 +61,6 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>プロジェクト</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item to="/profile">
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>登録情報</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -79,6 +93,9 @@ export default {
     hasValidJwtToken() {
       return this.$store.getters.hasValidJwtToken;
     },
+    userInfo() {
+      return this.$store.getters.getUserInfo;
+    },
     isLoginPage() {
       return this.$route.path == this.loginPage;
     },
@@ -92,9 +109,9 @@ export default {
     }
   },
   methods: {
-    auth_clicked: function() {
+    changeAuth: function() {
       if (this.hasValidJwtToken) {
-        this.$store.commit("setJwtToken", undefined);
+        this.$store.dispatch("setJwtToken", undefined);
         if (!this.isLoginPage) router.push(this.loginPage);
       } else {
         router.push(this.loginPage);
