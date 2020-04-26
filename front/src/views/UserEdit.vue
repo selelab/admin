@@ -16,7 +16,12 @@
             <v-form ref="profileForm">
               <v-list-item>
                 <v-list-item-content>
-                  <v-text-field label="名前" v-model="displayName" :rules="[notBlankValidation]"></v-text-field>
+                  <v-text-field
+                    label="名前"
+                    :disabled="isProcessing"
+                    v-model="displayName"
+                    :rules="[notBlankValidation]"
+                  ></v-text-field>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -65,7 +70,11 @@
               </v-list-item>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary" :disabled="!isFormValueChanged" @click="saveChanges">保存</v-btn>
+                <v-btn
+                  color="primary"
+                  :disabled="isProcessing || !isFormValueChanged"
+                  @click="saveChanges"
+                >保存</v-btn>
                 <v-btn color="grey" style="margin: 10px" dark>キャンセル</v-btn>
               </v-card-actions>
             </v-form>
@@ -124,6 +133,7 @@
                     type="password"
                     autocomplete="new-password"
                     v-model="newPassword"
+                    :disabled="isProcessing"
                   ></v-text-field>
                 </v-list-item-content>
               </v-list-item>
@@ -135,12 +145,17 @@
                     autocomplete="new-password"
                     :rules="[passwordValidation]"
                     v-model="newPasswordConfirm"
+                    :disabled="isProcessing"
                   ></v-text-field>
                 </v-list-item-content>
               </v-list-item>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary" :disabled="!isFormValueChanged" @click="saveChanges">保存</v-btn>
+                <v-btn
+                  color="primary"
+                  :disabled="isProcessing || !isFormValueChanged"
+                  @click="saveChanges"
+                >保存</v-btn>
                 <v-btn color="grey" style="margin: 10px" dark>キャンセル</v-btn>
               </v-card-actions>
             </v-form>
@@ -215,7 +230,8 @@ export default {
       validatedFile: null,
       newPassword: "",
       newPasswordConfirm: "",
-      checkValidation: false
+      checkValidation: false,
+      isProcessing: false
     };
   },
   computed: {
@@ -358,57 +374,65 @@ export default {
       this.dialog = false;
     },
     saveChanges: async function() {
-      this.checkValidation = true;
-      if (
-        (this.isProfileChanged && !this.$refs.profileForm.validate()) ||
-        (this.isAuthInfoChanged && !this.$refs.authInfoForm.validate())
-      ) {
-        this.errorMessage = "入力内容に誤りがあります";
-        this.alert = true;
-        if (this.isProfileChanged && !this.$refs.profileForm.validate()) {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-        } else {
-          utils.scrollToElementById("authInfoForm");
+      try {
+        this.checkValidation = true;
+        this.isProcessing = true;
+        if (
+          (this.isProfileChanged && !this.$refs.profileForm.validate()) ||
+          (this.isAuthInfoChanged && !this.$refs.authInfoForm.validate())
+        ) {
+          this.errorMessage = "入力内容に誤りがあります";
+          this.alert = true;
+          if (this.isProfileChanged && !this.$refs.profileForm.validate()) {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          } else {
+            utils.scrollToElementById("authInfoForm");
+          }
+          this.checkValidation = false;
+          this.isProcessing = false;
+          return;
         }
         this.checkValidation = false;
-        return;
-      }
-      this.checkValidation = false;
 
-      if (this.isProfileChanged) {
-        let iconMediaKey = null;
-        if (this.avatar) {
-          iconMediaKey = await this.uploadImage();
+        if (this.isProfileChanged) {
+          let iconMediaKey = null;
+          if (this.avatar) {
+            iconMediaKey = await this.uploadImage();
+          }
+
+          let displayName =
+            this.displayName != this.userInfo.displayName && this.displayName;
+
+          await api.patch(
+            `/v1/users/${this.userId}/`,
+            utils.filterFalsy({
+              display_name: displayName,
+              icon_media_key: iconMediaKey
+            })
+          );
+          this.clearAvatar();
         }
 
-        let displayName =
-          this.displayName != this.userInfo.displayName && this.displayName;
+        if (this.isAuthInfoChanged) {
+          await api.patch(
+            `/v1/users/${this.userId}/`,
+            utils.filterFalsy({
+              password: this.newPassword
+            })
+          );
+          this.newPassword = "";
+          this.newPasswordConfirm = "";
+        }
 
-        await api.patch(
-          `/v1/users/${this.userId}/`,
-          utils.filterFalsy({
-            display_name: displayName,
-            icon_media_key: iconMediaKey
-          })
-        );
+        await this.retrieveUserInfo();
+        this.errorMessage = "";
+        this.isProcessing = false;
+      } catch (error) {
+        this.errorMessage = "エラーが発生しました。";
       }
-
-      if (this.isAuthInfoChanged) {
-        await api.patch(
-          `/v1/users/${this.userId}/`,
-          utils.filterFalsy({
-            password: this.newPassword
-          })
-        );
-        this.newPassword = "";
-        this.newPasswordConfirm = "";
-      }
-
-      this.errorMessage = "";
-      this.retrieveUserInfo();
     },
     uploadImage: async function() {
       try {
