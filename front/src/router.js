@@ -1,13 +1,13 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Index from "./views/Index"
-import Projects from "./views/projects/ListView"
-import ProjectCreator from "./views/projects/CreateView"
-import ProjectEditor from "./views/projects/EditView"
-import Manager from "./views/manage/Home"
-import UserEdit from "./views/UserEdit"
-import Login from "./views/Login"
-import NotFound from "./views/NotFound"
+import Index from "./views/Index";
+import Projects from "./views/projects/ListView";
+import ProjectCreator from "./views/projects/CreateView";
+import ProjectEditor from "./views/projects/EditView";
+import Manager from "./views/manage/Home";
+import UserEdit from "./views/UserEdit";
+import Login from "./views/Login";
+import NotFound from "./views/NotFound";
 import { store } from "./store";
 
 Vue.use(Router);

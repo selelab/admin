@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { KJUR, b64utoutf8 } from 'jsrsasign'
+import { KJUR, b64utoutf8 } from 'jsrsasign';
 import createPersistedState from "vuex-persistedstate";
 import Cookies from 'js-cookie';
 import camelcaseKeys from "camelcase-keys";
