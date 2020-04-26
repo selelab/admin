@@ -30,7 +30,7 @@
         {{ new Date().getFullYear() }} —
         <strong>Sophia Electronics Lab</strong>
         <v-btn icon href="https://github.com/selelab/admin" target="_blank">
-          <v-icon>mdi-github-circle</v-icon>
+          <v-icon>mdi-github</v-icon>
         </v-btn>
       </v-col>
     </v-footer>
