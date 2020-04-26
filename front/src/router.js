@@ -15,6 +15,17 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(savedPosition)
+        })
+      })
+    } else if (!(to.path.startsWith(from.path) || from.path.startsWith(to.path))) {
+      return { x: 0, y: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
