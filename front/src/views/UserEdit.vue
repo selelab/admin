@@ -75,7 +75,7 @@
                   :disabled="isProcessing || !isFormValueChanged"
                   @click="saveChanges"
                 >保存</v-btn>
-                <v-btn color="grey" style="margin: 10px" dark>キャンセル</v-btn>
+                <v-btn color="grey" class="ma-2" dark>キャンセル</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>
@@ -156,7 +156,7 @@
                   :disabled="isProcessing || !isFormValueChanged"
                   @click="saveChanges"
                 >保存</v-btn>
-                <v-btn color="grey" style="margin: 10px" dark>キャンセル</v-btn>
+                <v-btn color="grey" class="ma-2" dark>キャンセル</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>

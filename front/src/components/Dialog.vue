@@ -71,7 +71,7 @@
       <v-card-text
         v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0"
       >
-        <v-divider style="margin: 20px 0"></v-divider>
+        <v-divider class="my-5"></v-divider>
         <h3>購入一覧</h3>
         <div width="100%" max-width="400">
           <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">

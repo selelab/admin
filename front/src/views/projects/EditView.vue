@@ -28,7 +28,7 @@
           :disabled="!readyToEdit || !(isProjectChanged || isBudgetChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
+        <v-btn color="grey" @click="cancelEditing" class="ma-2" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
 
@@ -136,7 +136,7 @@
           :disabled="!readyToEdit || !(isBudgetChanged || isProjectChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
+        <v-btn color="grey" @click="cancelEditing" class="ma-2" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
     <Confirm ref="confirm"></Confirm>

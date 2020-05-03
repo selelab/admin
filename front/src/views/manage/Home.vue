@@ -19,6 +19,7 @@
         <v-icon small color="red" @click="rejectPurchase(item)">mdi-cancel</v-icon>
       </template>
     </v-data-table>
+    <v-divider class="my-5"></v-divider>
     <h3>予算申請・予算超過申請</h3>
     <v-data-table :headers="approvalHeaders" :items="openApprovals" class="elevation-1">
       <template v-slot:item.budget_amount="{ item }">{{ item.budget_amount | addComma }} 円</template>
