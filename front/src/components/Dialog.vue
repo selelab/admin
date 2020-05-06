@@ -1,15 +1,15 @@
 <template>
   <v-dialog v-model="isOpen" @input="v => v || close()" width="640px">
     <v-card class="main">
-      <v-card-text style="padding-top: 20px" v-if="alert && !!error_message">
+      <v-card-text style="padding-top: 20px" v-if="alert && !!errorMessage">
         <v-alert
           v-model="alert"
-          :value="!!error_message"
+          :value="!!errorMessage"
           type="error"
           style="margin: auto;"
           outlined
           dismissible
-        >{{ error_message }}</v-alert>
+        >{{ errorMessage }}</v-alert>
       </v-card-text>
       <v-card-title>
         <span class="headline">{{ project.title }}</span>
@@ -124,7 +124,7 @@ export default {
   data() {
     return {
       isOpen: false,
-      error_message: "",
+      errorMessage: "",
       alert: false,
       purchaseHeaders: [
         {
@@ -205,17 +205,17 @@ export default {
       }
     },
     requestErrorHandler(error) {
-      let error_messages = {
+      let errorMessages = {
         403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
         500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
       };
       if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
+        this.errorMessage =
+          errorMessages[error.response.status] ||
           "正しく処理することができませんでした。管理者へお問い合わせください。";
         this.alert = true;
       } else {
-        this.error_message =
+        this.errorMessage =
           "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
         this.alert = true;
       }
@@ -234,7 +234,7 @@ export default {
               }
             )
           ) {
-            await api.patch(`/v1/api/projects/${this.project.id}/`, {
+            await api.patch(`/v1/projects/${this.project.id}/`, {
               closed: true
             });
           }

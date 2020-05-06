@@ -2,12 +2,12 @@
   <div>
     <v-alert
       v-model="alert"
-      :value="!!error_message"
+      :value="!!errorMessage"
       type="error"
       style="margin: auto; margin-bottom: 30px"
       outlined
       dismissible
-    >{{ error_message }}</v-alert>
+    >{{ errorMessage }}</v-alert>
     <h1>管理画面</h1>
     <h2>承認系</h2>
     <h3>購入報告</h3>
@@ -32,6 +32,22 @@
       </template>
     </v-data-table>
     <h2>運営系</h2>
+    <h3>CSVダウンロード</h3>
+    <v-card>
+      <v-card-text>
+        <v-checkbox
+          v-for="source in csvSources"
+          :key="source.apiPath"
+          v-model="source.download"
+          :label="source.title"
+          required
+        ></v-checkbox>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <CsvExport :sources="downloadCsvSources"></CsvExport>
+      </v-card-actions>
+    </v-card>
     <Confirm ref="confirm"></Confirm>
     <ConfirmWithTextInput ref="confirmWithTextInput"></ConfirmWithTextInput>
   </div>
@@ -43,13 +59,14 @@ import moment from "moment";
 
 import Confirm from "@/components/Confirm";
 import ConfirmWithTextInput from "@/components/ConfirmWithTextInput";
+import CsvExport from "@/components/CsvExport";
 
 export default {
   data() {
     return {
       openApprovals: [],
       openPurchases: [],
-      error_message: "",
+      errorMessage: "",
       alert: false,
       approvalHeaders: [
         {
@@ -118,15 +135,51 @@ export default {
           value: "actions",
           sortable: false
         }
+      ],
+      csvSources: [
+        {
+          apiPath: "/v1/projects/",
+          title: "プロジェクト一覧",
+          header: {
+            title: { title: "プロジェクト名" },
+            description: { title: "説明" },
+            "leader.display_name": { title: "リーダー" },
+            closed: { title: "完了フラグ" },
+            sum_budget: { title: "予算上限額" },
+            sum_purchase_price: { title: "予算支出額" },
+            date_created: { title: "作成日" },
+            date_updated: { title: "最終更新日" }
+          },
+          download: true
+        },
+        {
+          apiPath: "/v1/purchases/",
+          title: "購入品目一覧",
+          header: {
+            title: { title: "購入項目" },
+            "project.title": { title: "プロジェクト" },
+            "project.leader.display_name": { title: "リーダー" },
+            comment: { title: "コメント" },
+            price: { title: "購入金額" },
+            approved: { title: "返金済みフラグ" },
+            date_created: { title: "作成日" }
+          },
+          download: true
+        }
       ]
     };
+  },
+  computed: {
+    downloadCsvSources: function() {
+      return this.csvSources.filter(item => item.download);
+    }
   },
   created() {
     (async () => {
       try {
         this.openApprovals = Array.from(
           (
-            await api.get("/v1/api/approvals/", {
+            await api.get("/v1/approvals/", {
               params: { is_open: true }
             })
           ).data
@@ -134,7 +187,7 @@ export default {
 
         this.openPurchases = Array.from(
           (
-            await api.get("/v1/api/purchases/", {
+            await api.get("/v1/purchases/", {
               params: { is_open: true }
             })
           ).data
@@ -146,17 +199,17 @@ export default {
   },
   methods: {
     requestErrorHandler(error) {
-      let error_messages = {
+      let errorMessages = {
         403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
         500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
       };
       if (error.response) {
-        this.error_message =
-          error_messages[error.response.status] ||
+        this.errorMessage =
+          errorMessages[error.response.status] ||
           "正しく処理することができませんでした。管理者へお問い合わせください。";
         this.alert = true;
       } else {
-        this.error_message =
+        this.errorMessage =
           "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
         this.alert = true;
       }
@@ -185,8 +238,8 @@ export default {
               }
             )
           ) {
-            this.error_message = "";
-            await api.patch(`/v1/api/approvals/${item.id}/`, {
+            this.errorMessage = "";
+            await api.patch(`/v1/approvals/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
             });
@@ -210,8 +263,8 @@ export default {
             }
           );
           if (reason) {
-            this.error_message = "";
-            await api.patch(`/v1/api/approvals/${item.id}/`, {
+            this.errorMessage = "";
+            await api.patch(`/v1/approvals/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
               comment: reason
@@ -237,8 +290,8 @@ export default {
               }
             )
           ) {
-            this.error_message = "";
-            await api.patch(`/v1/api/purchases/${item.id}/`, {
+            this.errorMessage = "";
+            await api.patch(`/v1/purchases/${item.id}/`, {
               approved: true,
               approver: this.$store.getters.getUserId
             });
@@ -262,8 +315,8 @@ export default {
             }
           );
           if (reason) {
-            this.error_message = "";
-            await api.patch(`/v1/api/purchases/${item.id}/`, {
+            this.errorMessage = "";
+            await api.patch(`/v1/purchases/${item.id}/`, {
               approved: false,
               approver: this.$store.getters.getUserId,
               comment: reason
@@ -286,7 +339,8 @@ export default {
   },
   components: {
     Confirm,
-    ConfirmWithTextInput
+    ConfirmWithTextInput,
+    CsvExport
   }
 };
 </script>
