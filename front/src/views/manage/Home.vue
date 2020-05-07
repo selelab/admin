@@ -33,6 +33,22 @@
       </template>
     </v-data-table>
     <h2>運営系</h2>
+    <h3>CSVダウンロード</h3>
+    <v-card>
+      <v-card-text>
+        <v-checkbox
+          v-for="source in csvSources"
+          :key="source.apiPath"
+          v-model="source.download"
+          :label="source.title"
+          required
+        ></v-checkbox>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <CsvExport :sources="downloadCsvSources"></CsvExport>
+      </v-card-actions>
+    </v-card>
     <Confirm ref="confirm"></Confirm>
     <ConfirmWithTextInput ref="confirmWithTextInput"></ConfirmWithTextInput>
   </div>
@@ -45,6 +61,7 @@ import moment from "moment";
 
 import Confirm from "@/components/Confirm";
 import ConfirmWithTextInput from "@/components/ConfirmWithTextInput";
+import CsvExport from "@/components/CsvExport";
 
 export default {
   data() {
@@ -120,8 +137,44 @@ export default {
           value: "actions",
           sortable: false
         }
+      ],
+      csvSources: [
+        {
+          apiPath: "/v1/projects/",
+          title: "プロジェクト一覧",
+          header: {
+            title: { title: "プロジェクト名" },
+            description: { title: "説明" },
+            "leader.display_name": { title: "リーダー" },
+            closed: { title: "完了フラグ" },
+            sum_budget: { title: "予算上限額" },
+            sum_purchase_price: { title: "予算支出額" },
+            date_created: { title: "作成日" },
+            date_updated: { title: "最終更新日" }
+          },
+          download: true
+        },
+        {
+          apiPath: "/v1/purchases/",
+          title: "購入品目一覧",
+          header: {
+            title: { title: "購入項目" },
+            "project.title": { title: "プロジェクト" },
+            "project.leader.display_name": { title: "リーダー" },
+            comment: { title: "コメント" },
+            price: { title: "購入金額" },
+            approved: { title: "返金済みフラグ" },
+            date_created: { title: "作成日" }
+          },
+          download: true
+        }
       ]
     };
+  },
+  computed: {
+    downloadCsvSources: function() {
+      return this.csvSources.filter(item => item.download);
+    }
   },
   created() {
     (async () => {
@@ -278,7 +331,8 @@ export default {
   },
   components: {
     Confirm,
-    ConfirmWithTextInput
+    ConfirmWithTextInput,
+    CsvExport
   }
 };
 </script>

@@ -67,7 +67,7 @@ export default {
           router.push("/projects");
         } catch (error) {
           if (error && error.response) {
-            this.errorMessage = utils.getErrorMessage(error.response);
+            this.errorMessage = utils.getErrorMessage(error.response)
             this.alert = true;
           }
           window.scrollTo({
