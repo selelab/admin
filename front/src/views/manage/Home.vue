@@ -19,6 +19,7 @@
         <v-icon small color="red" @click="rejectPurchase(item)">mdi-cancel</v-icon>
       </template>
     </v-data-table>
+    <v-divider class="my-5"></v-divider>
     <h3>予算申請・予算超過申請</h3>
     <v-data-table :headers="approvalHeaders" :items="openApprovals" class="elevation-1">
       <template v-slot:item.budget_amount="{ item }">{{ item.budget_amount | addComma }} 円</template>
@@ -55,6 +56,7 @@
 
 <script>
 import api from "@/api";
+import * as utils from "@/utils";
 import moment from "moment";
 
 import Confirm from "@/components/Confirm";
@@ -199,18 +201,8 @@ export default {
   },
   methods: {
     requestErrorHandler(error) {
-      let errorMessages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.errorMessage =
-          errorMessages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.errorMessage =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error && error.response) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
       window.scrollTo({

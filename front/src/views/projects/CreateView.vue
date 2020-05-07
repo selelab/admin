@@ -24,6 +24,7 @@
 
 <script>
 import api from "@/api";
+import * as utils from "@/utils";
 import router from "@/router";
 
 export default {
@@ -39,7 +40,7 @@ export default {
       description: "### 概要\n### 予算内訳\n",
       errorMessage: "",
       alert: false,
-      confirm_dialog: false,
+      confirm_dialog: false
     };
   },
   methods: {
@@ -65,18 +66,8 @@ export default {
 
           router.push("/projects");
         } catch (error) {
-          let errorMessages = {
-            403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-          };
-          if (error.response) {
-            this.errorMessage =
-              errorMessages[error.response.status] ||
-              "正しく処理することができませんでした。管理者へお問い合わせください。";
-            this.alert = true;
-          } else {
-            this.errorMessage =
-              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+          if (error && error.response) {
+            this.errorMessage = utils.getErrorMessage(error.response)
             this.alert = true;
           }
           window.scrollTo({

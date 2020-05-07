@@ -64,6 +64,7 @@ import {
 
 import router from "@/router";
 import api from "@/api";
+import * as utils from "@/utils";
 
 setInteractionMode("eager");
 
@@ -88,7 +89,7 @@ const Login = {
       password: "",
       errorMessage: "",
       alert: false,
-      connecting: false,
+      connecting: false
     };
   },
   components: {
@@ -101,10 +102,10 @@ const Login = {
     }
   },
   methods: {
-    login: function() {
+    login: async function() {
       this.connecting = true;
-      api
-        .post("/jwt-token/", {
+      try {
+        const response = await api.post("/jwt-token/", {
           email: this.email,
           password: this.password
         })
@@ -128,6 +129,13 @@ const Login = {
           }
           this.connecting = false;
         });
+        this.$store.dispatch("setJwtToken", response.data.token);
+        router.push(this.$route.query.redirect || "/");
+      } catch (error) {
+        this.errorMessage = utils.getErrorMessage(error.response);
+        this.alert = true;
+      }
+      this.connecting = false;
     },
     clear() {
       this.email = "";

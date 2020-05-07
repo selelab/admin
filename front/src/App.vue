@@ -28,7 +28,7 @@ export default {
 }
 
 .router-content {
-  width: 80%;
+  width: 90%;
   margin: 50px auto 100px;
 }
 

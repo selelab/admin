@@ -21,11 +21,16 @@
     </div>
     <div v-if="!openApprovals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
     <v-row dense>
-      <v-col v-for="(approval,index) in openApprovals" :key="index">
+      <v-col v-for="(approval,index) in openApprovals" :key="index" cols="12" sm="12" md="6" lg="4">
         <v-card height="100%" class="approval.project_card" @click="openDialog(approval.project)">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
-              <img class="card_profile_icon" src="@/assets/shika.jpg" />
+              <img
+                class="card_profile_icon"
+                :src="getIconUrl(approval.project.leader)"
+                v-if="!isDebug"
+              />
+              <img v-else src="@/assets/shika.jpg" />
             </v-list-item-avatar>
             <v-list-item-content class="card_header_text">
               <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
@@ -86,11 +91,16 @@
           v-for="(project,index) in projects"
           :key="index"
           v-show="shCheck[project.accounting_type] && (closedCheck.closed & project.closed || closedCheck.in_progress && !project.closed)"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="4"
         >
           <v-card height="100%" class="project_card" @click="openDialog(project)">
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" src="@/assets/shika.jpg" />
+                <img class="card_profile_icon" :src="getIconUrl(project.leader)" v-if="!isDebug" />
+                <img v-else src="@/assets/shika.jpg" />
               </v-list-item-avatar>
               <v-list-item-content class="card_header_text">
                 <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
@@ -136,6 +146,7 @@
 
 <script>
 import api from "@/api";
+import * as utils from "@/utils";
 import router from "@/router";
 
 import CampaignBox from "@/components/CampaignBox";
@@ -158,8 +169,6 @@ export default {
         in_progress: true
       },
       dialogProject: {},
-      maxlength: 60,
-      maxLines: 4,
       projectOffset: 0
     };
   },
@@ -207,7 +216,8 @@ export default {
         }
         return prev;
       }, defaultApprovalSummary);
-    }
+    },
+    isDebug: () => utils.isDebug()
   },
   created() {
     (async () => {
@@ -255,19 +265,8 @@ export default {
         }
       })();
     },
-    summarize: function(text) {
-      const newLineCount = (text.match(/\n/g) || []).length;
-      if (text.length < this.maxlength && newLineCount < this.maxLines) {
-        return text;
-      } else {
-        return (
-          text
-            .substr(0, this.maxlength - 3)
-            .split("\n")
-            .slice(0, this.maxLines)
-            .join("\n") + "..."
-        );
-      }
+    summarize: function(text, maxLength, maxLines) {
+      return utils.summarize(text, maxLength, maxLines);
     },
     loadProjects: function() {
       (async () => {
@@ -295,12 +294,15 @@ export default {
         }
       })();
     },
+    getIconUrl: function(user) {
+      return utils.getIconUrl(user);
+    },
     onScroll: function() {
       let bottomOfWindow =
         document.documentElement.offsetHeight -
-          (document.documentElement.scrollTop + window.innerHeight) < 10;
+          (document.documentElement.scrollTop + window.innerHeight) <
+        10;
       if (bottomOfWindow) {
-        console.log("bottom");
         this.loadProjects();
       }
     }
@@ -319,10 +321,6 @@ export default {
 .v-card {
   width: 380px;
   margin: auto;
-}
-
-.card_header_text {
-  padding-left: 20px;
 }
 
 .chip_wrapper {

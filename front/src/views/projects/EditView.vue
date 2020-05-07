@@ -23,12 +23,12 @@
 
       <v-select v-model="accounting_type" label="会計種別" :disabled="true" :items="accounting_types"></v-select>
       <v-col class="text-right">
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
         <v-btn
           color="primary"
           :disabled="!readyToEdit || !(isProjectChanged || isBudgetChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
+        <v-btn color="grey" @click="cancelEditing" class="ma-2" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
 
@@ -131,12 +131,12 @@
         suffix="円"
       ></v-text-field>
       <v-col class="text-right">
-        <v-btn color="grey" @click="cancelEditing" style="margin: 10px" dark>キャンセル</v-btn>
         <v-btn
           color="primary"
           :disabled="!readyToEdit || !(isBudgetChanged || isProjectChanged || isPurchaseChanged)"
           @click="updateProject"
         >保存</v-btn>
+        <v-btn color="grey" @click="cancelEditing" class="ma-2" dark>キャンセル</v-btn>
       </v-col>
     </v-form>
     <Confirm ref="confirm"></Confirm>
@@ -147,6 +147,7 @@
 import moment from "moment";
 
 import api from "@/api";
+import * as utils from "@/utils";
 import router from "@/router";
 
 import Confirm from "@/components/Confirm";
@@ -374,18 +375,8 @@ export default {
       }
     },
     requestErrorHandler(error) {
-      let errorMessages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.errorMessage =
-          errorMessages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.errorMessage =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error && error.response) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
       window.scrollTo({

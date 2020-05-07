@@ -31,7 +31,8 @@
       </v-card-title>
       <v-list-item>
         <v-list-item-avatar>
-          <img src="@/assets/shika.jpg" />
+          <img :src="getIconUrl(project.leader)" v-if="!isDebug" />
+          <img v-else src="@/assets/shika.jpg" />
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -70,7 +71,7 @@
       <v-card-text
         v-if="project.detail && project.detail.purchases && project.detail.purchases.length > 0"
       >
-        <v-divider style="margin: 20px 0"></v-divider>
+        <v-divider class="my-5"></v-divider>
         <h3>購入一覧</h3>
         <div width="100%" max-width="400">
           <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
@@ -103,6 +104,7 @@
 <script>
 import api from "@/api";
 import router from "@/router";
+import * as utils from "@/utils";
 import moment from "moment";
 
 import Confirm from "@/components/Confirm";
@@ -170,7 +172,8 @@ export default {
             return val + item.price;
           }, 0)
       );
-    }
+    },
+    isDebug: () => utils.isDebug()
   },
   methods: {
     open: function() {
@@ -194,7 +197,6 @@ export default {
       return "rejected";
     },
     getStatusMessage(item) {
-      console.log(item);
       switch (this.getStatus(item)) {
         case "approved":
           return "承認済み";
@@ -204,19 +206,12 @@ export default {
           return "不承認: " + item.comment;
       }
     },
+    getIconUrl: function(user) {
+      return utils.getIconUrl(user);
+    },
     requestErrorHandler(error) {
-      let errorMessages = {
-        403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
-        500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-      };
-      if (error.response) {
-        this.errorMessage =
-          errorMessages[error.response.status] ||
-          "正しく処理することができませんでした。管理者へお問い合わせください。";
-        this.alert = true;
-      } else {
-        this.errorMessage =
-          "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
+      if (error) {
+        this.errorMessage = utils.getErrorMessage(error.response);
         this.alert = true;
       }
     },
