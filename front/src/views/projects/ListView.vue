@@ -1,5 +1,5 @@
 <template>
-  <div v-scroll="onScroll" id="entire_component">
+  <div v-scroll="onScroll" id="entire-component">
     <h1>プロジェクト</h1>
     <br />
     <CampaignBox text="おめでとうございます！<br>あなたはプロジェクトを申請して最大21億4748万3647円を受け取るチャンスを得ました。"></CampaignBox>
@@ -7,13 +7,13 @@
 
     <ListHeading text="承認待ちプロジェクト" append="/projects/create"></ListHeading>
 
-    <div class="approval_summary_wrapper">
-      <div class="approval_summary" style="float: left">
+    <div class="approval-summary-wrapper">
+      <div class="approval-summary" style="float: left">
         <v-chip x-small chip color="cyan lighten-4">ソフト会計</v-chip>
         <div>{{ openApprovalSummary.soft.count }} プロジェクト</div>
         <div>{{ openApprovalSummary.soft.budget | addComma }} 円</div>
       </div>
-      <div class="approval_summary" style="float: right">
+      <div class="approval-summary" style="float: right">
         <v-chip x-small chip color="orange lighten-4">ハード会計</v-chip>
         <div>{{ openApprovalSummary.hard.count }} プロジェクト</div>
         <div>{{ openApprovalSummary.hard.budget | addComma }} 円</div>
@@ -22,30 +22,30 @@
     <div v-if="!openApprovals.length" style="max-width: 420px; margin: auto">承認待ちのプロジェクトはまだありません</div>
     <v-row dense>
       <v-col v-for="(approval,index) in openApprovals" :key="index" cols="12" sm="12" md="6" lg="4">
-        <v-card height="100%" class="approval.project_card" @click="openDialog(approval.project)">
+        <v-card height="100%" class="approval.project-card" @click="openDialog(approval.project)">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
               <img
-                class="card_profile_icon"
+                class="card-profile-icon"
                 :src="getIconUrl(approval.project.leader)"
                 v-if="!isDebug"
               />
               <img v-else src="@/assets/shika.jpg" />
             </v-list-item-avatar>
-            <v-list-item-content class="card_header_text">
+            <v-list-item-content class="card-header-text">
               <v-list-item-title class="headline">{{ approval.project.title }}</v-list-item-title>
               <v-list-item-subtitle>
                 <v-chip
                   x-small
                   chip
-                  :color="approval.project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                  :color="approval.project.accountingType == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
                   text-color="grey darken-3"
-                  class="chip_wrapper"
-                >{{ approval.project.accounting_type }}</v-chip>
+                  class="chip-wrapper"
+                >{{ approval.project.accountingType }}</v-chip>
                 <v-chip
                   x-small
                   chip
-                  class="chip_wrapper"
+                  class="chip-wrapper"
                 >{{ approval.project.closed ? "完了" : "進行中" }}</v-chip>
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -53,13 +53,13 @@
           <v-card-text>
             <div>
               <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-              {{ approval.project.sum_purchase_price | addComma }}円 /
+              {{ approval.project.sumPurchasePrice | addComma }}円 /
               <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-              {{ approval.project.sum_budget | addComma }}円
+              {{ approval.project.sumBudget | addComma }}円
               +
               <span
-                class="important_text"
-              >{{ approval.budget_amount | addComma }}円</span>
+                class="important-text"
+              >{{ approval.budgetAmount | addComma }}円</span>
             </div>
 
             <br />
@@ -81,47 +81,47 @@
     <label for="soft">SOFT</label>
     <input type="checkbox" id="closed" value="closed" v-model="closedCheck.closed" />
     <label for="closed">完了</label>
-    <input type="checkbox" id="in_progress" value="in_progress" v-model="closedCheck.in_progress" />
-    <label for="in_progress">進行中</label>
+    <input type="checkbox" id="inProgress" value="inProgress" v-model="closedCheck.inProgress" />
+    <label for="inProgress">進行中</label>
     <br />
 
-    <div class="project_list">
+    <div class="project-list">
       <v-row dense>
         <v-col
           v-for="(project,index) in projects"
           :key="index"
-          v-show="shCheck[project.accounting_type] && (closedCheck.closed & project.closed || closedCheck.in_progress && !project.closed)"
+          v-show="shCheck[project.accountingType] && (closedCheck.closed & project.closed || closedCheck.inProgress && !project.closed)"
           cols="12"
           sm="12"
           md="6"
           lg="4"
         >
-          <v-card height="100%" class="project_card" @click="openDialog(project)">
+          <v-card height="100%" class="project-card" @click="openDialog(project)">
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" :src="getIconUrl(project.leader)" v-if="!isDebug" />
+                <img class="card-profile-icon" :src="getIconUrl(project.leader)" v-if="!isDebug" />
                 <img v-else src="@/assets/shika.jpg" />
               </v-list-item-avatar>
-              <v-list-item-content class="card_header_text">
+              <v-list-item-content class="card-header-text">
                 <v-list-item-title class="headline">{{ project.title }}</v-list-item-title>
                 <v-list-item-subtitle>
                   <v-chip
                     x-small
                     chip
-                    :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+                    :color="project.accountingType == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
                     text-color="grey darken-3"
-                    class="chip_wrapper"
-                  >{{ project.accounting_type }}</v-chip>
-                  <v-chip v-if="!project.closed" x-small chip class="chip_wrapper">進行中</v-chip>
+                    class="chip-wrapper"
+                  >{{ project.accountingType }}</v-chip>
+                  <v-chip v-if="!project.closed" x-small chip class="chip-wrapper">進行中</v-chip>
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-card-text>
               <div>
                 <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-                {{ project.sum_purchase_price | addComma }}円 /
+                {{ project.sumPurchasePrice | addComma }}円 /
                 <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-                {{ project.sum_budget | addComma }}円
+                {{ project.sumBudget | addComma }}円
               </div>
 
               <br />
@@ -166,7 +166,7 @@ export default {
       },
       closedCheck: {
         closed: true,
-        in_progress: true
+        inProgress: true
       },
       dialogProject: {},
       projectOffset: 0
@@ -207,12 +207,12 @@ export default {
         return defaultApprovalSummary;
       }
       return this.openApprovals.reduce((prev, item) => {
-        if (item.project.accounting_type === "soft") {
+        if (item.project.accountingType === "soft") {
           prev.soft.count += 1;
-          prev.soft.budget += item.budget_amount;
+          prev.soft.budget += item.budgetAmount;
         } else {
           prev.hard.count += 1;
-          prev.hard.budget += item.budget_amount;
+          prev.hard.budget += item.budgetAmount;
         }
         return prev;
       }, defaultApprovalSummary);
@@ -223,16 +223,20 @@ export default {
     (async () => {
       try {
         this.openApprovals = Array.from(
-          (
-            await api.get("/v1/approvals/", {
-              params: { is_open: true }
-            })
-          ).data
+          utils.camelize(
+            (
+              await api.get("/v1/approvals/", {
+                params: { is_open: true }
+              })
+            ).data
+          )
         );
         this.loadProjects();
         if (this.dialogProjectId) {
           this.openDialog(
-            (await api.get(`/v1/projects/${this.dialogProjectId}/`)).data
+            utils.camelize(
+              (await api.get(`/v1/projects/${this.dialogProjectId}/`)).data
+            )
           );
         }
       } catch (error) {
@@ -251,12 +255,12 @@ export default {
         try {
           let dialog_project = this.dialogProject;
 
-          dialog_project.detail = (
-            await api.get(`/v1/projects/${project.id}/`)
-          ).data;
+          dialog_project.detail = utils.camelize(
+            (await api.get(`/v1/projects/${project.id}/`)).data
+          );
 
           if (project.leader) {
-            dialog_project.leader_detail = project.leader;
+            dialog_project.leaderDetail = project.leader;
           }
 
           this.$set(this.dialogProject, dialog_project);
@@ -272,11 +276,13 @@ export default {
       (async () => {
         try {
           let projects = Array.from(
-            (
-              await api.get("/v1/projects/", {
-                params: { limit: 10, offset: this.projectOffset }
-              })
-            ).data.results
+            utils.camelize(
+              (
+                await api.get("/v1/projects/", {
+                  params: { limit: 10, offset: this.projectOffset }
+                })
+              ).data.results
+            )
           );
           projects.forEach(() => {
             this.isShow.push(false);
@@ -323,34 +329,30 @@ export default {
   margin: auto;
 }
 
-.chip_wrapper {
+.chip-wrapper {
   padding: 8px;
   margin: 2px;
 }
-.chip_icon {
+.chip-icon {
   margin-right: 4px;
 }
 
-.project_card {
+.project-card {
   position: relative;
   padding-bottom: 50px;
 }
 
-.card_actions {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
 
-.project_list {
+
+.project-list {
   margin: auto;
 }
 
-.important_text {
+.important-text {
   font-weight: 900;
 }
 
-.approval_summary_wrapper {
+.approval-summary-wrapper {
   height: 120px;
   max-width: 380px;
   margin: auto;
@@ -358,7 +360,7 @@ export default {
   padding-bottom: 10px;
 }
 
-.approval_summary {
+.approval-summary {
   width: 50%;
   max-width: 320px;
 }

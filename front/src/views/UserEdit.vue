@@ -87,9 +87,9 @@
             </v-list-item>
             <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
-                <img class="card_profile_icon" :src="croppedImage" v-if="!!croppedImage" />
-                <img class="card_profile_icon" :src="getIconUrl(userInfo)" v-else-if="!isDebug" />
-                <img class="card_profile_icon" src="@/assets/shika.jpg" v-else />
+                <img class="card-profile-icon" :src="croppedImage" v-if="!!croppedImage" />
+                <img class="card-profile-icon" :src="getIconUrl(userInfo)" v-else-if="!isDebug" />
+                <img class="card-profile-icon" src="@/assets/shika.jpg" v-else />
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">{{displayName}}</v-list-item-title>

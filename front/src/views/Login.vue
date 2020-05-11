@@ -108,28 +108,10 @@ const Login = {
         const response = await api.post("/jwt-token/", {
           email: this.email,
           password: this.password
-        })
-        .then(response => {
-          this.$store.commit("setJwtToken", response.data.token);
-          router.push(this.$route.query.redirect || "/");
-        })
-        .catch(error => {
-          let errorMessages = {
-            400: "メールアドレスまたはパスワードが正しくありません。",
-            500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
-          };
-          console.log(error);
-          if (error.response) {
-            this.errorMessage = errorMessages[error.response.status];
-            this.alert = true;
-          } else {
-            this.errorMessage =
-              "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
-            this.alert = true;
-          }
-          this.connecting = false;
         });
-        this.$store.dispatch("setJwtToken", response.data.token);
+        await this.$store.commit("setJwtToken", response.data.token);
+        await this.$store.dispatch("retrieveUserInfo");
+
         router.push(this.$route.query.redirect || "/");
       } catch (error) {
         this.errorMessage = utils.getErrorMessage(error.response);

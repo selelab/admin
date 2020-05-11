@@ -18,11 +18,11 @@
             <v-chip
               x-small
               chip
-              :color="project.accounting_type == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
+              :color="project.accountingType == 'soft' ? 'cyan lighten-4' : 'orange lighten-4'"
               text-color="grey darken-3"
-              class="chip_wrapper"
-            >{{ project.accounting_type }}</v-chip>
-            <v-chip x-small chip class="chip_wrapper">{{ project.closed ? "完了" : "進行中" }}</v-chip>
+              class="chip-wrapper"
+            >{{ project.accountingType }}</v-chip>
+            <v-chip x-small chip class="chip-wrapper">{{ project.closed ? "完了" : "進行中" }}</v-chip>
           </div>
         </v-list-item-subtitle>
         <v-btn icon absolute right :to="editPath" v-if="editable">
@@ -43,21 +43,21 @@
       </v-list-item>
 
       <v-card-text>
-        <div class="top_chips">
+        <div class="top-chips">
           <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-          {{ project.sum_purchase_price | addComma }}円
+          {{ project.sumPurchasePrice | addComma }}円
         </div>
-        <div class="top_chips">
+        <div class="top-chips">
           <v-chip x-small chip color="orange lighten-3">返金済</v-chip>
           {{ sumReturned | addComma }}円
         </div>
-        <div class="top_chips">
+        <div class="top-chips">
           <v-chip x-small chip color="red lighten-2" style="color: white">上限</v-chip>
-          {{ project.sum_budget | addComma }}円
+          {{ project.sumBudget | addComma }}円
         </div>
-        <div class="top_chips" v-if="project.detail && project.detail.sum_req_budget">
+        <div class="top-chips" v-if="project.detail && project.detail.sumReqBudget">
           <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
-          {{ project.detail.sum_req_budget | addComma }}円
+          {{ project.detail.sumReqBudget | addComma }}円
         </div>
         <br />
         <br />
@@ -75,7 +75,7 @@
         <h3>購入一覧</h3>
         <div width="100%" max-width="400">
           <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
-            <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+            <template v-slot:item.dateCreated="{ item }">{{ getDateText(item.dateCreated) }}</template>
             <template v-slot:item.status="{ item }">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -142,7 +142,7 @@ export default {
         {
           text: "申請日",
           align: "center",
-          value: "date_created"
+          value: "dateCreated"
         },
         {
           text: "状態",
@@ -156,8 +156,8 @@ export default {
     projectLeaderName: function() {
       return (
         (this.project &&
-          this.project.leader_detail &&
-          this.project.leader_detail.display_name) ||
+          this.project.leaderDetail &&
+          this.project.leaderDetail.displayName) ||
         "リーダーはまだいません。"
       );
     },
@@ -247,7 +247,7 @@ export default {
 </script>
 
 <style scoped>
-.top_chips {
+.top-chips {
   width: 100%;
   max-width: 140px;
   padding-left: 10px;

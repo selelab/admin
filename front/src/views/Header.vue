@@ -11,7 +11,8 @@
         <template v-slot:activator="{ on }">
           <v-btn class="mx-1" dark icon v-on="on">
             <v-avatar size="36" color="grey darken-3" v-if="hasValidJwtToken">
-              <img class="card_profile_icon" src="@/assets/shika.jpg" />
+              <img class="card-profile-icon" :src="getIconUrl(userInfo)" v-if="!isDebug" />
+              <img class="card-profile-icon" src="@/assets/shika.jpg" v-else />
             </v-avatar>
           </v-btn>
         </template>
@@ -20,7 +21,8 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
-                <img class="card_profile_icon" src="@/assets/shika.jpg" />
+                <img class="card-profile-icon" :src="getIconUrl(userInfo)" v-if="!isDebug" />
+                <img class="card-profile-icon" src="@/assets/shika.jpg" v-else />
               </v-list-item-avatar>
             </v-list-item>
 
@@ -80,6 +82,7 @@
 
 <script>
 import router from "@/router";
+import * as utils from "@/utils";
 
 export default {
   data: () => ({
@@ -90,6 +93,7 @@ export default {
     group: null
   }),
   computed: {
+    isDebug: () => utils.isDebug(),
     hasValidJwtToken() {
       return this.$store.getters.hasValidJwtToken;
     },
@@ -109,6 +113,9 @@ export default {
     }
   },
   methods: {
+    getIconUrl: function(user) {
+      return utils.getIconUrl(user);
+    },
     changeAuth: function() {
       if (this.hasValidJwtToken) {
         this.$store.dispatch("setJwtToken", undefined);

@@ -21,7 +21,7 @@
         label="プロジェクト説明"
       ></v-textarea>
 
-      <v-select v-model="accounting_type" label="会計種別" :disabled="true" :items="accounting_types"></v-select>
+      <v-select v-model="accountingType" label="会計種別" :disabled="true" :items="accountingTypes"></v-select>
       <v-col class="text-right">
         <v-btn
           color="primary"
@@ -41,11 +41,11 @@
         </v-btn>
       </h3>
 
-      <div class="top_chips">
+      <div class="top-chips">
         <v-chip x-small chip color="amber lighten-4">支出</v-chip>
-        {{ formerProjectInfo.sum_purchase_price | addComma }}円
+        {{ formerProjectInfo.sumPurchasePrice | addComma }}円
       </div>
-      <div class="top_chips">
+      <div class="top-chips">
         <v-chip x-small chip color="orange lighten-3">返金済</v-chip>
         {{ sumReturned | addComma }}円
       </div>
@@ -85,7 +85,7 @@
             :disabled="!!(item.approver || item.approved)"
           ></v-text-field>
         </template>
-        <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
+        <template v-slot:item.dateCreated="{ item }">{{ getDateText(item.dateCreated) }}</template>
         <template v-slot:item.status="{ item }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
@@ -111,23 +111,23 @@
       </v-data-table>
 
       <h3>予算上限</h3>
-      <div class="top_chips">
+      <div class="top-chips">
         <v-chip x-small chip color="red lighten-2" style="color: white">予算上限額</v-chip>
-        {{ formerProjectInfo.sum_budget | addComma }} 円
+        {{ formerProjectInfo.sumBudget | addComma }} 円
         <div
           style="display: inline-block"
-          v-if="formerProjectInfo.sum_req_budget"
-        >−(承認後)→ {{ formerProjectInfo.sum_budget + formerProjectInfo.sum_req_budget | addComma }} 円</div>
+          v-if="formerProjectInfo.sumReqBudget"
+        >−(承認後)→ {{ formerProjectInfo.sumBudget + formerProjectInfo.sumReqBudget | addComma }} 円</div>
       </div>
-      <div class="top_chips" v-if="formerProjectInfo.sum_req_budget">
+      <div class="top-chips" v-if="formerProjectInfo.sumReqBudget">
         <v-chip x-small chip color="green lighten-2" style="color: white">未承認</v-chip>
-        {{ formerProjectInfo.sum_req_budget | addComma }}円
+        {{ formerProjectInfo.sumReqBudget | addComma }}円
       </div>
 
       <v-text-field
         v-model="budgetInfo.additionalBudgetAmount"
         type="number"
-        :label="formerProjectInfo.sum_req_budget ? '変更後の超過申請' : '追加予算上限'"
+        :label="formerProjectInfo.sumReqBudget ? '変更後の超過申請' : '追加予算上限'"
         suffix="円"
       ></v-text-field>
       <v-col class="text-right">
@@ -157,8 +157,8 @@ export default {
     return {
       title: "",
       budget: 0,
-      accounting_type: "",
-      accounting_types: [
+      accountingType: "",
+      accountingTypes: [
         { text: "ソフトウェア会計", value: "soft" },
         { text: "ハードウェア会計", value: "hard" }
       ],
@@ -166,7 +166,6 @@ export default {
       errorMessage: "",
       alert: false,
       readyToEdit: false,
-      confirm_dialog: false,
       formerProjectInfo: {},
       purchases: [],
       budgetInfo: {
@@ -189,7 +188,7 @@ export default {
         {
           text: "申請日",
           align: "center",
-          value: "date_created"
+          value: "dateCreated"
         },
         {
           text: "状態",
@@ -219,7 +218,7 @@ export default {
     isBudgetChanged: function() {
       if (
         this.budgetInfo.additionalBudgetAmount !=
-        this.formerProjectInfo.sum_req_budget
+        this.formerProjectInfo.sumReqBudget
       )
         return true;
 
@@ -297,9 +296,9 @@ export default {
         ).data;
 
         this.title = this.formerProjectInfo.title;
-        this.accounting_type = this.formerProjectInfo.accounting_type;
+        this.accountingType = this.formerProjectInfo.accountingType;
         this.description = this.formerProjectInfo.description;
-        this.budgetInfo.additionalBudgetAmount = this.formerProjectInfo.sum_req_budget;
+        this.budgetInfo.additionalBudgetAmount = this.formerProjectInfo.sumReqBudget;
         this.readyToEdit = true;
         if (this.formerProjectInfo.purchases)
           this.purchases = JSON.parse(
@@ -392,7 +391,7 @@ export default {
               (acc, item) => acc + parseInt(item.price),
               0
             );
-            if (sumPurchasePrice > this.formerProjectInfo.sum_budget) {
+            if (sumPurchasePrice > this.formerProjectInfo.sumBudget) {
               this.errorMessage =
                 "予算上限値を超えて購入を報告することはできません。";
               this.alert = true;

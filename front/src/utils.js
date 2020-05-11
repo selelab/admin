@@ -2,6 +2,7 @@
 import Axios from "axios";
 
 import api from "@/api";
+import camelcaseKeys from "camelcase-keys";
 
 const uploadImage = async function (data, contentType, onUploadProgress) {
   const storagingInfo = (
@@ -49,8 +50,8 @@ const isDebug = () => {
 }
 
 const getIconUrl = function (user) {
-  if (!(user && user.icon_media_key)) return "";
-  return `https://static.selelab.com/profile-images/${user.icon_media_key}`
+  if (!(user && user.iconMediaKey)) return "";
+  return `https://static.selelab.com/profile-images/${user.iconMediaKey}`
 }
 
 const getErrorMessage = function (response) {
@@ -85,6 +86,10 @@ const scrollToElementById = function (id) {
   });
 }
 
+const camelize = (obj) =>
+  camelcaseKeys(obj, { deep: true })
+
+
 export {
   uploadImage,
   getIconUrl,
@@ -93,5 +98,6 @@ export {
   getErrorMessage,
   notBlankValidation,
   filterFalsy,
-  scrollToElementById
+  scrollToElementById,
+  camelize
 }

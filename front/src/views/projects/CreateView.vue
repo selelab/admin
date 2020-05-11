@@ -13,10 +13,10 @@
       <v-text-field v-model="title" label="プロジェクト名" required></v-text-field>
       <v-textarea v-model="description" outlined required name="input-7-4" label="プロジェクト説明"></v-textarea>
 
-      <v-select v-model="accounting_type" label="会計種別" :items="accounting_types"></v-select>
+      <v-select v-model="accountingType" label="会計種別" :items="accountingTypes"></v-select>
       <v-text-field v-model="budget" type="number" label="予算上限額" suffix="円"></v-text-field>
       <v-col class="text-right">
-        <v-btn color="primary" @click="create_project">申請</v-btn>
+        <v-btn color="primary" @click="createProject">申請</v-btn>
       </v-col>
     </v-form>
   </div>
@@ -32,30 +32,29 @@ export default {
     return {
       title: "",
       budget: 0,
-      accounting_type: "",
-      accounting_types: [
+      accountingType: "",
+      accountingTypes: [
         { text: "ソフトウェア会計", value: "soft" },
         { text: "ハードウェア会計", value: "hard" }
       ],
       description: "### 概要\n### 予算内訳\n",
       errorMessage: "",
       alert: false,
-      confirm_dialog: false
     };
   },
   methods: {
-    create_project: function() {
+    createProject: function() {
       (async () => {
         try {
-          let create_project_result = await api.post("/v1/projects/", {
+          let createProject_result = await api.post("/v1/projects/", {
             title: this.title,
             description: this.description,
-            accounting_type: this.accounting_type,
+            accounting_type: this.accountingType,
             leader: this.$store.getters.getUserId
           });
 
           if (this.budget && this.budget > 0) {
-            let project = create_project_result.data.id;
+            let project = createProject_result.data.id;
 
             await api.post("/v1/approvals/", {
               approver: null,
