@@ -61,9 +61,8 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    setJwtToken(context, payload) {
-      context.commit('setJwtToken', payload);
-      context.dispatch('retrieveUserInfo')
+    async setJwtToken(context, payload) {
+      await context.commit('setJwtToken', payload);
     },
     async retrieveUserInfo(context) {
       if (!context.getters.getUserId) return null;
