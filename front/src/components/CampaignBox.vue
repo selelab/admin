@@ -1,5 +1,5 @@
 <template>
-  <div class="campaign_box">
+  <div class="campaign-box">
     <br />
     <p v-html="text"></p>
     <router-link to="/projects/create" class="button">
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style>
-.campaign_box {
+.campaign-box {
   height: 250px;
   width: 100%;
   max-width: 380px;
@@ -31,7 +31,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.campaign_box .button {
+.campaign-box .button {
   box-shadow: inset 0px 3px 0px 0px #cf866c;
   background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
   background-color: #d0451b;
@@ -46,12 +46,12 @@ export default {
   text-shadow: 0px 1px 0px #854629;
 }
 
-.campaign_box .button:hover {
+.campaign-box .button:hover {
   background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
   background-color: #bc3315;
 }
 
-.campaign_box .button:active {
+.campaign-box .button:active {
   position: relative;
   top: 1px;
 }
