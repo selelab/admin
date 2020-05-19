@@ -150,6 +150,7 @@ export default {
   },
   mounted: function() {
     window.addEventListener("resize", this.handleResize);
+    this.$store.dispatch("retrieveUserInfo");
   },
   beforeDestroy: function() {
     window.removeEventListener("resize", this.handleResize);
