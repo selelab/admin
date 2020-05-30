@@ -11,6 +11,7 @@ services:
       - ../contests/front/dist:/var/contests/dist/
       - ../web/build:/var/react
       - ./front/dist:/var/admin-front
+      - $SANDBOX_DIRECTORY_PATH:/var/sandbox
     depends_on:
       - api
     restart: always
