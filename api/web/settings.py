@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'web',
-    'corsheaders',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +72,13 @@ LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
 LOGIN_URL = FORCE_SCRIPT_NAME + '/api-auth/login'
 LOGOUT_URL = FORCE_SCRIPT_NAME + '/api-auth/logout'
 STATIC_URL = '/dj-static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'apptest'
+EMAIL_HOST_PASSWORD = 'xxxxxxxx'
+EMAIL_USE_TLS = False
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
