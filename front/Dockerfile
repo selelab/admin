@@ -5,8 +5,10 @@ RUN apk update && \
     npm install -g @vue/cli
 
 WORKDIR /app
-ADD package*.json /app
-ADD yarn.lock /app
+ADD package*.json ./
+ADD yarn.lock ./
 RUN yarn install
+ADD . ./
+RUN yarn build
 
 CMD ["yarn", "run", "serve"]

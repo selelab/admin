@@ -1,5 +1,16 @@
 version: "3"
 services:
+  front:
+    build:
+      context: front
+    environment:
+      LOCAL_ADDRESS: $LOCAL_ADDRESS
+    ports:
+      - 8080:8080
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+      - admin-front:/app/dist
   web_server:
     build:
       context: server
@@ -13,7 +24,7 @@ services:
       - ../contests/static:/var/contests/static/
       - ../contests/front/dist:/var/contests/dist/
       - ../web/build:/var/react
-      - ./front/dist:/var/admin-front
+      - admin-front:/var/admin-front
       - $SANDBOX_DIRECTORY_PATH:/var/sandbox
     depends_on:
       - api
@@ -25,3 +36,6 @@ services:
       > /etc/nginx/nginx.conf
       && nginx -g 'daemon off;'"
     restart: always
+volumes:
+  admin-front:
+    driver: local
