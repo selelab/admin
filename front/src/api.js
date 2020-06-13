@@ -4,7 +4,7 @@ import { store } from './store'
 
 var api = Axios.create({
   // axiosインスタンスの作成
-  baseURL: location.protocol + '//' + location.hostname + '/api/admin',
+  baseURL: '/api/admin',
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'

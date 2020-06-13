@@ -1,29 +1,5 @@
 version: "3"
 services:
-  web_server:
-    build:
-      context: server
-    environment:
-      LOCAL_ADDRESS: $LOCAL_ADDRESS
-    ports:
-      - "80:80"
-    volumes:
-      - ./static:/var/static/api/admin/
-      - ../contests/static:/var/contests/static/
-      - ../contests/front/dist:/var/contests/dist/
-      - ../web/build:/var/react
-      - ./front/dist:/var/admin-front
-      - $SANDBOX_DIRECTORY_PATH:/var/sandbox
-    depends_on:
-      - api
-    command: >
-      /bin/sh -c
-      "envsubst '
-      $$LOCAL_ADDRESS
-      '< /etc/nginx/nginx.conf.template
-      > /etc/nginx/nginx.conf
-      && nginx -g 'daemon off;'"
-    restart: always
   api:
     build:
       context: api
