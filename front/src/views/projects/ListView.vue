@@ -169,7 +169,8 @@ export default {
         inProgress: true
       },
       dialogProject: {},
-      projectOffset: 0
+      projectOffset: 0,
+      isLoading: false
     };
   },
   watch: {
@@ -274,6 +275,7 @@ export default {
     },
     loadProjects: function() {
       (async () => {
+        this.isLoading = true;
         try {
           let projects = Array.from(
             utils.camelize(
@@ -298,6 +300,7 @@ export default {
         } catch (error) {
           console.log(error);
         }
+        this.isLoading = false;
       })();
     },
     getIconUrl: function(user) {
@@ -308,7 +311,7 @@ export default {
         document.documentElement.offsetHeight -
           (document.documentElement.scrollTop + window.innerHeight) <
         10;
-      if (bottomOfWindow) {
+      if (!this.isLoading && bottomOfWindow) {
         this.loadProjects();
       }
     }
