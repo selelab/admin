@@ -277,26 +277,29 @@ export default {
       const loader = async () => {
         this.isLoading = true;
         try {
+          const offset = this.projectOffset;
           let projects = Array.from(
             utils.camelize(
               (
                 await api.get("/v1/projects/", {
-                  params: { limit: 10, offset: this.projectOffset }
+                  params: { limit: 10, offset }
                 })
               ).data.results
             )
           );
-          projects.forEach(() => {
-            this.isShow.push(false);
-          });
-          Array.prototype.push.apply(this.projects, projects);
-          let approvalable_project_ids = new Set(
-            this.openApprovals.map(approval => approval.project.id)
-          );
-          this.projects = this.projects.filter(
-            project => !approvalable_project_ids.has(project.id)
-          );
-          this.projectOffset += projects.length;
+          if (offset == this.projectOffset) {
+            projects.forEach(() => {
+              this.isShow.push(false);
+            });
+            Array.prototype.push.apply(this.projects, projects);
+            let approvalable_project_ids = new Set(
+              this.openApprovals.map(approval => approval.project.id)
+            );
+            this.projects = this.projects.filter(
+              project => !approvalable_project_ids.has(project.id)
+            );
+            this.projectOffset += projects.length;
+          }
         } catch (error) {
           console.log(error);
         }

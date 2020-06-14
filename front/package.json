@@ -27,12 +27,13 @@
     "vue-router": "*",
     "vuetify": "*",
     "vuex": "*",
-    "vuex-persistedstate": "*"
-  },
-  "devDependencies": {
+    "vuex-persistedstate": "*",
     "@vue/cli-plugin-babel": "~4.4.4",
     "@vue/cli-plugin-eslint": "~4.4.4",
     "@vue/cli-service": "~4.4.4",
+    "@vue/cli-shared-utils": "~4.4.4"
+  },
+  "devDependencies": {
     "babel-eslint": "*",
     "eslint": "*",
     "eslint-plugin-vue": "*",

@@ -5,6 +5,8 @@ services:
       context: front
     environment:
       LOCAL_ADDRESS: $LOCAL_ADDRESS
+    ports:
+      - 8080:8080
     volumes:
       - ./front:/app
       - /app/node_modules
@@ -21,7 +23,6 @@ services:
       - ../contests/static:/var/contests/static/
       - ../contests/front/dist:/var/contests/dist/
       - ../web/build:/var/react
-      - ./front/dist:/var/admin-front
       - $SANDBOX_DIRECTORY_PATH:/var/sandbox
     depends_on:
       - api
