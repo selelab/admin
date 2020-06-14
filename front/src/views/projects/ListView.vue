@@ -274,7 +274,7 @@ export default {
       return utils.summarize(text, maxLength, maxLines);
     },
     loadProjects: function() {
-      (async () => {
+      const loader = async () => {
         this.isLoading = true;
         try {
           let projects = Array.from(
@@ -301,7 +301,9 @@ export default {
           console.log(error);
         }
         this.isLoading = false;
-      })();
+      };
+
+      if (!this.isLoading) loader();
     },
     getIconUrl: function(user) {
       return utils.getIconUrl(user);
