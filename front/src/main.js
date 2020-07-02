@@ -38,7 +38,7 @@ new Vue({
         dark: false,
       },
       options: {
-          customProperties: true,
+        customProperties: true,
       },
     }
   }),
