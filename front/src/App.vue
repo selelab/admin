@@ -17,8 +17,8 @@ import Footer from "./views/Footer";
 export default {
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
