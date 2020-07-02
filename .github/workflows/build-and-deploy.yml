@@ -8,26 +8,22 @@ on:
 
 jobs:
   build:
-    defaults:
-      run:
-        shell: bash
-        working-directory: front
-    name: Build and Deploy
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: install
+          cmd: --cwd front install
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: build
+          cmd: --cwd front build
       - name: Publish to AWS S3
         uses: opspresso/action-s3-sync@master
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: "ap-northeast-1"
-          FROM_PATH: "./build/"
+          FROM_PATH: "./front/build/"
           DEST_PATH: ${{ secrets.AWS_BUCKET_NAME }}
           OPTIONS: "--follow-symlinks --delete"
