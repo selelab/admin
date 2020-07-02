@@ -1,16 +1,5 @@
 version: "3"
 services:
-  front:
-    build:
-      context: front
-    environment:
-      LOCAL_ADDRESS: $LOCAL_ADDRESS
-    ports:
-      - 8080:8080
-    command: /bin/sh -c "yarn build"
-    volumes:
-      - ./front:/app
-      - /app/node_modules
   web_server:
     build:
       context: server
@@ -21,10 +10,6 @@ services:
       - "80:80"
     volumes:
       - ./static:/var/static/api/admin/
-      - ../contests/static:/var/contests/static/
-      - ../contests/front/dist:/var/contests/dist/
-      - ../web/build:/var/react
-      - ./front:/var/admin-front
       - $SANDBOX_DIRECTORY_PATH:/var/sandbox
     depends_on:
       - api
