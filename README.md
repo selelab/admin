@@ -61,11 +61,13 @@
     ```
   - なお、このままだとユーザーが作られておらず、何もできないので以下のようにseedを走らせてください。
     ```bash
+    docker-compose run --entrypoint '' api pipenv run python manage.py migrate
     docker-compose run --entrypoint '' api pipenv run python manage.py loaddata seed_auth.json seed_accounting.json
     ```
   - また、開発用のVueを立ち上げるには、以下のコマンドを実行してください。デフォルトでは http://localhost:8080/admin で立ち上がります。
     ```bash
     cd front
+    yarn install
     yarn serve
     ```
 
