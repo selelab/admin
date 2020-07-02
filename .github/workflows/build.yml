@@ -5,6 +5,8 @@ on:
       - master
     paths:
       - 'front/**'
+      - '.github/workflows/build.yml'
+      - '.github/workflows/build-and-deploy.yml'
 
 jobs:
   build:
