@@ -9,6 +9,10 @@
   },
   "dependencies": {
     "@mdi/font": "*",
+    "@vue/cli-plugin-babel": "~4.4.4",
+    "@vue/cli-plugin-eslint": "~4.4.4",
+    "@vue/cli-service": "~4.4.4",
+    "@vue/cli-shared-utils": "~4.4.4",
     "axios": "*",
     "camelcase-keys": "^6.2.2",
     "core-js": "*",
@@ -27,11 +31,7 @@
     "vue-router": "*",
     "vuetify": "*",
     "vuex": "*",
-    "vuex-persistedstate": "*",
-    "@vue/cli-plugin-babel": "~4.4.4",
-    "@vue/cli-plugin-eslint": "~4.4.4",
-    "@vue/cli-service": "~4.4.4",
-    "@vue/cli-shared-utils": "~4.4.4"
+    "vuex-persistedstate": "*"
   },
   "devDependencies": {
     "babel-eslint": "*",
