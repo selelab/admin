@@ -8,9 +8,12 @@ services:
       LOCAL_ADDRESS: $LOCAL_ADDRESS
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./static:/var/static/api/admin/
       - $SANDBOX_DIRECTORY_PATH:/var/sandbox
+      - /var/www/letsencrypt-webroot:/var/www/letsencrypt-webroot
+      - /etc/letsencrypt/archive/api.selelab.com:/etc/letsencrypt/live/api.selelab.com
     depends_on:
       - api
     command: >

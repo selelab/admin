@@ -3,8 +3,7 @@ import Axios from 'axios'
 import { store } from './store'
 
 var api = Axios.create({
-  // axiosインスタンスの作成
-  baseURL: '/api/admin',
+  baseURL: 'https://api.selelab.com/api/admin',
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
