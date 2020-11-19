@@ -13,7 +13,8 @@ services:
       - ./static:/var/static/api/admin/
       - $SANDBOX_DIRECTORY_PATH:/var/sandbox
       - /var/www/letsencrypt-webroot:/var/www/letsencrypt-webroot
-      - /etc/letsencrypt/archive/api.selelab.com:/etc/letsencrypt/live/api.selelab.com
+      - /etc/letsencrypt/live/api.selelab.com/fullchain.pem:/etc/letsencrypt/live/api.selelab.com/fullchain.pem
+      - /etc/letsencrypt/live/api.selelab.com/privkey.pem:/etc/letsencrypt/live/api.selelab.com/privkey.pem
     depends_on:
       - api
     command: >
