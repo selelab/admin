@@ -3,7 +3,7 @@
     <h1>ユーザー管理</h1>
 
     <v-data-table :headers="listUserHeaders" :items="listUsers" class="elevation-1">
-      <template v-slot:item.email="{ item }">
+      <template v-slot:[`item.email`]="{ item }">
         <v-text-field
           v-model="item.email"
           style="height: 40px"

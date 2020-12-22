@@ -12,9 +12,9 @@
     <h2>承認系</h2>
     <h3>購入報告</h3>
     <v-data-table :headers="purchaseHeaders" :items="openPurchases" class="elevation-1">
-      <template v-slot:item.price="{ item }">{{ item.price | addComma }} 円</template>
-      <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:[`item.price`]="{ item }">{{ item.price | addComma }} 円</template>
+      <template v-slot:[`item.date_created`]="{ item }">{{ getDateText(item.date_created) }}</template>
+      <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" color="green" @click="approvePurchase(item)">mdi-check</v-icon>
         <v-icon small color="red" @click="rejectPurchase(item)">mdi-cancel</v-icon>
       </template>
@@ -22,12 +22,12 @@
     <v-divider class="my-5"></v-divider>
     <h3>予算申請・予算超過申請</h3>
     <v-data-table :headers="approvalHeaders" :items="openApprovals" class="elevation-1">
-      <template v-slot:item.budget_amount="{ item }">{{ item.budget_amount | addComma }} 円</template>
+      <template v-slot:[`item.budget_amount`]="{ item }">{{ item.budget_amount | addComma }} 円</template>
       <template
-        v-slot:item.project.sum_budget="{ item }"
+        v-slot:[`item.project.sum_budget`]="{ item }"
       >{{ item.project.sum_budget | addComma }} → {{ item.project.sum_budget + item.budget_amount | addComma }} 円</template>
-      <template v-slot:item.date_created="{ item }">{{ getDateText(item.date_created) }}</template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:[`item.date_created`]="{ item }">{{ getDateText(item.date_created) }}</template>
+      <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" color="green" @click="approveBudget(item)">mdi-check</v-icon>
         <v-icon small color="red" @click="rejectBudget(item)">mdi-cancel</v-icon>
       </template>

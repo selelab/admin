@@ -51,7 +51,7 @@
       </div>
 
       <v-data-table dense :headers="purchaseHeaders" selected-key="id" :items="purchases">
-        <template v-slot:item.disposeButton="{ item }">
+        <template v-slot:[`item.disposeButton`]="{ item }">
           <v-btn
             icon
             @click="removePurchase(item)"
@@ -60,7 +60,7 @@
             <v-icon color="grey lighten-1">mdi-close-circle</v-icon>
           </v-btn>
         </template>
-        <template v-slot:item.title="{ item }">
+        <template v-slot:[`item.title`]="{ item }">
           <v-text-field
             v-model="item.title"
             style="height: 40px"
@@ -71,7 +71,7 @@
             :disabled="!!(item.approver || item.approved)"
           ></v-text-field>
         </template>
-        <template v-slot:item.price="{ item }">
+        <template v-slot:[`item.price`]="{ item }">
           <v-text-field
             dense
             style="height: 40px"
@@ -85,8 +85,8 @@
             :disabled="!!(item.approver || item.approved)"
           ></v-text-field>
         </template>
-        <template v-slot:item.dateCreated="{ item }">{{ getDateText(item.dateCreated) }}</template>
-        <template v-slot:item.status="{ item }">
+        <template v-slot:[`item.dateCreated`]="{ item }">{{ getDateText(item.dateCreated) }}</template>
+        <template v-slot:[`item.status`]="{ item }">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn icon v-on="on">
