@@ -1,13 +1,10 @@
-FROM node:lts-alpine
-
-RUN apk update && \
-    npm install -g npm && \
-    npm install -g @vue/cli
+FROM node:12
+RUN npm install -g @vue/cli
 
 WORKDIR /app
 ADD package*.json ./
 ADD yarn.lock ./
 RUN yarn install
-ADD . ./
 
-CMD ["yarn", "run", "serve"]
+EXPOSE 8080
+CMD ["yarn", "serve"]
