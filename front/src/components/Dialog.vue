@@ -75,8 +75,8 @@
         <h3>購入一覧</h3>
         <div width="100%" max-width="400">
           <v-data-table :headers="purchaseHeaders" :items="project.detail.purchases">
-            <template v-slot:item.dateCreated="{ item }">{{ getDateText(item.dateCreated) }}</template>
-            <template v-slot:item.status="{ item }">
+            <template v-slot:[`item.dateCreated`]="{ item }">{{ getDateText(item.dateCreated) }}</template>
+            <template v-slot:[`item.status`]="{ item }">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
