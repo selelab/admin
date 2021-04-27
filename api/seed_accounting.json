@@ -6,7 +6,10 @@
       "title": "\u3059\u3054\u3044\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
       "accounting_type": "soft",
       "leader": "380ac58d-1595-4614-a8e2-5e881b51d18a",
-      "closed": false
+      "closed": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00",
+      "date_updated": "2021-04-27 00:00:00.000000+09:00",
+      "description": "テストプロジェクト1"
     }
   },
   {
@@ -16,7 +19,10 @@
       "title": "Django\u3067REST API\u4f5c\u308b\u305e",
       "accounting_type": "soft",
       "leader": "f2b34d83-b890-45ff-aedd-1d11a92cb9f5",
-      "closed": false
+      "closed": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00",
+      "date_updated": "2021-04-27 00:00:00.000000+09:00",
+      "description": "テストプロジェクト2"
     }
   },
   {
@@ -26,7 +32,10 @@
       "title": "\u30db\u30b2\u30db\u30b2\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
       "accounting_type": "soft",
       "leader": null,
-      "closed": false
+      "closed": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00",
+      "date_updated": "2021-04-27 00:00:00.000000+09:00",
+      "description": "テストプロジェクト3"
     }
   },
   {
@@ -36,7 +45,10 @@
       "title": "\u30db\u30b2\u30db\u30b2\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
       "accounting_type": "soft",
       "leader": "380ac58d-1595-4614-a8e2-5e881b51d18a",
-      "closed": false
+      "closed": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00",
+      "date_updated": "2021-04-27 00:00:00.000000+09:00",
+      "description": "テストプロジェクト4"
     }
   },
   {
@@ -46,7 +58,8 @@
       "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
       "approver": "345865f9-c7ee-4107-9149-57dc35db0b79",
       "budget_amount": 7532,
-      "approved": true
+      "approved": true,
+      "date_created": "2021-04-27 00:00:00.000000+09:00"
     }
   },
   {
@@ -56,7 +69,8 @@
       "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
       "approver": "345865f9-c7ee-4107-9149-57dc35db0b79",
       "budget_amount": 1500,
-      "approved": false
+      "approved": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00"
     }
   },
   {
@@ -64,12 +78,10 @@
     "pk": "690c4aeb-fef7-45d2-a98b-1c5f8c7af548",
     "fields": {
       "title": "\u4ea4\u901a\u8cbb",
-      "description": "\u6771\u4eac\u99c5\u304b\u3089\u8349\u6d25\u6e29\u6cc9\u307e\u3067\u306e\u4ea4\u901a\u8cbb\u3067\u3059\u3002",
       "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
-      "evidence_media_key": "d2a85f4f-4ac5-4dcb-986e-6e988d83d3b4",
       "price": 5670,
-      "returned": false,
-      "approved": false
+      "approved": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00"
     }
   },
   {
@@ -77,12 +89,10 @@
     "pk": "768a00ae-b643-4449-8148-418e996636c7",
     "fields": {
       "title": "\u4ea4\u969b\u8cbb",
-      "description": "\u8efd\u4e95\u6ca2\u30d3\u30fc\u30eb\u8cfc\u5165\u4ee3\u91d1",
       "project_id": "1982e609-9c92-40ab-ac85-ee7f2830ab2a",
-      "evidence_media_key": "d2a85f4f-4ac5-4dcb-986e-6e988d83d3b4",
       "price": 1862,
-      "returned": false,
-      "approved": false
+      "approved": false,
+      "date_created": "2021-04-27 00:00:00.000000+09:00"
     }
   }
 ]
