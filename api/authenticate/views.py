@@ -1,11 +1,9 @@
-import logging
-import uuid
+import json
 
-import django_filters
-from django.shortcuts import render
-from rest_framework import decorators, filters, permissions, response, viewsets
+from django.contrib import auth
+from django.http import JsonResponse
+from rest_framework import permissions, viewsets, decorators
 
-from accounting.models import Project
 from web import settings
 
 from .models import User
@@ -64,3 +62,33 @@ class UserViewSet(viewsets.ModelViewSet):
         elif self.action == 'partial_update':
             return UserUpdateSerializer
         return self.serializer_class
+
+
+class LoginViewSet(viewsets.ViewSet):
+    permission_classes = []
+
+    def list(self, request):
+        return JsonResponse({"user_id": request.user.id})
+
+    def destroy(self, request, pk=None):
+        auth.logout(request)
+        return JsonResponse({"detail": "ok"})
+
+    def create(self, request):
+        data = json.loads(request.body)
+        email = data.get('email')
+        password = data.get('password')
+        if email is None or password is None:
+            return JsonResponse({
+                "errors": {
+                    "__all__": "Please enter both username and password"
+                }
+            }, status=400)
+        user = auth.authenticate(email=email, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return JsonResponse({"detail": "Success", "user_id": user.id})
+        return JsonResponse(
+            {"detail": "Invalid credentials"},
+            status=400,
+        )

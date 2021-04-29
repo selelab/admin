@@ -96,8 +96,8 @@ const Login = {
     ValidationProvider,
     ValidationObserver
   },
-  created() {
-    if (this.$store.getters.hasValidJwtToken) {
+  async created() {
+    if (await this.$store.getters.hasLoggedIn) {
       router.push(this.$route.query.redirect || "/");
     }
   },
@@ -105,11 +105,11 @@ const Login = {
     login: async function() {
       this.connecting = true;
       try {
-        const response = await api.post("/jwt-token/", {
+        const response = utils.camelize(await api.post("/v1/auth/", {
           email: this.email,
           password: this.password
-        });
-        await this.$store.commit("setJwtToken", response.data.token);
+        }));
+        await this.$store.commit("setUserId", response.data.userId);
         await this.$store.dispatch("retrieveUserInfo");
 
         router.push(this.$route.query.redirect || "/");

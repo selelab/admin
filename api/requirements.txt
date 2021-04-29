@@ -10,4 +10,3 @@ drf-yasg
 django-redis-sessions
 uwsgi
 django-cors-headers
-djangorestframework-jwt

@@ -82,21 +82,14 @@ EMAIL_USE_TLS = False
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer', ),
-    'DEFAULT_PERMISSION_CLASSES':
-    ('rest_framework.permissions.IsAuthenticated', ),
-    'DEFAULT_AUTHENTICATION_CLASSES':
-    ('rest_framework_jwt.authentication.JSONWebTokenAuthentication', ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'web.authenticate.CsrfExemptSessionAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-      'jwt': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-      }
-   }
 }
 
 TEMPLATES = [
@@ -117,19 +110,9 @@ TEMPLATES = [
 
 CORS_ORIGIN_WHITELIST = [
     "https://selelab.com",
-    "http://localhost:8080",
-    "http://localhost",
-    "http://192.168.2.107:8080",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-JWT_AUTH = {
-    'JWT_SECRET_KEY': env.str('JWT_SECRET_KEY', SECRET_KEY),
-    'JWT_ALGORITHM': 'HS256',
-    'JWT_ALLOW_REFRESH': False,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=3),
-}
 
 WSGI_APPLICATION = 'web.wsgi.application'
 

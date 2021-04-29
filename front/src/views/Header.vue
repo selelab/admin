@@ -10,7 +10,7 @@
       <v-menu bottom left>
         <template v-slot:activator="{ on }">
           <v-btn class="mx-1" dark icon v-on="on">
-            <v-avatar size="36" color="grey darken-3" v-if="hasValidJwtToken">
+            <v-avatar size="36" color="grey darken-3" v-if="userInfo">
               <img class="card-profile-icon" :src="getIconUrl(userInfo)" v-if="!isDebug" />
               <img class="card-profile-icon" src="@/assets/shika.jpg" v-else />
             </v-avatar>
@@ -82,6 +82,7 @@
 
 <script>
 import router from "@/router";
+import api from "@/api";
 import * as utils from "@/utils";
 
 export default {
@@ -94,9 +95,6 @@ export default {
   }),
   computed: {
     isDebug: () => utils.isDebug(),
-    hasValidJwtToken() {
-      return this.$store.getters.hasValidJwtToken;
-    },
     userInfo() {
       return this.$store.getters.getUserInfo;
     },
@@ -116,9 +114,11 @@ export default {
     getIconUrl: function(user) {
       return utils.getIconUrl(user);
     },
-    changeAuth: function() {
-      if (this.hasValidJwtToken) {
-        this.$store.dispatch("setJwtToken", undefined);
+    changeAuth: async function() {
+      if (this.userInfo !== null) {
+        await api.delete("/v1/auth/1/");
+        await this.$store.commit("setUserId", null);
+        await this.$store.commit("setUserInfo", null);
         if (!this.isLoginPage) router.push(this.loginPage);
       } else {
         router.push(this.loginPage);

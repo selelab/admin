@@ -1,24 +1,24 @@
 import Axios from 'axios'
 
-import { store } from './store'
+Axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+Axios.defaults.xsrfCookieName = 'csrftoken'
 
-var api = Axios.create({
-  baseURL: 'https://api.selelab.com/api/admin',
+
+const getBaseURL = (host) => {
+  if (host === 'selelab.com') {
+    return 'https://api.selelab.com'
+  } else {
+    return ''
+  }
+}
+
+const api = Axios.create({
+  baseURL: `${getBaseURL(location.host)}/api/admin`,
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
   },
   responseType: 'json'
 })
-
-export const setTokenToHeader = (token) => {
-  api.defaults.headers.common['Authorization'] = `jwt ${token}`;
-};
-
-store.subscribe((mutation, state) => {
-  if (mutation.type === 'setJwtToken') {
-    setTokenToHeader(state.jwtToken);
-  }
-});
 
 export default api;
