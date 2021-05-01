@@ -66,7 +66,7 @@ export default {
           router.push("/projects");
         } catch (error) {
           if (error && error.response) {
-            this.errorMessage = utils.getErrorMessage(error.response)
+            this.errorMessage = utils.getErrorMessage(error.response, "over_max_chars_in_description_field")
             this.alert = true;
           }
           window.scrollTo({

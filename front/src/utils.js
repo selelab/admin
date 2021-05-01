@@ -54,16 +54,27 @@ const getIconUrl = function (user) {
   return `https://static.selelab.com/profile-images/${user.iconMediaKey}`
 }
 
-const getErrorMessage = function (response) {
+const getErrorMessage = function (response, cause_of_error400 = "unknown") {
   const errorMessages = {
-    400: "メールアドレスまたはパスワードが正しくありません。",
+    400: "リクエストの内容が正しくありません：",
     403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
     500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
   };
+  
+  const error400Causes = {
+    "invalid_login_credentials": "メールアドレスまたはパスワードが間違っています。",
+    "over_max_chars_in_description_field": "プロジェクト説明は500文字以内で入力してください。",
+    "unknown": "リクエストの中で間違っている箇所が特定できません。このエラーが発生した時の状況を併せて、管理者へお問い合わせください。"
+  };
 
   if (response) {
-    return errorMessages[response.status] || "正しく処理することができませんでした。管理者へお問い合わせください。";
+    if (response.status == 400) {
+      return `${errorMessages[response.status]}${error400Causes[cause_of_error400]}`;
+    } else {
+      return errorMessages[response.status] || "正しく処理することができませんでした。管理者へお問い合わせください。";
+    }
   }
+
   return "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
 }
 

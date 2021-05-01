@@ -114,7 +114,7 @@ const Login = {
 
         router.push(this.$route.query.redirect || "/");
       } catch (error) {
-        this.errorMessage = utils.getErrorMessage(error.response);
+        this.errorMessage = utils.getErrorMessage(error.response, "invalid_login_credentials");
         this.alert = true;
       }
       this.connecting = false;
