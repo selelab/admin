@@ -63,7 +63,7 @@ const getErrorMessage = function (response, cause_of_error400 = "unknown") {
   
   const error400Causes = {
     "invalid_login_credentials": "メールアドレスまたはパスワードが間違っています。",
-    "over_max_chars_in_description_field": "プロジェクト説明は500文字以内で入力してください。",
+    "over_max_chars_in_description_field": "申請内容を正しく入力しているか確認して下さい。プロジェクト説明は500文字以内で入力してください。",
     "unknown": "リクエストの中で間違っている箇所が特定できません。このエラーが発生した時の状況を併せて、管理者へお問い合わせください。"
   };
 
