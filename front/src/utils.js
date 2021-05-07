@@ -54,7 +54,7 @@ const getIconUrl = function (user) {
   return `https://static.selelab.com/profile-images/${user.iconMediaKey}`
 }
 
-const getErrorMessage = function (response, cause_of_error400 = "unknown") {
+const getErrorMessage = function (response, error_hint) {
   const errorMessages = {
     400: "リクエストの内容が正しくありません：",
     403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
@@ -64,12 +64,11 @@ const getErrorMessage = function (response, cause_of_error400 = "unknown") {
   const error400Causes = {
     "invalid_login_credentials": "メールアドレスまたはパスワードが間違っています。",
     "over_max_chars_in_description_field": "申請内容を正しく入力しているか確認して下さい。プロジェクト説明は500文字以内で入力してください。",
-    "unknown": "リクエストの中で間違っている箇所が特定できません。このエラーが発生した時の状況を併せて、管理者へお問い合わせください。"
   };
 
   if (response) {
     if (response.status == 400) {
-      return `${errorMessages[response.status]}${error400Causes[cause_of_error400]}`;
+      return `${errorMessages[response.status]}${error400Causes[error_hint]}`;
     } else {
       return errorMessages[response.status] || "正しく処理することができませんでした。管理者へお問い合わせください。";
     }
