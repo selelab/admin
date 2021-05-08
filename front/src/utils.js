@@ -54,16 +54,26 @@ const getIconUrl = function (user) {
   return `https://static.selelab.com/profile-images/${user.iconMediaKey}`
 }
 
-const getErrorMessage = function (response) {
+const getErrorMessage = function (response, error_hint) {
   const errorMessages = {
-    400: "メールアドレスまたはパスワードが正しくありません。",
+    400: "リクエストの内容が正しくありません。",
     403: "この操作は許されていません。一旦ログアウトし、再度ログインしてからお試しください。",
     500: "サーバー内部でエラーが発生しました。しばらくしてからアクセスしてください。"
   };
+  
+  const japaneseErrorHints = {
+    "invalid_login_credentials": "メールアドレスまたはパスワードが間違っています。",
+    "over_max_chars_in_description_field": "申請内容を正しく入力しているか確認してください。プロジェクト説明は500文字以内で入力してください。",
+  };
 
   if (response) {
-    return errorMessages[response.status] || "正しく処理することができませんでした。管理者へお問い合わせください。";
+    if (error_hint && japaneseErrorHints[error_hint]) {
+      return `${errorMessages[response.status]}${japaneseErrorHints[error_hint]}`;
+    } else {
+      return errorMessages[response.status] || "正しく処理することができませんでした。管理者へお問い合わせください。";
+    }
   }
+
   return "サーバーにアクセスできませんでした。インターネット接続を確認し、管理者へお問い合わせください。";
 }
 
