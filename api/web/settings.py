@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'authenticate',
     'storaging',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
     'web',
     'corsheaders'
@@ -85,6 +86,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'web.authenticate.CsrfExemptSessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }

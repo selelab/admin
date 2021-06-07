@@ -1,7 +1,5 @@
-import django_filters
 from django.db.models import Q
-from django.shortcuts import render
-from rest_framework import filters, permissions, viewsets
+from rest_framework import permissions, viewsets, authtoken
 
 from utils import perm_method
 from web import settings
@@ -11,9 +9,13 @@ from .serializer import (ProjectApprovalSerializer, ProjectDetailSerializer, Cre
                          ProjectSerializer, PurchaseSerializer, CreateProjectApprovalSerializer, CreatePurchaseSerializer)
 
 
+def is_token_auth(request):
+    return isinstance(request.auth, authtoken.models.Token)
+
+
 class AdminPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user and request.user.is_superuser
+        return request.user and request.user.is_superuser and not is_token_auth(request)
 
 
 class ReadOnlyPermission(permissions.BasePermission):
@@ -23,6 +25,9 @@ class ReadOnlyPermission(permissions.BasePermission):
 
 class ProjectOwnerPermission(permissions.BasePermission):
     def has_permission(self, request, view):
+        if is_token_auth(request):
+            return False
+
         if 'pk' not in view.kwargs:
             return False
 
@@ -48,10 +53,16 @@ class UserProjectPermission(permissions.BasePermission):
         if request.method not in {'POST', 'PATCH', 'GET'}:
             return False
 
+        if is_token_auth(request) and request.method != 'GET':
+            return False
+
         return True
 
 class ProjectApprovalRequestPermission(permissions.BasePermission):
     def has_permission(self, request, view):
+        if is_token_auth(request):
+            return False
+
         if not request.user:
             return False
 
@@ -64,6 +75,10 @@ class PurchaseOwnerPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if not request.user or not request.user.is_authenticated:
             return False
+
+        if is_token_auth(request):
+            return False
+
         return True
 
 
@@ -91,6 +106,9 @@ class ProjectPermission(permissions.BasePermission):
         if obj.closed:
             return False
 
+        if is_token_auth(request):
+            return False
+
         return True
 
 
@@ -103,6 +121,9 @@ class PurchasePermission(permissions.BasePermission):
                    for perm_class in allowed_perm_classes)
 
     def has_object_permission(self, request, view, obj):
+        if is_token_auth(request):
+            return False
+
         if request.method == 'PATCH':
             if request.user.is_superuser:
                 return True
