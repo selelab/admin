@@ -1,26 +1,24 @@
-import datetime
-import logging
-import uuid
-import pytz
-
 import boto3
 
-from rest_framework import permissions, views
+from rest_framework import permissions, authtoken
 from rest_framework.response import Response
 from rest_framework.generics import (
     CreateAPIView,
 )
 
 import constants
-from web import settings
 
 from .models import Medium
 from .serializer import MediumSerializer
 
 
+def is_token_auth(request):
+    return isinstance(request.auth, authtoken.models.Token)
+
+
 class AdminPermission(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user and request.user.is_superuser
+        return request.user and request.user.is_superuser and not is_token_auth(request)
 
 
 class GeneralPermission(permissions.BasePermission):
