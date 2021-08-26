@@ -1,9 +1,11 @@
 import uuid
+import json
 
 from django.db import models
-from django import utils
+from django import utils, dispatch
 
 from authenticate.models import User
+from redis_client import redis_client
 
 ACCOUNTING_TYPES = (
     ('soft', 'software_accounting'),
@@ -29,6 +31,14 @@ class Project(models.Model):
     class Meta:
         ordering = ['-date_updated', '-date_created', 'id']
 
+
+@dispatch.receiver(models.signals.post_save, sender=Project)
+def project_post_save(sender, instance, created, **kwargs):
+    if created:
+        data = json.dumps({'project_id': str(instance.id)})
+        redis_client.publish('sel_admin.project_created', data)
+
+
 class ProjectApproval(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -40,6 +50,7 @@ class ProjectApproval(models.Model):
 
     class Meta:
         ordering = ['-date_created', 'id']
+
 
 class Purchase(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
